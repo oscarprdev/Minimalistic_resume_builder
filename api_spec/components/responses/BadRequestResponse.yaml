@@ -1,0 +1,9 @@
+description: Bad request response
+content:
+  application/json:
+    schema:
+      $ref: 'components/_index.yaml#/schemas/Error'
+    example:
+      error:
+        status: 400
+        message: 'Bad request message'

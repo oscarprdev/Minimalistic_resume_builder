@@ -1,0 +1,9 @@
+description: Internal error response
+content:
+  application/json:
+    schema:
+      $ref: 'components/_index.yaml#/schemas/Error'
+    example:
+      error:
+        status: 500
+        message: 'Internal error'

@@ -1,0 +1,9 @@
+description: Not found response
+content:
+  application/json:
+    schema:
+      $ref: 'components/_index.yaml#/schemas/Error'
+    example:
+      error:
+        status: 404
+        message: 'Not found'

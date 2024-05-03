@@ -1,0 +1,19 @@
+parameters:
+  Id:
+    $ref: 'components/parameters/Id.yaml'
+
+responses:
+  # Common
+  BadRequestResponse:
+    $ref: 'components/responses/BadRequestResponse.yaml'
+
+  InternalErrorResponse:
+    $ref: 'components/responses/InternalErrorResponse.yaml'
+
+  NotFoundResponse:
+    $ref: 'components/responses/NotFoundResponse.yaml'
+
+schemas:
+  # Common
+  Error:
+    $ref: 'components/schemas/Error.yaml'
