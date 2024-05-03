@@ -13,6 +13,7 @@
 		"wrangler": "^3.0.0"
 	},
 	"dependencies": {
+		"@neondatabase/serverless": "^0.9.1",
 		"itty-router": "^4.0.27"
 	}
 }

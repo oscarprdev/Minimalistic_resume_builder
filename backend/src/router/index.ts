@@ -1,11 +1,14 @@
 import { Router, RouterType } from 'itty-router';
 import { Env } from '..';
+import { neon } from '@neondatabase/serverless';
 
 function buildRouter(env: Env): RouterType {
 	const router = Router();
 
 	router.get('/', async (request: Request, env: Env) => {
-		return new Response('Hello world 2', {
+		const sql = neon(env.DATABASE_URL);
+		const posts = await sql('SELECT * FROM users;');
+		return new Response(JSON.stringify(posts), {
 			status: 200,
 		});
 	});

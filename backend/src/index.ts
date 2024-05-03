@@ -3,6 +3,7 @@ import { RouterType } from 'itty-router';
 
 export interface Env {
 	router?: RouterType;
+	DATABASE_URL: string;
 }
 
 export default {
