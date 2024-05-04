@@ -1,0 +1,14 @@
+type: object
+required:
+  - title
+  - educationList
+properties:
+  title:
+    type: string
+    description: Education section title.
+    example: Education
+  educationList:
+    type: array
+    description: An array of formal education schools.
+    items:
+      $ref: 'components/_index.yaml#/schemas/School'

@@ -1,0 +1,14 @@
+type: object
+required:
+  - title
+  - jobList
+properties:
+  title:
+    type: string
+    description: Experience section title.
+    example: Work Experience
+  jobList:
+    type: array
+    description: An array of jobs.
+    items:
+      $ref: 'components/_index.yaml#/schemas/Job'

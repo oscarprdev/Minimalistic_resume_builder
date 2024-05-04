@@ -1,0 +1,40 @@
+type: object
+required:
+  - title
+  - company
+  - startDate
+  - endDate
+  - description
+properties:
+  title:
+    type: string
+    description: The job title.
+    example: Software Engineer
+  company:
+    type: string
+    description: The name of the company.
+    example: Acme Corporation
+  startDate:
+    type: string
+    format: date
+    description: The start date of the job (YYYY-MM-DD).
+    example: 2020-01-01
+  endDate:
+    type: string
+    format: date
+    description: The end date of the job (YYYY-MM-DD).
+    example: 2022-12-31
+  description:
+    type: string
+    description: A brief description of the job responsibilities and achievements.
+    example: Developed web applications using React and Node.js.
+  hint:
+    type: string
+    description: Any hint related with your job info.
+    example: The description should show valuable information.
+example:
+  title: Software Engineer
+  company: Acme Corporation
+  startDate: 2020-01-01
+  endDate: 2022-12-31
+  description: Developed web applications using React and Node.js.

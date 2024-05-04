@@ -1,0 +1,40 @@
+type: object
+required:
+  - title
+  - career
+  - startDate
+  - endDate
+  - description
+properties:
+  title:
+    type: string
+    description: The name of the title or educational institution.
+    example: University of Example
+  career:
+    type: string
+    description: The name of the career.
+    example: Software engineering
+  startDate:
+    type: string
+    format: date
+    description: The start date of the education (YYYY-MM-DD).
+    example: 2018-09-01
+  endDate:
+    type: string
+    format: date
+    description: The end date of the education (YYYY-MM-DD).
+    example: 2022-06-30
+  description:
+    type: string
+    description: A brief description of the education, coursework, or achievements.
+    example: Graduated with a Bachelor's degree in Computer Science.
+  hint:
+    type: string
+    description: Any hint related to your education info.
+    example: Focus on relevant coursework and academic achievements.
+example:
+  title: University of Example
+  career: Software engineering
+  startDate: 2018-09-01
+  endDate: 2022-06-30
+  description: Graduated with a Bachelor's degree in Computer Science.

@@ -23,8 +23,13 @@ responses:
   ResumeSummaryDescribe:
     $ref: 'components/responses/resume/ResumeSummaryDescribe.yaml'
 
+  ResumeExperienceDescribe:
+    $ref: 'components/responses/resume/ResumeExperienceDescribe.yaml'
+
+  ResumeEducationDescribe:
+    $ref: 'components/responses/resume/ResumeEducationDescribe.yaml'
+
 schemas:
-  # Common
   Error:
     $ref: 'components/schemas/Error.yaml'
 
@@ -33,3 +38,15 @@ schemas:
 
   Summary:
     $ref: 'components/schemas/Summary.yaml'
+
+  Experience:
+    $ref: 'components/schemas/Experience.yaml'
+
+  Job:
+    $ref: 'components/schemas/Job.yaml'
+
+  Education:
+    $ref: 'components/schemas/Education.yaml'
+
+  School:
+    $ref: 'components/schemas/School.yaml'
