@@ -12,3 +12,6 @@
 
 '/resume/describe/{user_id}/{resume_id}/skills':
   $ref: 'paths/resume/resume_describe_skills.yaml'
+
+'/resume/describe/{user_id}/{resume_id}/languages':
+  $ref: 'paths/resume/resume_describe_languages.yaml'

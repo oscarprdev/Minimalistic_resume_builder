@@ -32,6 +32,9 @@ responses:
   ResumeSkillsDescribe:
     $ref: 'components/responses/resume/ResumeSkillsDescribe.yaml'
 
+  ResumeLanguagesDescribe:
+    $ref: 'components/responses/resume/ResumeLanguagesDescribe.yaml'
+
 schemas:
   Error:
     $ref: 'components/schemas/Error.yaml'
@@ -59,3 +62,9 @@ schemas:
 
   Skill:
     $ref: 'components/schemas/Skill.yaml'
+
+  Languages:
+    $ref: 'components/schemas/Languages.yaml'
+
+  Language:
+    $ref: 'components/schemas/Language.yaml'

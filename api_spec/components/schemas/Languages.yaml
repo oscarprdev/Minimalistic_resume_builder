@@ -1,0 +1,14 @@
+type: object
+required:
+  - title
+  - languageList
+properties:
+  title:
+    type: string
+    description: Languages section title.
+    example: Languages
+  languageList:
+    type: array
+    description: An array of languages.
+    items:
+      $ref: 'components/_index.yaml#/schemas/Language'

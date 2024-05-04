@@ -1,0 +1,21 @@
+type: object
+required:
+  - name
+  - level
+properties:
+  name:
+    type: string
+    description: The language name.
+    example: English
+  level:
+    type: string
+    description: The language level.
+    example: B2
+  certificateLink:
+    type: string
+    description: The language certificate url.
+    example: http://cambridge.com/language
+example:
+  name: English
+  level: B2
+  certificateLink: http://cambridge.com/language
