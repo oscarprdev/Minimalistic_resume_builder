@@ -36,7 +36,3 @@ properties:
     example:
       - https://www.linkedin.com/in/johndoe
       - https://github.com/johndoe
-  hint:
-    type: string
-    description: Any hint related with your header info.
-    example: The email should look professional.

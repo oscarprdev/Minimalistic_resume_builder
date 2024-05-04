@@ -28,10 +28,6 @@ properties:
     type: string
     description: A brief description of the education, coursework, or achievements.
     example: Graduated with a Bachelor's degree in Computer Science.
-  hint:
-    type: string
-    description: Any hint related to your education info.
-    example: Focus on relevant coursework and academic achievements.
 example:
   title: University of Example
   career: Software engineering

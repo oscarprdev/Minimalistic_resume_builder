@@ -1,0 +1,14 @@
+type: object
+required:
+  - title
+  - skillList
+properties:
+  title:
+    type: string
+    description: Skills section title.
+    example: Skills
+  skillList:
+    type: array
+    description: An array of skills.
+    items:
+      $ref: 'components/_index.yaml#/schemas/Skill'

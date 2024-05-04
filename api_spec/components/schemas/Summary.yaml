@@ -11,7 +11,3 @@ properties:
     type: string
     description: A brief summary of the owner's professional background and skills.
     example: Dedicated software engineer with 5 years of experience in full-stack web development and a passion for creating efficient and scalable solutions.
-  hint:
-    type: string
-    description: Any hint related with your summary.
-    example: The summary should be written in impersonal way.

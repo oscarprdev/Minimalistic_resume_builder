@@ -29,6 +29,9 @@ responses:
   ResumeEducationDescribe:
     $ref: 'components/responses/resume/ResumeEducationDescribe.yaml'
 
+  ResumeSkillsDescribe:
+    $ref: 'components/responses/resume/ResumeSkillsDescribe.yaml'
+
 schemas:
   Error:
     $ref: 'components/schemas/Error.yaml'
@@ -50,3 +53,9 @@ schemas:
 
   School:
     $ref: 'components/schemas/School.yaml'
+
+  Skills:
+    $ref: 'components/schemas/Skills.yaml'
+
+  Skill:
+    $ref: 'components/schemas/Skill.yaml'

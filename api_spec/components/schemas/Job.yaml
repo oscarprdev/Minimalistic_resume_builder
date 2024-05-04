@@ -28,10 +28,6 @@ properties:
     type: string
     description: A brief description of the job responsibilities and achievements.
     example: Developed web applications using React and Node.js.
-  hint:
-    type: string
-    description: Any hint related with your job info.
-    example: The description should show valuable information.
 example:
   title: Software Engineer
   company: Acme Corporation

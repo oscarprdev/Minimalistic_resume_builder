@@ -1,0 +1,5 @@
+description: Returns resume skills info
+content:
+  application/json:
+    schema:
+      $ref: 'components/_index.yaml#/schemas/Skills'
