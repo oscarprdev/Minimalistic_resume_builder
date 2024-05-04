@@ -1,19 +1,35 @@
 parameters:
-  Id:
-    $ref: 'components/parameters/Id.yaml'
+  UserId:
+    $ref: 'components/parameters/UserId.yaml'
+
+  ResumeId:
+    $ref: 'components/parameters/ResumeId.yaml'
 
 responses:
   # Common
-  BadRequestResponse:
-    $ref: 'components/responses/BadRequestResponse.yaml'
+  BadRequest:
+    $ref: 'components/responses/BadRequest.yaml'
 
-  InternalErrorResponse:
-    $ref: 'components/responses/InternalErrorResponse.yaml'
+  InternalError:
+    $ref: 'components/responses/InternalError.yaml'
 
-  NotFoundResponse:
-    $ref: 'components/responses/NotFoundResponse.yaml'
+  NotFound:
+    $ref: 'components/responses/NotFound.yaml'
+
+  # Resume
+  ResumeHeaderDescribe:
+    $ref: 'components/responses/resume/ResumeHeaderDescribe.yaml'
+
+  ResumeSummaryDescribe:
+    $ref: 'components/responses/resume/ResumeSummaryDescribe.yaml'
 
 schemas:
   # Common
   Error:
     $ref: 'components/schemas/Error.yaml'
+
+  Header:
+    $ref: 'components/schemas/Header.yaml'
+
+  Summary:
+    $ref: 'components/schemas/Summary.yaml'

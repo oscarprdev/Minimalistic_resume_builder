@@ -1,6 +1,6 @@
-name: id
+name: resume_id
 in: path
-description: ID of the resource
+description: Resume ID
 required: true
 schema:
   type: string

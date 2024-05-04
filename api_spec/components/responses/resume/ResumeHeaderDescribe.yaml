@@ -1,0 +1,5 @@
+description: Returns resume header info
+content:
+  application/json:
+    schema:
+      $ref: 'components/_index.yaml#/schemas/Header'

@@ -1,0 +1,42 @@
+type: object
+required:
+  - name
+  - job
+  - location
+  - email
+  - phone
+  - links
+properties:
+  name:
+    type: string
+    description: The name of the person associated with the resume.
+    example: John Doe
+  job:
+    type: string
+    description: The job title or professional designation of the person.
+    example: Software Engineer
+  location:
+    type: string
+    description: The geographic location of the person, typically their city and state/province.
+    example: New York, NY
+  email:
+    type: string
+    description: The email address of the person.
+    format: email
+    example: john.doe@example.com
+  phone:
+    type: string
+    description: The phone number of the person.
+    example: +1 (123) 456-7890
+  links:
+    type: array
+    description: An array of links associated with the person's online profiles or portfolios.
+    items:
+      type: string
+    example:
+      - https://www.linkedin.com/in/johndoe
+      - https://github.com/johndoe
+  hint:
+    type: string
+    description: Any hint related with your header info.
+    example: The email should look professional.

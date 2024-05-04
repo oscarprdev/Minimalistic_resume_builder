@@ -7,8 +7,8 @@ info:
   version: 1.0.0
 
 tags:
-  - name: Test
-    description: Test API
+  - name: Resume
+    description: Resume API
 
 paths:
   $ref: './paths/_index.yaml'
