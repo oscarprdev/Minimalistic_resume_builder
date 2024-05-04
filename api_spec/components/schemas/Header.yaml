@@ -36,3 +36,7 @@ properties:
     example:
       - https://www.linkedin.com/in/johndoe
       - https://github.com/johndoe
+  image:
+    type: string
+    description: The image url of the person associated with the resume.
+    example: https://www.bucket.com/image

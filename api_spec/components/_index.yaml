@@ -17,6 +17,9 @@ responses:
     $ref: 'components/responses/NotFound.yaml'
 
   # Resume
+  ResumeListDescribe:
+    $ref: 'components/responses/resume/ResumeListDescribe.yaml'
+
   ResumeHeaderDescribe:
     $ref: 'components/responses/resume/ResumeHeaderDescribe.yaml'
 
@@ -38,6 +41,9 @@ responses:
 schemas:
   Error:
     $ref: 'components/schemas/Error.yaml'
+
+  Resume:
+    $ref: 'components/schemas/Resume.yaml'
 
   Header:
     $ref: 'components/schemas/Header.yaml'

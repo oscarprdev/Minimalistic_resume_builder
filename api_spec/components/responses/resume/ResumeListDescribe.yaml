@@ -1,0 +1,8 @@
+description: Returns resume list
+content:
+  application/json:
+    schema:
+      type: array
+      description: An array of resumes.
+      items:
+        $ref: 'components/_index.yaml#/schemas/Resume'

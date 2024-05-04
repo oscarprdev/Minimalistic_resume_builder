@@ -1,3 +1,7 @@
+# Resume
+'/resume/describe/{user_id}/list':
+  $ref: 'paths/resume/resume_describe_list.yaml'
+
 '/resume/describe/{user_id}/{resume_id}/header':
   $ref: 'paths/resume/resume_describe_header.yaml'
 
