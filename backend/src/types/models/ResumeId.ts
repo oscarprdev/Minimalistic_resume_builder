@@ -3,6 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * ID of the resource
+ * Resume ID
  */
-export type Id = string;
+export type ResumeId = string;
