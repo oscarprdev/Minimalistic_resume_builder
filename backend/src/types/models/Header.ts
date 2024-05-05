@@ -27,5 +27,9 @@ export type Header = {
      * An array of links associated with the person's online profiles or portfolios.
      */
     links: Array<string>;
+    /**
+     * The image url of the person associated with the resume.
+     */
+    image?: string;
 };
 
