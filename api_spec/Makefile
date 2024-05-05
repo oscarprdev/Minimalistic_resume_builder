@@ -8,7 +8,7 @@ serve:
 generate-backend:
 	make compile && \
 	npx openapi-typescript-codegen \
-	--input ./compiled.yaml --output ../backend/src/types --exportCore false --exportServices false \
+	--input ./compiled.yaml --output ../backend/src/core/domain/types --exportCore false --exportServices false \
 
 generate-frontend: 
 	make compile && \
