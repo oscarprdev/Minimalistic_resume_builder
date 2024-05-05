@@ -1,21 +1,21 @@
 # Resume
-'/resume/describe/{user_id}/list':
-  $ref: 'paths/resume/resume_describe_list.yaml'
+'/resume/{user_id}/list':
+  $ref: 'paths/resume/resume_list.yaml'
 
-'/resume/describe/{user_id}/{resume_id}/header':
-  $ref: 'paths/resume/resume_describe_header.yaml'
+'/resume/{user_id}/{resume_id}/header':
+  $ref: 'paths/resume/resume_header.yaml'
 
-'/resume/describe/{user_id}/{resume_id}/summary':
-  $ref: 'paths/resume/resume_describe_summary.yaml'
+'/resume/{user_id}/{resume_id}/summary':
+  $ref: 'paths/resume/resume_summary.yaml'
 
-'/resume/describe/{user_id}/{resume_id}/experience':
-  $ref: 'paths/resume/resume_describe_experience.yaml'
+'/resume/{user_id}/{resume_id}/experience':
+  $ref: 'paths/resume/resume_experience.yaml'
 
-'/resume/describe/{user_id}/{resume_id}/education':
-  $ref: 'paths/resume/resume_describe_education.yaml'
+'/resume/{user_id}/{resume_id}/education':
+  $ref: 'paths/resume/resume_education.yaml'
 
-'/resume/describe/{user_id}/{resume_id}/skills':
-  $ref: 'paths/resume/resume_describe_skills.yaml'
+'/resume/{user_id}/{resume_id}/skills':
+  $ref: 'paths/resume/resume_skills.yaml'
 
-'/resume/describe/{user_id}/{resume_id}/languages':
-  $ref: 'paths/resume/resume_describe_languages.yaml'
+'/resume/{user_id}/{resume_id}/languages':
+  $ref: 'paths/resume/resume_languages.yaml'
