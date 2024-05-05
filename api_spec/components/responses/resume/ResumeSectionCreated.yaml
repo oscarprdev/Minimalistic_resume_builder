@@ -1,0 +1,18 @@
+description: Returns resume section created response
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          description: Response code
+        message:
+          type: string
+          description: Action description
+      example:
+        status: 201
+        message: 'Resume section created'

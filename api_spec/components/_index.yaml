@@ -38,6 +38,9 @@ responses:
   ResumeLanguagesDescribe:
     $ref: 'components/responses/resume/ResumeLanguagesDescribe.yaml'
 
+  ResumeSectionCreated:
+    $ref: 'components/responses/resume/ResumeSectionCreated.yaml'
+
 schemas:
   Error:
     $ref: 'components/schemas/Error.yaml'

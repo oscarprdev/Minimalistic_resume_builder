@@ -1,0 +1,38 @@
+get:
+  tags:
+    - Resume
+  description: Get resume skills section
+  parameters:
+    - $ref: 'components/_index.yaml#/parameters/UserId'
+    - $ref: 'components/_index.yaml#/parameters/ResumeId'
+  responses:
+    '200':
+      $ref: 'components/_index.yaml#/responses/ResumeSkillsDescribe'
+    '404':
+      $ref: 'components/_index.yaml#/responses/NotFound'
+    '400':
+      $ref: 'components/_index.yaml#/responses/BadRequest'
+    '500':
+      $ref: 'components/_index.yaml#/responses/InternalError'
+post:
+  tags:
+    - Resume
+  description: Create resume skills section
+  parameters:
+    - $ref: 'components/_index.yaml#/parameters/UserId'
+    - $ref: 'components/_index.yaml#/parameters/ResumeId'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components/_index.yaml#/schemas/Skills'
+  responses:
+    '201':
+      $ref: 'components/_index.yaml#/responses/ResumeSectionCreated'
+    '404':
+      $ref: 'components/_index.yaml#/responses/NotFound'
+    '400':
+      $ref: 'components/_index.yaml#/responses/BadRequest'
+    '500':
+      $ref: 'components/_index.yaml#/responses/InternalError'
