@@ -1,3 +1,10 @@
+# User
+'/user/register':
+  $ref: 'paths/user/user_register.yaml'
+
+'/user/login':
+  $ref: 'paths/user/user_login.yaml'
+
 # Resume
 '/resume/{user_id}/list':
   $ref: 'paths/resume/resume_list.yaml'

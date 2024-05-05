@@ -10,6 +10,9 @@ tags:
   - name: Resume
     description: Resume API
 
+  - name: User
+    description: User API
+
 paths:
   $ref: './paths/_index.yaml'
 

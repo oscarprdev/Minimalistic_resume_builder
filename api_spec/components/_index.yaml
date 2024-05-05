@@ -16,7 +16,17 @@ responses:
   NotFound:
     $ref: 'components/responses/NotFound.yaml'
 
+  # User
+  UserLogged:
+    $ref: 'components/responses/user/UserLogged.yaml'
+
+  UserRegistered:
+    $ref: 'components/responses/user/UserRegistered.yaml'
+
   # Resume
+  ResumeSectionCreated:
+    $ref: 'components/responses/resume/ResumeSectionCreated.yaml'
+
   ResumeListDescribe:
     $ref: 'components/responses/resume/ResumeListDescribe.yaml'
 
@@ -38,12 +48,15 @@ responses:
   ResumeLanguagesDescribe:
     $ref: 'components/responses/resume/ResumeLanguagesDescribe.yaml'
 
-  ResumeSectionCreated:
-    $ref: 'components/responses/resume/ResumeSectionCreated.yaml'
-
 schemas:
   Error:
     $ref: 'components/schemas/Error.yaml'
+
+  UserCredentials:
+    $ref: 'components/schemas/UserCredentials.yaml'
+
+  CommonPostResponse:
+    $ref: 'components/schemas/CommonPostResponse.yaml'
 
   Resume:
     $ref: 'components/schemas/Resume.yaml'

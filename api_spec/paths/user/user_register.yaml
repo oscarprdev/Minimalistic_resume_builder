@@ -1,0 +1,19 @@
+post:
+  tags:
+    - User
+  description: Register user
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components/_index.yaml#/schemas/UserCredentials'
+  responses:
+    '201':
+      $ref: 'components/_index.yaml#/responses/UserRegistered'
+    '404':
+      $ref: 'components/_index.yaml#/responses/NotFound'
+    '400':
+      $ref: 'components/_index.yaml#/responses/BadRequest'
+    '500':
+      $ref: 'components/_index.yaml#/responses/InternalError'

@@ -1,8 +1,8 @@
-description: Returns resume section created response
+description: Returns user logged response
 content:
   application/json:
     schema:
       $ref: 'components/_index.yaml#/schemas/CommonPostResponse'
       example:
         status: 201
-        message: 'Resume section created'
+        message: 'User is successfully logged'
