@@ -1,12 +1,16 @@
 import { Database } from '../../core/infrastructure/database';
-import { ResumeApplication } from '../application';
+import { DefaultResumeApplication } from '../application';
 import { ResumeRouter } from './router';
 
-export class ResumeFeature {
+export interface ResumeFeature {
+	use(): ResumeRouter;
+}
+
+export class DefaultResumeFeature implements ResumeFeature {
 	constructor(private readonly database: Database) {}
 
 	use() {
-		const resumeApplication = new ResumeApplication(this.database);
+		const resumeApplication = new DefaultResumeApplication(this.database);
 
 		return new ResumeRouter(resumeApplication);
 	}
