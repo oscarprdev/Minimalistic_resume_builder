@@ -1,7 +1,10 @@
-import { Router } from './core/domain/router';
+import { Router } from './features/core/domain/router';
 import { RouterType } from 'itty-router';
-import { UserRouter } from './core/domain/router/user_router';
-import { ResumeRouter } from './core/domain/router/resume_router';
+import { UserRouter } from './features/core/domain/router/user_router';
+import { DefaultErrorEntity } from './features/core/domain/entities/Error';
+import { Database } from './features/core/infrastructure/database';
+import { ResumeRouter } from './features/resume/domain/router';
+import { ResumeFeature } from './features/resume/domain';
 
 export interface Env {
 	router?: RouterType;
@@ -10,24 +13,27 @@ export interface Env {
 
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
+		const database = new Database(env);
+
 		if (request.url.includes('user')) {
 			const userRouter = new UserRouter();
 			const router = new Router(userRouter);
 
-			env.router = router.router(request, env);
+			env.router = router.router(request);
 
-			return env.router.handle(request, env);
+			return env.router.handle(request);
 		}
 
 		if (request.url.includes('resume')) {
-			const resumeRouter = new ResumeRouter();
-			const router = new Router(resumeRouter);
+			const resumeFeature = new ResumeFeature(database);
 
-			env.router = router.router(request, env);
+			const router = new Router(resumeFeature.use());
 
-			return env.router.handle(request, env);
+			env.router = router.router(request);
+
+			return env.router.handle(request);
 		}
 
-		return new Response('Route not found', { status: 404 });
+		return new DefaultErrorEntity(404, 'ROUTER').handleError();
 	},
 };
