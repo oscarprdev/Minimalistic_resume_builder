@@ -1,4 +1,4 @@
-import { generateUuid } from '../../../../core/application/utils/generateUuid';
+import { generateUUID } from '../../../../core/application/utils/generateUuid';
 import { Header } from '../../../../core/domain/types';
 import { CommonResumePorts } from '../../common/common.ports';
 import { DefaultCommonResumeUsecase } from '../../common/common.use_case';
@@ -29,13 +29,13 @@ export class DefaultCreateHeaderUsecase extends DefaultCommonResumeUsecase imple
 		const currentResume = await this.validateResume(resumeId, currentUser);
 
 		if (!currentResume) {
-			const newResumeId = generateUuid();
+			const newResumeId = generateUUID();
 			await this.ports.createResume({ resumeId: newResumeId, ownerId: currentUser.id });
-			return await this.createNewHeader(generateUuid(), newResumeId, data);
+			return await this.createNewHeader(generateUUID(), newResumeId, data);
 		}
 
 		if (!currentResume.header) {
-			return await this.createNewHeader(generateUuid(), currentResume.id, data);
+			return await this.createNewHeader(generateUUID(), currentResume.id, data);
 		}
 
 		return await this.ports.updateHeader({ headerResumeId: currentResume.header, data });
