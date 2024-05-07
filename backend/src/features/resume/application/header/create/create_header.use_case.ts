@@ -29,8 +29,9 @@ export class DefaultCreateHeaderUsecase extends DefaultCommonResumeUsecase imple
 		const currentResume = await this.validateResume(resumeId, currentUser);
 
 		if (!currentResume) {
-			await this.ports.createResume({ resumeId: generateUuid(), ownerId: currentUser.id });
-			return await this.createNewHeader(generateUuid(), resumeId, data);
+			const newResumeId = generateUuid();
+			await this.ports.createResume({ resumeId: newResumeId, ownerId: currentUser.id });
+			return await this.createNewHeader(generateUuid(), newResumeId, data);
 		}
 
 		if (!currentResume.header) {
