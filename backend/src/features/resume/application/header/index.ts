@@ -1,4 +1,6 @@
-import { ResumeDatabase } from '../../infrastructure';
+import { CommonResumeDatabase } from '../../infrastructure/common';
+import { HeaderResumeDatabase } from '../../infrastructure/header';
+import { CommonResumeAdapter } from '../common/common.adapter';
 import { CreateHeaderAdapter } from './create/create_header.adapter';
 import { CreateHeaderHandler, DefaultCreateHeaderHandler } from './create/create_header.handler';
 import { DefaultCreateHeaderUsecase } from './create/create_header.use_case';
@@ -13,7 +15,7 @@ export interface HeaderUsecase {
 }
 
 export class DefaultHeaderUsecase implements HeaderUsecase {
-	constructor(private readonly database: ResumeDatabase) {}
+	constructor(private readonly database: HeaderResumeDatabase, private readonly commonDatabase: CommonResumeDatabase) {}
 
 	describeHeader() {
 		const describeHeaderAdapter = new DescribeHeaderAdapter(this.database);
@@ -23,8 +25,9 @@ export class DefaultHeaderUsecase implements HeaderUsecase {
 	}
 
 	createHeader() {
+		const commonResumeAdapter = new CommonResumeAdapter(this.commonDatabase);
 		const createHeaderAdapter = new CreateHeaderAdapter(this.database);
-		const createHeaderUsecase = new DefaultCreateHeaderUsecase(createHeaderAdapter);
+		const createHeaderUsecase = new DefaultCreateHeaderUsecase(createHeaderAdapter, commonResumeAdapter);
 
 		return new DefaultCreateHeaderHandler(createHeaderUsecase);
 	}

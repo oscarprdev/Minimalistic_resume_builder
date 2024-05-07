@@ -21,6 +21,8 @@ export class ResumeRouter implements RouterStrategy {
 
 	private routeController(request: Request) {
 		// this.internalRouter.get('/resume/:userId/:resumeId/header', this.resumeApplication.headerUsecase().describeHeader().handleRequest);
-		this.internalRouter.post('/resume/:userId/:resumeId/header', this.resumeApplication.headerUsecase().createHeader().handleRequest);
+		this.internalRouter.post('/resume/:userId/:resumeId/header', (req) =>
+			this.resumeApplication.headerUsecase().createHeader().handleRequest(req)
+		);
 	}
 }

@@ -3,7 +3,7 @@ export type ErrorStatus = 400 | 404 | 500;
 
 interface ErrorEntity {
 	handleError(error: unknown): Response;
-	sendError(message: string, status: number): void;
+	sendError<A>(error: unknown, status: number, action: A): never;
 }
 
 export class DefaultErrorEntity implements ErrorEntity {
@@ -23,7 +23,8 @@ export class DefaultErrorEntity implements ErrorEntity {
 		return new Response('Internal error', { status: 500 });
 	}
 
-	sendError(message: string, status: number) {
+	sendError<A>(error: unknown, status: number, action: A): never {
+		const message = error instanceof Error ? `Error in ${action}: ${error.message}` : `Error in ${action}`;
 		const errorBody = {
 			message,
 			status,

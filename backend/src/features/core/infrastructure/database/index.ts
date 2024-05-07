@@ -8,7 +8,11 @@ export class Database {
 		this.sql = neon(env.DATABASE_URL);
 	}
 
-	async query(query: string) {
+	async query(query: string, params?: string[]) {
+		if (params && Array.isArray(params)) {
+			return await this.sql(query, params);
+		}
+
 		return await this.sql(query);
 	}
 }

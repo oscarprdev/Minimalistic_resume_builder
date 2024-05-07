@@ -3,8 +3,7 @@ import { RouterType } from 'itty-router';
 import { UserRouter } from './features/core/domain/router/user_router';
 import { DefaultErrorEntity } from './features/core/domain/entities/Error';
 import { Database } from './features/core/infrastructure/database';
-import { ResumeRouter } from './features/resume/domain/router';
-import { DefaultResumeFeature, ResumeFeature } from './features/resume/domain';
+import { DefaultResumeFeature } from './features/resume/domain';
 
 export interface Env {
 	router?: RouterType;
@@ -35,7 +34,7 @@ export default {
 				return env.router.handle(request);
 			}
 
-			new DefaultErrorEntity().sendError('Request not found', 404);
+			new DefaultErrorEntity().sendError<'handlingRequest'>('Request not found', 404, 'handlingRequest');
 		} catch (error: unknown) {
 			console.log(error);
 			return new DefaultErrorEntity().handleError(error);

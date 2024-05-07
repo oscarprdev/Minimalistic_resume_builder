@@ -18,6 +18,8 @@ const HeaderSectionSchema = z.object({
 	image: z.string().optional(),
 });
 
+type CreateHeaderHandlerActions = 'extractPayload';
+
 export class DefaultCreateHeaderHandler implements CreateHeaderHandler {
 	constructor(private readonly usecase: CreateHeaderUsecase) {}
 
@@ -28,13 +30,13 @@ export class DefaultCreateHeaderHandler implements CreateHeaderHandler {
 		const { error } = HeaderSectionSchema.safeParse(bodyParsed);
 
 		if (error) {
-			throw new DefaultErrorEntity().sendError('Request payload not correct', 400);
+			throw new DefaultErrorEntity().sendError<CreateHeaderHandlerActions>('Request payload not correct', 400, 'extractPayload');
 		}
 
 		return { data: bodyParsed };
 	}
 
-	async handleRequest(request: RequestParams) {
+	public async handleRequest(request: RequestParams) {
 		try {
 			const userId = request.params.userId;
 			const resumeId = request.params.resumeId;

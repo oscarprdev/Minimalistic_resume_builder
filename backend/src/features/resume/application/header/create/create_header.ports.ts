@@ -1,17 +1,35 @@
 import { Header } from '../../../../core/domain/types';
-import { ResumeDb } from '../../../domain/types';
+import { HeaderDb, ResumeDb, UserDb } from '../../../domain/types';
 
 export interface CreateHeaderPorts {
-	getResume(input: GetResumeInput): Promise<ResumeDb>;
+	createResume(input: CreateResumeInput): Promise<void>;
+
+	getHeader(input: GetHeaderPortsInput): Promise<HeaderDb | null>;
 	createHeader(input: CreateHeaderPortsInput): Promise<void>;
+	insertHeader(input: InsertHeaderPortsInput): Promise<void>;
+	updateHeader(input: UpdateHeaderPortsInput): Promise<void>;
 }
 
 export interface CreateHeaderPortsInput {
-	userId: string;
-	resumeId: string;
+	headerResumeId: string;
 	data: Header;
 }
 
-export interface GetResumeInput {
+export interface CreateResumeInput {
 	resumeId: string;
+	ownerId: string;
+}
+
+export interface InsertHeaderPortsInput {
+	headerResumeId: string;
+	resumeId: string;
+}
+
+export interface GetHeaderPortsInput {
+	headerResumeId: string;
+}
+
+export interface UpdateHeaderPortsInput {
+	headerResumeId: string;
+	data: Header;
 }
