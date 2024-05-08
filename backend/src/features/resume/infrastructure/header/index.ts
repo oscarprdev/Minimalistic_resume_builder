@@ -12,7 +12,7 @@ import {
 export interface HeaderResumeDatabase {
 	getHeader(input: GetHeaderInfrastructureInput): Promise<HeaderDb | null>;
 	createHeader(input: CreateHeaderInfrastructureInput): Promise<void>;
-	insertHeader(input: InsertHeaderInfrastructureInput): Promise<void>;
+	insertHeaderIntoResume(input: InsertHeaderInfrastructureInput): Promise<void>;
 	updateHeader(input: UpdateHeaderInfrastructureInput): Promise<void>;
 }
 
@@ -59,7 +59,7 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 		}
 	}
 
-	async insertHeader({ headerResumeId, resumeId }: InsertHeaderInfrastructureInput): Promise<void> {
+	async insertHeaderIntoResume({ headerResumeId, resumeId }: InsertHeaderInfrastructureInput): Promise<void> {
 		try {
 			await this.database.query(
 				`UPDATE resume 

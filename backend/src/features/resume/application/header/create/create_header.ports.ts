@@ -2,7 +2,7 @@ import { Header } from '../../../../core/domain/types';
 
 export interface CreateHeaderPorts {
 	createHeader(input: CreateHeaderPortsInput): Promise<void>;
-	insertHeader(input: InsertHeaderPortsInput): Promise<void>;
+	insertHeaderIntoResume(input: InsertHeaderIntoResumePortsInput): Promise<void>;
 	updateHeader(input: UpdateHeaderPortsInput): Promise<void>;
 }
 
@@ -11,7 +11,7 @@ export interface CreateHeaderPortsInput {
 	data: Header;
 }
 
-export interface InsertHeaderPortsInput {
+export interface InsertHeaderIntoResumePortsInput {
 	headerResumeId: string;
 	resumeId: string;
 }

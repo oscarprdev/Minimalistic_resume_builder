@@ -21,7 +21,7 @@ export class DefaultCreateHeaderUsecase extends DefaultCommonResumeUsecase imple
 
 	private async createNewHeader(headerResumeId: string, resumeId: string, data: Header) {
 		await this.ports.createHeader({ headerResumeId, data });
-		await this.ports.insertHeader({ headerResumeId, resumeId });
+		await this.ports.insertHeaderIntoResume({ headerResumeId, resumeId });
 	}
 
 	async execute({ userId, resumeId, data }: CreateHeaderUsecaseExecuteInput) {
