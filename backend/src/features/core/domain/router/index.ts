@@ -7,7 +7,7 @@ export class Router implements RouterStrategy {
 		return this.routerStrategy.handle(request);
 	}
 
-	router(request: Request) {
-		return this.routerStrategy.router(request);
+	router() {
+		return this.routerStrategy.router();
 	}
 }

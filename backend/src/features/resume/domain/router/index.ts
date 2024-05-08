@@ -11,8 +11,8 @@ export class ResumeRouter implements RouterStrategy {
 		this.internalRouter = Router();
 	}
 
-	router(request: Request): RouterType {
-		this.routeController(request);
+	router(): RouterType {
+		this.routeController();
 
 		return this.internalRouter;
 	}
@@ -21,7 +21,7 @@ export class ResumeRouter implements RouterStrategy {
 		return this.internalRouter.handle(request);
 	}
 
-	private routeController(request: Request) {
+	private routeController() {
 		this.internalRouter.get(`${RESUME_COMMON_PATH}/header`, (req) =>
 			this.resumeApplication.headerUsecase().describeHeader().handleRequest(req)
 		);
