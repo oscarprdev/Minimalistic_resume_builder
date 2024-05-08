@@ -20,6 +20,12 @@ export interface HeaderDb {
 	image: string | null;
 }
 
+export interface SummaryDb {
+	id: string;
+	title: string;
+	summary: string;
+}
+
 export interface UserDb {
 	id: string;
 }

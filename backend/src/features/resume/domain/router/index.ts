@@ -2,6 +2,8 @@ import { Router, RouterType } from 'itty-router';
 import { RouterStrategy } from '../../../core/domain/interfaces';
 import { ResumeApplication } from '../../application';
 
+const RESUME_COMMON_PATH = '/resume/:userId/:resumeId';
+
 export class ResumeRouter implements RouterStrategy {
 	public internalRouter: RouterType;
 
@@ -20,11 +22,15 @@ export class ResumeRouter implements RouterStrategy {
 	}
 
 	private routeController(request: Request) {
-		this.internalRouter.get('/resume/:userId/:resumeId/header', (req) =>
+		this.internalRouter.get(`${RESUME_COMMON_PATH}/header`, (req) =>
 			this.resumeApplication.headerUsecase().describeHeader().handleRequest(req)
 		);
-		this.internalRouter.post('/resume/:userId/:resumeId/header', (req) =>
+		this.internalRouter.post(`${RESUME_COMMON_PATH}/header`, (req) =>
 			this.resumeApplication.headerUsecase().createHeader().handleRequest(req)
+		);
+
+		this.internalRouter.post(`${RESUME_COMMON_PATH}/summary`, (req) =>
+			this.resumeApplication.summaryUsecase().createSumary().handleRequest(req)
 		);
 	}
 }

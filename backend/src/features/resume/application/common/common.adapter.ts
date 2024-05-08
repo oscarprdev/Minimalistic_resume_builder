@@ -1,6 +1,6 @@
 import { ResumeDb, UserDb } from '../../domain/types';
 import { CommonResumeDatabase } from '../../infrastructure/common';
-import { CommonResumePorts, GetResumeInput, GetUserInput } from './common.ports';
+import { CommonResumePorts, CreateResumeInput, GetResumeInput, GetUserInput } from './common.ports';
 
 export class CommonResumeAdapter implements CommonResumePorts {
 	constructor(private readonly database: CommonResumeDatabase) {}
@@ -19,5 +19,9 @@ export class CommonResumeAdapter implements CommonResumePorts {
 		if (result === undefined) return null;
 
 		return result;
+	}
+
+	async createResume({ resumeId, ownerId }: CreateResumeInput): Promise<void> {
+		await this.database.createResume({ resumeId, ownerId });
 	}
 }
