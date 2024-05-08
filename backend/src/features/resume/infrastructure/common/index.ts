@@ -1,12 +1,14 @@
 import { DefaultErrorEntity } from '../../../core/domain/entities/Error';
 import { Database } from '../../../core/infrastructure/database';
-import { HeaderDb, ResumeDb, UserDb } from '../../domain/types';
-import { ErrorActions, GetResumeInfrastructureInput, GetUserInfrastructureInput } from './types';
+import { ResumeDb, UserDb } from '../../domain/types';
+import { CreateResumeInfrastructureInput, ErrorActions, GetResumeInfrastructureInput, GetUserInfrastructureInput } from './types';
 
 export interface CommonResumeDatabase {
 	getUser(input: GetUserInfrastructureInput): Promise<UserDb | void>;
 
 	getResume(input: GetResumeInfrastructureInput): Promise<ResumeDb | void>;
+
+	createResume(input: CreateResumeInfrastructureInput): Promise<void>;
 }
 
 export class DefaultCommonResumeDatabase implements CommonResumeDatabase {
@@ -37,6 +39,14 @@ export class DefaultCommonResumeDatabase implements CommonResumeDatabase {
 			return result[0] as ResumeDb;
 		} catch (error: unknown) {
 			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getResume');
+		}
+	}
+
+	async createResume({ resumeId, ownerId }: CreateResumeInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(`INSERT INTO resume (id, owner) VALUES ($1, $2);`, [resumeId, ownerId]);
+		} catch (error: unknown) {
+			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'createResume');
 		}
 	}
 }
