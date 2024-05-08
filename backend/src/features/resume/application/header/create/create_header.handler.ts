@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { DefaultErrorEntity } from '../../../../core/domain/entities/Error';
 import { RequestParams } from '../../../../core/domain/interfaces';
-import { Header } from '../../../../core/domain/types';
+import { CommonPostResponse, Header } from '../../../../core/domain/types';
 import { CreateHeaderUsecase } from './create_header.use_case';
 
 export interface CreateHeaderHandler {
@@ -45,9 +45,9 @@ export class DefaultCreateHeaderHandler implements CreateHeaderHandler {
 
 			await this.usecase.execute({ userId, resumeId, data });
 
-			return new Response('Header created successfully', {
-				status: 201,
-			});
+			const response = { status: 201, message: 'Header created successfully' } satisfies CommonPostResponse;
+
+			return new Response(response.message, response);
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().handleError(error);
 		}
