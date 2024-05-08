@@ -18,8 +18,9 @@ export class DefaultHeaderUsecase implements HeaderUsecase {
 	constructor(private readonly database: HeaderResumeDatabase, private readonly commonDatabase: CommonResumeDatabase) {}
 
 	describeHeader() {
+		const commonResumeAdapter = new CommonResumeAdapter(this.commonDatabase);
 		const describeHeaderAdapter = new DescribeHeaderAdapter(this.database);
-		const describeHeaderUsecase = new DefaultDescribeHeaderUsecase(describeHeaderAdapter);
+		const describeHeaderUsecase = new DefaultDescribeHeaderUsecase(describeHeaderAdapter, commonResumeAdapter);
 
 		return new DefaultDescribeHeaderHandler(describeHeaderUsecase);
 	}

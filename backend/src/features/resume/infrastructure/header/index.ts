@@ -13,7 +13,7 @@ import {
 export interface HeaderResumeDatabase {
 	createResume(input: CreateResumeInfrastructureInput): Promise<void>;
 
-	getHeader(input: GetHeaderInfrastructureInput): Promise<HeaderDb | void>;
+	getHeader(input: GetHeaderInfrastructureInput): Promise<HeaderDb | null>;
 	createHeader(input: CreateHeaderInfrastructureInput): Promise<void>;
 	insertHeader(input: InsertHeaderInfrastructureInput): Promise<void>;
 	updateHeader(input: UpdateHeaderInfrastructureInput): Promise<void>;
@@ -30,17 +30,17 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 		}
 	}
 
-	async getHeader({ headerResumeId }: GetHeaderInfrastructureInput): Promise<HeaderDb | void> {
+	async getHeader({ headerResumeId }: GetHeaderInfrastructureInput): Promise<HeaderDb | null> {
 		try {
 			const result = await this.database.query(`SELECT * FROM header WHERE id = $1;`, [headerResumeId]);
 
 			if (result.length === 0) {
-				return;
+				return null;
 			}
 
 			return result[0] as HeaderDb;
 		} catch (error: unknown) {
-			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getHeader');
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getHeader');
 		}
 	}
 
