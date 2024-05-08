@@ -1,5 +1,4 @@
 import { Header } from '../../../../core/domain/types';
-import { HeaderDb } from '../../../domain/types';
 import { HeaderResumeDatabase } from '../../../infrastructure/header';
 import { DescribeHeaderPorts, GetHeaderPortsInput } from './describe_header.ports';
 
