@@ -3,7 +3,6 @@ import { Database } from '../../../core/infrastructure/database';
 import { HeaderDb } from '../../domain/types';
 import {
 	CreateHeaderInfrastructureInput,
-	CreateResumeInfrastructureInput,
 	ErrorActions,
 	GetHeaderInfrastructureInput,
 	InsertHeaderInfrastructureInput,
@@ -11,8 +10,6 @@ import {
 } from './types';
 
 export interface HeaderResumeDatabase {
-	createResume(input: CreateResumeInfrastructureInput): Promise<void>;
-
 	getHeader(input: GetHeaderInfrastructureInput): Promise<HeaderDb | null>;
 	createHeader(input: CreateHeaderInfrastructureInput): Promise<void>;
 	insertHeader(input: InsertHeaderInfrastructureInput): Promise<void>;
@@ -21,14 +18,6 @@ export interface HeaderResumeDatabase {
 
 export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 	constructor(private readonly database: Database) {}
-
-	async createResume({ resumeId, ownerId }: CreateResumeInfrastructureInput): Promise<void> {
-		try {
-			await this.database.query(`INSERT INTO resume (id, owner) VALUES ($1, $2);`, [resumeId, ownerId]);
-		} catch (error: unknown) {
-			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'createResume');
-		}
-	}
 
 	async getHeader({ headerResumeId }: GetHeaderInfrastructureInput): Promise<HeaderDb | null> {
 		try {

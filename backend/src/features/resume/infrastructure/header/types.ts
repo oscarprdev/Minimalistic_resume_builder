@@ -7,11 +7,6 @@ export interface CreateHeaderInfrastructureInput {
 	data: HeaderPayload;
 }
 
-export interface CreateResumeInfrastructureInput {
-	resumeId: string;
-	ownerId: string;
-}
-
 export interface HeaderPayload extends Omit<Header, 'links'> {
 	links: string;
 }

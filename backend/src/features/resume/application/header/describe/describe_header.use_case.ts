@@ -22,7 +22,7 @@ export class DefaultDescribeHeaderUsecase extends DefaultCommonResumeUsecase imp
 	}
 
 	private async provideHeaderId(resumeId: string, user: UserDb): Promise<string> {
-		const currentResume = await this.validateResume(resumeId, user);
+		const currentResume = await this.validateResume({ resumeId, userId: user.id });
 
 		if (!currentResume?.header) {
 			return new DefaultErrorEntity().sendError<DescribeHeaderUsecaseAction>('Header not stored on a resume', 404, 'provideHeaderId');
@@ -42,7 +42,7 @@ export class DefaultDescribeHeaderUsecase extends DefaultCommonResumeUsecase imp
 	}
 
 	async execute({ userId, resumeId }: DescribeHeaderUsecaseExecuteInput): Promise<Header> {
-		const currentUser = await this.validateUser(userId);
+		const currentUser = await this.validateUser({ userId });
 		const headerResumeId = await this.provideHeaderId(resumeId, currentUser);
 
 		return await this.provideHeaderData(headerResumeId);

@@ -1,9 +1,6 @@
 import { Header } from '../../../../core/domain/types';
-import { HeaderDb, ResumeDb, UserDb } from '../../../domain/types';
 
 export interface CreateHeaderPorts {
-	createResume(input: CreateResumeInput): Promise<void>;
-
 	createHeader(input: CreateHeaderPortsInput): Promise<void>;
 	insertHeader(input: InsertHeaderPortsInput): Promise<void>;
 	updateHeader(input: UpdateHeaderPortsInput): Promise<void>;
@@ -12,11 +9,6 @@ export interface CreateHeaderPorts {
 export interface CreateHeaderPortsInput {
 	headerResumeId: string;
 	data: Header;
-}
-
-export interface CreateResumeInput {
-	resumeId: string;
-	ownerId: string;
 }
 
 export interface InsertHeaderPortsInput {

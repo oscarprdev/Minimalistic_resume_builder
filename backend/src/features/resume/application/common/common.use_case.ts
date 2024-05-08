@@ -1,18 +1,18 @@
 import { DefaultErrorEntity } from '../../../core/domain/entities/Error';
 import { ResumeDb, UserDb } from '../../domain/types';
-import { CommonResumePorts } from './common.ports';
+import { CommonResumePorts, CreateResumeInput } from './common.ports';
+import { CommonUseCaseActions, ValidateResumeInput, ValidateUserInput } from './common.use_case.types';
 
 export interface CommonResumeUsecase {
-	validateUser(userId: string): Promise<UserDb>;
-	validateResume(resumeId: string, currentUser: UserDb): Promise<ResumeDb | null>;
+	validateUser(input: ValidateUserInput): Promise<UserDb>;
+	validateResume(input: ValidateResumeInput): Promise<ResumeDb | null>;
+	createResume(input: CreateResumeInput): Promise<void>;
 }
-
-type CommonUseCaseActions = 'validateUser' | 'validateResume';
 
 export class DefaultCommonResumeUsecase implements CommonResumeUsecase {
 	constructor(protected readonly commonPorts: CommonResumePorts) {}
 
-	async validateUser(userId: string): Promise<UserDb> {
+	async validateUser({ userId }: ValidateUserInput): Promise<UserDb> {
 		const currentUser = await this.commonPorts.getUser({ userId });
 
 		if (!currentUser) {
@@ -22,10 +22,10 @@ export class DefaultCommonResumeUsecase implements CommonResumeUsecase {
 		return currentUser;
 	}
 
-	async validateResume(resumeId: string, currentUser: UserDb): Promise<ResumeDb | null> {
+	async validateResume({ resumeId, userId }: ValidateResumeInput): Promise<ResumeDb | null> {
 		const currentResume = await this.commonPorts.getResume({ resumeId });
 
-		if (currentResume && currentUser?.id !== currentResume?.owner) {
+		if (currentResume && userId !== currentResume?.owner) {
 			return new DefaultErrorEntity().sendError<CommonUseCaseActions>(
 				'Bad request: Resume and User are not connected',
 				400,
@@ -34,5 +34,9 @@ export class DefaultCommonResumeUsecase implements CommonResumeUsecase {
 		}
 
 		return currentResume;
+	}
+
+	async createResume({ resumeId, ownerId }: CreateResumeInput): Promise<void> {
+		await this.commonPorts.createResume({ resumeId, ownerId });
 	}
 }
