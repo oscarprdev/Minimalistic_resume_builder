@@ -26,7 +26,7 @@ export class DefaultCreateExperienceUsecase extends DefaultCommonResumeUsecase i
 
 	private async deleteOldJobs(experienceResumeId: string, data: Experience) {
 		const currentJobsIds = await this.ports.getJobs({ experienceResumeId });
-		if (data.jobList.length === 0) {
+		if (data.jobList.length === 0 || data.jobList.every((jb) => !jb.id)) {
 			return await this.ports.deleteJobs({ jobsIds: currentJobsIds });
 		}
 
