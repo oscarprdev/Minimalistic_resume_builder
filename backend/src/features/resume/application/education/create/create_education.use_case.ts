@@ -26,12 +26,12 @@ export class DefaultCreateEducationUsecase extends DefaultCommonResumeUsecase im
 
 	private async deleteOldSchools(educationResumeId: string, data: Education) {
 		const currentSchoolsIds = await this.ports.getSchools({ educationResumeId });
-		if (data.educationList.length === 0) {
+		if (data.educationList.length === 0 || data.educationList.every((school) => !school.id)) {
 			return await this.ports.deleteSchools({ schoolsIds: currentSchoolsIds });
 		}
 
 		const schoolsToDelete = currentSchoolsIds.filter((currentSchoolId) =>
-			data.educationList.some((jb) => 'id' in jb && jb.id !== currentSchoolId)
+			data.educationList.some((school) => 'id' in school && school.id !== currentSchoolId)
 		);
 
 		await this.ports.deleteSchools({ schoolsIds: schoolsToDelete });
@@ -40,8 +40,8 @@ export class DefaultCreateEducationUsecase extends DefaultCommonResumeUsecase im
 	private async updateEducationInfo(educationResumeId: string, data: Education) {
 		await this.deleteOldSchools(educationResumeId, data);
 
-		const schoolsToUpdate: School[] = data.educationList.filter((jb) => Boolean('id' in jb));
-		const newSchools: School[] = data.educationList.filter((jb) => !Boolean('id' in jb));
+		const schoolsToUpdate: School[] = data.educationList.filter((school) => Boolean('id' in school));
+		const newSchools: School[] = data.educationList.filter((school) => !Boolean('id' in school));
 		const payloadData = {
 			...data,
 			educationList: schoolsToUpdate,

@@ -34,7 +34,11 @@ export class DefaultCreateEducationHandler implements CreateEducationHandler {
 		const { error } = EducationSectionSchema.safeParse(bodyParsed);
 
 		if (error) {
-			throw new DefaultErrorEntity().sendError<CreateEducationHandlerActions>('Request payload not correct', 400, 'extractPayload');
+			throw new DefaultErrorEntity().sendError<CreateEducationHandlerActions>(
+				new Error('Request payload not correct'),
+				400,
+				'extractPayload'
+			);
 		}
 
 		return { data: bodyParsed };
