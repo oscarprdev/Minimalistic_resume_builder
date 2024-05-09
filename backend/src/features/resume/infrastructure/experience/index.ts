@@ -1,16 +1,20 @@
 import { DefaultErrorEntity } from '../../../core/domain/entities/Error';
 import { Database } from '../../../core/infrastructure/database';
-import { ExperienceDb } from '../../domain/types';
+import { ExperienceDb, JobDb } from '../../domain/types';
 import {
 	CreateExperienceInfrastructureInput,
+	DeleteJobsInfrastructureInput,
 	ErrorActions,
 	GetExperienceInfrastructureInput,
+	GetJobsInfrastructureInput,
 	InsertExperienceInfrastructureInput,
 	UpdateExperienceInfrastructureInput,
 } from './types';
 
 export interface ExperienceResumeDatabase {
 	getExperience(input: GetExperienceInfrastructureInput): Promise<ExperienceDb | null>;
+	getJobs(input: GetJobsInfrastructureInput): Promise<JobDb[] | []>;
+	deleteJobs(input: DeleteJobsInfrastructureInput): Promise<void>;
 	createExperience(input: CreateExperienceInfrastructureInput): Promise<void>;
 	insertExperienceIntoResume(input: InsertExperienceInfrastructureInput): Promise<void>;
 	updateExperience(input: UpdateExperienceInfrastructureInput): Promise<void>;
@@ -39,7 +43,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
             LEFT JOIN 
                 Job ON ExperienceJob.jobId = Job.id
             WHERE 
-                Experience.id = '$1';`,
+                Experience.id = $1;`,
 				[experienceResumeId]
 			);
 
@@ -50,6 +54,60 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			return result[0] as ExperienceDb;
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getExperience');
+		}
+	}
+
+	async getJobs({ experienceResumeId }: GetJobsInfrastructureInput): Promise<[] | JobDb[]> {
+		try {
+			const result = await this.database.query(
+				`
+            SELECT 
+				Job.id, 
+				Job.title, 
+				Job.company, 
+				Job.startDate, 
+				Job.endDate, 
+				Job.description
+            FROM 
+                Experience
+            LEFT JOIN 
+                ExperienceJob ON Experience.id = ExperienceJob.experienceId
+            LEFT JOIN 
+                Job ON ExperienceJob.jobId = Job.id
+            WHERE 
+                Experience.id = $1;`,
+				[experienceResumeId]
+			);
+
+			if (result.length === 0) {
+				return [];
+			}
+
+			return result as JobDb[];
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getJobs');
+		}
+	}
+
+	async deleteJobs({ jobsIds }: DeleteJobsInfrastructureInput): Promise<void> {
+		try {
+			for (const jobId of jobsIds) {
+				await this.database.query(
+					`
+					DELETE FROM experienceJob WHERE jobId = $1;
+					`,
+					[jobId]
+				);
+
+				await this.database.query(
+					`
+					DELETE FROM job WHERE id = $1;
+					`,
+					[jobId]
+				);
+			}
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteJobs');
 		}
 	}
 
@@ -102,12 +160,12 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 		}
 	}
 
-	async updateExperience({ experienceResumeId, data }: UpdateExperienceInfrastructureInput): Promise<void> {
+	async updateExperience({ experienceResumeId, data, newJobs }: UpdateExperienceInfrastructureInput): Promise<void> {
 		try {
 			const { title, jobList } = data;
 			await this.database.query(
 				`UPDATE Experience
-					title = $2
+					SET title = $2
                     WHERE id = $1
 				;`,
 				[experienceResumeId, title]
@@ -116,7 +174,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			for (const { id, title, company, startDate, endDate, description } of jobList) {
 				await this.database.query(
 					`UPDATE Job
-                        title = $2, 
+                        SET title = $2, 
                         company = $3, 
                         startDate = $4, 
                         endDate = $5, 
@@ -124,6 +182,26 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
                     WHERE id = $1
 				    ;`,
 					[id, title, company, startDate, endDate, description]
+				);
+			}
+
+			for (const { title, company, startDate, endDate, description } of newJobs) {
+				const jobId = crypto.randomUUID().toString();
+
+				await this.database.query(
+					`INSERT INTO Job 
+                        (id, title, company, startDate, endDate, description) 
+                        VALUES ($1, $2, $3, $4, $5, $6)
+                    ;`,
+					[jobId, title, company, startDate, endDate, description]
+				);
+
+				await this.database.query(
+					`INSERT INTO ExperienceJob 
+                        (experienceId, jobId) 
+                        VALUES ($1, $2)
+                    ;`,
+					[experienceResumeId, jobId]
 				);
 			}
 		} catch (error: unknown) {

@@ -1,5 +1,5 @@
 import { generateUUID } from '../../../../core/application/utils/generateUuid';
-import { Experience } from '../../../../core/domain/types';
+import { Experience, Job } from '../../../../core/domain/types';
 import { CommonResumePorts } from '../../common/common.ports';
 import { DefaultCommonResumeUsecase } from '../../common/common.use_case';
 import { CreateExperiencePorts } from './create_experience.ports';
@@ -24,6 +24,26 @@ export class DefaultCreateExperienceUsecase extends DefaultCommonResumeUsecase i
 		await this.ports.insertExperienceIntoResume({ experienceResumeId, resumeId });
 	}
 
+	private async deleteOldJobs(experienceResumeId: string, data: Experience) {
+		const currentJobsIds = await this.ports.getJobs({ experienceResumeId });
+		const jobsToDelete = currentJobsIds.filter((currentJobId) => data.jobList.some((jb) => 'id' in jb && jb.id !== currentJobId));
+
+		await this.ports.deleteJobs({ jobsIds: jobsToDelete });
+	}
+
+	private async updateExperienceInfo(experienceResumeId: string, data: Experience) {
+		await this.deleteOldJobs(experienceResumeId, data);
+
+		const jobsToUpdate: Job[] = data.jobList.filter((jb) => Boolean('id' in jb));
+		const newJobs: Job[] = data.jobList.filter((jb) => !Boolean('id' in jb));
+		const payloadData = {
+			...data,
+			jobList: jobsToUpdate,
+		} satisfies Experience;
+
+		await this.ports.updateExperience({ experienceResumeId, data: payloadData, newJobs });
+	}
+
 	async execute({ userId, resumeId, data }: CreateExperienceUsecaseExecuteInput) {
 		const currentUser = await this.validateUser({ userId });
 		const currentResume = await this.validateResume({ resumeId, userId: currentUser.id });
@@ -38,6 +58,6 @@ export class DefaultCreateExperienceUsecase extends DefaultCommonResumeUsecase i
 			return await this.createNewExperience(generateUUID(), currentResume.id, data);
 		}
 
-		return await this.ports.updateExperience({ experienceResumeId: currentResume.experience, data });
+		return await this.updateExperienceInfo(currentResume.experience, data);
 	}
 }

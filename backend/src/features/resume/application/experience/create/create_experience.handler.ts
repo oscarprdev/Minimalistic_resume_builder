@@ -9,6 +9,7 @@ export interface CreateExperienceHandler {
 }
 
 const JobSchema = z.object({
+	id: z.string().uuid().optional(),
 	title: z.string(),
 	company: z.string(),
 	startDate: z.string(),
