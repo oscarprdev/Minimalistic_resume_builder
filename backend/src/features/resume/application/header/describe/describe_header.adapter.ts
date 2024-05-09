@@ -11,6 +11,7 @@ export class DescribeHeaderAdapter implements DescribeHeaderPorts {
 		if (!headerDb) return null;
 
 		return {
+			id: headerDb.id,
 			name: headerDb.name,
 			job: headerDb.job,
 			location: headerDb.location,

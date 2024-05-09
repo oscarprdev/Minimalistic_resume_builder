@@ -79,14 +79,25 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 			if (image) {
 				await this.database.query(
 					`UPDATE header
-					 SET name = $2, job = $3, location = $4, email = $5, phone = $6, links = $7, image = $8
+					 	SET name = $2, 
+						job = $3, 
+						location = $4, 
+						email = $5, 
+						phone = $6, 
+						links = $7, 
+						image = $8
 					 WHERE id = $1;`,
 					[headerResumeId, name, job, location, email, phone, links, image]
 				);
 			} else {
 				await this.database.query(
 					`UPDATE header
-					 SET name = $2, job = $3, location = $4, email = $5, phone = $6, links = $7
+					 	SET name = $2, 
+						job = $3, 
+						location = $4, 
+						email = $5, 
+						phone = $6, 
+						links = $7
 					 WHERE id = $1;`,
 					[headerResumeId, name, job, location, email, phone, links]
 				);

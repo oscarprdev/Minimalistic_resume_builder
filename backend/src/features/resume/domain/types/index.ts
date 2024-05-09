@@ -29,3 +29,18 @@ export interface SummaryDb {
 export interface UserDb {
 	id: string;
 }
+
+export interface JobDb {
+	id: string;
+	title: string;
+	company: string;
+	startDate: string;
+	endDate: string;
+	description: string;
+}
+
+export interface ExperienceDb {
+	id: string;
+	title: string;
+	jobList: JobDb[];
+}

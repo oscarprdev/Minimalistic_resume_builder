@@ -35,5 +35,9 @@ export class ResumeRouter implements RouterStrategy {
 		this.internalRouter.post(`${RESUME_COMMON_PATH}/summary`, (req) =>
 			this.resumeApplication.summaryUsecase().createSumary().handleRequest(req)
 		);
+
+		this.internalRouter.post(`${RESUME_COMMON_PATH}/experience`, (req) =>
+			this.resumeApplication.experienceUsecase().createExperience().handleRequest(req)
+		);
 	}
 }

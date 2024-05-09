@@ -11,6 +11,7 @@ export class DescribeSummaryAdapter implements DescribeSummaryPorts {
 		if (!summaryDb) return null;
 
 		return {
+			id: summaryDb.id,
 			title: summaryDb.title,
 			summary: summaryDb.summary,
 		};
