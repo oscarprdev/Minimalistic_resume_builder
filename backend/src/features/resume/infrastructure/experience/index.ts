@@ -28,8 +28,8 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			const result = await this.database.query(
 				`
             SELECT 
-                Experience.id AS "experienceId", 
-                Experience.title AS "experienceTitle",
+                Experience.id AS "id", 
+                Experience.title AS "title",
                 Job.id AS "jobId", 
                 Job.title AS "jobTitle", 
                 Job.company AS "jobCompany", 
@@ -47,11 +47,26 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				[experienceResumeId]
 			);
 
-			if (result.length === 0) {
-				return null;
-			}
+			const { id, title } = result[0];
 
-			return result[0] as ExperienceDb;
+			const jobList: JobDb[] = result.map((r) => {
+				return {
+					id: r.jobId,
+					title: r.jobTitle,
+					company: r.jobCompany,
+					startDate: r.jobStartDate,
+					endDate: r.jobEndDate,
+					description: r.jobDescription,
+				};
+			});
+
+			const experience: ExperienceDb = {
+				id,
+				title,
+				jobList,
+			};
+
+			return experience;
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getExperience');
 		}
