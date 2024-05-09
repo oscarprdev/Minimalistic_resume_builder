@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Skill = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * The skill name.
      */
     name: string;

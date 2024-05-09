@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type School = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * The name of the title or educational institution.
      */
     title: string;

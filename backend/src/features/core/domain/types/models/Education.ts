@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Education = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * Education section title.
      */
     title: string;
@@ -11,6 +15,10 @@ export type Education = {
      * An array of formal education schools.
      */
     educationList: Array<{
+        /**
+         * Resource Id.
+         */
+        id: string;
         /**
          * The name of the title or educational institution.
          */

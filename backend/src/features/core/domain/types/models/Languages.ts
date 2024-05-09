@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Languages = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * Languages section title.
      */
     title: string;
@@ -11,6 +15,10 @@ export type Languages = {
      * An array of languages.
      */
     languageList: Array<{
+        /**
+         * Resource Id.
+         */
+        id: string;
         /**
          * The language name.
          */

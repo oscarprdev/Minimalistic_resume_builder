@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Summary = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * Summary section title.
      */
     title: string;

@@ -4,7 +4,7 @@
 /* eslint-disable */
 export type Resume = {
     /**
-     * The unique identifier of the resume.
+     * Resource Id.
      */
     id: string;
     /**

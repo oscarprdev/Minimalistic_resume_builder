@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Skills = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * Skills section title.
      */
     title: string;
@@ -11,6 +15,10 @@ export type Skills = {
      * An array of skills.
      */
     skillList: Array<{
+        /**
+         * Resource Id.
+         */
+        id: string;
         /**
          * The skill name.
          */

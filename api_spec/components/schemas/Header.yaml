@@ -1,5 +1,6 @@
 type: object
 required:
+  - id
   - name
   - job
   - location
@@ -7,6 +8,10 @@ required:
   - phone
   - links
 properties:
+  id:
+    type: string
+    description: Resource Id.
+    example: f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c
   name:
     type: string
     description: The name of the person associated with the resume.

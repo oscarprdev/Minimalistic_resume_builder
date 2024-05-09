@@ -1,11 +1,16 @@
 type: object
 required:
+  - id
   - title
   - career
   - startDate
   - endDate
   - description
 properties:
+  id:
+    type: string
+    description: Resource Id.
+    example: f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c
   title:
     type: string
     description: The name of the title or educational institution.
