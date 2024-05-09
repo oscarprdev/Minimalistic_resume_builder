@@ -41,7 +41,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
             LEFT JOIN 
                 EducationSchool ON Education.id = EducationSchool.EducationId
             LEFT JOIN 
-                Job ON EducationSchool.schoolId = School.id
+                School ON EducationSchool.schoolId = School.id
             WHERE 
                 Education.id = $1;`,
 				[educationResumeId]
@@ -204,7 +204,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
-					`INSERT INTO Job 
+					`INSERT INTO School 
                         (id, title, career, startDate, endDate, description) 
                         VALUES ($1, $2, $3, $4, $5, $6)
                     ;`,
