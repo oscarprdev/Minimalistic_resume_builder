@@ -44,3 +44,18 @@ export interface ExperienceDb {
 	title: string;
 	jobList: JobDb[];
 }
+
+export interface SchoolDb {
+	id: string;
+	title: string;
+	career: string;
+	startDate: string;
+	endDate: string;
+	description: string;
+}
+
+export interface EducationDb {
+	id: string;
+	title: string;
+	educationList: SchoolDb[];
+}
