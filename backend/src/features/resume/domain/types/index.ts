@@ -59,3 +59,16 @@ export interface EducationDb {
 	title: string;
 	educationList: SchoolDb[];
 }
+
+export interface LanguageDb {
+	id: string;
+	name: string;
+	level: string;
+	certificateLink: string | null;
+}
+
+export interface LanguagesDb {
+	id: string;
+	title: string;
+	languageList: LanguageDb[];
+}
