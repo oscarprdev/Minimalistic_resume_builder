@@ -72,3 +72,15 @@ export interface LanguagesDb {
 	title: string;
 	languageList: LanguageDb[];
 }
+
+export interface SkillDb {
+	id: string;
+	name: string;
+	svgUrl: string;
+}
+
+export interface SkillsDb {
+	id: string;
+	title: string;
+	skillList: SkillDb[];
+}

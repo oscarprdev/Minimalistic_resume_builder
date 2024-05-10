@@ -4,11 +4,13 @@ import { DefaultEducationResumeDatabase } from '../infrastructure/education';
 import { DefaultExperienceResumeDatabase } from '../infrastructure/experience';
 import { DefaultHeaderResumeDatabase } from '../infrastructure/header';
 import { DefaultLanguagesResumeDatabase } from '../infrastructure/languages';
+import { DefaultSkillsResumeDatabase } from '../infrastructure/skills';
 import { DefaultSummaryResumeDatabase } from '../infrastructure/summary';
 import { DefaultEducationUsecase, EducationUsecase } from './education';
 import { DefaultExperienceUsecase, ExperienceUsecase } from './experience';
 import { DefaultHeaderUsecase, HeaderUsecase } from './header';
 import { DefaultLanguagesUsecase, LanguagesUsecase } from './languages';
+import { DefaultSkillsUsecase, SkillsUsecase } from './skills';
 import { DefaultSumaryUsecase, SumaryUsecase } from './summary';
 
 export interface ResumeApplication {
@@ -17,6 +19,7 @@ export interface ResumeApplication {
 	experienceUsecase(): ExperienceUsecase;
 	educationUsecase(): EducationUsecase;
 	languagesUsecase(): LanguagesUsecase;
+	skillsUsecase(): SkillsUsecase;
 }
 
 export class DefaultResumeApplication {
@@ -55,5 +58,12 @@ export class DefaultResumeApplication {
 		const commonResumeDatabase = new DefaultCommonResumeDatabase(this.database);
 
 		return new DefaultLanguagesUsecase(languagesResumeDatabase, commonResumeDatabase);
+	}
+
+	skillsUsecase() {
+		const skillsResumeDatabase = new DefaultSkillsResumeDatabase(this.database);
+		const commonResumeDatabase = new DefaultCommonResumeDatabase(this.database);
+
+		return new DefaultSkillsUsecase(skillsResumeDatabase, commonResumeDatabase);
 	}
 }

@@ -1,0 +1,215 @@
+import { DefaultErrorEntity } from '../../../core/domain/entities/Error';
+import { Database } from '../../../core/infrastructure/database';
+import { SkillsDb, SkillDb } from '../../domain/types';
+import {
+	CreateSkillsInfrastructureInput,
+	DeleteSkillsInfrastructureInput,
+	ErrorActions,
+	GetSkillInfrastructureInput,
+	GetSkillsInfrastructureInput,
+	InsertSkillsInfrastructureInput,
+	UpdateSkillsInfrastructureInput,
+} from './types';
+
+export interface SkillsResumeDatabase {
+	getSkills(input: GetSkillsInfrastructureInput): Promise<SkillsDb | null>;
+	getSkill(input: GetSkillInfrastructureInput): Promise<SkillDb[] | []>;
+	deleteSkills(input: DeleteSkillsInfrastructureInput): Promise<void>;
+	createSkills(input: CreateSkillsInfrastructureInput): Promise<void>;
+	insertSkillsIntoResume(input: InsertSkillsInfrastructureInput): Promise<void>;
+	updateSkills(input: UpdateSkillsInfrastructureInput): Promise<void>;
+}
+
+export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
+	constructor(private readonly database: Database) {}
+
+	async getSkills({ skillsResumeId }: GetSkillsInfrastructureInput): Promise<SkillsDb | null> {
+		try {
+			const result = await this.database.query(
+				`
+            SELECT 
+                Skills.id AS "id", 
+                Skills.title AS "title",
+                Skill.id AS "SkillId", 
+                Skill.name AS "SkillName", 
+                Skill.svgUrl AS "SkillSvgUrl"
+            FROM 
+                Skills
+            LEFT JOIN 
+                SkillsSkill ON Skills.id = SkillsSkill.SkillsId
+            LEFT JOIN 
+                Skill ON SkillsSkill.SkillId = Skill.id
+            WHERE 
+                Skills.id = $1;`,
+				[skillsResumeId]
+			);
+
+			const { id, title } = result[0];
+
+			const skillList: SkillDb[] = result.map((r) => {
+				return {
+					id: r.SkillId,
+					name: r.SkillName,
+					svgUrl: r.SkillSvgUrl,
+				};
+			});
+
+			const Skills: SkillsDb = {
+				id,
+				title,
+				skillList,
+			};
+
+			return Skills;
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getSkills');
+		}
+	}
+
+	async getSkill({ skillsResumeId }: GetSkillsInfrastructureInput): Promise<[] | SkillDb[]> {
+		try {
+			const result = await this.database.query(
+				`
+            SELECT 
+				Skill.id, 
+				Skill.name, 
+				Skill.svgUrl
+            FROM 
+                Skills
+            LEFT JOIN 
+                SkillsSkill ON Skills.id = SkillsSkill.SkillsId
+            LEFT JOIN 
+                Skill ON SkillsSkill.SkillId = Skill.id
+            WHERE 
+                Skills.id = $1;`,
+				[skillsResumeId]
+			);
+
+			if (result.length === 0) {
+				return [];
+			}
+
+			return result as SkillDb[];
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getSkills');
+		}
+	}
+
+	async deleteSkills({ skillsIds }: DeleteSkillsInfrastructureInput): Promise<void> {
+		try {
+			for (const skillId of skillsIds) {
+				await this.database.query(
+					`
+					DELETE FROM SkillsSkill WHERE SkillId = $1;
+					`,
+					[skillId]
+				);
+
+				await this.database.query(
+					`
+					DELETE FROM Skill WHERE id = $1;
+					`,
+					[skillId]
+				);
+			}
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteSkills');
+		}
+	}
+
+	async createSkills({ skillsResumeId, data }: CreateSkillsInfrastructureInput): Promise<void> {
+		try {
+			const { title, skillList } = data;
+
+			await this.database.query(
+				`INSERT INTO Skills 
+					(id, title) 
+					VALUES ($1, $2)
+				;`,
+				[skillsResumeId, title]
+			);
+
+			for (const { name, svgUrl } of skillList) {
+				const skillId = crypto.randomUUID().toString();
+
+				await this.database.query(
+					`INSERT INTO Skill 
+                        (id, name, svgUrl) 
+                        VALUES ($1, $2, $3)
+                    ;`,
+					[skillId, name, svgUrl]
+				);
+
+				await this.database.query(
+					`INSERT INTO SkillsSkill 
+                        (SkillsId, SkillId) 
+                        VALUES ($1, $2)
+                    ;`,
+					[skillsResumeId, skillId]
+				);
+			}
+		} catch (error: unknown) {
+			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'createSkills');
+		}
+	}
+
+	async insertSkillsIntoResume({ skillsResumeId, resumeId }: InsertSkillsInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`UPDATE resume 
+				 SET Skills = $2 
+				 WHERE id = $1;`,
+				[resumeId, skillsResumeId]
+			);
+		} catch (error: unknown) {
+			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'insertSkills');
+		}
+	}
+
+	async updateSkills({ skillsResumeId, data, newSkills }: UpdateSkillsInfrastructureInput): Promise<void> {
+		try {
+			const { title, skillList } = data;
+			await this.database.query(
+				`UPDATE Skills
+					SET title = $2
+                    WHERE id = $1
+				;`,
+				[skillsResumeId, title]
+			);
+
+			for (const { id, name, svgUrl } of skillList) {
+				await this.database.query(
+					`UPDATE Skill
+                        SET name = $2, 
+                        name = $3, 
+                        svgUrl = $4
+                    WHERE id = $1
+                    ;`,
+					[id, name, svgUrl]
+				);
+			}
+
+			for (const { name, svgUrl } of newSkills) {
+				const skillId = crypto.randomUUID().toString();
+
+				await this.database.query(
+					`INSERT INTO Skill 
+                        (id, name, svgUrl) 
+                        VALUES ($1, $2, $3)
+                    ;`,
+					[skillId, name, svgUrl]
+				);
+
+				await this.database.query(
+					`INSERT INTO SkillsSkill
+                        (SkillsId, SkillId) 
+                        VALUES ($1, $2)
+                    ;`,
+					[skillsResumeId, skillId]
+				);
+			}
+		} catch (error: unknown) {
+			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'updateSkills');
+		}
+	}
+}
