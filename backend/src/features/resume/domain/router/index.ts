@@ -50,6 +50,9 @@ export class ResumeRouter implements RouterStrategy {
 			this.resumeApplication.educationUsecase().createEducation().handleRequest(req)
 		);
 
+		this.internalRouter.get(`${RESUME_COMMON_PATH}/languages`, (req) =>
+			this.resumeApplication.languagesUsecase().describeLanguages().handleRequest(req)
+		);
 		this.internalRouter.post(`${RESUME_COMMON_PATH}/languages`, (req) =>
 			this.resumeApplication.languagesUsecase().createLanguages().handleRequest(req)
 		);

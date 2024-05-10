@@ -39,7 +39,7 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
             LEFT JOIN 
                 LanguagesLang ON Languages.id = LanguagesLang.LanguagesId
             LEFT JOIN 
-                Language ON LanguagesLan.LanguageId = Language.id
+                Language ON LanguagesLang.LanguageId = Language.id
             WHERE 
                 Languages.id = $1;`,
 				[languagesResumeId]
