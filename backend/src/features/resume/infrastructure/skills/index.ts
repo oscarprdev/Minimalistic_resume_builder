@@ -181,8 +181,7 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 				await this.database.query(
 					`UPDATE Skill
                         SET name = $2, 
-                        name = $3, 
-                        svgUrl = $4
+                        svgUrl = $3
                     WHERE id = $1
                     ;`,
 					[id, name, svgUrl]
