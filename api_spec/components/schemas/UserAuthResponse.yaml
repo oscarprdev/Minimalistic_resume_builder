@@ -1,0 +1,13 @@
+type: object
+required:
+  - id
+  - username
+properties:
+  id:
+    type: string
+    description: User Id.
+    example: f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c
+  username:
+    type: string
+    description: The username registered.
+    example: JohnDoe

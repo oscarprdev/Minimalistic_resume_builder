@@ -2,14 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UserCredentials = {
+export type UserAuthResponse = {
     /**
-     * The username to register an user.
+     * User Id.
+     */
+    id: string;
+    /**
+     * The username registered.
      */
     username: string;
-    /**
-     * The password encrypted.
-     */
-    password: string;
 };
 

@@ -1,8 +1,7 @@
 description: Returns user logged response
 content:
   application/json:
-    schema:
-      $ref: 'components/_index.yaml#/schemas/CommonPostResponse'
-      example:
-        status: 201
-        message: 'User is successfully logged'
+    $ref: 'components/_index.yaml#/schemas/UserAuthResponse'
+    example:
+      id: 'f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c'
+      username: 'jonhDoe'

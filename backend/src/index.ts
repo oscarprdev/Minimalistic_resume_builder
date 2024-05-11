@@ -3,27 +3,31 @@ import { RouterType } from 'itty-router';
 import { DefaultErrorEntity } from './features/core/domain/entities/Error';
 import { Database } from './features/core/infrastructure/database';
 import { DefaultResumeFeature } from './features/resume/domain';
+import { DefaultUserFeature } from './features/user/domain';
 
 export interface Env {
 	router?: RouterType;
 	DATABASE_URL: string;
 }
+const VALID_RESUME_RESOURCES = ['header', 'summary', 'experience', 'education', 'languages', 'skills'];
+const VALID_USER_RESOURCES = ['login'];
 
 export default {
 	async fetch(request: Request, env: Env): Promise<Response | void> {
 		try {
 			const database = new Database(env);
 
-			// if (request.url.includes('user')) {
-			// 	const userRouter = new UserRouter();
-			// 	const router = new Router(userRouter);
+			if (request.url.includes('user') && VALID_USER_RESOURCES.some((resource) => request.url.includes(resource))) {
+				const resumeFeature = new DefaultUserFeature(database);
 
-			// 	env.router = router.router();
+				const router = new Router(resumeFeature.use());
 
-			// 	return env.router.handle(request);
-			// }
+				env.router = router.router();
 
-			if (request.url.includes('resume')) {
+				return env.router.handle(request);
+			}
+
+			if (request.url.includes('resume') && VALID_RESUME_RESOURCES.some((resource) => request.url.includes(resource))) {
 				const resumeFeature = new DefaultResumeFeature(database);
 
 				const router = new Router(resumeFeature.use());

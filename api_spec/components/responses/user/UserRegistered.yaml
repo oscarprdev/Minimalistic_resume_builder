@@ -2,7 +2,7 @@ description: Returns user registered response
 content:
   application/json:
     schema:
-      $ref: 'components/_index.yaml#/schemas/CommonPostResponse'
+      $ref: 'components/_index.yaml#/schemas/UserAuthResponse'
       example:
-        status: 201
-        message: 'User is successfully registered'
+        id: 'f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c'
+        username: 'jonhDoe'

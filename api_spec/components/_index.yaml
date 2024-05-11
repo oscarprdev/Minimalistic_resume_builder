@@ -55,6 +55,9 @@ schemas:
   UserCredentials:
     $ref: 'components/schemas/UserCredentials.yaml'
 
+  UserAuthResponse:
+    $ref: 'components/schemas/UserAuthResponse.yaml'
+
   CommonPostResponse:
     $ref: 'components/schemas/CommonPostResponse.yaml'
 
