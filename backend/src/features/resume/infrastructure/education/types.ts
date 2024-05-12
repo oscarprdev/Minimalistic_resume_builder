@@ -5,6 +5,7 @@ export type ErrorActions =
 	| 'getSchools'
 	| 'deleteSchools'
 	| 'deleteEducation'
+	| 'deleteEducationFromResume'
 	| 'createEducation'
 	| 'insertEducation'
 	| 'updateEducation';
@@ -39,4 +40,8 @@ export interface DeleteSchoolsInfrastructureInput {
 
 export interface DeleteEducationInfrastructureInput {
 	educationResumeId: string;
+}
+
+export interface DeleteEducationFromResumeInfrastructureInput {
+	resumeId: string;
 }

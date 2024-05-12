@@ -13,7 +13,7 @@ export class DescribeEducationAdapter implements DescribeEducationPorts {
 		return {
 			id: educationDb.id,
 			title: educationDb.title,
-			educationList: educationDb.educationList.every((job) => !job.id) ? [] : educationDb.educationList,
+			educationList: educationDb.educationList.every((school) => !school.id) ? [] : educationDb.educationList,
 		};
 	}
 }

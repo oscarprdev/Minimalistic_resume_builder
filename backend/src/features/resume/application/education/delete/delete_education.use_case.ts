@@ -52,5 +52,6 @@ export class DefaultDeleteEducationUsecase extends DefaultCommonResumeUsecase im
 
 		await this.ports.deleteSchools({ schoolsIds: educationList.map((school) => school.id) });
 		await this.ports.deleteEducation({ educationResumeId: id });
+		await this.ports.deleteEducationFromResume({ resumeId });
 	}
 }

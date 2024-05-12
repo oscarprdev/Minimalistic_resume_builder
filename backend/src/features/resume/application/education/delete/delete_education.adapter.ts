@@ -1,12 +1,22 @@
 import { Education } from '../../../../core/domain/types';
 import { EducationResumeDatabase } from '../../../infrastructure/education';
-import { DeleteEducationPorts, DeleteEducationPortsInput, DeleteSchoolsPortsInput, GetEducationPortsInput } from './delete_education.ports';
+import {
+	DeleteEducationFromResumePortsInput,
+	DeleteEducationPorts,
+	DeleteEducationPortsInput,
+	DeleteSchoolsPortsInput,
+	GetEducationPortsInput,
+} from './delete_education.ports';
 
 export class DeleteEducationAdapter implements DeleteEducationPorts {
 	constructor(private readonly database: EducationResumeDatabase) {}
 
 	async deleteEducation({ educationResumeId }: DeleteEducationPortsInput): Promise<void> {
 		await this.database.deleteEducation({ educationResumeId });
+	}
+
+	async deleteEducationFromResume({ resumeId }: DeleteEducationFromResumePortsInput): Promise<void> {
+		await this.database.deleteEducationFromResume({ resumeId });
 	}
 
 	async deleteSchools({ schoolsIds }: DeleteSchoolsPortsInput): Promise<void> {
@@ -21,7 +31,7 @@ export class DeleteEducationAdapter implements DeleteEducationPorts {
 		return {
 			id: educationDb.id,
 			title: educationDb.title,
-			educationList: educationDb.educationList.every((job) => !job.id) ? [] : educationDb.educationList,
+			educationList: educationDb.educationList.every((school) => !school.id) ? [] : educationDb.educationList,
 		};
 	}
 }

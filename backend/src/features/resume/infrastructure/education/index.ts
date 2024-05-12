@@ -10,6 +10,7 @@ import {
 	GetSchoolsInfrastructureInput,
 	InsertEducationInfrastructureInput,
 	UpdateEducationInfrastructureInput,
+	DeleteEducationFromResumeInfrastructureInput,
 } from './types';
 
 export interface EducationResumeDatabase {
@@ -18,6 +19,7 @@ export interface EducationResumeDatabase {
 
 	deleteSchools(input: DeleteSchoolsInfrastructureInput): Promise<void>;
 	deleteEducation(input: DeleteEducationInfrastructureInput): Promise<void>;
+	deleteEducationFromResume(input: DeleteEducationFromResumeInfrastructureInput): Promise<void>;
 
 	createEducation(input: CreateEducationInfrastructureInput): Promise<void>;
 	insertEducationIntoResume(input: InsertEducationInfrastructureInput): Promise<void>;
@@ -132,6 +134,21 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 			);
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteEducation');
+		}
+	}
+
+	async deleteEducationFromResume({ resumeId }: DeleteEducationFromResumeInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				UPDATE resume 
+					SET education = null 
+					WHERE id = $1;
+				`,
+				[resumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteEducationFromResume');
 		}
 	}
 
