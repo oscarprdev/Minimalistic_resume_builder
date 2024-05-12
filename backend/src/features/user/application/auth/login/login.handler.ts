@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { DefaultErrorEntity } from '../../../../core/domain/entities/Error';
 import { RequestParams } from '../../../../core/domain/interfaces';
-import { CommonPostResponse, UserCredentials } from '../../../../core/domain/types';
+import { CommonPostResponse, UserAuthResponse, UserCredentials } from '../../../../core/domain/types';
 import { LoginUsecase } from './login.use-case';
 
 export interface AuthInput {
@@ -40,11 +40,11 @@ export class DefaultLoginHandler implements LoginHandler {
 		try {
 			const { data } = await this.extractPayload(request);
 
-			await this.usecase.execute({ username: data.username, password: data.password, authInput });
+			const loginResponse = await this.usecase.execute({ username: data.username, password: data.password, authInput });
 
-			const response = { status: 201, message: 'Header created successfully' } satisfies CommonPostResponse;
-
-			return new Response(response.message, response);
+			return new Response(JSON.stringify(loginResponse), {
+				status: 201,
+			});
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().handleError(error);
 		}
