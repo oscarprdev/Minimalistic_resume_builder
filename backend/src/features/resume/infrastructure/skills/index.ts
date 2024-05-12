@@ -3,7 +3,9 @@ import { Database } from '../../../core/infrastructure/database';
 import { SkillsDb, SkillDb } from '../../domain/types';
 import {
 	CreateSkillsInfrastructureInput,
+	DeleteSkillsFromResumeInfrastructureInput,
 	DeleteSkillsInfrastructureInput,
+	DeleteSkillsSectionInfrastructureInput,
 	ErrorActions,
 	GetSkillInfrastructureInput,
 	GetSkillsInfrastructureInput,
@@ -14,7 +16,11 @@ import {
 export interface SkillsResumeDatabase {
 	getSkills(input: GetSkillsInfrastructureInput): Promise<SkillsDb | null>;
 	getSkill(input: GetSkillInfrastructureInput): Promise<SkillDb[] | []>;
+
 	deleteSkills(input: DeleteSkillsInfrastructureInput): Promise<void>;
+	deleteSkillsSection(input: DeleteSkillsSectionInfrastructureInput): Promise<void>;
+	deleteSkillsFromResume(input: DeleteSkillsFromResumeInfrastructureInput): Promise<void>;
+
 	createSkills(input: CreateSkillsInfrastructureInput): Promise<void>;
 	insertSkillsIntoResume(input: InsertSkillsInfrastructureInput): Promise<void>;
 	updateSkills(input: UpdateSkillsInfrastructureInput): Promise<void>;
@@ -92,6 +98,34 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 			return result as SkillDb[];
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getSkills');
+		}
+	}
+
+	async deleteSkillsSection({ skillsResumeId }: DeleteSkillsSectionInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				DELETE FROM Skills WHERE id = $1;
+				`,
+				[skillsResumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteSkillsSection');
+		}
+	}
+
+	async deleteSkillsFromResume({ resumeId }: DeleteSkillsFromResumeInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				UPDATE resume 
+					SET Skills = null 
+					WHERE id = $1;
+				`,
+				[resumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteSkillsFromResume');
 		}
 	}
 

@@ -72,5 +72,6 @@ export class ResumeRouter implements RouterStrategy {
 		const skillsPath = `${RESUME_COMMON_PATH}/skills`;
 		this.internalRouter.get(skillsPath, (req) => this.resumeApplication.skillsUsecase().describeSkills().handleRequest(req));
 		this.internalRouter.post(skillsPath, (req) => this.resumeApplication.skillsUsecase().createSkills().handleRequest(req));
+		this.internalRouter.delete(skillsPath, (req) => this.resumeApplication.skillsUsecase().deleteSkills().handleRequest(req));
 	}
 }
