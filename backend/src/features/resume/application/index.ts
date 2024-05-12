@@ -13,13 +13,13 @@ import { DefaultGlobalUsecase, GlobalUsecase } from './global';
 import { DefaultHeaderUsecase, HeaderUsecase } from './header';
 import { DefaultLanguagesUsecase, LanguagesUsecase } from './languages';
 import { DefaultSkillsUsecase, SkillsUsecase } from './skills';
-import { DefaultSumaryUsecase, SumaryUsecase } from './summary';
+import { DefaultSummaryUsecase, SummaryUsecase } from './summary';
 
 export interface ResumeApplication {
 	globalUsecase(): GlobalUsecase;
 
 	headerUsecase(): HeaderUsecase;
-	summaryUsecase(): SumaryUsecase;
+	summaryUsecase(): SummaryUsecase;
 	experienceUsecase(): ExperienceUsecase;
 	educationUsecase(): EducationUsecase;
 	languagesUsecase(): LanguagesUsecase;
@@ -47,7 +47,7 @@ export class DefaultResumeApplication {
 		const summaryResumeDatabase = new DefaultSummaryResumeDatabase(this.database);
 		const commonResumeDatabase = new DefaultCommonResumeDatabase(this.database);
 
-		return new DefaultSumaryUsecase(summaryResumeDatabase, commonResumeDatabase);
+		return new DefaultSummaryUsecase(summaryResumeDatabase, commonResumeDatabase);
 	}
 
 	experienceUsecase() {

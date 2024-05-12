@@ -8,15 +8,15 @@ import { DescribeSummaryAdapter } from './describe/describe_summary.adapter';
 import { DefaultDescribeSummaryHandler, DescribeSummaryHandler } from './describe/describe_summary.handler';
 import { DefaultDescribeSummaryUsecase } from './describe/describe_summary.use_case';
 
-export interface SumaryUsecase {
-	describeSumary(): DescribeSummaryHandler;
-	createSumary(): CreateSummaryHandler;
+export interface SummaryUsecase {
+	describeSummary(): DescribeSummaryHandler;
+	createSummary(): CreateSummaryHandler;
 }
 
-export class DefaultSumaryUsecase implements SumaryUsecase {
+export class DefaultSummaryUsecase implements SummaryUsecase {
 	constructor(private readonly database: SummaryResumeDatabase, private readonly commonDatabase: CommonResumeDatabase) {}
 
-	describeSumary() {
+	describeSummary() {
 		const commonResumeAdapter = new CommonResumeAdapter(this.commonDatabase);
 		const describeSumaryAdapter = new DescribeSummaryAdapter(this.database);
 		const describeSumaryUsecase = new DefaultDescribeSummaryUsecase(describeSumaryAdapter, commonResumeAdapter);
@@ -24,7 +24,7 @@ export class DefaultSumaryUsecase implements SumaryUsecase {
 		return new DefaultDescribeSummaryHandler(describeSumaryUsecase);
 	}
 
-	createSumary() {
+	createSummary() {
 		const commonResumeAdapter = new CommonResumeAdapter(this.commonDatabase);
 		const createSumaryAdapter = new CreateSummaryAdapter(this.database);
 		const createSumaryUsecase = new DefaultCreateSummaryUsecase(createSumaryAdapter, commonResumeAdapter);
