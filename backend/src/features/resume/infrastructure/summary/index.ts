@@ -3,6 +3,8 @@ import { Database } from '../../../core/infrastructure/database';
 import { SummaryDb } from '../../domain/types';
 import {
 	CreateSummaryInfrastructureInput,
+	DeleteSummaryFromResumeInfrastructureInput,
+	DeleteSummaryInfrastructureInput,
 	ErrorActions,
 	GetSummaryInfrastructureInput,
 	InsertSummaryInfrastructureInput,
@@ -11,6 +13,10 @@ import {
 
 export interface SummaryResumeDatabase {
 	getSummary(input: GetSummaryInfrastructureInput): Promise<SummaryDb | null>;
+
+	deleteSummary(input: DeleteSummaryInfrastructureInput): Promise<void>;
+	deleteSummaryFromResume(input: DeleteSummaryFromResumeInfrastructureInput): Promise<void>;
+
 	createSummary(input: CreateSummaryInfrastructureInput): Promise<void>;
 	insertSummaryIntoResume(input: InsertSummaryInfrastructureInput): Promise<void>;
 	updateSummary(input: UpdateSummaryInfrastructureInput): Promise<void>;
@@ -74,6 +80,34 @@ export class DefaultSummaryResumeDatabase implements SummaryResumeDatabase {
 			);
 		} catch (error: unknown) {
 			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'updateSummary');
+		}
+	}
+
+	async deleteSummary({ summaryResumeId }: DeleteSummaryInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				DELETE FROM Summary WHERE id = $1;
+				`,
+				[summaryResumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteSummary');
+		}
+	}
+
+	async deleteSummaryFromResume({ resumeId }: DeleteSummaryFromResumeInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				UPDATE resume 
+					SET Summary = null 
+					WHERE id = $1;
+				`,
+				[resumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteSummaryFromResume');
 		}
 	}
 }

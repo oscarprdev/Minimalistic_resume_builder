@@ -1,6 +1,6 @@
 import { Summary } from '../../../core/domain/types';
 
-export type ErrorActions = 'getSummary' | 'createSummary' | 'insertSummary' | 'updateSummary';
+export type ErrorActions = 'getSummary' | 'createSummary' | 'insertSummary' | 'updateSummary' | 'deleteSummary' | 'deleteSummaryFromResume';
 
 export interface CreateSummaryInfrastructureInput {
 	summaryResumeId: string;
@@ -19,4 +19,12 @@ export interface GetSummaryInfrastructureInput {
 export interface UpdateSummaryInfrastructureInput {
 	summaryResumeId: string;
 	data: Summary;
+}
+
+export interface DeleteSummaryInfrastructureInput {
+	summaryResumeId: string;
+}
+
+export interface DeleteSummaryFromResumeInfrastructureInput {
+	resumeId: string;
 }

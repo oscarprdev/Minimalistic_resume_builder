@@ -45,6 +45,7 @@ export class ResumeRouter implements RouterStrategy {
 		const summaryPath = `${RESUME_COMMON_PATH}/summary`;
 		this.internalRouter.get(summaryPath, (req) => this.resumeApplication.summaryUsecase().describeSummary().handleRequest(req));
 		this.internalRouter.post(summaryPath, (req) => this.resumeApplication.summaryUsecase().createSummary().handleRequest(req));
+		this.internalRouter.delete(summaryPath, (req) => this.resumeApplication.summaryUsecase().deleteSummary().handleRequest(req));
 	}
 
 	private experienceRouter() {
