@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Header = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * The name of the person associated with the resume.
      */
     name: string;

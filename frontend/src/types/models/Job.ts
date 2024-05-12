@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Job = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * The job title.
      */
     title: string;

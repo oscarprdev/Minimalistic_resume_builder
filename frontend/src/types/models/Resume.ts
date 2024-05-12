@@ -4,7 +4,7 @@
 /* eslint-disable */
 export type Resume = {
     /**
-     * The unique identifier of the resume.
+     * Resource Id.
      */
     id: string;
     /**
@@ -12,12 +12,28 @@ export type Resume = {
      */
     title: string;
     /**
-     * The date and time when the resume was created.
+     * Header flag to know if header already created.
      */
-    createdAt: string;
+    header: boolean;
     /**
-     * The date and time when the resume was last updated.
+     * Summary flag to know if summary already created.
      */
-    updatedAt: string;
+    summary: boolean;
+    /**
+     * Experience flag to know if experience already created.
+     */
+    experience: boolean;
+    /**
+     * Education flag to know if education already created.
+     */
+    education: boolean;
+    /**
+     * Languages flag to know if languages already created.
+     */
+    languages: boolean;
+    /**
+     * Skills flag to know if skills already created.
+     */
+    skills: boolean;
 };
 

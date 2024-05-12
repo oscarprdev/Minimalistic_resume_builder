@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export type { CommonDeleteResponse } from './models/CommonDeleteResponse';
 export type { CommonPostResponse } from './models/CommonPostResponse';
 export type { Education } from './models/Education';
 export type { Error } from './models/Error';
@@ -17,5 +18,6 @@ export type { School } from './models/School';
 export type { Skill } from './models/Skill';
 export type { Skills } from './models/Skills';
 export type { Summary } from './models/Summary';
+export type { UserAuthResponse } from './models/UserAuthResponse';
 export type { UserCredentials } from './models/UserCredentials';
 export type { UserId } from './models/UserId';

@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type Experience = {
     /**
+     * Resource Id.
+     */
+    id: string;
+    /**
      * Experience section title.
      */
     title: string;
@@ -11,6 +15,10 @@ export type Experience = {
      * An array of jobs.
      */
     jobList: Array<{
+        /**
+         * Resource Id.
+         */
+        id: string;
         /**
          * The job title.
          */

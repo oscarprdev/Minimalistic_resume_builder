@@ -2,18 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type Skill = {
+export type CommonDeleteResponse = {
     /**
-     * Resource Id.
+     * Response code
      */
-    id: string;
+    status: number;
     /**
-     * The skill name.
+     * Delete description
      */
-    name: string;
-    /**
-     * The skill svg bucket url.
-     */
-    svgUrl: string;
+    message: string;
 };
 

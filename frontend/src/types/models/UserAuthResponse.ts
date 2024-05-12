@@ -2,18 +2,18 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type Summary = {
+export type UserAuthResponse = {
     /**
-     * Resource Id.
+     * User Id.
      */
     id: string;
     /**
-     * Summary section title.
+     * The username registered.
      */
-    title: string;
+    username: string;
     /**
-     * A brief summary of the owner's professional background and skills.
+     * JWT.
      */
-    summary: string;
+    token?: string;
 };
 
