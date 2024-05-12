@@ -1,5 +1,5 @@
 import { generateUUID } from '../../../../core/application/utils/generateUuid';
-import { Header, Resume } from '../../../../core/domain/types';
+import { Resume } from '../../../../core/domain/types';
 import { CommonResumePorts } from '../../common/common.ports';
 import { DefaultCommonResumeUsecase } from '../../common/common.use_case';
 import { UpdateResumePorts } from './update_resume.ports';

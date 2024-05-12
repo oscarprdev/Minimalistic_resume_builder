@@ -1,4 +1,4 @@
-export type ErrorActions = 'listResumeByUser' | 'updateResume';
+export type ErrorActions = 'listResumeByUser' | 'updateResume' | 'deleteResume' | 'describeResumeById';
 
 export interface ListResumeByUserInfrastructureInput {
 	ownerId: string;
@@ -11,4 +11,8 @@ export interface UpdateResumeInfrastructureInput {
 
 export interface UpdateResumeDataInput {
 	title: string;
+}
+
+export interface DeleteResumeInfrastructureInput {
+	resumeId: string;
 }

@@ -1,6 +1,9 @@
 import { CommonResumeDatabase } from '../../infrastructure/common';
 import { GlobalResumeDatabase } from '../../infrastructure/global';
 import { CommonResumeAdapter } from '../common/common.adapter';
+import { DeleteResumeAdapter } from './delete/delete_resume.adapter';
+import { DefaultDeleteResumeHandler, DeleteResumeHandler } from './delete/delete_resume.handler';
+import { DefaultDeleteResumeUsecase } from './delete/delete_resume.use-case';
 import { ListResumeAdapter } from './list/list_resume.adapter';
 import { DefaultListResumeHandler, ListResumeHandler } from './list/list_resume.handler';
 import { DefaultListResumeUsecase } from './list/list_resume.use-case';
@@ -11,6 +14,7 @@ import { DefaultUpdateResumeUsecase } from './update/update_resume.use-case';
 export interface GlobalUsecase {
 	listResume(): ListResumeHandler;
 	updateResume(): UpdateResumeHandler;
+	deleteResume(): DeleteResumeHandler;
 }
 
 export class DefaultGlobalUsecase implements GlobalUsecase {
@@ -30,5 +34,13 @@ export class DefaultGlobalUsecase implements GlobalUsecase {
 		const updateResumeUsecase = new DefaultUpdateResumeUsecase(updateResumeAdapter, commonResumeAdapter);
 
 		return new DefaultUpdateResumeHandler(updateResumeUsecase);
+	}
+
+	deleteResume() {
+		const commonResumeAdapter = new CommonResumeAdapter(this.commonDatabase);
+		const deleteResumeAdapter = new DeleteResumeAdapter(this.database);
+		const deleteResumeUsecase = new DefaultDeleteResumeUsecase(deleteResumeAdapter, commonResumeAdapter);
+
+		return new DefaultDeleteResumeHandler(deleteResumeUsecase);
 	}
 }
