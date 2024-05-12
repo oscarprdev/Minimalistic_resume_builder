@@ -118,15 +118,6 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				`,
 				[experienceResumeId]
 			);
-
-			await this.database.query(
-				`
-				UPDATE resume 
-					SET experience = null 
-					WHERE id = $1;
-				`,
-				[experienceResumeId]
-			);
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteExperience');
 		}
