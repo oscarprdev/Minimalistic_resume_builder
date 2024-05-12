@@ -3,6 +3,7 @@ import { Database } from '../../../core/infrastructure/database';
 import { EducationDb, SchoolDb } from '../../domain/types';
 import {
 	CreateEducationInfrastructureInput,
+	DeleteEducationInfrastructureInput,
 	DeleteSchoolsInfrastructureInput,
 	ErrorActions,
 	GetEducationInfrastructureInput,
@@ -14,7 +15,10 @@ import {
 export interface EducationResumeDatabase {
 	getEducation(input: GetEducationInfrastructureInput): Promise<EducationDb | null>;
 	getSchools(input: GetSchoolsInfrastructureInput): Promise<SchoolDb[] | []>;
+
 	deleteSchools(input: DeleteSchoolsInfrastructureInput): Promise<void>;
+	deleteEducation(input: DeleteEducationInfrastructureInput): Promise<void>;
+
 	createEducation(input: CreateEducationInfrastructureInput): Promise<void>;
 	insertEducationIntoResume(input: InsertEducationInfrastructureInput): Promise<void>;
 	updateEducation(input: UpdateEducationInfrastructureInput): Promise<void>;
@@ -47,6 +51,10 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId]
 			);
 
+			if (!result[0].id) {
+				return null;
+			}
+
 			const { id, title } = result[0];
 
 			const educationList: SchoolDb[] = result.map((r) => {
@@ -68,6 +76,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 
 			return Education;
 		} catch (error: unknown) {
+			console.log(error);
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getEducation');
 		}
 	}
@@ -101,6 +110,19 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 			return result as SchoolDb[];
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getSchools');
+		}
+	}
+
+	async deleteEducation({ educationResumeId }: DeleteEducationInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				DELETE FROM education WHERE id = $1;
+				`,
+				[educationResumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteEducation');
 		}
 	}
 

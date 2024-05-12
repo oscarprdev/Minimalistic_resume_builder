@@ -1,6 +1,13 @@
 import { Education, School } from '../../../core/domain/types';
 
-export type ErrorActions = 'getEducation' | 'getSchools' | 'deleteSchools' | 'createEducation' | 'insertEducation' | 'updateEducation';
+export type ErrorActions =
+	| 'getEducation'
+	| 'getSchools'
+	| 'deleteSchools'
+	| 'deleteEducation'
+	| 'createEducation'
+	| 'insertEducation'
+	| 'updateEducation';
 
 export interface CreateEducationInfrastructureInput {
 	educationResumeId: string;
@@ -28,4 +35,8 @@ export interface UpdateEducationInfrastructureInput {
 
 export interface DeleteSchoolsInfrastructureInput {
 	schoolsIds: string[];
+}
+
+export interface DeleteEducationInfrastructureInput {
+	educationResumeId: string;
 }

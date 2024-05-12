@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export type { CommonDeleteResponse } from './models/CommonDeleteResponse';
 export type { CommonPostResponse } from './models/CommonPostResponse';
 export type { Education } from './models/Education';
 export type { Error } from './models/Error';
