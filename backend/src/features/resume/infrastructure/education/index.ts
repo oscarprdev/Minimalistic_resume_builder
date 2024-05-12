@@ -123,15 +123,6 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				`,
 				[educationResumeId]
 			);
-
-			await this.database.query(
-				`
-				UPDATE resume 
-					SET education = null 
-					WHERE id = $1;
-				`,
-				[educationResumeId]
-			);
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteEducation');
 		}
