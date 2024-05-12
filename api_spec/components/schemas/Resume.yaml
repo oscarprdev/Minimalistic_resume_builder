@@ -2,8 +2,6 @@ type: object
 required:
   - id
   - title
-  - createdAt
-  - updatedAt
 properties:
   id:
     type: string
@@ -13,13 +11,3 @@ properties:
     type: string
     description: The title of the resume.
     example: 'Resume Title'
-  createdAt:
-    type: string
-    format: date-time
-    description: The date and time when the resume was created.
-    example: '2022-05-20T10:30:00Z'
-  updatedAt:
-    type: string
-    format: date-time
-    description: The date and time when the resume was last updated.
-    example: '2022-05-20T12:45:00Z'

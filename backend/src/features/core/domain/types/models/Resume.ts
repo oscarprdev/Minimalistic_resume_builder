@@ -11,13 +11,5 @@ export type Resume = {
      * The title of the resume.
      */
     title: string;
-    /**
-     * The date and time when the resume was created.
-     */
-    createdAt: string;
-    /**
-     * The date and time when the resume was last updated.
-     */
-    updatedAt: string;
 };
 

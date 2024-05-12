@@ -9,7 +9,7 @@ export interface Env {
 	router?: RouterType;
 	DATABASE_URL: string;
 }
-const VALID_RESUME_RESOURCES = ['header', 'summary', 'experience', 'education', 'languages', 'skills'];
+const VALID_RESUME_RESOURCES = ['list', 'header', 'summary', 'experience', 'education', 'languages', 'skills'];
 const VALID_USER_RESOURCES = ['login'];
 
 export default {

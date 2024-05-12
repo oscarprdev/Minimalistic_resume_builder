@@ -7,6 +7,7 @@ export interface ResumeDb {
 	experience: string | null;
 	languages: string | null;
 	skills: string | null;
+	title: string;
 }
 
 export interface HeaderDb {

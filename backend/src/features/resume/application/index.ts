@@ -2,18 +2,22 @@ import { Database } from '../../core/infrastructure/database';
 import { DefaultCommonResumeDatabase } from '../infrastructure/common';
 import { DefaultEducationResumeDatabase } from '../infrastructure/education';
 import { DefaultExperienceResumeDatabase } from '../infrastructure/experience';
+import { DefaultGlobalResumeDatabase } from '../infrastructure/global';
 import { DefaultHeaderResumeDatabase } from '../infrastructure/header';
 import { DefaultLanguagesResumeDatabase } from '../infrastructure/languages';
 import { DefaultSkillsResumeDatabase } from '../infrastructure/skills';
 import { DefaultSummaryResumeDatabase } from '../infrastructure/summary';
 import { DefaultEducationUsecase, EducationUsecase } from './education';
 import { DefaultExperienceUsecase, ExperienceUsecase } from './experience';
+import { DefaultGlobalUsecase, GlobalUsecase } from './global';
 import { DefaultHeaderUsecase, HeaderUsecase } from './header';
 import { DefaultLanguagesUsecase, LanguagesUsecase } from './languages';
 import { DefaultSkillsUsecase, SkillsUsecase } from './skills';
 import { DefaultSumaryUsecase, SumaryUsecase } from './summary';
 
 export interface ResumeApplication {
+	globalUsecase(): GlobalUsecase;
+
 	headerUsecase(): HeaderUsecase;
 	summaryUsecase(): SumaryUsecase;
 	experienceUsecase(): ExperienceUsecase;
@@ -24,6 +28,13 @@ export interface ResumeApplication {
 
 export class DefaultResumeApplication {
 	constructor(private readonly database: Database) {}
+
+	globalUsecase() {
+		const globalResumeDatabase = new DefaultGlobalResumeDatabase(this.database);
+		const commonResumeDatabase = new DefaultCommonResumeDatabase(this.database);
+
+		return new DefaultGlobalUsecase(globalResumeDatabase, commonResumeDatabase);
+	}
 
 	headerUsecase() {
 		const headerResumeDatabase = new DefaultHeaderResumeDatabase(this.database);
