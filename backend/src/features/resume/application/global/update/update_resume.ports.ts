@@ -1,4 +1,4 @@
-import { Resume } from '../../../../core/domain/types';
+import { UpdateResumeUsecaseExecuteDataInput } from './update_resume.use-case';
 
 export interface UpdateResumePorts {
 	updateResume(input: UpdateResumePortsInput): Promise<void>;
@@ -6,5 +6,5 @@ export interface UpdateResumePorts {
 
 export interface UpdateResumePortsInput {
 	resumeId: string;
-	data: Resume;
+	data: UpdateResumeUsecaseExecuteDataInput;
 }

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { DefaultErrorEntity } from '../../../../core/domain/entities/Error';
 import { RequestParams } from '../../../../core/domain/interfaces';
-import { UpdateResumeUsecase } from './update_resume.use-case';
+import { UpdateResumeUsecase, UpdateResumeUsecaseExecuteDataInput } from './update_resume.use-case';
 import { CommonPostResponse, Resume } from '../../../../core/domain/types';
 
 export interface UpdateResumeHandler {
@@ -19,7 +19,7 @@ export class DefaultUpdateResumeHandler implements UpdateResumeHandler {
 
 	private async extractPayload(request: Request) {
 		const body = await request.text();
-		const bodyParsed = JSON.parse(body) as Resume;
+		const bodyParsed = JSON.parse(body) as UpdateResumeUsecaseExecuteDataInput;
 
 		const { error } = ResumeSectionSchema.safeParse(bodyParsed);
 

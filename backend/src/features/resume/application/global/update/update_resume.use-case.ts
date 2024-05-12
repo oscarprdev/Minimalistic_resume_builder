@@ -7,8 +7,10 @@ import { UpdateResumePorts } from './update_resume.ports';
 interface UpdateResumeUsecaseExecuteInput {
 	userId: string;
 	resumeId: string;
-	data: Resume;
+	data: UpdateResumeUsecaseExecuteDataInput;
 }
+
+export type UpdateResumeUsecaseExecuteDataInput = Pick<Resume, 'title'>;
 
 export interface UpdateResumeUsecase {
 	execute(input: UpdateResumeUsecaseExecuteInput): Promise<void>;
