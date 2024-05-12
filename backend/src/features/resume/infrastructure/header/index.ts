@@ -3,6 +3,8 @@ import { Database } from '../../../core/infrastructure/database';
 import { HeaderDb } from '../../domain/types';
 import {
 	CreateHeaderInfrastructureInput,
+	DeleteHeaderFromResumeInfrastructureInput,
+	DeleteHeaderInfrastructureInput,
 	ErrorActions,
 	GetHeaderInfrastructureInput,
 	InsertHeaderInfrastructureInput,
@@ -11,6 +13,10 @@ import {
 
 export interface HeaderResumeDatabase {
 	getHeader(input: GetHeaderInfrastructureInput): Promise<HeaderDb | null>;
+
+	deleteHeader(input: DeleteHeaderInfrastructureInput): Promise<void>;
+	deleteHeaderFromResume(input: DeleteHeaderFromResumeInfrastructureInput): Promise<void>;
+
 	createHeader(input: CreateHeaderInfrastructureInput): Promise<void>;
 	insertHeaderIntoResume(input: InsertHeaderInfrastructureInput): Promise<void>;
 	updateHeader(input: UpdateHeaderInfrastructureInput): Promise<void>;
@@ -104,6 +110,34 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 			}
 		} catch (error: unknown) {
 			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'updateHeader');
+		}
+	}
+
+	async deleteHeader({ headerResumeId }: DeleteHeaderInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				DELETE FROM Header WHERE id = $1;
+				`,
+				[headerResumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteHeader');
+		}
+	}
+
+	async deleteHeaderFromResume({ resumeId }: DeleteHeaderFromResumeInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				UPDATE resume 
+					SET Header = null 
+					WHERE id = $1;
+				`,
+				[resumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteHeaderFromResume');
 		}
 	}
 }

@@ -38,6 +38,7 @@ export class ResumeRouter implements RouterStrategy {
 		const headerPath = `${RESUME_COMMON_PATH}/header`;
 		this.internalRouter.get(headerPath, (req) => this.resumeApplication.headerUsecase().describeHeader().handleRequest(req));
 		this.internalRouter.post(headerPath, (req) => this.resumeApplication.headerUsecase().createHeader().handleRequest(req));
+		this.internalRouter.delete(headerPath, (req) => this.resumeApplication.headerUsecase().deleteHeader().handleRequest(req));
 	}
 
 	private summaryRouter() {

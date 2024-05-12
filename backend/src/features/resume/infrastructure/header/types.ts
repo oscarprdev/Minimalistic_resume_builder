@@ -1,6 +1,6 @@
 import { Header } from '../../../core/domain/types';
 
-export type ErrorActions = 'getHeader' | 'createHeader' | 'insertHeader' | 'updateHeader';
+export type ErrorActions = 'getHeader' | 'createHeader' | 'insertHeader' | 'updateHeader' | 'deleteHeader' | 'deleteHeaderFromResume';
 
 export interface CreateHeaderInfrastructureInput {
 	headerResumeId: string;
@@ -23,4 +23,12 @@ export interface GetHeaderInfrastructureInput {
 export interface UpdateHeaderInfrastructureInput {
 	headerResumeId: string;
 	data: HeaderPayload;
+}
+
+export interface DeleteHeaderInfrastructureInput {
+	headerResumeId: string;
+}
+
+export interface DeleteHeaderFromResumeInfrastructureInput {
+	resumeId: string;
 }
