@@ -10,6 +10,24 @@ tags:
   - name: Resume
     description: Resume API
 
+  - name: Header
+    description: Resume API
+
+  - name: Summary
+    description: Resume API
+
+  - name: Experience
+    description: Resume API
+
+  - name: Education
+    description: Resume API
+
+  - name: Languages
+    description: Resume API
+
+  - name: Skills
+    description: Resume API
+
   - name: User
     description: User API
 

@@ -3,6 +3,3 @@ content:
   application/json:
     schema:
       $ref: 'components/_index.yaml#/schemas/CommonPostResponse'
-      example:
-        status: 201
-        message: 'Resume section created'

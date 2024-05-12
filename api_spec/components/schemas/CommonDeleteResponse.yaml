@@ -6,8 +6,8 @@ properties:
   status:
     type: integer
     description: Response code
-    example: 201
+    example: 204
   message:
     type: string
-    description: Post description
-    example: 'Resume section created'
+    description: Delete description
+    example: 'Resume section deleted'

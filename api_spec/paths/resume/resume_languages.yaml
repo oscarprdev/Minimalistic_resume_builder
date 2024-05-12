@@ -1,6 +1,6 @@
 get:
   tags:
-    - Resume
+    - Languages
   description: Get resume language section
   parameters:
     - $ref: 'components/_index.yaml#/parameters/UserId'
@@ -16,7 +16,7 @@ get:
       $ref: 'components/_index.yaml#/responses/InternalError'
 post:
   tags:
-    - Resume
+    - Languages
   description: Create resume language section
   parameters:
     - $ref: 'components/_index.yaml#/parameters/UserId'
@@ -30,6 +30,22 @@ post:
   responses:
     '201':
       $ref: 'components/_index.yaml#/responses/ResumeSectionCreated'
+    '404':
+      $ref: 'components/_index.yaml#/responses/NotFound'
+    '400':
+      $ref: 'components/_index.yaml#/responses/BadRequest'
+    '500':
+      $ref: 'components/_index.yaml#/responses/InternalError'
+delete:
+  tags:
+    - Languages
+  description: Delete resume languages section
+  parameters:
+    - $ref: 'components/_index.yaml#/parameters/UserId'
+    - $ref: 'components/_index.yaml#/parameters/ResumeId'
+  responses:
+    '204':
+      $ref: 'components/_index.yaml#/responses/ResumeSectionDeleted'
     '404':
       $ref: 'components/_index.yaml#/responses/NotFound'
     '400':

@@ -1,0 +1,5 @@
+description: Returns resume section deleted response
+content:
+  application/json:
+    schema:
+      $ref: 'components/_index.yaml#/schemas/CommonDeleteResponse'

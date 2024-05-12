@@ -27,6 +27,9 @@ responses:
   ResumeSectionCreated:
     $ref: 'components/responses/resume/ResumeSectionCreated.yaml'
 
+  ResumeSectionDeleted:
+    $ref: 'components/responses/resume/ResumeSectionDeleted.yaml'
+
   ResumeListDescribe:
     $ref: 'components/responses/resume/ResumeListDescribe.yaml'
 
@@ -60,6 +63,9 @@ schemas:
 
   CommonPostResponse:
     $ref: 'components/schemas/CommonPostResponse.yaml'
+
+  CommonDeleteResponse:
+    $ref: 'components/schemas/CommonDeleteResponse.yaml'
 
   Resume:
     $ref: 'components/schemas/Resume.yaml'
