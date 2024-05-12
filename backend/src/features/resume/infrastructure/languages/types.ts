@@ -1,6 +1,14 @@
 import { Languages, Language } from '../../../core/domain/types';
 
-export type ErrorActions = 'getLanguages' | 'getLanguages' | 'deleteLanguages' | 'createLanguages' | 'insertLanguages' | 'updateLanguages';
+export type ErrorActions =
+	| 'getLanguages'
+	| 'getLanguages'
+	| 'deleteLanguages'
+	| 'deleteLanguagesSection'
+	| 'deleteLanguagesFromResume'
+	| 'createLanguages'
+	| 'insertLanguages'
+	| 'updateLanguages';
 
 export interface CreateLanguagesInfrastructureInput {
 	languagesResumeId: string;
@@ -28,4 +36,12 @@ export interface UpdateLanguagesInfrastructureInput {
 
 export interface DeleteLanguagesInfrastructureInput {
 	languagesIds: string[];
+}
+
+export interface DeleteLanguagesSectionInfrastructureInput {
+	languagesResumeId: string;
+}
+
+export interface DeleteLanguagesFromResumeInfrastructureInput {
+	resumeId: string;
 }

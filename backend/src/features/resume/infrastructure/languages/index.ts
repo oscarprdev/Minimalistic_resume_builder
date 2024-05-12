@@ -3,7 +3,9 @@ import { Database } from '../../../core/infrastructure/database';
 import { LanguagesDb, LanguageDb } from '../../domain/types';
 import {
 	CreateLanguagesInfrastructureInput,
+	DeleteLanguagesFromResumeInfrastructureInput,
 	DeleteLanguagesInfrastructureInput,
+	DeleteLanguagesSectionInfrastructureInput,
 	ErrorActions,
 	GetLanguageInfrastructureInput,
 	GetLanguagesInfrastructureInput,
@@ -14,7 +16,11 @@ import {
 export interface LanguagesResumeDatabase {
 	getLanguages(input: GetLanguagesInfrastructureInput): Promise<LanguagesDb | null>;
 	getLanguage(input: GetLanguageInfrastructureInput): Promise<LanguageDb[] | []>;
+
 	deleteLanguages(input: DeleteLanguagesInfrastructureInput): Promise<void>;
+	deleteLanguagesSection(input: DeleteLanguagesSectionInfrastructureInput): Promise<void>;
+	deleteLanguagesFromResume(input: DeleteLanguagesFromResumeInfrastructureInput): Promise<void>;
+
 	createLanguages(input: CreateLanguagesInfrastructureInput): Promise<void>;
 	insertLanguagesIntoResume(input: InsertLanguagesInfrastructureInput): Promise<void>;
 	updateLanguages(input: UpdateLanguagesInfrastructureInput): Promise<void>;
@@ -95,6 +101,34 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 			return result as LanguageDb[];
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getLanguages');
+		}
+	}
+
+	async deleteLanguagesSection({ languagesResumeId }: DeleteLanguagesSectionInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				DELETE FROM languages WHERE id = $1;
+				`,
+				[languagesResumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteLanguagesSection');
+		}
+	}
+
+	async deleteLanguagesFromResume({ resumeId }: DeleteLanguagesFromResumeInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				UPDATE resume 
+					SET languages = null 
+					WHERE id = $1;
+				`,
+				[resumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteLanguagesFromResume');
 		}
 	}
 
