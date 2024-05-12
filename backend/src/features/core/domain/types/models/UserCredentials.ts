@@ -8,7 +8,7 @@ export type UserCredentials = {
      */
     username: string;
     /**
-     * The password encrypted.
+     * The password.
      */
     password: string;
 };

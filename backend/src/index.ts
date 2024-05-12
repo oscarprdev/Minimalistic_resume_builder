@@ -12,7 +12,7 @@ export interface Env {
 	SECRET: string;
 }
 const VALID_RESUME_RESOURCES = ['list', 'header', 'summary', 'experience', 'education', 'languages', 'skills'];
-const VALID_USER_RESOURCES = ['login'];
+const VALID_USER_RESOURCES = ['login', 'register'];
 
 export default {
 	async fetch(request: Request, env: Env): Promise<Response | void> {

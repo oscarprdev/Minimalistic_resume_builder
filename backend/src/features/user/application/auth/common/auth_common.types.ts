@@ -3,3 +3,8 @@ export interface VerifyPasswordInput {
 	hashedPassword: string;
 	hexSalt: string;
 }
+
+export interface HashPasswordInput {
+	password: string;
+	hexSalt: string;
+}

@@ -1,8 +1,8 @@
 description: Returns user logged response
 content:
   application/json:
-    $ref: 'components/_index.yaml#/schemas/UserAuthResponse'
-    example:
-      id: 'f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c'
-      username: 'jonhDoe'
-      token: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+    schema:
+      $ref: 'components/_index.yaml#/schemas/UserAuthResponse'
+      example:
+        id: 'f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c'
+        username: 'jonhDoe'

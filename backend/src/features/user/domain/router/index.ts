@@ -31,5 +31,9 @@ export class UserRouter implements RouterStrategy {
 		this.internalRouter.post(`${USER_COMMON_PATH}/login`, (req) =>
 			this.userApplication.authUsecase().login().handleRequest(req, { secret: env.SECRET, salt: env.SALT })
 		);
+
+		this.internalRouter.post(`${USER_COMMON_PATH}/register`, (req) =>
+			this.userApplication.authUsecase().register().handleRequest(req, { salt: env.SALT })
+		);
 	}
 }

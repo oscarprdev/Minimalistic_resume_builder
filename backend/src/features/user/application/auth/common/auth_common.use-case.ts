@@ -1,4 +1,4 @@
-import { VerifyPasswordInput } from './auth_common.types';
+import { HashPasswordInput, VerifyPasswordInput } from './auth_common.types';
 
 export class DefaultAuthUsecases {
 	constructor() {}
@@ -17,7 +17,7 @@ export class DefaultAuthUsecases {
 		return uint8Array;
 	}
 
-	protected async hashPassword(password: string, hexSalt: string): Promise<string> {
+	protected async hashPassword({ password, hexSalt }: HashPasswordInput): Promise<string> {
 		const encoder = new TextEncoder();
 
 		const passwordBuffer = encoder.encode(password);
