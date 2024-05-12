@@ -36,6 +36,9 @@ export class ResumeRouter implements RouterStrategy {
 		this.internalRouter.post(`${globalRouterPath}/:resumeId/update`, (req) =>
 			this.resumeApplication.globalUsecase().updateResume().handleRequest(req)
 		);
+		this.internalRouter.delete(`${globalRouterPath}/:resumeId/delete`, (req) =>
+			this.resumeApplication.globalUsecase().deleteResume().handleRequest(req)
+		);
 	}
 
 	private headerRouter() {

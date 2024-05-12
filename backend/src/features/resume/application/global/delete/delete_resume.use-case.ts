@@ -25,8 +25,6 @@ export class DefaultDeleteResumeUsecase extends DefaultCommonResumeUsecase imple
 			return new DefaultErrorEntity().sendError('Bad request: Resume not found', 404, 'execute');
 		}
 
-        
-
 		return await this.ports.deleteResume({ resumeId });
 	}
 }
