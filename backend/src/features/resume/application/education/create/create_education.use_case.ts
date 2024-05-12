@@ -55,9 +55,8 @@ export class DefaultCreateEducationUsecase extends DefaultCommonResumeUsecase im
 		const currentResume = await this.validateResume({ resumeId, userId: currentUser.id });
 
 		if (!currentResume) {
-			const newResumeId = generateUUID();
-			await this.createResume({ resumeId: newResumeId, ownerId: currentUser.id });
-			return await this.createNewEducation(generateUUID(), newResumeId, data);
+			await this.createResume({ resumeId, ownerId: currentUser.id });
+			return await this.createNewEducation(generateUUID(), resumeId, data);
 		}
 
 		if (!currentResume.education) {

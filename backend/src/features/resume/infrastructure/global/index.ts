@@ -46,7 +46,7 @@ export class DefaultGlobalResumeDatabase implements GlobalResumeDatabase {
 		try {
 			await this.database.query(
 				`
-				DELETE resume WHERE id = $1;
+				DELETE FROM resume WHERE id = $1;
 				`,
 				[resumeId]
 			);

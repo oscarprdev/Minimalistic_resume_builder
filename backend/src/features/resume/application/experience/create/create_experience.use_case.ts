@@ -53,9 +53,8 @@ export class DefaultCreateExperienceUsecase extends DefaultCommonResumeUsecase i
 		const currentResume = await this.validateResume({ resumeId, userId: currentUser.id });
 
 		if (!currentResume) {
-			const newResumeId = generateUUID();
-			await this.createResume({ resumeId: newResumeId, ownerId: currentUser.id });
-			return await this.createNewExperience(generateUUID(), newResumeId, data);
+			await this.createResume({ resumeId, ownerId: currentUser.id });
+			return await this.createNewExperience(generateUUID(), resumeId, data);
 		}
 
 		if (!currentResume.experience) {
