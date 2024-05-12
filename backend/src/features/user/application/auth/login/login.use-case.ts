@@ -24,6 +24,10 @@ export class DefaultLoginUsecase extends DefaultAuthUsecases implements LoginUse
 	private async validateUserAuthCredentials(username: string, password: string, salt: string): Promise<UserDb> {
 		const userDb = await this.ports.describeUserByUsername({ username });
 
+		if (!userDb) {
+			new DefaultErrorEntity().sendError('Bad request: user does not exist', 400, 'validateUserAuthCredentials');
+		}
+
 		const isPasswordValid = await this.verifyPassword({ password, hashedPassword: userDb.password, hexSalt: salt });
 
 		if (!isPasswordValid) {
