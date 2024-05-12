@@ -31,7 +31,11 @@ export class ResumeRouter implements RouterStrategy {
 	}
 
 	private globalRouter() {
-		this.internalRouter.get(`/resume/:userId/list`, (req) => this.resumeApplication.globalUsecase().listResume().handleRequest(req));
+		const globalRouterPath = `/resume/:userId`;
+		this.internalRouter.get(`${globalRouterPath}/list`, (req) => this.resumeApplication.globalUsecase().listResume().handleRequest(req));
+		this.internalRouter.post(`${globalRouterPath}/:resumeId/update`, (req) =>
+			this.resumeApplication.globalUsecase().updateResume().handleRequest(req)
+		);
 	}
 
 	private headerRouter() {
