@@ -1,6 +1,14 @@
 import { Experience, Job } from '../../../core/domain/types';
 
-export type ErrorActions = 'getExperience' | 'getJobs' | 'deleteJobs' | 'createExperience' | 'insertExperience' | 'updateExperience';
+export type ErrorActions =
+	| 'getExperience'
+	| 'getJobs'
+	| 'deleteJobs'
+	| 'deleteExperience'
+	| 'deleteExperienceFromResume'
+	| 'createExperience'
+	| 'insertExperience'
+	| 'updateExperience';
 
 export interface CreateExperienceInfrastructureInput {
 	experienceResumeId: string;
@@ -28,4 +36,12 @@ export interface UpdateExperienceInfrastructureInput {
 
 export interface DeleteJobsInfrastructureInput {
 	jobsIds: string[];
+}
+
+export interface DeleteExperienceInfrastructureInput {
+	experienceResumeId: string;
+}
+
+export interface DeleteExperienceFromResumeInfrastructureInput {
+	resumeId: string;
 }

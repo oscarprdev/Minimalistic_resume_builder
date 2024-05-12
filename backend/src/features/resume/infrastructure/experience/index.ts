@@ -3,6 +3,8 @@ import { Database } from '../../../core/infrastructure/database';
 import { ExperienceDb, JobDb } from '../../domain/types';
 import {
 	CreateExperienceInfrastructureInput,
+	DeleteExperienceFromResumeInfrastructureInput,
+	DeleteExperienceInfrastructureInput,
 	DeleteJobsInfrastructureInput,
 	ErrorActions,
 	GetExperienceInfrastructureInput,
@@ -14,7 +16,11 @@ import {
 export interface ExperienceResumeDatabase {
 	getExperience(input: GetExperienceInfrastructureInput): Promise<ExperienceDb | null>;
 	getJobs(input: GetJobsInfrastructureInput): Promise<JobDb[] | []>;
+
 	deleteJobs(input: DeleteJobsInfrastructureInput): Promise<void>;
+	deleteExperience(input: DeleteExperienceInfrastructureInput): Promise<void>;
+	deleteExperienceFromResume(input: DeleteExperienceFromResumeInfrastructureInput): Promise<void>;
+
 	createExperience(input: CreateExperienceInfrastructureInput): Promise<void>;
 	insertExperienceIntoResume(input: InsertExperienceInfrastructureInput): Promise<void>;
 	updateExperience(input: UpdateExperienceInfrastructureInput): Promise<void>;
@@ -101,6 +107,43 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			return result as JobDb[];
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getJobs');
+		}
+	}
+
+	async deleteExperience({ experienceResumeId }: DeleteExperienceInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				DELETE FROM experience WHERE id = $1;
+				`,
+				[experienceResumeId]
+			);
+
+			await this.database.query(
+				`
+				UPDATE resume 
+					SET experience = null 
+					WHERE id = $1;
+				`,
+				[experienceResumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteExperience');
+		}
+	}
+
+	async deleteExperienceFromResume({ resumeId }: DeleteExperienceFromResumeInfrastructureInput): Promise<void> {
+		try {
+			await this.database.query(
+				`
+				UPDATE resume 
+					SET experience = null 
+					WHERE id = $1;
+				`,
+				[resumeId]
+			);
+		} catch (error: unknown) {
+			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'deleteExperienceFromResume');
 		}
 	}
 
