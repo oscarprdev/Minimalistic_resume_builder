@@ -8,6 +8,15 @@ export class ListResumeAdapter implements ListResumePorts {
 	async listResume({ ownerId }: ListResumePortsInput): Promise<Resume[]> {
 		const result = await this.database.listResumeByUser({ ownerId });
 
-		return result.map((res) => ({ id: res.id, title: res.title }));
+		return result.map((res) => ({
+			id: res.id,
+			title: res.title,
+			header: Boolean(res.header),
+			summary: Boolean(res.summary),
+			education: Boolean(res.education),
+			experience: Boolean(res.experience),
+			languages: Boolean(res.languages),
+			skills: Boolean(res.skills),
+		}));
 	}
 }

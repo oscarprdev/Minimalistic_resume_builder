@@ -2,6 +2,12 @@ type: object
 required:
   - id
   - title
+  - header
+  - summary
+  - experience
+  - education
+  - languages
+  - skills
 properties:
   id:
     type: string
@@ -11,3 +17,27 @@ properties:
     type: string
     description: The title of the resume.
     example: 'Resume Title'
+  header:
+    type: boolean
+    description: Header flag to know if header already created.
+    example: true
+  summary:
+    type: boolean
+    description: Summary flag to know if summary already created.
+    example: true
+  experience:
+    type: boolean
+    description: Experience flag to know if experience already created.
+    example: true
+  education:
+    type: boolean
+    description: Education flag to know if education already created.
+    example: true
+  languages:
+    type: boolean
+    description: Languages flag to know if languages already created.
+    example: true
+  skills:
+    type: boolean
+    description: Skills flag to know if skills already created.
+    example: true
