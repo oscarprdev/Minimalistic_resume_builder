@@ -36,19 +36,19 @@ export class DefaultDescribeEducationUsecase extends DefaultCommonResumeUsecase 
 	}
 
 	private async provideEducationData(educationResumeId: string): Promise<Education> {
-		const Education = await this.ports.getEducation({ educationResumeId });
+		const education = await this.ports.getEducation({ educationResumeId });
 
-		if (!Education) {
+		if (!education) {
 			return new DefaultErrorEntity().sendError<DescribeEducationUsecaseAction>('Education not found', 404, 'provideEducationData');
 		}
 
-		return Education;
+		return education;
 	}
 
 	async execute({ userId, resumeId }: DescribeEducationUsecaseExecuteInput): Promise<Education> {
 		const currentUser = await this.validateUser({ userId });
-		const EducationResumeId = await this.provideEducationId(resumeId, currentUser);
+		const educationResumeId = await this.provideEducationId(resumeId, currentUser);
 
-		return await this.provideEducationData(EducationResumeId);
+		return await this.provideEducationData(educationResumeId);
 	}
 }
