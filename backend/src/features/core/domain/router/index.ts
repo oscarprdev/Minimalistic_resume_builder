@@ -1,4 +1,5 @@
-import { RouterStrategy } from '../interfaces';
+import { Env } from '../../../..';
+import { RouterInput, RouterStrategy } from '../interfaces';
 
 export class Router implements RouterStrategy {
 	constructor(private readonly routerStrategy: RouterStrategy) {}
@@ -7,7 +8,7 @@ export class Router implements RouterStrategy {
 		return this.routerStrategy.handle(request);
 	}
 
-	router() {
-		return this.routerStrategy.router();
+	router(input: RouterInput) {
+		return this.routerStrategy.router(input);
 	}
 }

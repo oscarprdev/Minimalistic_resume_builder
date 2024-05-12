@@ -11,3 +11,7 @@ properties:
     type: string
     description: The username registered.
     example: JohnDoe
+  token:
+    type: string
+    description: JWT.
+    example: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789

@@ -4,8 +4,13 @@ import { RequestParams } from '../../../../core/domain/interfaces';
 import { CommonPostResponse, UserCredentials } from '../../../../core/domain/types';
 import { LoginUsecase } from './login.use-case';
 
+export interface AuthInput {
+	salt: string;
+	secret: string;
+}
+
 export interface LoginHandler {
-	handleRequest(request: RequestParams): Promise<Response>;
+	handleRequest(request: RequestParams, authInput: AuthInput): Promise<Response>;
 }
 
 const LoginSectionSchema = z.object({
@@ -31,11 +36,11 @@ export class DefaultLoginHandler implements LoginHandler {
 		return { data: bodyParsed };
 	}
 
-	public async handleRequest(request: RequestParams) {
+	public async handleRequest(request: RequestParams, authInput: AuthInput) {
 		try {
 			const { data } = await this.extractPayload(request);
 
-			await this.usecase.execute({ username: data.username, password: data.password });
+			await this.usecase.execute({ username: data.username, password: data.password, authInput });
 
 			const response = { status: 201, message: 'Header created successfully' } satisfies CommonPostResponse;
 

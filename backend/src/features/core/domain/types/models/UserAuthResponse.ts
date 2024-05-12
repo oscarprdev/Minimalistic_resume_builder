@@ -11,5 +11,9 @@ export type UserAuthResponse = {
      * The username registered.
      */
     username: string;
+    /**
+     * JWT.
+     */
+    token?: string;
 };
 

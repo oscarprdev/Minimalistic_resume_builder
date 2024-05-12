@@ -8,6 +8,8 @@ import { DefaultUserFeature } from './features/user/domain';
 export interface Env {
 	router?: RouterType;
 	DATABASE_URL: string;
+	SALT: string;
+	SECRET: string;
 }
 const VALID_RESUME_RESOURCES = ['list', 'header', 'summary', 'experience', 'education', 'languages', 'skills'];
 const VALID_USER_RESOURCES = ['login'];
@@ -22,7 +24,7 @@ export default {
 
 				const router = new Router(resumeFeature.use());
 
-				env.router = router.router();
+				env.router = router.router({ env });
 
 				return env.router.handle(request);
 			}
@@ -32,7 +34,7 @@ export default {
 
 				const router = new Router(resumeFeature.use());
 
-				env.router = router.router();
+				env.router = router.router({});
 
 				return env.router.handle(request);
 			}

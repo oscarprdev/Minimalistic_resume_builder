@@ -5,3 +5,4 @@ content:
     example:
       id: 'f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c'
       username: 'jonhDoe'
+      token: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789

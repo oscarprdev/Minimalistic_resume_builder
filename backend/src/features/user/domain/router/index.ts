@@ -1,6 +1,8 @@
 import { Router, RouterType } from 'itty-router';
-import { RouterStrategy } from '../../../core/domain/interfaces';
+import { RouterInput, RouterStrategy } from '../../../core/domain/interfaces';
 import { UserApplication } from '../../application';
+import { Env } from '../../../..';
+import { DefaultErrorEntity } from '../../../core/domain/entities/Error';
 
 const USER_COMMON_PATH = '/user';
 
@@ -11,8 +13,12 @@ export class UserRouter implements RouterStrategy {
 		this.internalRouter = Router();
 	}
 
-	router(): RouterType {
-		this.routeController();
+	router({ env }: RouterInput): RouterType {
+		if (!env) {
+			return new DefaultErrorEntity().sendError('ENV not found', 404, 'router');
+		}
+
+		this.routeController(env);
 
 		return this.internalRouter;
 	}
@@ -21,7 +27,9 @@ export class UserRouter implements RouterStrategy {
 		return this.internalRouter.handle(request);
 	}
 
-	private routeController() {
-		this.internalRouter.post(`${USER_COMMON_PATH}/login`, (req) => this.userApplication.authUsecase().login().handleRequest(req));
+	private routeController(env: Env) {
+		this.internalRouter.post(`${USER_COMMON_PATH}/login`, (req) =>
+			this.userApplication.authUsecase().login().handleRequest(req, { secret: env.SECRET, salt: env.SALT })
+		);
 	}
 }
