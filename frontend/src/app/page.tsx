@@ -3,7 +3,7 @@
 import Home from './_containers/Home';
 
 export interface HomeProps {
-	searchParams: { user: string; resume: string };
+	searchParams: { user: string; resume?: string };
 }
 
 export default async function HomePage({ searchParams }: HomeProps) {

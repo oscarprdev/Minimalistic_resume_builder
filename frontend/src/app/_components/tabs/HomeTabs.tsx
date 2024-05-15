@@ -1,11 +1,12 @@
 'use server';
 
+import { redirect } from 'next/navigation';
 import HomeTabsTab from './HomeTabsTab';
 import { listResume } from '@/app/actions/resume/global/list-resume';
 
 interface HomeTabsProps {
 	userId: string;
-	resumeSelected: string;
+	resumeSelected?: string;
 }
 
 const HomeTabs = async ({ userId, resumeSelected }: HomeTabsProps) => {
@@ -17,6 +18,10 @@ const HomeTabs = async ({ userId, resumeSelected }: HomeTabsProps) => {
 
 	if (data.length === 0) {
 		return <p>No data</p>;
+	}
+
+	if (!resumeSelected) {
+		redirect(`/?user=${userId}&resume=${data[0].id}`);
 	}
 
 	return (

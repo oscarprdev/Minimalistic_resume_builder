@@ -6,7 +6,7 @@ import Resume from './Resume';
 
 interface HomeProps {
 	userId: string;
-	resumeSelected: string;
+	resumeSelected?: string;
 }
 
 const Home = async ({ userId, resumeSelected }: HomeProps) => {
