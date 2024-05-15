@@ -10,18 +10,14 @@ interface ResumeProps {
 
 const Resume = ({ userId, resumeId }: ResumeProps) => {
 	return (
-		<div>
-			{!resumeId ? (
-				'No resume selected'
-			) : (
-				<Suspense fallback={<p>Loading resume section</p>}>
-					<ResumeHeader
-						userId={userId}
-						resumeId={resumeId}
-					/>
-				</Suspense>
-			)}
-		</div>
+		<article className='bg-white w-[800px] min-h-screen py-10 px-20 mx-auto shadow-lg'>
+			<Suspense fallback={<p>Loading resume section</p>}>
+				<ResumeHeader
+					userId={userId}
+					resumeId={resumeId}
+				/>
+			</Suspense>
+		</article>
 	);
 };
 

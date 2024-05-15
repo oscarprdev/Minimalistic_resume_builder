@@ -1,4 +1,20 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--purple-100: #a673ef;
+	--purple-200: #8247e5;
+}
+
+body {
+	margin: 0 auto;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}

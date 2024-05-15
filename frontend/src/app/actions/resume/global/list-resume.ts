@@ -1,10 +1,11 @@
 'use server';
 
 import { API_URL } from '@/constants';
+import { DEFAULT_HEADER } from '@/data/default-header';
 import { Resume } from '@/types';
 
 interface ListResumeInput {
-	userId?: string | null;
+	userId: string;
 }
 
 interface ListResumeOutput {
@@ -14,15 +15,8 @@ interface ListResumeOutput {
 
 export const listResume = async ({ userId }: ListResumeInput): Promise<ListResumeOutput> => {
 	try {
-		if (!userId) {
-			return {
-				data: [],
-				error: null,
-			};
-		}
-
 		const response = await fetch(`${API_URL}/resume/${userId}/list`);
-		const resumes = await response.json();
+		const resumes: Resume[] = await response.json();
 
 		return {
 			data: resumes,

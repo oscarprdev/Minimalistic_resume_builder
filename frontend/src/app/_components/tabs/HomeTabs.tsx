@@ -17,7 +17,7 @@ const HomeTabs = async ({ userId, resumeSelected }: HomeTabsProps) => {
 	}
 
 	if (data.length === 0) {
-		return <p>No data</p>;
+		return <p>Create your first resume!</p>;
 	}
 
 	if (!resumeSelected) {
@@ -25,7 +25,7 @@ const HomeTabs = async ({ userId, resumeSelected }: HomeTabsProps) => {
 	}
 
 	return (
-		<div>
+		<div className='flex items-center gap-2'>
 			{data.map((resume) => (
 				<HomeTabsTab
 					key={resume.id}

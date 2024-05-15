@@ -5,8 +5,8 @@ import { DEFAULT_HEADER } from '@/data/default-header';
 import { Header } from '@/types';
 
 export interface DescribeHeaderInput {
-	resumeId: string | null;
 	userId: string | null;
+	resumeId?: string;
 }
 
 export interface DescribeHeaderOutput {

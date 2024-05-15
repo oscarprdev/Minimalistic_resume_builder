@@ -5,7 +5,7 @@ import ResumeHeaderFormController from './ResumeHeaderFormController';
 
 interface ResumeHeaderProps {
 	userId: string;
-	resumeId: string;
+	resumeId?: string;
 }
 
 const ResumeHeader = async ({ userId, resumeId }: ResumeHeaderProps) => {
@@ -18,7 +18,7 @@ const ResumeHeader = async ({ userId, resumeId }: ResumeHeaderProps) => {
 	return (
 		<ResumeHeaderFormController
 			userId={userId}
-			resumeId={resumeId}
+			resumeId={resumeId || ''}
 			defaultValues={data}
 		/>
 	);
