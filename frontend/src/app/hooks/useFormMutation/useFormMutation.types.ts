@@ -13,7 +13,7 @@ export interface UseFormMutationInput<S extends FieldValues> {
 		resumeId: string;
 	};
 	errorMessage: string;
-	action: (input: ActionInput<S>) => Promise<Response>;
+	action: (input: ActionInput<S>) => Promise<void>;
 }
 
 export interface UseFormMutationOutput<S extends FieldValues> {

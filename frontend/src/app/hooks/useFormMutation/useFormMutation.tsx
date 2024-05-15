@@ -44,6 +44,7 @@ export const useFormMutation = <S extends FieldValues>({
 
 	useEffect(() => {
 		if (error) {
+			console.log(error);
 			toast({
 				title: 'Error',
 				description: errorMessage,
