@@ -11,6 +11,6 @@ export const headerFormSchema = z.object({
 	image: z.string().optional(),
 });
 
-export type HeaderFormValues = z.infer<typeof headerFormSchema>;
+// export type HeaderFormValues = z.infer<typeof headerFormSchema>;
 
 export type HeaderFormState = Omit<Header, 'id'>;

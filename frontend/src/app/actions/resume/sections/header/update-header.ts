@@ -11,23 +11,15 @@ export interface UpdateHeaderInput {
 }
 
 export const updateHeader = async ({ userId, resumeId, values }: UpdateHeaderInput) => {
-	try {
-		console.log(values);
-		const response = await fetch(`${API_URL}/resume/${userId}/${resumeId}/header`, {
-			method: 'POST',
-			body: JSON.stringify(values),
-			headers: {
-				'content-type': 'application/json',
-			},
-		});
+	const response = await fetch(`${API_URL}/resume/${userId}/${resumeId}/header`, {
+		method: 'POST',
+		body: JSON.stringify(values),
+		headers: {
+			'content-type': 'application/json',
+		},
+	});
 
-		revalidatePath('/');
+	revalidatePath('/');
 
-		// const data = await response.json();
-
-		console.log(response);
-		return response;
-	} catch (error) {
-		console.log(error);
-	}
+	return response;
 };

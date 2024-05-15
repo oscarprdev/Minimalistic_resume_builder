@@ -3,9 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Header } from '@/types';
-import { Control, FieldErrors, UseFormReturn, useFieldArray } from 'react-hook-form';
-import { HeaderFormState, HeaderFormValues } from './utils';
+import { FieldErrors, UseFormReturn } from 'react-hook-form';
+import { HeaderFormState } from './utils';
 import ResumeHeaderLinks from './ResumeHeaderLinks';
 
 interface ResumeHeaderFormPresentationProps {
