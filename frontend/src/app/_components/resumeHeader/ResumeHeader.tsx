@@ -1,6 +1,7 @@
 'use server';
 
 import { describeHeader } from '@/app/actions/resume/sections/header/describe-header';
+import ResumeHeaderFormController from './ResumeHeaderFormController';
 
 interface ResumeHeaderProps {
 	userId: string;
@@ -15,10 +16,11 @@ const ResumeHeader = async ({ userId, resumeId }: ResumeHeaderProps) => {
 	}
 
 	return (
-		<div>
-			<p>{data?.name}</p>
-			<p>{data?.location}</p>
-		</div>
+		<ResumeHeaderFormController
+			userId={userId}
+			resumeId={resumeId}
+			defaultValues={data}
+		/>
 	);
 };
 

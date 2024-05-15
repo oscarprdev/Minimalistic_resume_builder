@@ -23,6 +23,7 @@ const HomeTabs = async ({ userId, resumeSelected }: HomeTabsProps) => {
 		<div>
 			{data.map((resume) => (
 				<HomeTabsTab
+					key={resume.id}
 					userId={userId}
 					resumeId={resume.id}
 					title={resume.title}
