@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import ResumeHeader from '../_components/resumeHeader/ResumeHeader';
 
 interface ResumeProps {
-	userId: string;
+	userId?: string;
 	resumeId?: string;
 }
 

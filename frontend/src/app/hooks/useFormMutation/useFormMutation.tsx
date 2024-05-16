@@ -29,6 +29,10 @@ export const useFormMutation = <S extends FieldValues>({
 		defaultValues: optimisticFormValues as DefaultValues<S>,
 	});
 
+	useEffect(() => {
+		form.reset(optimisticFormValues);
+	}, [optimisticFormValues]);
+
 	const { mutate, error, isPending } = useMutation({
 		mutationFn: (input: ActionInput<S>) => action(input),
 	});
@@ -44,7 +48,6 @@ export const useFormMutation = <S extends FieldValues>({
 
 	useEffect(() => {
 		if (error) {
-			console.log(error);
 			toast({
 				title: 'Error',
 				description: errorMessage,

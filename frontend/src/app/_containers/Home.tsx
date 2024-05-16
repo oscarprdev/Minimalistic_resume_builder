@@ -1,5 +1,3 @@
-'use server';
-
 import { Suspense } from 'react';
 import HomeTabs from '../_components/tabs/HomeTabs';
 import Resume from './Resume';
@@ -7,7 +5,7 @@ import HomeTabsWrapper from '../_components/tabs/HomeTabsWrapper';
 import { cn } from '@/lib/utils';
 
 interface HomeProps {
-	userId: string;
+	userId?: string;
 	resumeSelected?: string;
 }
 
