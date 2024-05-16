@@ -19,14 +19,17 @@ const ResumeHeaderFormPresentation = ({ onSubmit, form, formErrors, loading }: R
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-8'>
+				className='group border border-transparent border-dashed rounded-lg p-8 hover:border-purple_100 duration-300'>
 				<FormField
 					control={form.control}
 					name='name'
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input {...field} />
+								<Input
+									kind={'title'}
+									{...field}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -38,7 +41,10 @@ const ResumeHeaderFormPresentation = ({ onSubmit, form, formErrors, loading }: R
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input {...field} />
+								<Input
+									kind={'subtitle'}
+									{...field}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -50,19 +56,10 @@ const ResumeHeaderFormPresentation = ({ onSubmit, form, formErrors, loading }: R
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='email'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input {...field} />
+								<Input
+									kind={'text'}
+									{...field}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -74,7 +71,25 @@ const ResumeHeaderFormPresentation = ({ onSubmit, form, formErrors, loading }: R
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input {...field} />
+								<Input
+									kind={'label'}
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name='email'
+					render={({ field }) => (
+						<FormItem>
+							<FormControl>
+								<Input
+									kind={'label'}
+									{...field}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -85,7 +100,11 @@ const ResumeHeaderFormPresentation = ({ onSubmit, form, formErrors, loading }: R
 					register={form.register}
 					errors={formErrors.links && Array.isArray(formErrors.links) ? formErrors.links.map((linkError) => linkError?.message) : []}
 				/>
-				<Button type='submit'>{loading ? 'loading' : 'submit'}</Button>
+				<Button
+					className='hidden'
+					type='submit'>
+					{loading ? 'loading' : 'submit'}
+				</Button>
 			</form>
 		</Form>
 	);

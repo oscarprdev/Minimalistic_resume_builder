@@ -10,7 +10,7 @@ interface ResumeProps {
 
 const Resume = ({ userId, resumeId }: ResumeProps) => {
 	return (
-		<article className='bg-white w-[800px] min-h-screen py-10 px-20 mx-auto shadow-lg'>
+		<article className='bg-white w-[800px] min-h-screen p-5 mx-auto shadow-lg'>
 			<Suspense fallback={<p>Loading resume section</p>}>
 				<ResumeHeader
 					userId={userId}

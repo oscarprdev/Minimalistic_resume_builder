@@ -31,7 +31,7 @@ export const useFormMutation = <S extends FieldValues>({
 
 	useEffect(() => {
 		form.reset(optimisticFormValues);
-	}, [optimisticFormValues]);
+	}, [defaultValues]);
 
 	const { mutate, error, isPending } = useMutation({
 		mutationFn: (input: ActionInput<S>) => action(input),
