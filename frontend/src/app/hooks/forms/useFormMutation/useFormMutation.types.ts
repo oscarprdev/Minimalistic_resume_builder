@@ -1,5 +1,5 @@
 import { ZodType } from 'zod';
-import { UseFormReturn, FieldErrors, FieldValues } from 'react-hook-form';
+import { UseFormReturn, FieldErrors, FieldValues, Path } from 'react-hook-form';
 
 export type FormSchema<T> = ZodType<T, any, any>;
 
@@ -18,7 +18,7 @@ export interface UseFormMutationInput<S extends FieldValues> {
 
 export interface UseFormMutationOutput<S extends FieldValues> {
 	form: UseFormReturn<S, any, undefined>;
-	onSubmit: (values: S) => Promise<void>;
+	handleChange: (form: UseFormReturn<S>, name: Path<S>, value: any) => void;
 	loading: boolean;
 	errors: FieldErrors<S>;
 }

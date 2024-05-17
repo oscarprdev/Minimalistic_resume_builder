@@ -4,7 +4,7 @@ import { HeaderFormState, headerFormSchema } from './utils';
 import ResumeHeaderFormPresentation from './ResumeHeaderFormPresentation';
 import { updateHeader } from '@/app/actions/resume/sections/header/update-header';
 import { Header } from '@/types';
-import { useFormMutation } from '@/app/hooks/useFormMutation/useFormMutation';
+import { useFormMutation } from '@/app/hooks/forms';
 
 export interface ResumeHeaderFormProps {
 	userId: string;
@@ -13,17 +13,17 @@ export interface ResumeHeaderFormProps {
 }
 
 const ResumeHeaderFormController = ({ userId, resumeId, defaultValues }: ResumeHeaderFormProps) => {
-	const { form, onSubmit, loading, errors } = useFormMutation<HeaderFormState>({
+	const { form, handleChange, loading, errors } = useFormMutation<HeaderFormState>({
 		formSchema: headerFormSchema,
 		defaultValues,
 		errorMessage: 'Updating header resume section has failed',
 		info: { userId, resumeId },
 		action: updateHeader,
 	});
-
+	
 	return (
 		<ResumeHeaderFormPresentation
-			onSubmit={onSubmit}
+			handleChange={handleChange}
 			form={form}
 			formErrors={errors}
 			loading={loading}

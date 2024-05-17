@@ -3,97 +3,51 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { FieldErrors, UseFormReturn } from 'react-hook-form';
+import { FieldErrors, Path, UseFormReturn } from 'react-hook-form';
 import { HeaderFormState } from './utils';
 import ResumeHeaderLinks from './ResumeHeaderLinks';
+import FormInput from '../forms/FormInput';
 
 interface ResumeHeaderFormPresentationProps {
-	onSubmit: (values: HeaderFormState) => void;
+	handleChange: (form: UseFormReturn<HeaderFormState>, name: Path<HeaderFormState>, value: any) => void;
 	form: UseFormReturn<HeaderFormState, any, undefined>;
 	formErrors: FieldErrors<HeaderFormState>;
 	loading: boolean;
 }
 
-const ResumeHeaderFormPresentation = ({ onSubmit, form, formErrors, loading }: ResumeHeaderFormPresentationProps) => {
+const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading }: ResumeHeaderFormPresentationProps) => {
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='group border border-transparent border-dashed rounded-lg p-8 hover:border-purple_100 duration-300'>
-				<FormField
-					control={form.control}
+			<form className='group border border-transparent border-dashed rounded-lg p-8 hover:border-purple_100 duration-300'>
+				<FormInput
+					form={form}
 					name='name'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									kind={'title'}
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					kind='title'
+					handleChange={handleChange}
 				/>
-				<FormField
-					control={form.control}
+				<FormInput
+					form={form}
 					name='job'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									kind={'subtitle'}
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					kind='subtitle'
+					handleChange={handleChange}
 				/>
-				<FormField
-					control={form.control}
+				<FormInput
+					form={form}
 					name='location'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									kind={'text'}
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					kind='text'
+					handleChange={handleChange}
 				/>
-				<FormField
-					control={form.control}
+				<FormInput
+					form={form}
 					name='phone'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									kind={'label'}
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					kind='label'
+					handleChange={handleChange}
 				/>
-				<FormField
-					control={form.control}
+				<FormInput
+					form={form}
 					name='email'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									kind={'label'}
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					kind='label'
+					handleChange={handleChange}
 				/>
 				<ResumeHeaderLinks
 					control={form.control}

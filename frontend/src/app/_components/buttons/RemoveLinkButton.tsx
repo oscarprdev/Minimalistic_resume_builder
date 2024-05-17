@@ -13,6 +13,7 @@ const RemoveLinkButton = ({ index, onRemove }: RemoveLinkButtonProps) => {
 			<Tooltip>
 				<TooltipTrigger className='mt-[0.9rem] -mr-1'>
 					<Button
+						asChild
 						type='button'
 						variant={'outline'}
 						size={'icon'}
