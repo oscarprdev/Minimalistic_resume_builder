@@ -1,4 +1,6 @@
+import { InputKind } from '@/components/ui/input';
 import { Header } from '@/types';
+import { Path } from 'react-hook-form';
 import { z } from 'zod';
 
 export const headerFormSchema = z.object({
@@ -11,6 +13,32 @@ export const headerFormSchema = z.object({
 	image: z.string().optional(),
 });
 
-// export type HeaderFormValues = z.infer<typeof headerFormSchema>;
-
 export type HeaderFormState = Omit<Header, 'id'>;
+
+interface FORM_FIELDS_TYPE {
+	name: Path<HeaderFormState>;
+	kind: InputKind;
+}
+
+export const FORM_FIELDS: FORM_FIELDS_TYPE[] = [
+	{
+		name: 'name',
+		kind: 'title',
+	},
+	{
+		name: 'job',
+		kind: 'subtitle',
+	},
+	{
+		name: 'location',
+		kind: 'text',
+	},
+	{
+		name: 'phone',
+		kind: 'label',
+	},
+	{
+		name: 'email',
+		kind: 'label',
+	},
+];

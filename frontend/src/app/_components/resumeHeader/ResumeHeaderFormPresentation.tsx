@@ -1,10 +1,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import { FieldErrors, Path, UseFormReturn } from 'react-hook-form';
-import { HeaderFormState } from './utils';
+import { FORM_FIELDS, HeaderFormState } from './utils';
 import ResumeHeaderLinks from './ResumeHeaderLinks';
 import FormInput from '../forms/FormInput';
 
@@ -19,36 +18,15 @@ const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading 
 	return (
 		<Form {...form}>
 			<form className='group border border-transparent border-dashed rounded-lg p-8 hover:border-purple_100 duration-300'>
-				<FormInput
-					form={form}
-					name='name'
-					kind='title'
-					handleChange={handleChange}
-				/>
-				<FormInput
-					form={form}
-					name='job'
-					kind='subtitle'
-					handleChange={handleChange}
-				/>
-				<FormInput
-					form={form}
-					name='location'
-					kind='text'
-					handleChange={handleChange}
-				/>
-				<FormInput
-					form={form}
-					name='phone'
-					kind='label'
-					handleChange={handleChange}
-				/>
-				<FormInput
-					form={form}
-					name='email'
-					kind='label'
-					handleChange={handleChange}
-				/>
+				{FORM_FIELDS.map((field) => (
+					<FormInput
+						key={field.name}
+						form={form}
+						name={field.name}
+						kind={field.kind}
+						handleChange={handleChange}
+					/>
+				))}
 				<ResumeHeaderLinks
 					control={form.control}
 					register={form.register}
