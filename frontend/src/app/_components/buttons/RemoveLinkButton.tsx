@@ -11,7 +11,7 @@ const RemoveLinkButton = ({ index, onRemove }: RemoveLinkButtonProps) => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
-				<TooltipTrigger className='mt-[0.9rem] -mr-1'>
+				<TooltipTrigger className='mt-[0.4rem] -mr-1'>
 					<Button
 						asChild
 						type='button'
@@ -21,7 +21,8 @@ const RemoveLinkButton = ({ index, onRemove }: RemoveLinkButtonProps) => {
 						onClick={() => onRemove(index)}>
 						<IconX
 							stroke={1}
-							width={20}
+							width={18}
+							height={18}
 						/>
 					</Button>
 				</TooltipTrigger>

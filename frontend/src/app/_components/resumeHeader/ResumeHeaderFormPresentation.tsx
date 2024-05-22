@@ -17,7 +17,10 @@ interface ResumeHeaderFormPresentationProps {
 const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading }: ResumeHeaderFormPresentationProps) => {
 	return (
 		<Form {...form}>
-			<form className='group border border-transparent border-dashed rounded-lg p-8 hover:border-purple_100 duration-300'>
+			<form className='relative group border border-transparent border-dashed rounded-lg p-8 pb-3 pr-3 hover:border-purple_100 duration-300'>
+				<p className='absolute -top-3 left-2 bg-white px-2 text-purple_100 text-sm opacity-0 group-hover:opacity-100 transition duration-300'>
+					Header
+				</p>
 				{FORM_FIELDS.map((field) => (
 					<FormInput
 						key={field.name}

@@ -1,6 +1,7 @@
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input, InputKind } from '@/components/ui/input';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
+import ResumeHeaderIcons from '../resumeHeader/ResumeHeaderIcons';
 
 interface FormInputProps<S extends FieldValues> {
 	form: UseFormReturn<S, any, undefined>;
@@ -15,7 +16,8 @@ const FormInput = <S extends FieldValues>({ form, name, kind, handleChange }: Fo
 			control={form.control}
 			name={name}
 			render={({ field }) => (
-				<FormItem>
+				<FormItem className='flex items-center'>
+					<ResumeHeaderIcons value={field.name} />
 					<FormControl>
 						<Input
 							{...field}
