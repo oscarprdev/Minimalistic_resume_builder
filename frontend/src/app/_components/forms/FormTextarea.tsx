@@ -20,8 +20,9 @@ const FormTextarea = <S extends FieldValues>({ form, name, handleChange }: FormT
 					<FormControl>
 						<Textarea
 							{...field}
-							maxLength={100}
-							className='max-w-[60%] resize-none'
+							maxLength={80}
+							required
+							className='w-[70%] resize-none h-fit'
 							onChange={(e) => handleChange(form, field.name, e.target.value)}
 						/>
 					</FormControl>
