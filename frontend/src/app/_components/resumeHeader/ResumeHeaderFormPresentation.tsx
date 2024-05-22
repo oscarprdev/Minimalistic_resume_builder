@@ -6,6 +6,7 @@ import { FieldErrors, Path, UseFormReturn } from 'react-hook-form';
 import { FORM_FIELDS, HeaderFormState } from './utils';
 import ResumeHeaderLinks from './ResumeHeaderLinks';
 import FormInput from '../forms/FormInput';
+import FormTextarea from '../forms/FormTextarea';
 
 interface ResumeHeaderFormPresentationProps {
 	handleChange: (form: UseFormReturn<HeaderFormState>, name: Path<HeaderFormState>, value: any) => void;
@@ -21,15 +22,24 @@ const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading 
 				<p className='absolute -top-3 left-2 bg-white px-2 text-purple_100 text-sm opacity-0 group-hover:opacity-100 transition duration-300'>
 					Header
 				</p>
-				{FORM_FIELDS.map((field) => (
-					<FormInput
-						key={field.name}
-						form={form}
-						name={field.name}
-						kind={field.kind}
-						handleChange={handleChange}
-					/>
-				))}
+				{FORM_FIELDS.map((field) =>
+					field.container === 'input' ? (
+						<FormInput
+							key={field.name}
+							form={form}
+							name={field.name}
+							kind={field.kind}
+							handleChange={handleChange}
+						/>
+					) : (
+						<FormTextarea
+							key={field.name}
+							form={form}
+							name={field.name}
+							handleChange={handleChange}
+						/>
+					)
+				)}
 				<ResumeHeaderLinks
 					control={form.control}
 					register={form.register}
