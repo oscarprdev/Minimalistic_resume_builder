@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { FieldErrors, Path, UseFormReturn } from 'react-hook-form';
 import { FORM_FIELDS, HeaderFormState } from './utils';
@@ -37,7 +36,9 @@ const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading 
 							key={field.name}
 							form={form}
 							name={field.name}
+							maxLength={80}
 							handleChange={handleChange}
+							onHeader
 						/>
 					)
 				)}
@@ -52,11 +53,6 @@ const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading 
 					register={form.register}
 					errors={formErrors.links && Array.isArray(formErrors.links) ? formErrors.links.map((linkError) => linkError?.message) : []}
 				/>
-				<Button
-					className='hidden'
-					type='submit'>
-					{loading ? 'loading' : 'submit'}
-				</Button>
 			</form>
 		</Form>
 	);
