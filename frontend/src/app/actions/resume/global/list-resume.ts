@@ -15,7 +15,7 @@ interface ListResumeOutput {
 
 export const listResume = async ({ userId }: ListResumeInput): Promise<ListResumeOutput> => {
 	try {
-		const response = await fetch(`${API_URL}/resume/${userId}/list`);
+		const response = await fetch(`${API_URL}/resume/${userId}/list`, { cache: 'no-store' });
 		const resumes: Resume[] = await response.json();
 
 		return {

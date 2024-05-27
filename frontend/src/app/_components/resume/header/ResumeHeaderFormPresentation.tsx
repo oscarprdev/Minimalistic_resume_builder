@@ -5,8 +5,8 @@ import { Form } from '@/components/ui/form';
 import { FieldErrors, Path, UseFormReturn } from 'react-hook-form';
 import { FORM_FIELDS, HeaderFormState } from './utils';
 import ResumeHeaderLinks from './ResumeHeaderLinks';
-import FormInput from '../forms/FormInput';
-import FormTextarea from '../forms/FormTextarea';
+import FormInput from '../../forms/FormInput';
+import FormTextarea from '../../forms/FormTextarea';
 import ResumeHeaderImageController from './ResumeHeaderImageController';
 
 interface ResumeHeaderFormPresentationProps {

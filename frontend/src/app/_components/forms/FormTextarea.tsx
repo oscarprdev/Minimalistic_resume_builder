@@ -1,6 +1,6 @@
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
-import ResumeHeaderIcons from '../resumeHeader/ResumeHeaderIcons';
+import ResumeHeaderIcons from '../resume/header/ResumeHeaderIcons';
 import { Textarea } from '@/components/ui/textarea';
 
 interface FormTextareaProps<S extends FieldValues> {

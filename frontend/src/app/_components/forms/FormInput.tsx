@@ -1,7 +1,7 @@
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input, InputKind } from '@/components/ui/input';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
-import ResumeHeaderIcons from '../resumeHeader/ResumeHeaderIcons';
+import ResumeHeaderIcons from '../resume/header/ResumeHeaderIcons';
 
 interface FormInputProps<S extends FieldValues> {
 	form: UseFormReturn<S, any, undefined>;

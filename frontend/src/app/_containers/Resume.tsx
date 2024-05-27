@@ -1,7 +1,7 @@
 'use server';
 
 import { Suspense } from 'react';
-import ResumeHeader from '../_components/resumeHeader/ResumeHeader';
+import ResumeHeader from '../_components/resume/header/ResumeHeader';
 
 interface ResumeProps {
 	userId?: string;

@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Control, UseFormRegister, useFieldArray, Controller } from 'react-hook-form';
 import { HeaderFormState } from './utils';
 import { IconPlus } from '@tabler/icons-react';
-import RemoveLinkButton from '../buttons/RemoveLinkButton';
+import RemoveLinkButton from '../../buttons/RemoveLinkButton';
 import ResumeHeaderLinksIcons from './ResumeHeaderLinksIcons';
 
 interface ResumeHeaderLinksProps {
