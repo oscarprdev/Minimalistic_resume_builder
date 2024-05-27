@@ -4,7 +4,7 @@ import { HeaderFormState, headerFormSchema } from './utils';
 import ResumeHeaderFormPresentation from './ResumeHeaderFormPresentation';
 import { updateHeader } from '@/app/actions/resume/sections/header/update-header';
 import { Header } from '@/types';
-import { useFormMutation } from '@/app/hooks/forms';
+import { useFormMutation } from '@/app/hooks/useFormMutation/useFormMutation';
 
 export interface ResumeHeaderFormProps {
 	userId: string;
@@ -20,7 +20,7 @@ const ResumeHeaderFormController = ({ userId, resumeId, defaultValues }: ResumeH
 		info: { userId, resumeId },
 		action: updateHeader,
 	});
-	
+
 	return (
 		<ResumeHeaderFormPresentation
 			handleChange={handleChange}

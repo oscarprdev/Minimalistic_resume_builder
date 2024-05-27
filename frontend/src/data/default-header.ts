@@ -8,5 +8,5 @@ export const DEFAULT_HEADER: Header = {
 	email: 'john.doe@example.com',
 	phone: '+1 (123) 456-7890',
 	links: ['https:/www.linkedin.com/in/johndoe', 'https:/github.com/johndoe'],
-	image: 'https:/www.bucket.com/image',
+	image: 'empty',
 };

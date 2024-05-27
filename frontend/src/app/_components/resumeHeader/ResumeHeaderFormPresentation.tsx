@@ -7,6 +7,7 @@ import { FORM_FIELDS, HeaderFormState } from './utils';
 import ResumeHeaderLinks from './ResumeHeaderLinks';
 import FormInput from '../forms/FormInput';
 import FormTextarea from '../forms/FormTextarea';
+import ResumeHeaderImageController from './ResumeHeaderImageController';
 
 interface ResumeHeaderFormPresentationProps {
 	handleChange: (form: UseFormReturn<HeaderFormState>, name: Path<HeaderFormState>, value: any) => void;
@@ -40,6 +41,12 @@ const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading 
 						/>
 					)
 				)}
+				<ResumeHeaderImageController
+					imageUrl={form.getValues('image')}
+					form={form}
+					name='image'
+					handleChange={handleChange}
+				/>
 				<ResumeHeaderLinks
 					control={form.control}
 					register={form.register}

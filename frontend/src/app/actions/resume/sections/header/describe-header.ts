@@ -23,7 +23,7 @@ export const describeHeader = async ({ resumeId, userId }: DescribeHeaderInput):
 			};
 		}
 
-		const response = await fetch(`${API_URL}/resume/${userId}/${resumeId}/header`);
+		const response = await fetch(`${API_URL}/resume/${userId}/${resumeId}/header`, { cache: 'no-store' });
 		const data: Header = await response.json();
 
 		return {

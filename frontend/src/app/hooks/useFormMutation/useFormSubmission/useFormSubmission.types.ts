@@ -1,4 +1,4 @@
-import { ActionInput } from '../useFormMutation/useFormMutation.types';
+import { ActionInput } from '../useFormMutation.types';
 
 export interface UseFormSubmissionInput<S> {
 	action: (input: ActionInput<S>) => Promise<void>;

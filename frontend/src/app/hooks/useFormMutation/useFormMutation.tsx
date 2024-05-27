@@ -1,9 +1,9 @@
 import { FieldValues } from 'react-hook-form';
 import { UseFormMutationInput, UseFormMutationOutput } from './useFormMutation.types';
-import { useFormInitialization } from '../useFormInitialization/useFormInitialization';
-import { useFormSubmission } from '../useFormSubmission/useFormSubmission';
-import { useDebouncedSubmission } from '../useDebouncedSubmission/useDebouncedSubmission';
-import { useOptimisticFormState } from '../useOptimisticFormState/useOptimisticFormState';
+import { useFormInitialization } from './useFormInitialization/useFormInitialization';
+import { useFormSubmission } from './useFormSubmission/useFormSubmission';
+import { useDebouncedSubmission } from './useDebouncedSubmission/useDebouncedSubmission';
+import { useOptimisticFormState } from './useOptimisticFormState/useOptimisticFormState';
 
 /**
  * useFormMutation hook.
