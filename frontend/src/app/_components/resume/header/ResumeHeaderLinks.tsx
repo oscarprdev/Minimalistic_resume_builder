@@ -1,57 +1,89 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { FormControl, FormItem, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Control, UseFormRegister, useFieldArray, Controller } from 'react-hook-form';
+import { UseFormReturn, Path } from 'react-hook-form';
 import { HeaderFormState } from './utils';
 import { IconPlus } from '@tabler/icons-react';
-import RemoveLinkButton from '../../buttons/RemoveLinkButton';
+import RemoveItemButton from '../../buttons/RemoveItemButton';
 import ResumeHeaderLinksIcons from './ResumeHeaderLinksIcons';
+import { useState } from 'react';
 
 interface ResumeHeaderLinksProps {
-	control: Control<HeaderFormState, any>;
+	form: UseFormReturn<HeaderFormState, any, undefined>;
 	errors: string[];
-	register: UseFormRegister<HeaderFormState>;
+	handleChange: (form: UseFormReturn<HeaderFormState>, name: Path<HeaderFormState>, value: any) => void;
 }
 
-const ResumeHeaderLinks = ({ control, errors, register }: ResumeHeaderLinksProps) => {
-	const { fields, remove, append } = useFieldArray({ control, name: 'links' as never });
+const LINKS_NAME = 'links';
+
+const ResumeHeaderLinks = ({ form, errors, handleChange }: ResumeHeaderLinksProps) => {
+	const [links, setLinks] = useState<string[]>(form.getValues(LINKS_NAME));
+
+	const isDisabled = links.length !== form.watch(LINKS_NAME).length;
+
+	const appendLink = (newLink: string) => {
+		const updatedLinks = [...form.getValues(LINKS_NAME), newLink];
+		setLinks(updatedLinks);
+		handleChange(form, LINKS_NAME, updatedLinks);
+	};
+
+	const removeLink = (index: number) => {
+		const updatedLinks = form.getValues(LINKS_NAME).filter((_, i) => i !== index);
+		setLinks(updatedLinks);
+		handleChange(form, LINKS_NAME, updatedLinks);
+	};
+
+	const handleInputChange = (index: number, value: string) => {
+		handleChange(
+			form,
+			LINKS_NAME,
+			form.getValues(LINKS_NAME).map((link, i) => (i === index ? value : link))
+		);
+	};
 
 	return (
 		<section className='flex items-start justify-between w-full'>
 			<div className='flex flex-col gap-1 w-full'>
-				{fields.map((_, index) => (
-					<Controller
-						key={_.id}
+				{links.map((link, index) => (
+					<FormField
+						key={link}
 						name={`links.${index}`}
-						control={control}
 						render={({ field }) => (
-							<>
-								<FormItem className='flex items-center -ml-6 -mb-2'>
-									<RemoveLinkButton
+							<FormItem className='relative flex items-center -mb-2 '>
+								<span className='absolute top-[0.53rem] -left-6'>
+									<RemoveItemButton
 										index={index}
-										onRemove={() => remove(index)}
+										text={'Remove link'}
+										onRemove={removeLink}
 									/>
-									<ResumeHeaderLinksIcons value={field.value} />
-									<FormControl>
-										<Input
-											kind={'label'}
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage>{errors[index] && errors[index]}</FormMessage>
-								</FormItem>
-							</>
-						)}></Controller>
+								</span>
+
+								<ResumeHeaderLinksIcons value={form.getValues(LINKS_NAME)[index]} />
+								<FormControl>
+									<Input
+										{...field}
+										disabled={isDisabled}
+										kind={'label'}
+										className='w-full'
+										value={form.getValues(LINKS_NAME)[index]}
+										onChange={(e) => handleInputChange(index, e.target.value)}
+									/>
+								</FormControl>
+								<FormMessage>{errors[index] && errors[index]}</FormMessage>
+							</FormItem>
+						)}
+					/>
 				))}
 			</div>
 			<Button
 				type='button'
 				variant={'outline'}
 				size={'sm'}
-				className='ml-auto opacity-0 group-hover:opacity-100 transition duration-300 mt-auto'
-				onClick={() => append('Your awesome link')}>
+				disabled={isDisabled}
+				className='opacity-0 group-hover:opacity-100 transition duration-300 mt-auto'
+				onClick={() => appendLink('https://www.your_awesome_link.com')}>
 				<IconPlus
 					stroke={1}
 					width={20}

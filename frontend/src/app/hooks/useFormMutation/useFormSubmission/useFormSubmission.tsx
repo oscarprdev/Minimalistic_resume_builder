@@ -25,5 +25,5 @@ export function useFormSubmission<S extends FieldValues>({
 		mutate(mutationInput);
 	};
 
-	return { onSubmit, isPending };
+	return { onSubmit, loading: isPending };
 }

@@ -7,6 +7,7 @@ import ResumeHeaderLinks from './ResumeHeaderLinks';
 import FormInput from '../../forms/FormInput';
 import FormTextarea from '../../forms/FormTextarea';
 import ResumeHeaderImageController from './ResumeHeaderImageController';
+import { IconLoader2 } from '@tabler/icons-react';
 
 interface ResumeHeaderFormPresentationProps {
 	handleChange: (form: UseFormReturn<HeaderFormState>, name: Path<HeaderFormState>, value: any) => void;
@@ -18,7 +19,12 @@ interface ResumeHeaderFormPresentationProps {
 const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading }: ResumeHeaderFormPresentationProps) => {
 	return (
 		<Form {...form}>
-			<form className='relative group border border-transparent border-dashed rounded-lg p-8 pb-3 pr-3 hover:border-purple_100 duration-300'>
+			<form className='relative group border border-transparent border-dashed rounded-lg mt-2 pt-3 pl-8 pb-3 pr-3 hover:border-purple_100 duration-300'>
+				{loading && (
+					<span className='absolute top-3 right-3 *:text-purple_100 animate-spin place-items-center'>
+						<IconLoader2 size={20} />
+					</span>
+				)}
 				<p className='absolute -top-3 left-2 bg-white px-2 text-purple_100 text-sm opacity-0 group-hover:opacity-100 transition duration-300'>
 					Header
 				</p>
@@ -49,8 +55,8 @@ const ResumeHeaderFormPresentation = ({ handleChange, form, formErrors, loading 
 					handleChange={handleChange}
 				/>
 				<ResumeHeaderLinks
-					control={form.control}
-					register={form.register}
+					form={form}
+					handleChange={handleChange}
 					errors={formErrors.links && Array.isArray(formErrors.links) ? formErrors.links.map((linkError) => linkError?.message) : []}
 				/>
 			</form>

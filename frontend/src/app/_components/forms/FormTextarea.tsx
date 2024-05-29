@@ -1,9 +1,8 @@
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
-import ResumeHeaderIcons from '../resume/header/ResumeHeaderIcons';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface FormTextareaProps<S extends FieldValues> {
 	form: UseFormReturn<S, any, undefined>;
@@ -16,13 +15,11 @@ interface FormTextareaProps<S extends FieldValues> {
 const FormTextarea = <S extends FieldValues>({ form, name, onHeader = false, maxLength, handleChange }: FormTextareaProps<S>) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-	const [height, setHeight] = useState('auto');
-
 	useEffect(() => {
-		if (textareaRef.current) {
-			textareaRef.current.style.height = 'auto';
-			textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-			setHeight(`${textareaRef.current.scrollHeight}px`);
+		const element = textareaRef.current;
+		if (element) {
+			element.style.height = '1px';
+			element.style.height = element.scrollHeight + 'px';
 		}
 	}, [form.watch(name)]);
 
@@ -31,15 +28,14 @@ const FormTextarea = <S extends FieldValues>({ form, name, onHeader = false, max
 			control={form.control}
 			name={name}
 			render={({ field }) => (
-				<FormItem className='flex items-center'>
-					<ResumeHeaderIcons value={field.name} />
+				<FormItem className='flex items-center w-full'>
 					<FormControl>
 						<Textarea
 							{...field}
 							ref={textareaRef}
 							maxLength={maxLength}
 							required
-							className={cn('resize-none h-fit', onHeader ? 'w-[70%] ' : 'w-full')}
+							className={cn('text-pretty resize-none overflow-hidden', onHeader ? 'w-[70%]' : 'w-full text-gray-500')}
 							onChange={(e) => handleChange(form, field.name, e.target.value)}
 						/>
 					</FormControl>

@@ -15,7 +15,10 @@ export interface CreateExperienceUsecase {
 }
 
 export class DefaultCreateExperienceUsecase extends DefaultCommonResumeUsecase implements CreateExperienceUsecase {
-	constructor(private readonly ports: CreateExperiencePorts, protected readonly commonPorts: CommonResumePorts) {
+	constructor(
+		private readonly ports: CreateExperiencePorts,
+		protected readonly commonPorts: CommonResumePorts
+	) {
 		super(commonPorts);
 	}
 
@@ -30,7 +33,7 @@ export class DefaultCreateExperienceUsecase extends DefaultCommonResumeUsecase i
 			return await this.ports.deleteJobs({ jobsIds: currentJobsIds });
 		}
 
-		const jobsToDelete = currentJobsIds.filter((currentJobId) => data.jobList.some((jb) => 'id' in jb && jb.id !== currentJobId));
+		const jobsToDelete = currentJobsIds.filter((currentJobId) => !Boolean(data.jobList.map((job) => job.id).includes(currentJobId)));
 
 		await this.ports.deleteJobs({ jobsIds: jobsToDelete });
 	}

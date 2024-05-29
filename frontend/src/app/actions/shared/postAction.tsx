@@ -6,7 +6,7 @@ interface PostActionInput {
 }
 
 export const postAction = async ({ path, body }: PostActionInput) => {
-	await fetch(path, {
+	const response = await fetch(path, {
 		method: 'POST',
 		body,
 		headers: {
@@ -14,4 +14,8 @@ export const postAction = async ({ path, body }: PostActionInput) => {
 		},
 		cache: 'no-store',
 	});
+
+	if (response.status === 500) {
+		throw new Error('Error');
+	}
 };

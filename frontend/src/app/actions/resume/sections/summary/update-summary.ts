@@ -12,10 +12,14 @@ export interface UpdateSummaryInput {
 }
 
 export const updateSummary = async ({ userId, resumeId, values }: UpdateSummaryInput) => {
-	await postAction({
-		path: `${API_URL}/resume/${userId}/${resumeId}/summary`,
-		body: JSON.stringify(values),
-	});
+	try {
+		await postAction({
+			path: `${API_URL}/resume/${userId}/${resumeId}/summary`,
+			body: JSON.stringify(values),
+		});
 
-	revalidatePath('/');
+		revalidatePath('/');
+	} catch (error) {
+		throw new Error('Error updating summary');
+	}
 };

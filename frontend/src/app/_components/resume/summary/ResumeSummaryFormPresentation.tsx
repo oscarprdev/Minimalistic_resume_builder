@@ -5,6 +5,7 @@ import { FieldErrors, Path, UseFormReturn } from 'react-hook-form';
 import { FORM_FIELDS, SummaryFormState } from './utils';
 import FormInput from '../../forms/FormInput';
 import FormTextarea from '../../forms/FormTextarea';
+import { IconLoader2 } from '@tabler/icons-react';
 
 interface ResumeSummaryFormPresentationProps {
 	handleChange: (form: UseFormReturn<SummaryFormState>, name: Path<SummaryFormState>, value: any) => void;
@@ -16,7 +17,12 @@ interface ResumeSummaryFormPresentationProps {
 const ResumeSummaryFormPresentation = ({ handleChange, form, formErrors, loading }: ResumeSummaryFormPresentationProps) => {
 	return (
 		<Form {...form}>
-			<form className='relative group border border-transparent border-dashed rounded-lg mt-4 pt-1 pl-8 pb-3 pr-3 hover:border-purple_100 duration-300'>
+			<form className='relative group border border-transparent border-dashed rounded-lg mt-2 pt-3 pl-8 pb-3 pr-3 hover:border-purple_100 duration-300'>
+				{loading && (
+					<span className='absolute top-3 right-3 *:text-purple_100 animate-spin place-items-center'>
+						<IconLoader2 size={20} />
+					</span>
+				)}
 				<p className='absolute -top-3 left-2 bg-white px-2 text-purple_100 text-sm opacity-0 group-hover:opacity-100 transition duration-300'>
 					Summary
 				</p>

@@ -4,6 +4,7 @@ import { useFormInitialization } from './useFormInitialization/useFormInitializa
 import { useFormSubmission } from './useFormSubmission/useFormSubmission';
 import { useDebouncedSubmission } from './useDebouncedSubmission/useDebouncedSubmission';
 import { useOptimisticFormState } from './useOptimisticFormState/useOptimisticFormState';
+import { useState } from 'react';
 
 /**
  * useFormMutation hook.
@@ -24,9 +25,9 @@ export const useFormMutation = <S extends FieldValues>({
 
 	const { updateFormValues } = useOptimisticFormState({ defaultValues, setDefaultValues });
 
-	const { onSubmit, isPending } = useFormSubmission<S>({ action, info, updateFormValues, errorMessage });
+	const { onSubmit, loading } = useFormSubmission<S>({ action, info, updateFormValues, errorMessage });
 
 	const { handleChange } = useDebouncedSubmission<S>({ onSubmit });
 
-	return { form, handleChange, loading: isPending, errors: form.formState.errors };
+	return { form, handleChange, loading, errors: form.formState.errors };
 };

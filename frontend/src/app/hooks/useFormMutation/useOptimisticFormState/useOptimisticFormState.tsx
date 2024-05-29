@@ -1,5 +1,5 @@
 import { useEffect, useOptimistic } from 'react';
-import { FieldValues } from 'react-hook-form';
+import { DefaultValues, FieldValues } from 'react-hook-form';
 import { UseOptimisticFormStateInput, UseOptimisticFormStateOutput } from './useOptimisticFormState.types';
 
 export function useOptimisticFormState<S extends FieldValues>({
@@ -11,7 +11,7 @@ export function useOptimisticFormState<S extends FieldValues>({
 	}));
 
 	useEffect(() => {
-		setDefaultValues(optimisticFormValues);
+		setDefaultValues(optimisticFormValues as DefaultValues<S>);
 	}, [defaultValues]);
 
 	return { updateFormValues };

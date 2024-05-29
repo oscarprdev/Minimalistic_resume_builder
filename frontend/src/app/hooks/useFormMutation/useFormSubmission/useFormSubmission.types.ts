@@ -9,5 +9,5 @@ export interface UseFormSubmissionInput<S> {
 
 export interface UseFormSubmissionOutput<S> {
 	onSubmit: (values: S) => Promise<void>;
-	isPending: boolean;
+	loading: boolean;
 }

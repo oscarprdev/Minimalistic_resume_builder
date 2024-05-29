@@ -2,16 +2,17 @@ import { Button } from '@/components/ui/button';
 import { IconX } from '@tabler/icons-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-interface RemoveLinkButtonProps {
+interface RemoveItemButtonProps {
 	index: number;
+	text: string;
 	onRemove: (index: number) => void;
 }
 
-const RemoveLinkButton = ({ index, onRemove }: RemoveLinkButtonProps) => {
+const RemoveItemButton = ({ index, text, onRemove }: RemoveItemButtonProps) => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
-				<TooltipTrigger className='mt-[0.4rem] -mr-1'>
+				<TooltipTrigger>
 					<Button
 						asChild
 						type='button'
@@ -26,14 +27,12 @@ const RemoveLinkButton = ({ index, onRemove }: RemoveLinkButtonProps) => {
 						/>
 					</Button>
 				</TooltipTrigger>
-				<TooltipContent
-					side='left'
-					className='mb-5'>
-					<p>Remove link</p>
+				<TooltipContent side='left'>
+					<p>{text}</p>
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>
 	);
 };
 
-export default RemoveLinkButton;
+export default RemoveItemButton;

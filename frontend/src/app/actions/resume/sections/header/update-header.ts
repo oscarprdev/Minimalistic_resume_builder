@@ -12,10 +12,14 @@ export interface UpdateHeaderInput {
 }
 
 export const updateHeader = async ({ userId, resumeId, values }: UpdateHeaderInput) => {
-	await postAction({
-		path: `${API_URL}/resume/${userId}/${resumeId}/header`,
-		body: JSON.stringify(values),
-	});
+	try {
+		await postAction({
+			path: `${API_URL}/resume/${userId}/${resumeId}/header`,
+			body: JSON.stringify(values),
+		});
 
-	revalidatePath('/');
+		revalidatePath('/');
+	} catch (error) {
+		throw new Error('Error updating header');
+	}
 };
