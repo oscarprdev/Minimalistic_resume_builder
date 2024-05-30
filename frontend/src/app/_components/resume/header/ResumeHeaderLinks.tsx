@@ -88,7 +88,7 @@ const ResumeHeaderLinks = ({ form, errors, handleChange }: ResumeHeaderLinksProp
 					stroke={1}
 					width={20}
 				/>
-				Add new link
+				Add link
 			</Button>
 		</section>
 	);

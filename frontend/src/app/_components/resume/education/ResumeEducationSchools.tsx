@@ -78,7 +78,7 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 									/>
 								</div>
 								<span className='w-1 h-[0.1rem] bg-gray-500 -mt-2 ml-1' />
-								<div className='w-[70px]'>
+								<div className='w-[90px]'>
 									<FormInput
 										form={form}
 										name={`educationList.${index}.endDate`}
@@ -109,13 +109,13 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 				type='button'
 				variant={'outline'}
 				size={'sm'}
-				className='absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300'
+				className='absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300'
 				onClick={() => appendschool(DEFAULT_SCHOOL)}>
 				<IconPlus
 					stroke={1}
 					width={20}
 				/>
-				Add new school
+				Add school
 			</Button>
 		</section>
 	);
