@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import ResumeHeader from '../_components/resume/header/ResumeHeader';
 import ResumeSummary from '../_components/resume/summary/ResumeSummary';
 import ResumeExperience from '../_components/resume/experience/ResumeExperience';
+import ResumeEducation from '../_components/resume/education/ResumeEducation';
 
 interface ResumeProps {
 	userId?: string;
@@ -27,6 +28,12 @@ const Resume = ({ userId, resumeId }: ResumeProps) => {
 			</Suspense>
 			<Suspense fallback={<p>Loading resume section</p>}>
 				<ResumeExperience
+					userId={userId}
+					resumeId={resumeId}
+				/>
+			</Suspense>
+			<Suspense fallback={<p>Loading resume section</p>}>
+				<ResumeEducation
 					userId={userId}
 					resumeId={resumeId}
 				/>
