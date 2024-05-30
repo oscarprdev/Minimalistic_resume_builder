@@ -5,6 +5,7 @@ import { FieldErrors, Path, UseFormReturn } from 'react-hook-form';
 import { IconLoader2 } from '@tabler/icons-react';
 import { EducationFormState } from './utils';
 import FormInput from '../../forms/FormInput';
+import ResumeEducationSchools from './ResumeEducationSchools';
 
 interface ResumeEducationFormPresentationProps {
 	handleChange: (form: UseFormReturn<EducationFormState>, name: Path<EducationFormState>, value: any) => void;
@@ -30,6 +31,15 @@ const ResumeEducationFormPresentation = ({ handleChange, form, formErrors, loadi
 					name={'title'}
 					kind={'sectionTitle'}
 					handleChange={handleChange}
+				/>
+				<ResumeEducationSchools
+					form={form}
+					handleChange={handleChange}
+					errors={
+						formErrors.educationList && Array.isArray(formErrors.educationList)
+							? formErrors.educationList.map((jobError) => jobError?.message)
+							: []
+					}
 				/>
 			</form>
 		</Form>

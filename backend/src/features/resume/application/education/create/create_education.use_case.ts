@@ -15,7 +15,10 @@ export interface CreateEducationUsecase {
 }
 
 export class DefaultCreateEducationUsecase extends DefaultCommonResumeUsecase implements CreateEducationUsecase {
-	constructor(private readonly ports: CreateEducationPorts, protected readonly commonPorts: CommonResumePorts) {
+	constructor(
+		private readonly ports: CreateEducationPorts,
+		protected readonly commonPorts: CommonResumePorts
+	) {
 		super(commonPorts);
 	}
 
@@ -30,8 +33,8 @@ export class DefaultCreateEducationUsecase extends DefaultCommonResumeUsecase im
 			return await this.ports.deleteSchools({ schoolsIds: currentSchoolsIds });
 		}
 
-		const schoolsToDelete = currentSchoolsIds.filter((currentSchoolId) =>
-			data.educationList.some((school) => 'id' in school && school.id !== currentSchoolId)
+		const schoolsToDelete = currentSchoolsIds.filter(
+			(currentSchoolId) => !Boolean(data.educationList.map((school) => school.id).includes(currentSchoolId))
 		);
 
 		await this.ports.deleteSchools({ schoolsIds: schoolsToDelete });

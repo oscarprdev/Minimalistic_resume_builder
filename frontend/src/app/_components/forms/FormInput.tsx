@@ -18,13 +18,14 @@ const FormInput = <S extends FieldValues>({ form, name, kind, error, max, handle
 			control={form.control}
 			name={name}
 			render={({ field }) => (
-				<FormItem className='flex items-center -mt-2'>
+				<FormItem className='flex items-center -mt-2 w-full'>
 					<ResumeHeaderIcons value={field.name} />
 					<FormControl>
 						<Input
 							{...field}
 							kind={kind}
 							maxLength={max}
+							className='w-full'
 							onChange={(e) => handleChange(form, field.name, e.target.value)}
 						/>
 					</FormControl>

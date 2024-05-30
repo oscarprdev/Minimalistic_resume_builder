@@ -6,7 +6,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 export type InputKind = 'default' | 'label' | 'text' | 'subtitle' | 'sectionTitle' | 'title' | undefined;
 
 const inputVariants = cva(
-	'flex caret-purple_200 rounded-md border bg-transparent px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
+	'flex caret-purple_200 rounded-md border bg-transparent w-fit px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
 	{
 		variants: {
 			variant: {
@@ -18,8 +18,8 @@ const inputVariants = cva(
 				label: 'text-[0.85em] text-gray-500',
 				text: 'text-[0.9em] text-gray-800',
 				subtitle: 'text-[1.1em] text-gray-900',
-				sectionTitle: 'text-[1.5em] text-gray-900',
-				title: 'text-[2em] text-black',
+				sectionTitle: 'text-[1.4em] text-gray-900',
+				title: 'text-[1.8em] text-black',
 			},
 		},
 		defaultVariants: {

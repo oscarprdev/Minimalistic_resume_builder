@@ -64,7 +64,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 					id: r.schoolId,
 					title: r.schoolTitle,
 					career: r.schoolCareer,
-					startDate: r.SchoolstartDate,
+					startDate: r.schoolStartDate,
 					endDate: r.schoolEndDate,
 					description: r.schoolDescription,
 				};

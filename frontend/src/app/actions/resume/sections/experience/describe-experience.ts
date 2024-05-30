@@ -34,6 +34,13 @@ export const describeExperience = async ({ resumeId, userId }: DescribeExperienc
 
 		const data: Experience = await response.json();
 
+		if (data.jobList.length === 0) {
+			return {
+				data: { ...data, jobList: DEFAULT_EXPERIENCE.jobList },
+				error: null,
+			};
+		}
+
 		return {
 			data,
 			error: null,

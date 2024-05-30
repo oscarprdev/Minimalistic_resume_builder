@@ -3,56 +3,57 @@
 import { Button } from '@/components/ui/button';
 import { UseFormReturn, Path } from 'react-hook-form';
 import { IconPlus } from '@tabler/icons-react';
-import { ExperienceFormState } from './utils';
+import { EducationFormState } from './utils';
 import FormTextarea from '../../forms/FormTextarea';
 import FormInput from '../../forms/FormInput';
 import { useState } from 'react';
-import { Job } from '@/types';
+import { School } from '@/types';
 import RemoveItemButton from '../../buttons/RemoveItemButton';
+import ResumeEducationDescriptionField from './ResumeEducationDescriptionField';
 
-interface ResumeExperienceJobsProps {
-	form: UseFormReturn<ExperienceFormState, any, undefined>;
+interface ResumeEducationSchoolsProps {
+	form: UseFormReturn<EducationFormState, any, undefined>;
 	errors: string[];
-	handleChange: (form: UseFormReturn<ExperienceFormState>, name: Path<ExperienceFormState>, value: any) => void;
+	handleChange: (form: UseFormReturn<EducationFormState>, name: Path<EducationFormState>, value: any) => void;
 }
 
-const JOB_LIST_NAME = 'jobList';
+const EDUCATION_LIST_NAME = 'educationList';
 
-const DEFAULT_JOB: Omit<Job, 'id'> = {
-	title: 'Second job',
-	company: 'Web Solutions LLC',
+const DEFAULT_SCHOOL: Omit<School, 'id'> = {
+	title: 'Second school',
+	career: 'Web Solutions LLC',
 	startDate: '2017',
 	endDate: '2018',
 	description:
-		'Assisted in the development of client projects, including website and mobile application development. Gained experience in HTML, CSS, and PHP.',
+		'Assisted in the development of client projects, including website and mobile application development. Gained education in HTML, CSS, and PHP.',
 };
 
-const ResumeExperienceJobs = ({ form, errors, handleChange }: ResumeExperienceJobsProps) => {
-	const [jobList, setJobList] = useState<Omit<Job, 'id'>[]>(form.getValues(JOB_LIST_NAME));
+const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationSchoolsProps) => {
+	const [educationList, setEducationList] = useState<Omit<School, 'id'>[]>(form.getValues(EDUCATION_LIST_NAME));
 
-	const appendJob = (newJob: Omit<Job, 'id'>) => {
-		const updatedJobs = [...form.getValues(JOB_LIST_NAME), newJob];
-		setJobList(updatedJobs);
-		handleChange(form, JOB_LIST_NAME, updatedJobs);
+	const appendschool = (newschool: Omit<School, 'id'>) => {
+		const updatedschools = [...form.getValues(EDUCATION_LIST_NAME), newschool];
+		setEducationList(updatedschools);
+		handleChange(form, EDUCATION_LIST_NAME, updatedschools);
 	};
 
-	const removeJob = (index: number) => {
-		const updatedJobs = form.getValues(JOB_LIST_NAME).filter((_, i) => i !== index);
-		setJobList(updatedJobs);
-		handleChange(form, JOB_LIST_NAME, updatedJobs);
+	const removeschool = (index: number) => {
+		const updatedschools = form.getValues(EDUCATION_LIST_NAME).filter((_, i) => i !== index);
+		setEducationList(updatedschools);
+		handleChange(form, EDUCATION_LIST_NAME, updatedschools);
 	};
 
 	return (
 		<section className='flex flex-col gap-8'>
-			{jobList.map((_, index) => (
+			{educationList.map((_, index) => (
 				<div
 					key={_.title}
 					className='relative flex items-center -mb-2 first:mt-4'>
 					<span className='absolute -top-1 -left-5'>
 						<RemoveItemButton
 							index={index}
-							text={'Remove job'}
-							onRemove={() => removeJob(index)}
+							text={'Remove school'}
+							onRemove={() => removeschool(index)}
 						/>
 					</span>
 
@@ -60,7 +61,7 @@ const ResumeExperienceJobs = ({ form, errors, handleChange }: ResumeExperienceJo
 						<div className='flex justify-between w-full gap-2'>
 							<FormInput
 								form={form}
-								name={`jobList.${index}.title`}
+								name={`educationList.${index}.title`}
 								kind={'subtitle'}
 								handleChange={handleChange}
 								error={errors[index]}
@@ -69,7 +70,7 @@ const ResumeExperienceJobs = ({ form, errors, handleChange }: ResumeExperienceJo
 								<div className='w-[57px]'>
 									<FormInput
 										form={form}
-										name={`jobList.${index}.startDate`}
+										name={`educationList.${index}.startDate`}
 										kind={'label'}
 										max={4}
 										handleChange={handleChange}
@@ -77,10 +78,10 @@ const ResumeExperienceJobs = ({ form, errors, handleChange }: ResumeExperienceJo
 									/>
 								</div>
 								<span className='w-1 h-[0.1rem] bg-gray-500 -mt-2 ml-1' />
-								<div className='w-[90px]'>
+								<div className='w-[70px]'>
 									<FormInput
 										form={form}
-										name={`jobList.${index}.endDate`}
+										name={`educationList.${index}.endDate`}
 										kind={'label'}
 										max={12}
 										handleChange={handleChange}
@@ -91,15 +92,14 @@ const ResumeExperienceJobs = ({ form, errors, handleChange }: ResumeExperienceJo
 						</div>
 						<FormInput
 							form={form}
-							name={`jobList.${index}.company`}
+							name={`educationList.${index}.career`}
 							kind={'label'}
 							handleChange={handleChange}
 							error={errors[index]}
 						/>
-						<FormTextarea
+						<ResumeEducationDescriptionField
+							index={index}
 							form={form}
-							name={`jobList.${index}.description`}
-							maxLength={400}
 							handleChange={handleChange}
 						/>
 					</div>
@@ -110,15 +110,15 @@ const ResumeExperienceJobs = ({ form, errors, handleChange }: ResumeExperienceJo
 				variant={'outline'}
 				size={'sm'}
 				className='absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300'
-				onClick={() => appendJob(DEFAULT_JOB)}>
+				onClick={() => appendschool(DEFAULT_SCHOOL)}>
 				<IconPlus
 					stroke={1}
 					width={20}
 				/>
-				Add new job
+				Add new school
 			</Button>
 		</section>
 	);
 };
 
-export default ResumeExperienceJobs;
+export default ResumeEducationSchools;

@@ -34,6 +34,13 @@ export const describeEducation = async ({ resumeId, userId }: DescribeEducationI
 
 		const data: Education = await response.json();
 
+		if (data.educationList.length === 0) {
+			return {
+				data: { ...data, educationList: DEFAULT_EDUCATION.educationList },
+				error: null,
+			};
+		}
+
 		return {
 			data,
 			error: null,
