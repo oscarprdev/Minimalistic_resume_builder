@@ -15,7 +15,10 @@ export interface CreateSkillsUsecase {
 }
 
 export class DefaultCreateSkillsUsecase extends DefaultCommonResumeUsecase implements CreateSkillsUsecase {
-	constructor(private readonly ports: CreateSkillsPorts, protected readonly commonPorts: CommonResumePorts) {
+	constructor(
+		private readonly ports: CreateSkillsPorts,
+		protected readonly commonPorts: CommonResumePorts
+	) {
 		super(commonPorts);
 	}
 
@@ -30,11 +33,11 @@ export class DefaultCreateSkillsUsecase extends DefaultCommonResumeUsecase imple
 			return await this.ports.deleteSkills({ skillsIds: currentSkillsIds });
 		}
 
-		const SkillsToDelete = currentSkillsIds.filter((currentSkillId) =>
-			data.skillList.some((lang) => 'id' in lang && lang.id !== currentSkillId)
+		const skillsToDelete = currentSkillsIds.filter(
+			(currentSkillId) => !Boolean(data.skillList.map((skill) => skill.id).includes(currentSkillId))
 		);
 
-		await this.ports.deleteSkills({ skillsIds: SkillsToDelete });
+		await this.ports.deleteSkills({ skillsIds: skillsToDelete });
 	}
 
 	private async updateSkillsInfo(skillsResumeId: string, data: Skills) {

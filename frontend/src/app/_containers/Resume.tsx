@@ -6,6 +6,7 @@ import ResumeSummary from '../_components/resume/summary/ResumeSummary';
 import ResumeExperience from '../_components/resume/experience/ResumeExperience';
 import ResumeEducation from '../_components/resume/education/ResumeEducation';
 import ResumeLanguages from '../_components/resume/languages/ResumeLanguages';
+import ResumeSkills from '../_components/resume/skills/ResumeSkills';
 
 interface ResumeProps {
 	userId?: string;
@@ -41,6 +42,12 @@ const Resume = ({ userId, resumeId }: ResumeProps) => {
 			</Suspense>
 			<Suspense fallback={<p>Loading resume section</p>}>
 				<ResumeLanguages
+					userId={userId}
+					resumeId={resumeId}
+				/>
+			</Suspense>
+			<Suspense fallback={<p>Loading resume section</p>}>
+				<ResumeSkills
 					userId={userId}
 					resumeId={resumeId}
 				/>
