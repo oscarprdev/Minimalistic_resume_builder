@@ -12,7 +12,7 @@ export function useFormSubmission<S extends FieldValues>({
 	errorMessage,
 }: UseFormSubmissionInput<S>): UseFormSubmissionOutput<S> {
 	const { mutate, error, isPending } = useMutation({
-		mutationFn: (input: ActionInput<S>) => action(input),
+		mutationFn: async (input: ActionInput<S>) => await action(input),
 	});
 
 	useToastError({ error, errorMessage });
@@ -20,9 +20,10 @@ export function useFormSubmission<S extends FieldValues>({
 	const onSubmit = async (values: S) => {
 		startTransition(() => {
 			updateFormValues(values);
+
+			const mutationInput = { ...info, values };
+			mutate(mutationInput);
 		});
-		const mutationInput = { ...info, values };
-		mutate(mutationInput);
 	};
 
 	return { onSubmit, loading: isPending };

@@ -12,21 +12,21 @@ import ResumeSkillsIcons from './ResumeSkillIcon';
 
 interface ResumeSkillListProps {
 	form: UseFormReturn<SkillsFormState, any, undefined>;
-	errors: string[];
 	handleChange: (form: UseFormReturn<SkillsFormState>, name: Path<SkillsFormState>, value: any) => void;
 }
 
 const SKILL_LIST_NAME = 'skillList';
 
-const DEFAULT_SKILL: Omit<Skill, 'id'> = {
+const DEFAULT_SKILL: Skill = {
+	id: '',
 	name: 'skill',
 	svgUrl: '',
 };
 
-const ResumeSkillList = ({ form, errors, handleChange }: ResumeSkillListProps) => {
-	const [skillList, setSkillList] = useState<Omit<Skill, 'id'>[]>(form.getValues(SKILL_LIST_NAME));
+const ResumeSkillList = ({ form, handleChange }: ResumeSkillListProps) => {
+	const [skillList, setSkillList] = useState<Skill[]>(form.getValues(SKILL_LIST_NAME));
 
-	const appendSkill = (newskill: Omit<Skill, 'id'>) => {
+	const appendSkill = (newskill: Skill) => {
 		const updatedSkill = [...form.getValues(SKILL_LIST_NAME), newskill];
 		setSkillList(updatedSkill);
 		handleChange(form, SKILL_LIST_NAME, updatedSkill);
@@ -39,10 +39,10 @@ const ResumeSkillList = ({ form, errors, handleChange }: ResumeSkillListProps) =
 	};
 
 	return (
-		<section className='flex items-center gap-1 mt-4 justify-start'>
+		<section className='flex items-center gap-1 mt-2 w-full justify-start flex-wrap ml-2'>
 			{skillList.map((_, index) => (
 				<div
-					key={_.name}
+					key={_.id}
 					className='relative flex items-center'>
 					<span className='absolute -top-1 -left-6'>
 						<RemoveItemButton
@@ -52,7 +52,7 @@ const ResumeSkillList = ({ form, errors, handleChange }: ResumeSkillListProps) =
 						/>
 					</span>
 
-					<div className='flex items-center w-[100px] mt-[0.15rem] ml-1'>
+					<div className='flex items-center w-[120px] mt-[0.15rem] ml-1'>
 						<span className='grid place-items-center -mt-[0.55rem] -mr-1'>
 							<ResumeSkillsIcons value={form.getValues(SKILL_LIST_NAME)[index].name} />
 						</span>
@@ -62,7 +62,6 @@ const ResumeSkillList = ({ form, errors, handleChange }: ResumeSkillListProps) =
 							kind={'text'}
 							max={10}
 							handleChange={handleChange}
-							error={errors[index]}
 						/>
 					</div>
 				</div>
@@ -72,7 +71,7 @@ const ResumeSkillList = ({ form, errors, handleChange }: ResumeSkillListProps) =
 				variant={'outline'}
 				size={'sm'}
 				className='absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300'
-				onClick={() => appendSkill(DEFAULT_SKILL)}>
+				onClick={() => appendSkill({ ...DEFAULT_SKILL, id: crypto.randomUUID().toString() })}>
 				<IconPlus
 					stroke={1}
 					width={20}

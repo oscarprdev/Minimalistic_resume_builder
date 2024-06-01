@@ -11,7 +11,7 @@ interface HomeProps {
 
 const Home = async ({ userId, resumeSelected }: HomeProps) => {
 	return (
-		<main className={cn('bg-gray-100 w-screen h-screen', !userId && 'mt-10')}>
+		<main className={cn('bg-gray-100 w-screen', !userId && 'mt-10')}>
 			{userId && (
 				<HomeTabsWrapper>
 					<Suspense fallback={<p>loading tabs</p>}>

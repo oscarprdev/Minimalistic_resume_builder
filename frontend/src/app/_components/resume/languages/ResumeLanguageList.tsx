@@ -17,16 +17,17 @@ interface ResumeLanguageListProps {
 
 const LANGUAGE_LIST_NAME = 'languageList';
 
-const DEFAULT_LANGUAGE: Omit<Language, 'id'> = {
+const DEFAULT_LANGUAGE: Language = {
+	id: '',
 	name: 'English',
 	level: 'Medium',
 	certificateLink: '-',
 };
 
 const ResumeLanguageList = ({ form, errors, handleChange }: ResumeLanguageListProps) => {
-	const [languageList, setLanguageList] = useState<Omit<Language, 'id'>[]>(form.getValues(LANGUAGE_LIST_NAME));
+	const [languageList, setLanguageList] = useState<Language[]>(form.getValues(LANGUAGE_LIST_NAME));
 
-	const appendLanguage = (newlanguage: Omit<Language, 'id'>) => {
+	const appendLanguage = (newlanguage: Language) => {
 		const updatedLanguage = [...form.getValues(LANGUAGE_LIST_NAME), newlanguage];
 		setLanguageList(updatedLanguage);
 		handleChange(form, LANGUAGE_LIST_NAME, updatedLanguage);
@@ -39,10 +40,10 @@ const ResumeLanguageList = ({ form, errors, handleChange }: ResumeLanguageListPr
 	};
 
 	return (
-		<section className='flex items-center gap-1 mt-4 justify-start'>
+		<section className='flex items-center gap-1 mt-2 justify-start'>
 			{languageList.map((_, index) => (
 				<div
-					key={_.name}
+					key={crypto.randomUUID()}
 					className='relative flex items-center'>
 					<span className='absolute -top-1 -left-5'>
 						<RemoveItemButton
@@ -76,7 +77,7 @@ const ResumeLanguageList = ({ form, errors, handleChange }: ResumeLanguageListPr
 				variant={'outline'}
 				size={'sm'}
 				className='absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300'
-				onClick={() => appendLanguage(DEFAULT_LANGUAGE)}>
+				onClick={() => appendLanguage({ ...DEFAULT_LANGUAGE, id: crypto.randomUUID().toString() })}>
 				<IconPlus
 					stroke={1}
 					width={20}

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { UseFormReturn, Path } from 'react-hook-form';
 import { IconPlus } from '@tabler/icons-react';
 import { EducationFormState } from './utils';
-import FormTextarea from '../../forms/FormTextarea';
 import FormInput from '../../forms/FormInput';
 import { useState } from 'react';
 import { School } from '@/types';
@@ -19,7 +18,8 @@ interface ResumeEducationSchoolsProps {
 
 const EDUCATION_LIST_NAME = 'educationList';
 
-const DEFAULT_SCHOOL: Omit<School, 'id'> = {
+const DEFAULT_SCHOOL: School = {
+	id: '',
 	title: 'Second school',
 	career: 'Web Solutions LLC',
 	startDate: '2017',
@@ -29,9 +29,9 @@ const DEFAULT_SCHOOL: Omit<School, 'id'> = {
 };
 
 const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationSchoolsProps) => {
-	const [educationList, setEducationList] = useState<Omit<School, 'id'>[]>(form.getValues(EDUCATION_LIST_NAME));
+	const [educationList, setEducationList] = useState<School[]>(form.getValues(EDUCATION_LIST_NAME));
 
-	const appendschool = (newschool: Omit<School, 'id'>) => {
+	const appendschool = (newschool: School) => {
 		const updatedschools = [...form.getValues(EDUCATION_LIST_NAME), newschool];
 		setEducationList(updatedschools);
 		handleChange(form, EDUCATION_LIST_NAME, updatedschools);
@@ -47,8 +47,8 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 		<section className='flex flex-col gap-8'>
 			{educationList.map((_, index) => (
 				<div
-					key={_.title}
-					className='relative flex items-center -mb-2 first:mt-4'>
+					key={crypto.randomUUID()}
+					className='relative flex items-center -mb-2 first:mt-2'>
 					<span className='absolute -top-1 -left-5'>
 						<RemoveItemButton
 							index={index}
@@ -110,7 +110,7 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 				variant={'outline'}
 				size={'sm'}
 				className='absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300'
-				onClick={() => appendschool(DEFAULT_SCHOOL)}>
+				onClick={() => appendschool({ ...DEFAULT_SCHOOL, id: crypto.randomUUID().toString() })}>
 				<IconPlus
 					stroke={1}
 					width={20}

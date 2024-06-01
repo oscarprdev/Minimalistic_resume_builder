@@ -46,8 +46,8 @@ const ResumeExperienceJobs = ({ form, errors, handleChange }: ResumeExperienceJo
 		<section className='flex flex-col gap-8'>
 			{jobList.map((_, index) => (
 				<div
-					key={_.title}
-					className='relative flex items-center -mb-2 first:mt-4'>
+					key={crypto.randomUUID()}
+					className='relative flex items-center -mb-2 first:mt-2'>
 					<span className='absolute -top-1 -left-5'>
 						<RemoveItemButton
 							index={index}

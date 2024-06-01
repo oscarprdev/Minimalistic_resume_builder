@@ -16,23 +16,34 @@ interface ResumeHeaderLinksProps {
 	handleChange: (form: UseFormReturn<HeaderFormState>, name: Path<HeaderFormState>, value: any) => void;
 }
 
+interface LinksState {
+	id: string;
+	link: string;
+}
+
 const LINKS_NAME = 'links';
 
 const ResumeHeaderLinks = ({ form, errors, handleChange }: ResumeHeaderLinksProps) => {
-	const [links, setLinks] = useState<string[]>(form.getValues(LINKS_NAME));
+	const [links, setLinks] = useState<LinksState[]>(
+		form.getValues(LINKS_NAME).map((link) => ({ link, id: crypto.randomUUID().toString() }))
+	);
 
 	const isDisabled = links.length !== form.watch(LINKS_NAME).length;
 
-	const appendLink = (newLink: string) => {
-		const updatedLinks = [...form.getValues(LINKS_NAME), newLink];
-		setLinks(updatedLinks);
+	const appendLink = (newLink: LinksState) => {
+		const updatedLinks = [...form.getValues(LINKS_NAME), newLink.link];
+		setLinks((prev) => [...prev, newLink]);
 		handleChange(form, LINKS_NAME, updatedLinks);
 	};
 
 	const removeLink = (index: number) => {
-		const updatedLinks = form.getValues(LINKS_NAME).filter((_, i) => i !== index);
+		const updatedLinks = links.filter((_, i) => i !== index);
 		setLinks(updatedLinks);
-		handleChange(form, LINKS_NAME, updatedLinks);
+		handleChange(
+			form,
+			LINKS_NAME,
+			updatedLinks.map((link) => link.link)
+		);
 	};
 
 	const handleInputChange = (index: number, value: string) => {
@@ -48,7 +59,7 @@ const ResumeHeaderLinks = ({ form, errors, handleChange }: ResumeHeaderLinksProp
 			<div className='flex flex-col gap-1 w-full'>
 				{links.map((link, index) => (
 					<FormField
-						key={link}
+						key={link.id}
 						name={`links.${index}`}
 						render={({ field }) => (
 							<FormItem className='relative flex items-center -mb-2 '>
@@ -83,7 +94,7 @@ const ResumeHeaderLinks = ({ form, errors, handleChange }: ResumeHeaderLinksProp
 				size={'sm'}
 				disabled={isDisabled}
 				className='opacity-0 group-hover:opacity-100 transition duration-300 mt-auto'
-				onClick={() => appendLink('https://www.your_awesome_link.com')}>
+				onClick={() => appendLink({ link: 'https://www.your_awesome_link.com', id: crypto.randomUUID().toString() })}>
 				<IconPlus
 					stroke={1}
 					width={20}

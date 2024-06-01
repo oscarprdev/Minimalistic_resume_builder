@@ -4,9 +4,9 @@ import { UseDebouncedSubmissionInput, UseDebouncedSubmissionOutput } from './use
 
 export function useDebouncedSubmission<S extends FieldValues>({
 	onSubmit,
-	delay = 2000,
+	delay = 700,
 }: UseDebouncedSubmissionInput<S>): UseDebouncedSubmissionOutput<S> {
-	const debouncedOnSubmit = useDebouncedCallback(onSubmit, delay);
+	const debouncedOnSubmit = useDebouncedCallback((val) => onSubmit(val), delay);
 
 	const mapNestedValues = (form: UseFormReturn<S>, originalName: Path<S>, value: any) => {
 		if (!originalName.includes('.')) {
@@ -32,8 +32,6 @@ export function useDebouncedSubmission<S extends FieldValues>({
 		const mapped = mapNestedValues(form, name, value);
 		form.setValue(mapped.name, mapped.value);
 		const isValueValid = await form.trigger(mapped.name);
-
-		console.log(isValueValid, mapped);
 
 		if (isValueValid) {
 			debouncedOnSubmit(form.getValues());

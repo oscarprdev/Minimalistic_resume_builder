@@ -15,7 +15,10 @@ export interface CreateHeaderUsecase {
 }
 
 export class DefaultCreateHeaderUsecase extends DefaultCommonResumeUsecase implements CreateHeaderUsecase {
-	constructor(private readonly ports: CreateHeaderPorts, protected readonly commonPorts: CommonResumePorts) {
+	constructor(
+		private readonly ports: CreateHeaderPorts,
+		protected readonly commonPorts: CommonResumePorts
+	) {
 		super(commonPorts);
 	}
 

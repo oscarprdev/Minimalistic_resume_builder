@@ -6,6 +6,7 @@ import { IconLoader2 } from '@tabler/icons-react';
 import FormInput from '../../forms/FormInput';
 import { SkillsFormState } from './utils';
 import ResumeSkillList from './ResumeSkillList';
+import { IconAlertTriangle } from '@tabler/icons-react';
 
 interface ResumeSkillsFormPresentationProps {
 	handleChange: (form: UseFormReturn<SkillsFormState>, name: Path<SkillsFormState>, value: any) => void;
@@ -32,12 +33,15 @@ const ResumeSkillsFormPresentation = ({ handleChange, form, formErrors, loading 
 					kind={'subtitle'}
 					handleChange={handleChange}
 				/>
+				{formErrors.skillList && (
+					<div className='absolute bottom-0 left-12 flex items-center gap-2 text-red-600'>
+						<IconAlertTriangle size={13} />
+						<p className='text-xs'>{formErrors.skillList.message}</p>
+					</div>
+				)}
 				<ResumeSkillList
 					form={form}
 					handleChange={handleChange}
-					errors={
-						formErrors.skillList && Array.isArray(formErrors.skillList) ? formErrors.skillList.map((skillError) => skillError?.message) : []
-					}
 				/>
 			</form>
 		</Form>

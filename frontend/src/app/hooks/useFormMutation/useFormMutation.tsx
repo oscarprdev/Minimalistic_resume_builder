@@ -1,10 +1,9 @@
-import { FieldValues } from 'react-hook-form';
+import { DefaultValues, FieldValues, useForm } from 'react-hook-form';
 import { UseFormMutationInput, UseFormMutationOutput } from './useFormMutation.types';
-import { useFormInitialization } from './useFormInitialization/useFormInitialization';
 import { useFormSubmission } from './useFormSubmission/useFormSubmission';
 import { useDebouncedSubmission } from './useDebouncedSubmission/useDebouncedSubmission';
 import { useOptimisticFormState } from './useOptimisticFormState/useOptimisticFormState';
-import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 /**
  * useFormMutation hook.
@@ -21,9 +20,12 @@ export const useFormMutation = <S extends FieldValues>({
 	errorMessage,
 	action,
 }: UseFormMutationInput<S>): UseFormMutationOutput<S> => {
-	const { form, setDefaultValues } = useFormInitialization<S>({ formSchema, defaultValues });
+	const form = useForm<S>({
+		resolver: zodResolver(formSchema),
+		defaultValues: defaultValues as DefaultValues<S>,
+	});
 
-	const { updateFormValues } = useOptimisticFormState({ defaultValues, setDefaultValues });
+	const { updateFormValues, optimisticFormValues } = useOptimisticFormState({ defaultValues });
 
 	const { onSubmit, loading } = useFormSubmission<S>({ action, info, updateFormValues, errorMessage });
 

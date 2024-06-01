@@ -1,7 +1,7 @@
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 
 export interface UseDebouncedSubmissionInput<S> {
-	onSubmit: (values: S) => void;
+	onSubmit: (values: S) => Promise<void>;
 	delay?: number;
 }
 
