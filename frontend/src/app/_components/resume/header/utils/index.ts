@@ -9,7 +9,16 @@ export const headerFormSchema = z.object({
 	location: z.string(),
 	email: z.string().email(),
 	phone: z.string().min(1).max(9),
-	links: z.array(z.string().url()),
+	links: z.array(z.string().url()).refine(
+		(values) => {
+			const newItem = values[values.length - 1];
+
+			values.pop();
+
+			return !values.includes(newItem);
+		},
+		{ message: 'Links must be unique' }
+	),
 	image: z.string().optional(),
 });
 

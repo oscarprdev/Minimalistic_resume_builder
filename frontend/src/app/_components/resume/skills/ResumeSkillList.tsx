@@ -1,14 +1,13 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { UseFormReturn, Path } from 'react-hook-form';
-import { IconPlus } from '@tabler/icons-react';
 import FormInput from '../../forms/FormInput';
 import { useState } from 'react';
 import { Skill } from '@/types';
 import RemoveItemButton from '../../buttons/RemoveItemButton';
 import { SkillsFormState } from './utils';
 import ResumeSkillsIcons from './ResumeSkillIcon';
+import AppendButton from '../common/AppendButton';
 
 interface ResumeSkillListProps {
 	form: UseFormReturn<SkillsFormState, any, undefined>;
@@ -66,18 +65,10 @@ const ResumeSkillList = ({ form, handleChange }: ResumeSkillListProps) => {
 					</div>
 				</div>
 			))}
-			<Button
-				type='button'
-				variant={'outline'}
-				size={'sm'}
-				className='absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300'
-				onClick={() => appendSkill({ ...DEFAULT_SKILL, id: crypto.randomUUID().toString() })}>
-				<IconPlus
-					stroke={1}
-					width={20}
-				/>
-				Add skill
-			</Button>
+			<AppendButton
+				label='Add skill'
+				handleClick={() => appendSkill({ ...DEFAULT_SKILL, id: crypto.randomUUID().toString() })}
+			/>
 		</section>
 	);
 };

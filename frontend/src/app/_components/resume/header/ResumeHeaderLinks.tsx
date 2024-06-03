@@ -9,6 +9,7 @@ import { IconPlus } from '@tabler/icons-react';
 import RemoveItemButton from '../../buttons/RemoveItemButton';
 import ResumeHeaderLinksIcons from './ResumeHeaderLinksIcons';
 import { useState } from 'react';
+import AppendButton from '../common/AppendButton';
 
 interface ResumeHeaderLinksProps {
 	form: UseFormReturn<HeaderFormState, any, undefined>;
@@ -55,14 +56,14 @@ const ResumeHeaderLinks = ({ form, errors, handleChange }: ResumeHeaderLinksProp
 	};
 
 	return (
-		<section className='flex items-start justify-between w-full'>
-			<div className='flex flex-col gap-1 w-full'>
+		<section className='flex items-start justify-between w-full -ml-[0.1rem] -mt-[0.3rem]'>
+			<div className='flex flex-col w-full'>
 				{links.map((link, index) => (
 					<FormField
 						key={link.id}
 						name={`links.${index}`}
 						render={({ field }) => (
-							<FormItem className='relative flex items-center -mb-2 '>
+							<FormItem className='relative flex items-center -mb-2'>
 								<span className='absolute top-[0.53rem] -left-6'>
 									<RemoveItemButton
 										index={index}
@@ -88,19 +89,10 @@ const ResumeHeaderLinks = ({ form, errors, handleChange }: ResumeHeaderLinksProp
 					/>
 				))}
 			</div>
-			<Button
-				type='button'
-				variant={'outline'}
-				size={'sm'}
-				disabled={isDisabled}
-				className='opacity-0 group-hover:opacity-100 transition duration-300 mt-auto'
-				onClick={() => appendLink({ link: 'https://www.your_awesome_link.com', id: crypto.randomUUID().toString() })}>
-				<IconPlus
-					stroke={1}
-					width={20}
-				/>
-				Add link
-			</Button>
+			<AppendButton
+				label='Add link'
+				handleClick={() => appendLink({ link: 'https://www.your_awesome_link.com', id: crypto.randomUUID().toString() })}
+			/>
 		</section>
 	);
 };

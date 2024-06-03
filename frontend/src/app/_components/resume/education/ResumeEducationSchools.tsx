@@ -1,18 +1,16 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { UseFormReturn, Path } from 'react-hook-form';
-import { IconPlus } from '@tabler/icons-react';
 import { EducationFormState } from './utils';
 import FormInput from '../../forms/FormInput';
 import { useState } from 'react';
 import { School } from '@/types';
 import RemoveItemButton from '../../buttons/RemoveItemButton';
 import ResumeEducationDescriptionField from './ResumeEducationDescriptionField';
+import AppendButton from '../common/AppendButton';
 
 interface ResumeEducationSchoolsProps {
 	form: UseFormReturn<EducationFormState, any, undefined>;
-	errors: string[];
 	handleChange: (form: UseFormReturn<EducationFormState>, name: Path<EducationFormState>, value: any) => void;
 }
 
@@ -28,7 +26,7 @@ const DEFAULT_SCHOOL: School = {
 		'Assisted in the development of client projects, including website and mobile application development. Gained education in HTML, CSS, and PHP.',
 };
 
-const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationSchoolsProps) => {
+const ResumeEducationSchools = ({ form, handleChange }: ResumeEducationSchoolsProps) => {
 	const [educationList, setEducationList] = useState<School[]>(form.getValues(EDUCATION_LIST_NAME));
 
 	const appendschool = (newschool: School) => {
@@ -47,7 +45,7 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 		<section className='flex flex-col gap-8'>
 			{educationList.map((_, index) => (
 				<div
-					key={crypto.randomUUID()}
+					key={_.id}
 					className='relative flex items-center -mb-2 first:mt-2'>
 					<span className='absolute -top-1 -left-5'>
 						<RemoveItemButton
@@ -64,9 +62,8 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 								name={`educationList.${index}.title`}
 								kind={'subtitle'}
 								handleChange={handleChange}
-								error={errors[index]}
 							/>
-							<div className='flex gap-1 items-center mr-10'>
+							<div className='flex gap-1 items-center mr-3'>
 								<div className='w-[57px]'>
 									<FormInput
 										form={form}
@@ -74,18 +71,16 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 										kind={'label'}
 										max={4}
 										handleChange={handleChange}
-										error={errors[index]}
 									/>
 								</div>
 								<span className='w-1 h-[0.1rem] bg-gray-500 -mt-2 ml-1' />
-								<div className='w-[90px]'>
+								<div className='w-[120px]'>
 									<FormInput
 										form={form}
 										name={`educationList.${index}.endDate`}
 										kind={'label'}
 										max={12}
 										handleChange={handleChange}
-										error={errors[index]}
 									/>
 								</div>
 							</div>
@@ -95,7 +90,6 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 							name={`educationList.${index}.career`}
 							kind={'label'}
 							handleChange={handleChange}
-							error={errors[index]}
 						/>
 						<ResumeEducationDescriptionField
 							index={index}
@@ -105,18 +99,10 @@ const ResumeEducationSchools = ({ form, errors, handleChange }: ResumeEducationS
 					</div>
 				</div>
 			))}
-			<Button
-				type='button'
-				variant={'outline'}
-				size={'sm'}
-				className='absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300'
-				onClick={() => appendschool({ ...DEFAULT_SCHOOL, id: crypto.randomUUID().toString() })}>
-				<IconPlus
-					stroke={1}
-					width={20}
-				/>
-				Add school
-			</Button>
+			<AppendButton
+				label='Add school'
+				handleClick={() => appendschool({ ...DEFAULT_SCHOOL, id: crypto.randomUUID().toString() })}
+			/>
 		</section>
 	);
 };

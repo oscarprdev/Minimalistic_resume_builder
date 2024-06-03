@@ -2,7 +2,7 @@ import { Education } from '@/types';
 import { z } from 'zod';
 
 export const schoolFormSchema = z.object({
-	id: z.string().optional(),
+	id: z.string(),
 	title: z.string(),
 	career: z.string(),
 	startDate: z.string(),
@@ -12,7 +12,18 @@ export const schoolFormSchema = z.object({
 
 export const educationFormSchema = z.object({
 	title: z.string(),
-	educationList: z.array(schoolFormSchema),
+	educationList: z.array(schoolFormSchema).refine(
+		(values) => {
+			const newItem = values[values.length - 1];
+
+			values.pop();
+
+			const isAlreadyStored = values.some((val) => val.title === newItem.title);
+
+			return !isAlreadyStored;
+		},
+		{ message: 'Study title must be unique' }
+	),
 });
 
 export type EducationFormState = Omit<Education, 'id'>;

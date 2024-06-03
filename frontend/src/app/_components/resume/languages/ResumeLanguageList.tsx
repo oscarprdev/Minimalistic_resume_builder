@@ -1,17 +1,15 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { UseFormReturn, Path } from 'react-hook-form';
-import { IconPlus } from '@tabler/icons-react';
 import FormInput from '../../forms/FormInput';
 import { useState } from 'react';
 import { Language } from '@/types';
 import RemoveItemButton from '../../buttons/RemoveItemButton';
 import { LanguagesFormState } from './utils';
+import AppendButton from '../common/AppendButton';
 
 interface ResumeLanguageListProps {
 	form: UseFormReturn<LanguagesFormState, any, undefined>;
-	errors: string[];
 	handleChange: (form: UseFormReturn<LanguagesFormState>, name: Path<LanguagesFormState>, value: any) => void;
 }
 
@@ -24,7 +22,7 @@ const DEFAULT_LANGUAGE: Language = {
 	certificateLink: '-',
 };
 
-const ResumeLanguageList = ({ form, errors, handleChange }: ResumeLanguageListProps) => {
+const ResumeLanguageList = ({ form, handleChange }: ResumeLanguageListProps) => {
 	const [languageList, setLanguageList] = useState<Language[]>(form.getValues(LANGUAGE_LIST_NAME));
 
 	const appendLanguage = (newlanguage: Language) => {
@@ -43,7 +41,7 @@ const ResumeLanguageList = ({ form, errors, handleChange }: ResumeLanguageListPr
 		<section className='flex items-center gap-1 mt-2 justify-start'>
 			{languageList.map((_, index) => (
 				<div
-					key={crypto.randomUUID()}
+					key={_.id}
 					className='relative flex items-center'>
 					<span className='absolute -top-1 -left-5'>
 						<RemoveItemButton
@@ -60,30 +58,20 @@ const ResumeLanguageList = ({ form, errors, handleChange }: ResumeLanguageListPr
 							kind={'text'}
 							max={10}
 							handleChange={handleChange}
-							error={errors[index]}
 						/>
 						<FormInput
 							form={form}
 							name={`languageList.${index}.level`}
 							kind={'label'}
 							handleChange={handleChange}
-							error={errors[index]}
 						/>
 					</div>
 				</div>
 			))}
-			<Button
-				type='button'
-				variant={'outline'}
-				size={'sm'}
-				className='absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300'
-				onClick={() => appendLanguage({ ...DEFAULT_LANGUAGE, id: crypto.randomUUID().toString() })}>
-				<IconPlus
-					stroke={1}
-					width={20}
-				/>
-				Add language
-			</Button>
+			<AppendButton
+				label='Add language'
+				handleClick={() => appendLanguage({ ...DEFAULT_LANGUAGE, id: crypto.randomUUID().toString() })}
+			/>
 		</section>
 	);
 };

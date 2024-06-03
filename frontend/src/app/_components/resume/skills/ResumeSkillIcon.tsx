@@ -2,7 +2,6 @@ import {
 	IconBrandTypescript,
 	IconBrandJavascript,
 	IconBrandHtml5,
-	IconPoint,
 	IconBrandCss3,
 	IconBrandNodejs,
 	IconBrandGithub,
@@ -42,6 +41,7 @@ import {
 	IconBrandWordpress,
 	IconBrandCloudflare,
 	IconBrandCSharp,
+	IconPointFilled,
 } from '@tabler/icons-react';
 
 interface ResumeSkillsIconsProps {
@@ -393,10 +393,10 @@ const AVAILABLE_ICONS: Record<IconsKeys, string[]> = {
 };
 
 const DEFAULT_ICON = (
-	<IconPoint
+	<IconPointFilled
 		stroke={2}
-		size={22}
-		className='text-gray-500'
+		size={10}
+		className='text-gray-500 mt-1'
 	/>
 );
 

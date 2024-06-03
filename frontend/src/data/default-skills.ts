@@ -5,6 +5,7 @@ export const DEFAULT_SKILLS: Skills = {
 	title: 'Skills',
 	skillList: [
 		{
+			id: 'f4dfc6e7-801a-47c9-bb9b-fa95bc9fa38c',
 			name: 'skill',
 			svgUrl: '',
 		},

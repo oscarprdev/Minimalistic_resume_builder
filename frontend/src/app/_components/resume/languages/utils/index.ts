@@ -10,7 +10,18 @@ export const schoolFormSchema = z.object({
 
 export const languagesFormSchema = z.object({
 	title: z.string(),
-	languageList: z.array(schoolFormSchema),
+	languageList: z.array(schoolFormSchema).refine(
+		(values) => {
+			const newItem = values[values.length - 1];
+
+			values.pop();
+
+			const isAlreadyStored = values.some((val) => val.name === newItem.name);
+
+			return !isAlreadyStored;
+		},
+		{ message: 'Language must be unique' }
+	),
 });
 
 export type LanguagesFormState = Omit<Languages, 'id'>;
