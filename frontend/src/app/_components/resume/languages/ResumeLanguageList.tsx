@@ -38,7 +38,7 @@ const ResumeLanguageList = ({ form, handleChange }: ResumeLanguageListProps) => 
 	};
 
 	return (
-		<section className='flex items-center gap-1 mt-2 justify-start'>
+		<section className='flex items-center gap-1 mt-2 justify-start flex-wrap'>
 			{languageList.map((_, index) => (
 				<div
 					key={_.id}
