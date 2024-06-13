@@ -11,7 +11,18 @@ export interface Env {
 	SALT: string;
 	SECRET: string;
 }
-const VALID_RESUME_RESOURCES = ['list', 'header', 'summary', 'experience', 'education', 'languages', 'skills', 'update', 'delete'];
+const VALID_RESUME_RESOURCES = [
+	'list',
+	'describe',
+	'header',
+	'summary',
+	'experience',
+	'education',
+	'languages',
+	'skills',
+	'update',
+	'delete',
+];
 const VALID_USER_RESOURCES = ['login', 'register'];
 
 export default {
