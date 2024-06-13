@@ -37,11 +37,13 @@ export class DefaultUpdateResumeHandler implements UpdateResumeHandler {
 
 			const { data } = await this.extractPayload(request);
 
-			await this.usecase.execute({ userId, resumeId, data });
+			const useCaseResponse = await this.usecase.execute({ userId, resumeId, data });
 
-			const response = { status: 201, message: 'Resume updated successfully' } satisfies CommonPostResponse;
+			const response = { status: 201, message: useCaseResponse } satisfies CommonPostResponse;
 
-			return new Response(response.message, response);
+			return new Response(JSON.stringify(response.message), {
+				status: response.status,
+			});
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().handleError(error);
 		}

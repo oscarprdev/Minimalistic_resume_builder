@@ -13,15 +13,18 @@ interface UpdateResumeUsecaseExecuteInput {
 export type UpdateResumeUsecaseExecuteDataInput = Pick<Resume, 'title'>;
 
 export interface UpdateResumeUsecase {
-	execute(input: UpdateResumeUsecaseExecuteInput): Promise<void>;
+	execute(input: UpdateResumeUsecaseExecuteInput): Promise<string>;
 }
 
 export class DefaultUpdateResumeUsecase extends DefaultCommonResumeUsecase implements UpdateResumeUsecase {
-	constructor(private readonly ports: UpdateResumePorts, protected readonly commonPorts: CommonResumePorts) {
+	constructor(
+		private readonly ports: UpdateResumePorts,
+		protected readonly commonPorts: CommonResumePorts
+	) {
 		super(commonPorts);
 	}
 
-	async execute({ userId, resumeId, data }: UpdateResumeUsecaseExecuteInput) {
+	async execute({ userId, resumeId, data }: UpdateResumeUsecaseExecuteInput): Promise<string> {
 		const currentUser = await this.validateUser({ userId });
 		const currentResume = await this.validateResume({ resumeId, userId: currentUser.id });
 
