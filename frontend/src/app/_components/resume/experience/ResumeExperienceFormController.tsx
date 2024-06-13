@@ -2,7 +2,7 @@
 
 import ResumeExperienceFormPresentation from './ResumeExperienceFormPresentation';
 import { Experience } from '@/types';
-import { useFormMutation } from '@/app/hooks/useFormMutation/useFormMutation';
+import { useFormMutation } from '@/hooks/useFormMutation/useFormMutation';
 import { ExperienceFormState, experienceFormSchema } from './utils';
 import { updateExperience } from '@/app/actions/resume/sections/experience/update-experience';
 

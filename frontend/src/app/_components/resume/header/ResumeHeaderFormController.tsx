@@ -4,7 +4,7 @@ import { HeaderFormState, headerFormSchema } from './utils';
 import ResumeHeaderFormPresentation from './ResumeHeaderFormPresentation';
 import { updateHeader } from '@/app/actions/resume/sections/header/update-header';
 import { Header } from '@/types';
-import { useFormMutation } from '@/app/hooks/useFormMutation/useFormMutation';
+import { useFormMutation } from '@/hooks/useFormMutation/useFormMutation';
 
 export interface ResumeHeaderFormProps {
 	userId: string;

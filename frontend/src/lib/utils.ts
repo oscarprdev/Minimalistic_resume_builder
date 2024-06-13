@@ -10,3 +10,11 @@ export function isValidDateFormat(input: string) {
 
 	return datePattern.test(input);
 }
+
+export function strToCapitalized(str: string) {
+	if (str.length === 0) {
+		return str;
+	}
+
+	return str[0].toUpperCase() + str.slice(1, str.length);
+}

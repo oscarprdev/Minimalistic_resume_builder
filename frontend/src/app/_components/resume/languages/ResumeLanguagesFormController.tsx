@@ -1,7 +1,7 @@
 'use client';
 
 import { Languages } from '@/types';
-import { useFormMutation } from '@/app/hooks/useFormMutation/useFormMutation';
+import { useFormMutation } from '@/hooks/useFormMutation/useFormMutation';
 import { LanguagesFormState, languagesFormSchema } from './utils';
 import { updateLanguages } from '@/app/actions/resume/sections/languages/update-languages';
 import ResumeLanguagesFormPresentation from './ResumeLanguagesFormPresentation';

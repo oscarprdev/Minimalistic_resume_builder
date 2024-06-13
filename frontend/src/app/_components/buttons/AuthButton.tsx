@@ -1,24 +1,26 @@
-'use client';
+'use server';
 
+import { loginUserAction } from '@/app/actions/auth/login-user';
+import { logoutUserAction } from '@/app/actions/auth/logout-user';
+import { useUserLogged } from '@/hooks/use-user-logged';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-const AuthButton = () => {
-	const pathname = usePathname();
-	const router = useRouter();
-	const params = useSearchParams();
+const AuthButton = async () => {
+	const user = await useUserLogged();
 
-	const isUserLogged = params.get('user');
-
-	const onAuthClick = () => (isUserLogged ? router.push('/') : router.push(`${pathname}?user=5560497d-5b31-4e02-9e55-2e7723c34dc3`));
+	const onAuthClick = async () => {
+		'use server';
+		user ? await logoutUserAction() : await loginUserAction({ username: 'oscarpr', password: '1234' });
+	};
 
 	return (
-		<Button
-			variant={isUserLogged ? 'outline' : 'default'}
-			onClick={onAuthClick}>
-			{isUserLogged ? 'Logout' : 'Login'}
-		</Button>
+		<form action={onAuthClick}>
+			<Button
+				type='submit'
+				variant={user ? 'outline' : 'default'}>
+				{user ? 'Logout' : 'Login'}
+			</Button>
+		</form>
 	);
 };
 

@@ -2,7 +2,7 @@
 
 import ResumeSummaryFormPresentation from './ResumeSummaryFormPresentation';
 import { Summary } from '@/types';
-import { useFormMutation } from '@/app/hooks/useFormMutation/useFormMutation';
+import { useFormMutation } from '@/hooks/useFormMutation/useFormMutation';
 import { updateSummary } from '@/app/actions/resume/sections/summary/update-summary';
 import { SummaryFormState, summaryFormSchema } from './utils';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { Skills } from '@/types';
-import { useFormMutation } from '@/app/hooks/useFormMutation/useFormMutation';
+import { useFormMutation } from '@/hooks/useFormMutation/useFormMutation';
 import { SkillsFormState, skillsFormSchema } from './utils';
 import { updateSkills } from '@/app/actions/resume/sections/skills/update-skills';
 import ResumeSkillsFormPresentation from './ResumeSkillsFormPresentation';

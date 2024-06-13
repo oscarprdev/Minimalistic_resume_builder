@@ -4,8 +4,8 @@ import { useRef } from 'react';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 import ResumeHeaderImagePresentation from './ResumeHeaderImagePresentation';
 import { useSearchParams } from 'next/navigation';
-import { useResumeImage } from '@/app/hooks/useResumeImage/useResumeImage';
-import { useToastError } from '@/app/hooks/useToastError/useToastError';
+import { useResumeImage } from '@/hooks/useResumeImage/useResumeImage';
+import { useToastError } from '@/hooks/useToastError/useToastError';
 
 interface ResumeHeaderImageControllerProps<S extends FieldValues> {
 	imageUrl?: string;
