@@ -1,7 +1,6 @@
 import Credentials from 'next-auth/providers/credentials';
 import zod from 'zod';
 import { NextAuthConfig } from 'next-auth';
-import { cookies } from 'next/headers';
 import { loginUserService } from './services/auth/login-user';
 import { postCallback } from './lib/service.utils';
 

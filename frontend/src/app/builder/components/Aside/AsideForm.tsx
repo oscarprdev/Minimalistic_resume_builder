@@ -1,7 +1,7 @@
 'use server';
 
 import { SECTION_CONTROL, SectionControl } from '../_utils/sections';
-import AsideFormExperience from './AsideFormExperience';
+import AsideFormExperience from './AsideFormExperience/AsideFormExperience';
 import AsideFormInfoController from './AsideFormInfo/AsideFormInfoController';
 import AsideFormSummaryController from './AsideFormSummary/AsideFormSummaryController';
 

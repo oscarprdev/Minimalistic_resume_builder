@@ -4,16 +4,16 @@ import { create } from 'zustand';
 export type ResumeSummaryDefaultValues = Omit<Summary, 'id'>;
 
 export interface ResumeSummaryStore {
-	summary: ResumeSummaryDefaultValues;
+	resumeSummary: ResumeSummaryDefaultValues;
 	updateSummary: (summary: ResumeSummaryDefaultValues) => void;
 }
 
 export const DEFAULT_SUMMARY_VALUES: ResumeSummaryDefaultValues = {
-	title: '',
-	summary: '',
+	title: 'About me',
+	summary: 'Your professional summary',
 };
 
 export const useResumeSummaryStore = create<ResumeSummaryStore>((set) => ({
-	summary: DEFAULT_SUMMARY_VALUES,
+	resumeSummary: DEFAULT_SUMMARY_VALUES,
 	updateSummary: (input: ResumeSummaryDefaultValues) => set((state) => ({ ...state, resumeSummary: { ...input } })),
 }));

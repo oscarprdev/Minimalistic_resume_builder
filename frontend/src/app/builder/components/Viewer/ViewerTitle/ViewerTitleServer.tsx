@@ -1,10 +1,10 @@
 'use server';
 
-import { listResumeAction } from '@/app/actions/resume/list-resume.action';
-import { toast } from '@/components/ui/use-toast';
 import { isLeft } from '@/lib/either';
 import { getCallback } from '@/lib/service.utils';
 import ViewerTitle from './ViewerTitle';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import { DEFAULT_INFO_VALUES } from '@/store/useResumeInfoStore';
 
 interface ViewerTitleServerProps {
 	userId: string;
@@ -12,14 +12,21 @@ interface ViewerTitleServerProps {
 }
 
 const ViewerTitleServer = async ({ userId, resumeId }: ViewerTitleServerProps) => {
-	const response = await listResumeAction({ userId, getCallback });
-	if (isLeft(response)) {
-		toast({ variant: 'destructive', description: response.left });
+	if (!resumeId) {
+		return <ViewerTitle resumeTitle={DEFAULT_INFO_VALUES.title} />;
 	}
 
-	const resumeTitle = (!isLeft(response) && response.right.find((resume) => resume.id === resumeId)?.title) || 'Your resume needs a title';
+	const response = await describeResumeAction({ userId, resumeId, getCallback });
+	if (isLeft(response)) {
+		return (
+			<ViewerTitle
+				resumeTitle={DEFAULT_INFO_VALUES.title}
+				error={response.left}
+			/>
+		);
+	}
 
-	return <ViewerTitle resumeTitle={resumeTitle} />;
+	return <ViewerTitle resumeTitle={response.right.title} />;
 };
 
 export default ViewerTitleServer;

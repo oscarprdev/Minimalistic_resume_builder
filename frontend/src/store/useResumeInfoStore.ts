@@ -10,7 +10,7 @@ export interface ResumeInfoStore {
 }
 
 export const DEFAULT_INFO_VALUES: ResumeInfoDefaultValues = {
-	title: '',
+	title: 'Your resume title',
 };
 
 export const useResumeInfoStore = create<ResumeInfoStore>((set) => ({

@@ -19,6 +19,7 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 	const handleServerSubmit = async (values: z.infer<typeof asideFormSummarySchema>): Promise<Either<string, string>> => {
 		'use server';
 		return await updateResumeSummaryAction({
+			userId,
 			resumeId: resumeId || crypto.randomUUID().toString(),
 			payload: { title: values.title, summary: values.summary },
 			postCallback,
@@ -52,6 +53,7 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 	if (isLeft(response)) {
 		return <ErrorMessage />;
 	}
+	
 
 	return (
 		<AsideFormSummary

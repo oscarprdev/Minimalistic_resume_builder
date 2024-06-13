@@ -18,3 +18,10 @@ export function strToCapitalized(str: string) {
 
 	return str[0].toUpperCase() + str.slice(1, str.length);
 }
+
+export function addParamToPath(param: string) {
+	const currentUrl = new URL(window.location.href);
+	const pathWithQuery = `${currentUrl.pathname}${currentUrl.search}`;
+
+	return `${pathWithQuery}${pathWithQuery.includes('?') ? '&' : '?'}${param}`;
+}

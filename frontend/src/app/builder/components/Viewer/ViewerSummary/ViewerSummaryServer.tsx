@@ -4,31 +4,38 @@ import { isLeft } from '@/lib/either';
 import ViewerSummary from './ViewerSummary';
 import { describeResumeSummaryAction } from '@/app/builder/actions/describe-resume-summary';
 import { getCallback } from '@/lib/service.utils';
-import { toast } from '@/components/ui/use-toast';
-import { ResumeSummaryDefaultValues } from '@/store/useResumeSummaryStore';
+import { DEFAULT_SUMMARY_VALUES } from '@/store/useResumeSummaryStore';
 
 interface ViewerSummaryServerProps {
 	userId: string;
 	resumeId: string | null;
 }
 
-const DEFAULT_FIELDS: ResumeSummaryDefaultValues = {
-	title: 'About me',
-	summary: 'Your professional summary',
-};
-
 const ViewerSummaryServer = async ({ userId, resumeId }: ViewerSummaryServerProps) => {
-	const response = await describeResumeSummaryAction({ userId, resumeId, getCallback });
-	if (isLeft(response)) {
-		// toast({ variant: 'destructive', description: response.left });
+	if (!resumeId) {
+		return (
+			<ViewerSummary
+				title={DEFAULT_SUMMARY_VALUES.title}
+				summary={DEFAULT_SUMMARY_VALUES.summary}
+			/>
+		);
 	}
 
-	const isSuccess = !isLeft(response) && resumeId;
+	const response = await describeResumeSummaryAction({ userId, resumeId, getCallback });
+	if (isLeft(response)) {
+		return (
+			<ViewerSummary
+				title={DEFAULT_SUMMARY_VALUES.title}
+				summary={DEFAULT_SUMMARY_VALUES.summary}
+				error={response.left}
+			/>
+		);
+	}
 
 	return (
 		<ViewerSummary
-			title={isSuccess ? response.right.title : DEFAULT_FIELDS.title}
-			summary={isSuccess ? response.right.summary : DEFAULT_FIELDS.summary}
+			title={response.right.title}
+			summary={response.right.title}
 		/>
 	);
 };
