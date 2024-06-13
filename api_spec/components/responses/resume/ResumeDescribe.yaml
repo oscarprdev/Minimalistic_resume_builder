@@ -1,0 +1,5 @@
+description: Returns resume item
+content:
+  application/json:
+    schema:
+      $ref: 'components/_index.yaml#/schemas/Resume'

@@ -33,6 +33,9 @@ responses:
   ResumeListDescribe:
     $ref: 'components/responses/resume/ResumeListDescribe.yaml'
 
+  ResumeDescribe:
+    $ref: 'components/responses/resume/ResumeDescribe.yaml'
+
   ResumeHeaderDescribe:
     $ref: 'components/responses/resume/ResumeHeaderDescribe.yaml'
 

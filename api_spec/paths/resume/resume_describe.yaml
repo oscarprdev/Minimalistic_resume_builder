@@ -1,0 +1,16 @@
+get:
+  tags:
+    - Resume
+  description: Get resume info by user
+  parameters:
+    - $ref: 'components/_index.yaml#/parameters/UserId'
+    - $ref: 'components/_index.yaml#/parameters/ResumeId'
+  responses:
+    '200':
+      $ref: 'components/_index.yaml#/responses/ResumeDescribe'
+    '404':
+      $ref: 'components/_index.yaml#/responses/NotFound'
+    '400':
+      $ref: 'components/_index.yaml#/responses/BadRequest'
+    '500':
+      $ref: 'components/_index.yaml#/responses/InternalError'
