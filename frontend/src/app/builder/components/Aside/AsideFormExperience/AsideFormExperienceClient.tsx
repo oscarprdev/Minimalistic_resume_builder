@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_EXPERIENCE_VALUES, useResumeExperienceStore } from '@/store/useResumeExperienceStore';
+import { useResumeExperienceStore } from '@/store/useResumeExperienceStore';
 import { z } from 'zod';
 import AsideFormExperience from './AsideFormExperience';
 import { right } from '@/lib/either';
@@ -15,12 +15,7 @@ const AsideFormExperienceClient = () => {
 		return right('');
 	};
 
-	return (
-		<AsideFormExperience
-			defaultValues={DEFAULT_EXPERIENCE_VALUES}
-			handleSubmit={handleClientSubmit}
-		/>
-	);
+	return <AsideFormExperience handleSubmit={handleClientSubmit} />;
 };
 
 export default AsideFormExperienceClient;

@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_INFO_VALUES, useResumeInfoStore } from '@/store/useResumeInfoStore';
+import { useResumeInfoStore } from '@/store/useResumeInfoStore';
 import AsideFormInfo, { asideFormInfoSchema } from './AsideFormInfo';
 import { z } from 'zod';
 import { right } from '@/lib/either';
@@ -14,12 +14,7 @@ const AsideFormInfoClient = () => {
 		return right('');
 	};
 
-	return (
-		<AsideFormInfo
-			defaultValues={DEFAULT_INFO_VALUES}
-			handleSubmit={handleClientSubmit}
-		/>
-	);
+	return <AsideFormInfo handleSubmit={handleClientSubmit} />;
 };
 
 export default AsideFormInfoClient;

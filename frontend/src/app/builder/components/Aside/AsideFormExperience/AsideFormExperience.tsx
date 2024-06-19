@@ -16,7 +16,7 @@ import { asideFormExperienceSchema } from './schema-validations';
 
 interface AsideFormExperienceProps {
 	handleSubmit: (values: z.infer<typeof asideFormExperienceSchema>) => Promise<Either<string, string>>;
-	defaultValues: ResumeExperienceDefaultValues;
+	defaultValues?: ResumeExperienceDefaultValues;
 }
 
 export type ExperienceFormState = ResumeExperienceDefaultValues;

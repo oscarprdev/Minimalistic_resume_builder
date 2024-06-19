@@ -7,7 +7,6 @@ import { updateResumeSummaryAction } from '@/app/builder/actions/update-resume-s
 import { Either, isLeft } from '@/lib/either';
 import { describeResumeSummaryAction } from '@/app/builder/actions/describe-resume-summary';
 import ErrorMessage from '../../ErrorMessage';
-import { DEFAULT_SUMMARY_VALUES } from '@/store/useResumeSummaryStore';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 
 interface AsideFormSummaryServerProps {
@@ -27,12 +26,7 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 	};
 
 	if (!resumeId) {
-		return (
-			<AsideFormSummary
-				defaultValues={DEFAULT_SUMMARY_VALUES}
-				handleSubmit={handleServerSubmit}
-			/>
-		);
+		return <AsideFormSummary handleSubmit={handleServerSubmit} />;
 	}
 
 	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
@@ -41,12 +35,7 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 	}
 
 	if (!describeResumeActionResponse.right.summary) {
-		return (
-			<AsideFormSummary
-				defaultValues={DEFAULT_SUMMARY_VALUES}
-				handleSubmit={handleServerSubmit}
-			/>
-		);
+		return <AsideFormSummary handleSubmit={handleServerSubmit} />;
 	}
 
 	const response = await describeResumeSummaryAction({ userId, resumeId, getCallback });

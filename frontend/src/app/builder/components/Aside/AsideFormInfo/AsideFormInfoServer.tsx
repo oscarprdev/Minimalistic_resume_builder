@@ -26,12 +26,7 @@ const AsideFormInfoServer = async ({ userId, resumeId }: AsideFormInfoServerProp
 	};
 
 	if (!resumeId) {
-		return (
-			<AsideFormInfo
-				defaultValues={{ title: DEFAULT_INFO_VALUES.title }}
-				handleSubmit={handleServerSubmit}
-			/>
-		);
+		return <AsideFormInfo handleSubmit={handleServerSubmit} />;
 	}
 
 	const response = await describeResumeAction({ userId, resumeId, getCallback });

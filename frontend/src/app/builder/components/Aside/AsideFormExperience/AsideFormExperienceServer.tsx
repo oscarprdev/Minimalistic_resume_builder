@@ -5,7 +5,6 @@ import AsideFormExperience from './AsideFormExperience';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { DEFAULT_EXPERIENCE_VALUES } from '@/store/useResumeExperienceStore';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { updateResumeExperienceAction } from '@/app/builder/actions/update-resume-experience';
 import { describeResumeExperienceAction } from '@/app/builder/actions/describe-resume-experience';
@@ -28,12 +27,7 @@ const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperien
 	};
 
 	if (!resumeId) {
-		return (
-			<AsideFormExperience
-				defaultValues={DEFAULT_EXPERIENCE_VALUES}
-				handleSubmit={handleServerSubmit}
-			/>
-		);
+		return <AsideFormExperience handleSubmit={handleServerSubmit} />;
 	}
 
 	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
@@ -42,12 +36,7 @@ const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperien
 	}
 
 	if (!describeResumeActionResponse.right.experience) {
-		return (
-			<AsideFormExperience
-				defaultValues={DEFAULT_EXPERIENCE_VALUES}
-				handleSubmit={handleServerSubmit}
-			/>
-		);
+		return <AsideFormExperience handleSubmit={handleServerSubmit} />;
 	}
 
 	const response = await describeResumeExperienceAction({ userId, resumeId, getCallback });

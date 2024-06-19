@@ -13,7 +13,7 @@ import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 interface AsideFormInfoProps {
-	defaultValues: ResumeInfoDefaultValues;
+	defaultValues?: ResumeInfoDefaultValues;
 	handleSubmit: (values: z.infer<typeof asideFormInfoSchema>) => Promise<Either<string, string>>;
 }
 

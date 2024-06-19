@@ -14,7 +14,7 @@ import { Either } from '@/lib/either';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 interface AsideFormSummaryProps {
-	defaultValues: ResumeSummaryDefaultValues;
+	defaultValues?: ResumeSummaryDefaultValues;
 	handleSubmit: (values: z.infer<typeof asideFormSummarySchema>) => Promise<Either<string, string>>;
 }
 
