@@ -1,6 +1,6 @@
 import { IconBrandLinkedin, IconBrandGithub, IconWorldWww, IconBrandX, IconBrandInstagram } from '@tabler/icons-react';
 
-interface ResumeHeaderLinksIconsProps {
+interface ViewerHeaderLinksIconsProps {
 	value: string;
 }
 
@@ -10,36 +10,36 @@ const LINKS_ICONS = {
 	default: (
 		<IconWorldWww
 			stroke={2}
-			size={20}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 	linkedin: (
 		<IconBrandLinkedin
 			stroke={2}
-			size={20}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 	github: (
 		<IconBrandGithub
 			stroke={2}
-			size={20}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 	twitter: (
 		<IconBrandX
 			stroke={2}
-			size={20}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 	instagram: (
 		<IconBrandInstagram
 			stroke={2}
-			size={20}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 };
@@ -52,7 +52,7 @@ const AVAILABLE_ICONS: Record<LinksIconsKeys, LinksIconsKeys> = {
 	instagram: 'instagram',
 };
 
-const ResumeHeaderLinksIcons = ({ value }: ResumeHeaderLinksIconsProps) => {
+const ViewerHeaderLinksIcons = ({ value }: ViewerHeaderLinksIconsProps) => {
 	if (value.includes(AVAILABLE_ICONS.linkedin)) {
 		return LINKS_ICONS[AVAILABLE_ICONS.linkedin];
 	}
@@ -72,4 +72,4 @@ const ResumeHeaderLinksIcons = ({ value }: ResumeHeaderLinksIconsProps) => {
 	return LINKS_ICONS[AVAILABLE_ICONS.default];
 };
 
-export default ResumeHeaderLinksIcons;
+export default ViewerHeaderLinksIcons;

@@ -1,24 +1,24 @@
 'use server';
 
 import { useUserLogged } from '@/hooks/use-user-logged';
-import ViewerExperienceClient from './ViewerExperienceClient';
+import ViewerHeaderClient from './ViewerHeaderClient';
 import { Suspense } from 'react';
-import ViewerExperienceServer from './ViewerExperienceServer';
+import ViewerHeaderServer from './ViewerHeaderServer';
 
-interface ViewerExperienceControllerProps {
+interface ViewerHeaderControllerProps {
 	resumeId: string | null;
 }
 
-const ViewerExperienceController = async ({ resumeId }: ViewerExperienceControllerProps) => {
+const ViewerHeaderController = async ({ resumeId }: ViewerHeaderControllerProps) => {
 	const user = await useUserLogged();
 
 	if (!user?.id) {
-		return <ViewerExperienceClient />;
+		return <ViewerHeaderClient />;
 	}
 
 	return (
 		<Suspense fallback={<div className='w-[250px] h-5 animate-pulse rounded-xl bg-gray-300' />}>
-			<ViewerExperienceServer
+			<ViewerHeaderServer
 				userId={user.id}
 				resumeId={resumeId}
 			/>
@@ -26,4 +26,4 @@ const ViewerExperienceController = async ({ resumeId }: ViewerExperienceControll
 	);
 };
 
-export default ViewerExperienceController;
+export default ViewerHeaderController;

@@ -1,6 +1,6 @@
 import { IconMapPin, IconPhone, IconMail } from '@tabler/icons-react';
 
-interface ResumeHeaderIconsProps {
+interface ViewerHeaderIconsProps {
 	value: string;
 }
 
@@ -10,22 +10,22 @@ const HEADER_ICONS = {
 	location: (
 		<IconMapPin
 			stroke={2}
-			size={18}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 	phone: (
 		<IconPhone
 			stroke={2}
-			size={18}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 	mail: (
 		<IconMail
 			stroke={2}
-			size={18}
-			className='mt-[0.5rem] ml-2 -mr-1 text-gray-500'
+			size={16}
+			className='text-gray-500'
 		/>
 	),
 };
@@ -36,7 +36,7 @@ const AVAILABLE_ICONS: Record<IconsKeys, IconsKeys> = {
 	mail: 'mail',
 };
 
-const ResumeHeaderIcons = ({ value }: ResumeHeaderIconsProps) => {
+const ViewerHeaderIcons = ({ value }: ViewerHeaderIconsProps) => {
 	if (value.includes(AVAILABLE_ICONS.location)) {
 		return HEADER_ICONS[AVAILABLE_ICONS.location];
 	}
@@ -52,4 +52,4 @@ const ResumeHeaderIcons = ({ value }: ResumeHeaderIconsProps) => {
 	return <></>;
 };
 
-export default ResumeHeaderIcons;
+export default ViewerHeaderIcons;

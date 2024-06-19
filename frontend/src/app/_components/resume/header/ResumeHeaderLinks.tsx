@@ -7,7 +7,7 @@ import { UseFormReturn, Path } from 'react-hook-form';
 import { HeaderFormState } from './utils';
 import { IconPlus } from '@tabler/icons-react';
 import RemoveItemButton from '../../buttons/RemoveItemButton';
-import ResumeHeaderLinksIcons from './ResumeHeaderLinksIcons';
+import ResumeHeaderLinksIcons from '../../../builder/components/Viewer/ViewerHeader/ViewerHeaderLinksIcons';
 import { useState } from 'react';
 import AppendButton from '../common/AppendButton';
 

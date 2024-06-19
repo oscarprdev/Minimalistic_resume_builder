@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={cn(inter.className, 'bg-gray-100 h-screen overflow-hidden')}>
+			<body className={cn(inter.className, 'bg-gray-100')}>
 				<ToastWrapper>
 					<Header />
 					{children}
