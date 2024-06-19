@@ -20,7 +20,9 @@ const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
 			{jobList.length > 0 ? (
 				<div className='flex flex-col gap-4 mt-2'>
 					{jobList.map((job) => (
-						<div className='flex flex-col'>
+						<div
+							key={job.title}
+							className='flex flex-col'>
 							<div className='w-full flex items-center justify-between'>
 								<p>{job.company}</p>
 								<div className='flex items-center gap-2'>

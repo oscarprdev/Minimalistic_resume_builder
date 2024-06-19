@@ -36,7 +36,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 			{fields.map((_, index) => (
 				<div
 					key={_.title}
-					className='flex flex-col items-center w-full gap-2'>
+					className='flex flex-col items-center w-full space-y-4'>
 					<FormField
 						control={form.control}
 						name={`jobList.${index}.title`}
@@ -123,7 +123,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 					<Button
 						type='button'
 						className='w-full'
-						variant={'outline'}
+						variant={'clean'}
 						onClick={() => remove(index)}>
 						Remove job
 					</Button>
@@ -132,6 +132,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 			{formJobListFieldsError && <FormMessage>{formJobListFieldsError.root?.message}</FormMessage>}
 			<Button
 				type='button'
+				variant={'outline'}
 				onClick={() => append(DEFAULT_JOB)}>
 				Add job
 			</Button>

@@ -81,7 +81,17 @@ const AsideFormSummary = ({ defaultValues, handleSubmit }: AsideFormSummaryProps
 						</FormItem>
 					)}
 				/>
-				<Button type='submit'>{form.formState.isSubmitting ? <IconLoader2 className='animate-spin text-white' /> : 'Update'}</Button>
+				<Button
+					type='submit'
+					className='w-full'>
+					{form.formState.isSubmitting ? <IconLoader2 className='animate-spin text-white' /> : 'Update'}
+				</Button>
+				<Button
+					type='button'
+					variant={'clean'}
+					className='w-full'>
+					{form.formState.isSubmitting ? <IconLoader2 className='animate-spin text-white' /> : 'Remove section'}
+				</Button>
 			</form>
 		</Form>
 	);
