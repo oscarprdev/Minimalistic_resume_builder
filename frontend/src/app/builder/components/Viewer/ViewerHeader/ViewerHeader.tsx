@@ -5,6 +5,8 @@ import { useRouterError } from '@/hooks/use-router-error';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import ViewerHeaderIcons from './ViewerHeaderIcons';
+import Image from 'next/image';
+import { DEFAULT_IMAGE } from '../../Aside/AsideFormHeader/AsideFormHeaderImage';
 
 interface ViewerHeaderProps {
 	name: string;
@@ -22,9 +24,20 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 	useRouterError(router, error);
 
 	return (
-		<section className='p-5'>
+		<section className='relative p-5'>
 			<h3 className='text-2xl'>{name}</h3>
 			<p className='text-lg text-gray-900'>{job}</p>
+			{image && image !== DEFAULT_IMAGE && (
+				<picture className='w-[100px] h-[100px] absolute top-8 right-8'>
+					<Image
+						src={image}
+						alt='Viewer resume image'
+						width={500}
+						height={500}
+						className='rounded-md object-cover w-full h-full'
+					/>
+				</picture>
+			)}
 			<div className='flex flex-col space-y-2 mt-2'>
 				<ul className='flex flex-col space-y-2 items-start'>
 					<li className='flex items-center space-x-1'>

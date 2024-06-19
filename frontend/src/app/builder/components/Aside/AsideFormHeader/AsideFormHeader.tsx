@@ -6,7 +6,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { IconLoader2 } from '@tabler/icons-react';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
 import { Either, isLeft } from '@/lib/either';
@@ -16,6 +15,7 @@ import AsideFormHeaderImage, { DEFAULT_IMAGE, MAX_FILE_SIZE_MB } from './AsideFo
 import { ChangeEvent } from 'react';
 import { toast } from '@/components/ui/use-toast';
 import SectionActions from '../shared/components/SectionActions';
+import AsideFormHeaderLinks from './AsideFormHeaderLinks';
 
 interface AsideFormHeaderProps {
 	defaultValues?: ResumeHeaderDefaultValues;
@@ -165,6 +165,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 						</FormItem>
 					)}
 				/>
+				<AsideFormHeaderLinks form={form} />
 				<SectionActions loading={form.formState.isSubmitting} />
 			</form>
 		</Form>
