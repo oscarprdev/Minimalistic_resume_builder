@@ -5,9 +5,8 @@ import AsideFormExperience from './AsideFormExperience';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
-import { updateResumeExperienceAction } from '@/app/builder/actions/update-resume-experience';
-import { describeResumeExperienceAction } from '@/app/builder/actions/describe-resume-experience';
+import { describeResumeAction } from '@/app/actions';
+import { describeResumeExperienceAction, updateResumeExperienceAction } from '@/app/builder/components/Aside/AsideFormExperience/actions';
 import { asideFormExperienceSchema } from './schema-validations';
 
 interface AsideFormExperienceServerProps {

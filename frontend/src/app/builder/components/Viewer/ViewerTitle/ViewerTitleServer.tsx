@@ -3,7 +3,7 @@
 import { isLeft } from '@/lib/either';
 import { getCallback } from '@/lib/service.utils';
 import ViewerTitle from './ViewerTitle';
-import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import { describeResumeAction } from '@/app/actions';
 import { DEFAULT_INFO_VALUES } from '@/store/useResumeInfoStore';
 
 interface ViewerTitleServerProps {

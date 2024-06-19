@@ -2,9 +2,9 @@
 
 import { isLeft } from '@/lib/either';
 import ViewerExperience from './ViewerExperience';
-import { describeResumeExperienceAction } from '@/app/builder/actions/describe-resume-experience';
 import { getCallback } from '@/lib/service.utils';
 import { DEFAULT_EXPERIENCE_VALUES } from '@/store/useResumeExperienceStore';
+import { describeResumeExperienceAction } from '../../Aside/AsideFormExperience/actions';
 
 interface ViewerExperienceServerProps {
 	userId: string;

@@ -3,14 +3,11 @@
 import { postCallback, getCallback } from '@/lib/service.utils';
 import AsideFormHeader, { asideFormHeaderSchema } from './AsideFormHeader';
 import { z } from 'zod';
-import { updateResumeHeaderAction } from '@/app/builder/actions/update-resume-header';
-import { Either, isLeft, left, right } from '@/lib/either';
-import { describeResumeHeaderAction } from '@/app/builder/actions/describe-resume-header';
+import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
-import { ChangeEvent, useCallback } from 'react';
-import { uploadImageAction } from '@/app/builder/actions/upload-image';
-import { removeImageAction } from '@/app/builder/actions/remove-image';
+import { useCallback } from 'react';
+import { updateResumeHeaderAction, uploadImageAction, removeImageAction, describeResumeHeaderAction } from './actions';
+import { describeResumeAction } from '@/app/actions';
 
 interface AsideFormHeaderServerProps {
 	userId: string;

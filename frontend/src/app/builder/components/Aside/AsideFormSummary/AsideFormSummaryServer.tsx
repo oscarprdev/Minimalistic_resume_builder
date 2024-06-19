@@ -3,11 +3,10 @@
 import { postCallback, getCallback } from '@/lib/service.utils';
 import AsideFormSummary, { asideFormSummarySchema } from './AsideFormSummary';
 import { z } from 'zod';
-import { updateResumeSummaryAction } from '@/app/builder/actions/update-resume-summary';
 import { Either, isLeft } from '@/lib/either';
-import { describeResumeSummaryAction } from '@/app/builder/actions/describe-resume-summary';
 import ErrorMessage from '../../ErrorMessage';
-import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import { describeResumeAction } from '@/app/actions';
+import { describeResumeSummaryAction, updateResumeSummaryAction } from './actions';
 
 interface AsideFormSummaryServerProps {
 	userId: string;

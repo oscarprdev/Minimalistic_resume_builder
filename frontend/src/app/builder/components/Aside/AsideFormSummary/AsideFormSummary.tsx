@@ -12,7 +12,7 @@ import { ResumeSummaryDefaultValues } from '@/store/useResumeSummaryStore';
 import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
 import { Either } from '@/lib/either';
 import { useSearchParams, useRouter } from 'next/navigation';
-import SectionActions from '../shared/SectionActions';
+import SectionActions from '../shared/components/SectionActions';
 
 interface AsideFormSummaryProps {
 	defaultValues?: ResumeSummaryDefaultValues;
@@ -48,7 +48,7 @@ const AsideFormSummary = ({ defaultValues, handleSubmit }: AsideFormSummaryProps
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-8'>
+				className='space-y-6'>
 				<FormField
 					control={form.control}
 					name='title'

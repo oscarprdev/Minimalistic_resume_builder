@@ -13,7 +13,7 @@ import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { asideFormExperienceSchema } from './schema-validations';
-import SectionActions from '../shared/SectionActions';
+import SectionActions from '../shared/components/SectionActions';
 
 interface AsideFormExperienceProps {
 	handleSubmit: (values: z.infer<typeof asideFormExperienceSchema>) => Promise<Either<string, string>>;
@@ -42,7 +42,7 @@ const AsideFormExperience = ({ defaultValues, handleSubmit }: AsideFormExperienc
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-8'>
+				className='space-y-6'>
 				<FormField
 					control={form.control}
 					name='title'

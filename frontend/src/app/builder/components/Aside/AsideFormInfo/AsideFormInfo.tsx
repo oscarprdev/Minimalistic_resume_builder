@@ -11,7 +11,7 @@ import { ResumeInfoDefaultValues } from '@/store/useResumeInfoStore';
 import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
 import { useSearchParams, useRouter } from 'next/navigation';
-import SectionActions from '../shared/SectionActions';
+import SectionActions from '../shared/components/SectionActions';
 
 interface AsideFormInfoProps {
 	defaultValues?: ResumeInfoDefaultValues;
@@ -44,7 +44,7 @@ const AsideFormInfo = ({ defaultValues, handleSubmit }: AsideFormInfoProps) => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-8'>
+				className='space-y-6'>
 				<FormField
 					control={form.control}
 					name='title'

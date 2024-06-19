@@ -15,7 +15,7 @@ import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
 import AsideFormHeaderImage, { DEFAULT_IMAGE, MAX_FILE_SIZE_MB } from './AsideFormHeaderImage';
 import { ChangeEvent } from 'react';
 import { toast } from '@/components/ui/use-toast';
-import SectionActions from '../shared/SectionActions';
+import SectionActions from '../shared/components/SectionActions';
 
 interface AsideFormHeaderProps {
 	defaultValues?: ResumeHeaderDefaultValues;
@@ -94,7 +94,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-8'>
+				className='space-y-6'>
 				<AsideFormHeaderImage
 					form={form}
 					updateFormImageValue={updateFormImageValue}

@@ -2,9 +2,9 @@
 
 import { isLeft } from '@/lib/either';
 import ViewerSummary from './ViewerSummary';
-import { describeResumeSummaryAction } from '@/app/builder/actions/describe-resume-summary';
 import { getCallback } from '@/lib/service.utils';
 import { DEFAULT_SUMMARY_VALUES } from '@/store/useResumeSummaryStore';
+import { describeResumeSummaryAction } from '../../Aside/AsideFormSummary/actions';
 
 interface ViewerSummaryServerProps {
 	userId: string;
