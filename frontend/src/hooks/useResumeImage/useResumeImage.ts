@@ -1,4 +1,4 @@
-import { UploadImageInput, uploadImage } from '@/app/actions/resume/sections/header/upload-image';
+import { UploadImageInput, uploadImage } from '@/app/actions_/resume/sections/header/upload-image';
 import { useMutation } from '@tanstack/react-query';
 import { ChangeEvent, startTransition, useEffect, useState } from 'react';
 import { UseResumeImageInput } from './useResumeImage.types';
