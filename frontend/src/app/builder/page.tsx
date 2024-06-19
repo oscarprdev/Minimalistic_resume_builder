@@ -13,7 +13,7 @@ export default async function BuilderPage({ searchParams }: HomeProps) {
 	let sectionSelected = (searchParams.selected as SectionControl) || null;
 
 	return (
-		<main className='flex items-start w-screen'>
+		<main className='flex items-start w-screen h-full'>
 			<Aside
 				sectionSelected={sectionSelected}
 				resumeId={resumeSelected}

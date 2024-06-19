@@ -1,8 +1,9 @@
 'use server';
 
 import { BUCKET_ACCES_KEY, BUCKET_BASE_URL, BUCKET_KEY_ID, BUCKET_URL } from '@/constants';
-import { Either, left, right } from '@/lib/either';
+import { Either, isLeft, left, right } from '@/lib/either';
 import { Bucket } from '@oprdev/cloudflare-r2-storage';
+import { removeImageAction } from './remove-image';
 
 export interface UploadImageInput {
 	formData: FormData;
@@ -10,7 +11,7 @@ export interface UploadImageInput {
 	resumeId: string;
 }
 
-export const uploadImage = async ({ formData, userId, resumeId }: UploadImageInput): Promise<Either<string, string>> => {
+export const uploadImageAction = async ({ formData, userId, resumeId }: UploadImageInput): Promise<Either<string, string>> => {
 	try {
 		const imageFile = formData.get('image') as File;
 		const buffer = (await imageFile.arrayBuffer()) as Buffer;
@@ -24,9 +25,9 @@ export const uploadImage = async ({ formData, userId, resumeId }: UploadImageInp
 			bucketName: 'resume',
 		});
 
-		const images = await bucket.getKeysByEntity({ entity: resumeId });
-		if (Array.isArray(images) && images.length > 0) {
-			await Promise.all([images.map((img) => bucket.deleteItemByKey({ key: img }))]);
+		const response = await removeImageAction({ resumeId });
+		if (isLeft(response)) {
+			throw new Error(response.left);
 		}
 
 		const uploadedImage = await bucket.uploadFile({

@@ -45,11 +45,22 @@ const AsideSectionItem = async ({ label, control, sectionSelected, resumeId }: A
 			<Link
 				href={pathToRedirect(resumeId, sectionSelected)}
 				className={cn('flex items-center justify-between', isItemDisabled && 'text-gray-300 cursor-not-allowed')}>
-				<p className={cn('text-sm group-hover:text-purple_200', isItemDisabled && 'group-hover:text-gray-300')}>{label}</p>
+				<p
+					className={cn(
+						'text-sm group-hover:text-purple_200',
+						isItemDisabled && 'group-hover:text-gray-300',
+						isSectionSelected(control, sectionSelected) && 'text-purple_200'
+					)}>
+					{label}
+				</p>
 				{isSectionSelected(control, sectionSelected) ? (
 					<IconMinus
 						stroke={1}
-						className={cn('text-gray-700', isItemDisabled && 'text-gray-300 group-hover:text-gray-300')}
+						className={cn(
+							'text-gray-700',
+							isItemDisabled && 'text-gray-300 group-hover:text-gray-300',
+							isSectionSelected(control, sectionSelected) && 'text-purple_200'
+						)}
 					/>
 				) : (
 					<IconPlus

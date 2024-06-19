@@ -12,14 +12,16 @@ import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
 import { Either, isLeft } from '@/lib/either';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
-import AsideFormHeaderImage, { MAX_FILE_SIZE_MB } from './AsideFormHeaderImage';
+import AsideFormHeaderImage, { DEFAULT_IMAGE, MAX_FILE_SIZE_MB } from './AsideFormHeaderImage';
 import { ChangeEvent } from 'react';
 import { toast } from '@/components/ui/use-toast';
+import SectionActions from '../shared/SectionActions';
 
 interface AsideFormHeaderProps {
 	defaultValues?: ResumeHeaderDefaultValues;
 	handleSubmit: (values: z.infer<typeof asideFormHeaderSchema>) => Promise<Either<string, string>>;
 	updateImage: (formData: FormData) => Promise<Either<string, string>>;
+	removeImage: () => Promise<Either<string, string>>;
 }
 
 export const asideFormHeaderSchema = z.object({
@@ -32,7 +34,7 @@ export const asideFormHeaderSchema = z.object({
 	image: z.string().optional(),
 });
 
-const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage }: AsideFormHeaderProps) => {
+const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage }: AsideFormHeaderProps) => {
 	const router = useRouter();
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
@@ -75,6 +77,19 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage }: AsideForm
 		}
 	};
 
+	const removeFormImageValue = async () => {
+		const response = await removeImage();
+		if (isLeft(response)) {
+			toast({
+				description: response.left,
+				variant: 'destructive',
+			});
+			return;
+		}
+
+		form.setValue('image', DEFAULT_IMAGE);
+	};
+
 	return (
 		<Form {...form}>
 			<form
@@ -83,6 +98,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage }: AsideForm
 				<AsideFormHeaderImage
 					form={form}
 					updateFormImageValue={updateFormImageValue}
+					removeFormImageValue={removeFormImageValue}
 				/>
 				<FormField
 					control={form.control}
@@ -149,18 +165,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage }: AsideForm
 						</FormItem>
 					)}
 				/>
-
-				<Button
-					type='submit'
-					className='w-full'>
-					{form.formState.isSubmitting ? <IconLoader2 className='animate-spin text-white' /> : 'Update'}
-				</Button>
-				<Button
-					type='button'
-					variant={'clean'}
-					className='w-full'>
-					{form.formState.isSubmitting ? <IconLoader2 className='animate-spin text-white' /> : 'Remove section'}
-				</Button>
+				<SectionActions loading={form.formState.isSubmitting} />
 			</form>
 		</Form>
 	);

@@ -11,7 +11,7 @@ interface AsideProps {
 
 const Aside = ({ sectionSelected, resumeId }: AsideProps) => {
 	return (
-		<aside className='h-screen flex'>
+		<aside className='h-full flex'>
 			<AsideSectionList
 				sectionSelected={sectionSelected}
 				resumeId={resumeId}

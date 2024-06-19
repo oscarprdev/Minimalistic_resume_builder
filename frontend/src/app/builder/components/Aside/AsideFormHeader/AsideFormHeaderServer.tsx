@@ -9,7 +9,8 @@ import { describeResumeHeaderAction } from '@/app/builder/actions/describe-resum
 import ErrorMessage from '../../ErrorMessage';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { ChangeEvent, useCallback } from 'react';
-import { uploadImage } from '@/app/builder/actions/upload-image';
+import { uploadImageAction } from '@/app/builder/actions/upload-image';
+import { removeImageAction } from '@/app/builder/actions/remove-image';
 
 interface AsideFormHeaderServerProps {
 	userId: string;
@@ -31,7 +32,12 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 
 	const updateImage = useCallback(async (formData: FormData) => {
 		'use server';
-		return await uploadImage({ formData, userId, resumeId: resumeId || defaultResumeId });
+		return await uploadImageAction({ formData, userId, resumeId: resumeId || defaultResumeId });
+	}, []);
+
+	const removeImage = useCallback(async () => {
+		'use server';
+		return await removeImageAction({ resumeId: resumeId || defaultResumeId });
 	}, []);
 
 	if (!resumeId) {
@@ -39,6 +45,7 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 			<AsideFormHeader
 				handleSubmit={handleServerSubmit}
 				updateImage={updateImage}
+				removeImage={removeImage}
 			/>
 		);
 	}
@@ -53,6 +60,7 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 			<AsideFormHeader
 				handleSubmit={handleServerSubmit}
 				updateImage={updateImage}
+				removeImage={removeImage}
 			/>
 		);
 	}
@@ -67,6 +75,7 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 			defaultValues={response.right}
 			handleSubmit={handleServerSubmit}
 			updateImage={updateImage}
+			removeImage={removeImage}
 		/>
 	);
 };

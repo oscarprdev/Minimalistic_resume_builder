@@ -11,7 +11,7 @@ interface AsideSectionListProps {
 
 const AsideSectionList = ({ sectionSelected, resumeId }: AsideSectionListProps) => {
 	return (
-		<ul className='h-full flex flex-col w-1/4 min-w-[350px] bg-white shadow-sm border border-transparent border-r-gray-200'>
+		<ul className='h-full flex flex-col w-1/4 min-w-[300px] bg-white shadow-sm border border-transparent border-r-gray-200'>
 			{SECTIONS.map(({ label, control }) => (
 				<AsideSectionItem
 					key={label}

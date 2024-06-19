@@ -9,7 +9,7 @@ interface ViewerResumeProps {
 
 const ViewerResume = async ({ resumeId }: ViewerResumeProps) => {
 	return (
-		<article className='w-[650px] bg-white shadow-sm h-[800px]'>
+		<article className='w-[650px] bg-white shadow-sm h-[800px] mb-[100px]'>
 			<ViewerSummaryController resumeId={resumeId} />
 			<ViewerExperienceController resumeId={resumeId} />
 		</article>

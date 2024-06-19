@@ -4,7 +4,7 @@ import { Either, left, right } from './either';
 
 export const getCallback = async <R>(path: string): Promise<Either<string, R>> => {
 	try {
-		const response = await fetch(path);
+		const response = await fetch(path, { cache: 'no-store' });
 
 		if (response.status === 404) {
 			throw new Error('Error not found');
@@ -23,6 +23,7 @@ export const postCallback = async <P, R>(path: string, payload: P): Promise<Eith
 		const response = await fetch(path, {
 			method: 'POST',
 			body: JSON.stringify(payload),
+			cache: 'no-store',
 		});
 
 		if (!response.ok) {

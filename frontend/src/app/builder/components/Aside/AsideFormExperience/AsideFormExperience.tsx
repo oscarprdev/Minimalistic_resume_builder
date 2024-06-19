@@ -13,6 +13,7 @@ import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { asideFormExperienceSchema } from './schema-validations';
+import SectionActions from '../shared/SectionActions';
 
 interface AsideFormExperienceProps {
 	handleSubmit: (values: z.infer<typeof asideFormExperienceSchema>) => Promise<Either<string, string>>;
@@ -59,17 +60,7 @@ const AsideFormExperience = ({ defaultValues, handleSubmit }: AsideFormExperienc
 					)}
 				/>
 				<AsideFormExperienceJobList form={form} />
-				<Button
-					type='submit'
-					className='w-full'>
-					{form.formState.isSubmitting ? <IconLoader2 className='animate-spin text-white' /> : 'Update'}
-				</Button>
-				<Button
-					type='button'
-					variant={'clean'}
-					className='w-full'>
-					{form.formState.isSubmitting ? <IconLoader2 className='animate-spin text-white' /> : 'Remove section'}
-				</Button>
+				<SectionActions loading={form.formState.isSubmitting} />
 			</form>
 		</Form>
 	);

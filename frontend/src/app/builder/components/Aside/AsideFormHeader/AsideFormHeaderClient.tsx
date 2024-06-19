@@ -15,6 +15,11 @@ const AsideFormHeaderClient = () => {
 		return right('');
 	};
 
+	const removeImage = useCallback(async () => {
+		headerStore.updateHeader({ ...headerStore.resumeHeader, image: undefined });
+		return right('');
+	}, []);
+
 	const updateImage = useCallback(async (formData: FormData) => {
 		const file = formData.get('image') as File;
 		if (!file) {
@@ -30,6 +35,7 @@ const AsideFormHeaderClient = () => {
 		<AsideFormHeader
 			handleSubmit={handleClientSubmit}
 			updateImage={updateImage}
+			removeImage={removeImage}
 		/>
 	);
 };

@@ -27,7 +27,7 @@ const AsideForm = async ({ sectionSelected, resumeId }: AsideFormProps) => {
 		}
 	};
 
-	return <section className='bg-white w-1/4 min-w-[350px] p-5 overflow-scroll'>{renderSelectedForm(sectionSelected)}</section>;
+	return <section className='bg-white w-1/4 min-w-[400px] p-5 overflow-scroll'>{renderSelectedForm(sectionSelected)}</section>;
 };
 
 export default AsideForm;
