@@ -53,7 +53,6 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 	if (isLeft(response)) {
 		return <ErrorMessage />;
 	}
-	
 
 	return (
 		<AsideFormSummary

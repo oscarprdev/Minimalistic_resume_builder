@@ -15,8 +15,8 @@ const ViewerSummary = ({ title, summary, error }: ViewerSummaryProps) => {
 
 	return (
 		<section className='p-5'>
-			<h3 className='font-bold'>{title}</h3>
-			<p className='text-sm text-gray-700'>{summary}</p>
+			<h3 className='font-bold text-lg'>{title}</h3>
+			<p className='text-sm text-gray-700 text-pretty'>{summary}</p>
 		</section>
 	);
 };

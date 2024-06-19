@@ -35,7 +35,7 @@ const ViewerSummaryServer = async ({ userId, resumeId }: ViewerSummaryServerProp
 	return (
 		<ViewerSummary
 			title={response.right.title}
-			summary={response.right.title}
+			summary={response.right.summary}
 		/>
 	);
 };

@@ -51,7 +51,9 @@ export class DefaultCreateExperienceHandler implements CreateExperienceHandler {
 
 			const response = { status: 201, message: 'Experience created successfully' } satisfies CommonPostResponse;
 
-			return new Response(response.message, response);
+			return new Response(JSON.stringify(response.message), {
+				status: response.status,
+			});
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().handleError(error);
 		}

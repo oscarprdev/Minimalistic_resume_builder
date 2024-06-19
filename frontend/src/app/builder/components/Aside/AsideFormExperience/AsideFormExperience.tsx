@@ -7,51 +7,34 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { IconLoader2 } from '@tabler/icons-react';
-import { Experience } from '@/types';
 import AsideFormExperienceJobList from './AsideFormExperienceJobList';
+import { ResumeExperienceDefaultValues } from '@/store/useResumeExperienceStore';
+import { Either } from '@/lib/either';
+import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { asideFormExperienceSchema } from './schema-validations';
 
 interface AsideFormExperienceProps {
-	resumeId: string | null;
+	handleSubmit: (values: z.infer<typeof asideFormExperienceSchema>) => Promise<Either<string, string>>;
+	defaultValues: ResumeExperienceDefaultValues;
 }
 
-export type ExperienceFormState = Omit<Experience, 'id'>;
+export type ExperienceFormState = ResumeExperienceDefaultValues;
 
-const jobFormSchema = z.object({
-	id: z.string(),
-	title: z.string(),
-	company: z.string(),
-	startDate: z.string(),
-	endDate: z.string(),
-	description: z.string(),
-});
+const AsideFormExperience = ({ defaultValues, handleSubmit }: AsideFormExperienceProps) => {
+	const router = useRouter();
+	const params = useSearchParams();
+	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-const formSchema = z.object({
-	title: z.string(),
-	jobList: z.array(jobFormSchema).refine(
-		(values) => {
-			const newItem = values[values.length - 1];
-
-			values.pop();
-
-			const isAlreadyStored = values.some((val) => val.title === newItem.title);
-
-			return !isAlreadyStored;
-		},
-		{ message: 'Job title must be unique' }
-	),
-});
-
-const AsideFormExperience = ({ resumeId }: AsideFormExperienceProps) => {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
-		defaultValues: {
-			title: '',
-			jobList: [],
-		},
+	const form = useForm<z.infer<typeof asideFormExperienceSchema>>({
+		resolver: zodResolver(asideFormExperienceSchema),
+		defaultValues,
 	});
 
-	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		console.log(values);
+	const onSubmit = async (values: z.infer<typeof asideFormExperienceSchema>) => {
+		const response = await handleSubmit(values);
+
+		routerAfterSubmit(response);
 	};
 
 	return (

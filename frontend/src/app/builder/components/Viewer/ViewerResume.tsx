@@ -1,5 +1,6 @@
 'use server';
 
+import ViewerExperienceController from './ViewerExperience/ViewerExperienceController';
 import ViewerSummaryController from './ViewerSummary/ViewerSummaryController';
 
 interface ViewerResumeProps {
@@ -10,6 +11,7 @@ const ViewerResume = async ({ resumeId }: ViewerResumeProps) => {
 	return (
 		<article className='w-[650px] bg-white shadow-sm h-[800px]'>
 			<ViewerSummaryController resumeId={resumeId} />
+			<ViewerExperienceController resumeId={resumeId} />
 		</article>
 	);
 };
