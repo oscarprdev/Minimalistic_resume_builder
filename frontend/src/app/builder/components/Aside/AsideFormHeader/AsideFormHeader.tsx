@@ -94,7 +94,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-6'>
+				className='space-y-6 animate-fade-up'>
 				<AsideFormHeaderImage
 					form={form}
 					updateFormImageValue={updateFormImageValue}

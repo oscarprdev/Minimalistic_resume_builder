@@ -16,12 +16,10 @@ const Aside = ({ sectionSelected, resumeId }: AsideProps) => {
 				sectionSelected={sectionSelected}
 				resumeId={resumeId}
 			/>
-			{sectionSelected && (
-				<AsideForm
-					sectionSelected={sectionSelected}
-					resumeId={resumeId}
-				/>
-			)}
+			<AsideForm
+				sectionSelected={sectionSelected}
+				resumeId={resumeId}
+			/>
 		</aside>
 	);
 };

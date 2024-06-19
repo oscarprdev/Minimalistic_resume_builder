@@ -44,7 +44,7 @@ const AsideFormInfo = ({ defaultValues, handleSubmit }: AsideFormInfoProps) => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-6'>
+				className='space-y-6 animate-fade-up'>
 				<FormField
 					control={form.control}
 					name='title'

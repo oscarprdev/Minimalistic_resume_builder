@@ -23,7 +23,11 @@ const AsideFormHeaderLinks = ({ form }: AsideFormHeaderLinksProps) => {
 			{fields.map((_, index) => (
 				<div
 					key={_.id}
-					className='flex flex-col items-center w-full space-y-4'>
+					className='relative flex flex-col items-center w-full space-y-4 animate-fade-up'>
+					<span
+						aria-hidden
+						className='absolute top-1 bg-gray-100 w-52 h-[0.1rem]'
+					/>
 					<FormField
 						control={form.control}
 						name={`links.${index}`}
