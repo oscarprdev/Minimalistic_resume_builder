@@ -1,5 +1,6 @@
 'use server';
 
+import ViewerEducationController from './ViewerEducation/ViewerEducationController';
 import ViewerExperienceController from './ViewerExperience/ViewerExperienceController';
 import ViewerHeaderController from './ViewerHeader/ViewerHeaderController';
 import ViewerSummaryController from './ViewerSummary/ViewerSummaryController';
@@ -14,6 +15,7 @@ const ViewerResume = async ({ resumeId }: ViewerResumeProps) => {
 			<ViewerHeaderController resumeId={resumeId} />
 			<ViewerSummaryController resumeId={resumeId} />
 			<ViewerExperienceController resumeId={resumeId} />
+			<ViewerEducationController resumeId={resumeId} />
 		</article>
 	);
 };
