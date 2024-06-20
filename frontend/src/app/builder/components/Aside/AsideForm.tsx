@@ -2,10 +2,11 @@
 
 import { cn } from '@/lib/utils';
 import { SECTION_CONTROL, SectionControl } from '../_utils/sections';
-import AsideFormexperienceController from './AsideFormExperience/AsideFormExperienceController';
+import AsideFormExperienceController from './AsideFormExperience/AsideFormExperienceController';
 import AsideFormHeaderController from './AsideFormHeader/AsideFormHeaderController';
 import AsideFormInfoController from './AsideFormInfo/AsideFormInfoController';
 import AsideFormSummaryController from './AsideFormSummary/AsideFormSummaryController';
+import AsideFormEducationController from './AsideFormEducation/AsideFormEducationController';
 
 interface AsideFormProps {
 	sectionSelected: SectionControl | null;
@@ -22,7 +23,9 @@ const AsideForm = async ({ sectionSelected, resumeId }: AsideFormProps) => {
 			case SECTION_CONTROL.SUMMARY:
 				return <AsideFormSummaryController resumeId={resumeId} />;
 			case SECTION_CONTROL.EXPERIENCE:
-				return <AsideFormexperienceController resumeId={resumeId} />;
+				return <AsideFormExperienceController resumeId={resumeId} />;
+			case SECTION_CONTROL.EDUCATION:
+				return <AsideFormEducationController resumeId={resumeId} />;
 			default:
 				break;
 		}

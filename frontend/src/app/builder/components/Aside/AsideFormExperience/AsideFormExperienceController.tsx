@@ -2,11 +2,11 @@ import { useUserLogged } from '@/hooks/use-user-logged';
 import AsideFormExperienceClient from './AsideFormExperienceClient';
 import AsideFormExperienceServer from './AsideFormExperienceServer';
 
-interface AsideFormexperienceControllerProps {
+interface AsideFormExperienceControllerProps {
 	resumeId: string | null;
 }
 
-const AsideFormexperienceController = async ({ resumeId }: AsideFormexperienceControllerProps) => {
+const AsideFormExperienceController = async ({ resumeId }: AsideFormExperienceControllerProps) => {
 	const user = await useUserLogged();
 
 	if (!user?.id) {
@@ -21,4 +21,4 @@ const AsideFormexperienceController = async ({ resumeId }: AsideFormexperienceCo
 	);
 };
 
-export default AsideFormexperienceController;
+export default AsideFormExperienceController;

@@ -2,12 +2,12 @@
 
 import { API_URL } from '@/constants';
 import { Either } from '@/lib/either';
-import { Job } from '@/types';
+import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { revalidatePath } from 'next/cache';
 
 interface UpdateResumeExperienceActionPayload {
 	title: string;
-	jobList: Job[] | Omit<Job, 'id'>[];
+	jobList: OptionalJob[];
 }
 
 export interface UpdateResumeExperienceAction {
