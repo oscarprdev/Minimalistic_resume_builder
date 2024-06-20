@@ -36,7 +36,10 @@ const AsideForm = async ({ sectionSelected, resumeId }: AsideFormProps) => {
 
 	return (
 		<section
-			className={cn('bg-white w-1/4 min-w-[400px] p-5 overflow-scroll', sectionSelected ? 'animate-fade-right' : 'animate-fade-left')}>
+			className={cn(
+				'z-5 bg-white w-1/4 min-w-[400px] p-5 overflow-scroll border border-transparent border-r-gray-200 shadow-md',
+				sectionSelected ? 'animate-fade-right' : 'animate-fade-left'
+			)}>
 			{renderSelectedForm(sectionSelected)}
 		</section>
 	);
