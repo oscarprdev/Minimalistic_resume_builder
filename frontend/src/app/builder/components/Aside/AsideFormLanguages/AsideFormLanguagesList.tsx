@@ -87,7 +87,6 @@ const AsideFormLanguagesList = ({ form }: AsideFormLanguagesListProps) => {
 								<FormControl>
 									<Input
 										placeholder='Link'
-										required
 										{...field}
 										{...form.register(`languageList.${index}.certificateLink`)}
 									/>
