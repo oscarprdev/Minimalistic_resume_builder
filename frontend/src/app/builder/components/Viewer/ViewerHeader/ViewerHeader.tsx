@@ -42,16 +42,16 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 				<ul className='flex flex-col space-y-2 items-start'>
 					<li className='flex items-center space-x-1'>
 						<ViewerHeaderIcons value='location' />
-						<p className='text-sm text-gray-700'>{location}</p>
+						<p className='text-xs text-gray-700'>{location}</p>
 					</li>
 					<div className='flex items-center space-x-2 '>
 						<li className='flex items-center space-x-1'>
 							<ViewerHeaderIcons value='phone' />
-							<p className='text-sm text-gray-700'>{phone}</p>
+							<p className='text-xs text-gray-700'>{phone}</p>
 						</li>
 						<li className='flex items-center space-x-1'>
 							<ViewerHeaderIcons value='email' />
-							<p className='text-sm text-gray-700'>{email}</p>
+							<p className='text-xs text-gray-700'>{email}</p>
 						</li>
 					</div>
 				</ul>
@@ -59,7 +59,7 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 					links.length > 0 &&
 					links.map((link) => (
 						<ul className='flex flex-col space-y-2'>
-							<li className='text-sm text-gray-700 flex items-center space-x-2'>
+							<li className='text-xs text-gray-700 flex items-center space-x-2'>
 								<ViewerHeaderLinksIcons value={link} />
 								<Link
 									href={link}

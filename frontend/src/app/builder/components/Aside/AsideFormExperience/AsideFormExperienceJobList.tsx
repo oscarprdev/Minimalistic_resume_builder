@@ -8,6 +8,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { Textarea } from '@/components/ui/textarea';
 import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { useMemo } from 'react';
+import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
 
 interface AsideFormExperienceJobListProps {
 	form: UseFormReturn<ExperienceFormState, any, undefined>;
@@ -16,11 +17,11 @@ interface AsideFormExperienceJobListProps {
 const JOB_LIST_NAME = 'jobList';
 
 const DEFAULT_JOB: OptionalJob = {
-	title: 'New job',
-	company: 'Company',
-	startDate: '2017-03-29',
-	endDate: '2018-05-02',
-	description: 'Your job description.',
+	title: '',
+	company: '',
+	startDate: '',
+	endDate: '',
+	description: '',
 };
 
 const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) => {
@@ -31,12 +32,15 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 
 	const formJobListFieldsError = useMemo(() => form.formState.errors.jobList, [form.formState.errors.jobList]);
 
+	const { onRemoveListElement, asignRef } = useFieldArrayAnimations(remove);
+
 	return (
 		<section className='flex flex-col gap-5 w-full'>
 			{fields.map((_, index) => (
 				<article
-					key={_.title}
-					className='relative flex flex-col items-center w-full space-y-4'>
+					key={_.id}
+					ref={(el) => asignRef(el, _.id)}
+					className='relative flex flex-col items-center w-full space-y-4 animate-fade-up'>
 					<span
 						aria-hidden
 						className='absolute top-1 bg-gray-100 w-52 h-[0.1rem]'
@@ -49,6 +53,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 								<FormLabel className='text-sm text-gray-500'>Job title</FormLabel>
 								<FormControl>
 									<Input
+										placeholder='Your job title'
 										{...field}
 										{...form.register(`jobList.${index}.title`)}
 									/>
@@ -66,6 +71,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 									<FormLabel className='text-sm text-gray-500'>Start date</FormLabel>
 									<FormControl>
 										<Input
+											placeholder='Start date'
 											{...field}
 											{...form.register(`jobList.${index}.startDate`)}
 										/>
@@ -82,6 +88,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 									<FormLabel className='text-sm text-gray-500'>End date</FormLabel>
 									<FormControl>
 										<Input
+											placeholder='End date'
 											{...field}
 											{...form.register(`jobList.${index}.endDate`)}
 										/>
@@ -99,6 +106,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 								<FormLabel className='text-sm text-gray-500'>Company</FormLabel>
 								<FormControl>
 									<Input
+										placeholder='Company name'
 										{...field}
 										{...form.register(`jobList.${index}.company`)}
 									/>
@@ -115,12 +123,13 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 								<FormLabel className='text-sm text-gray-500'>Job Description</FormLabel>
 								<FormControl>
 									<Textarea
-										{...field}
 										className='min-h-[80px]'
+										placeholder='Job description'
+										{...field}
 										{...form.register(`jobList.${index}.description`)}
 									/>
 								</FormControl>
-								<FormMessage className='text-sm' />
+								<FormMessage className='text-xs' />
 							</FormItem>
 						)}
 					/>
@@ -128,12 +137,12 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 						type='button'
 						className='w-full'
 						variant={'clean'}
-						onClick={() => remove(index)}>
+						onClick={() => onRemoveListElement(index, _.id)}>
 						Remove job
 					</Button>
 				</article>
 			))}
-			{formJobListFieldsError && <FormMessage>{formJobListFieldsError.root?.message}</FormMessage>}
+			{formJobListFieldsError && <FormMessage className='text-xs'>{formJobListFieldsError.root?.message}</FormMessage>}
 			<Button
 				type='button'
 				variant={'outline'}
