@@ -36,7 +36,7 @@ img {
 }
 
 ::-webkit-scrollbar {
-	width: 15px;
+	width: 3px;
 	height: 5px;
 	overflow: visible;
 	background: transparent;
@@ -49,13 +49,19 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-	border-left: 12px solid white;
-	border-radius: 0;
+	border-radius: 10px;
 	background: transparent;
 }
 
 section[aria-label='viewer']::-webkit-scrollbar-thumb {
-	border-left: 12px solid rgb(243 244 246);
+	width: 3px;
+	border-radius: 10px;
+	background: transparent;
+	margin-right: 2px;
+}
+
+section[aria-label='viewer']:hover::-webkit-scrollbar-thumb {
+	background: var(--purple-200);
 }
 
 section:hover::-webkit-scrollbar-thumb {
@@ -63,7 +69,7 @@ section:hover::-webkit-scrollbar-thumb {
 }
 
 textarea::-webkit-scrollbar {
-	width: 15px;
+	width: 3px;
 	background-color: transparent;
 }
 
