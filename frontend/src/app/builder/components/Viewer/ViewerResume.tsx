@@ -4,6 +4,7 @@ import ViewerEducationController from './ViewerEducation/ViewerEducationControll
 import ViewerExperienceController from './ViewerExperience/ViewerExperienceController';
 import ViewerHeaderController from './ViewerHeader/ViewerHeaderController';
 import ViewerLanguagesController from './ViewerLanguages/ViewerLanguagesController';
+import ViewerSkillsController from './ViewerSkills/ViewerSkillsController';
 import ViewerSummaryController from './ViewerSummary/ViewerSummaryController';
 
 interface ViewerResumeProps {
@@ -18,6 +19,7 @@ const ViewerResume = async ({ resumeId }: ViewerResumeProps) => {
 			<ViewerExperienceController resumeId={resumeId} />
 			<ViewerEducationController resumeId={resumeId} />
 			<ViewerLanguagesController resumeId={resumeId} />
+			<ViewerSkillsController resumeId={resumeId} />
 		</article>
 	);
 };
