@@ -8,6 +8,7 @@ import AsideFormInfoController from './AsideFormInfo/AsideFormInfoController';
 import AsideFormSummaryController from './AsideFormSummary/AsideFormSummaryController';
 import AsideFormEducationController from './AsideFormEducation/AsideFormEducationController';
 import AsideFormLanguagesController from './AsideFormLanguages/AsideFormLanguagesController';
+import AsideFormSkillsController from './AsideFormSkills/AsideFormSkillsController';
 
 interface AsideFormProps {
 	sectionSelected: SectionControl | null;
@@ -29,6 +30,8 @@ const AsideForm = async ({ sectionSelected, resumeId }: AsideFormProps) => {
 				return <AsideFormEducationController resumeId={resumeId} />;
 			case SECTION_CONTROL.LANGUAGES:
 				return <AsideFormLanguagesController resumeId={resumeId} />;
+			case SECTION_CONTROL.SKILLS:
+				return <AsideFormSkillsController resumeId={resumeId} />;
 			default:
 				break;
 		}
