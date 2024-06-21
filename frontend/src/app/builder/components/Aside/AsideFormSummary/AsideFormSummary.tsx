@@ -57,6 +57,7 @@ const AsideFormSummary = ({ defaultValues, handleSubmit }: AsideFormSummaryProps
 							<FormLabel className='text-sm text-gray-500'>Summary title</FormLabel>
 							<FormControl>
 								<Input
+									required
 									placeholder='Title'
 									{...field}
 								/>
@@ -75,6 +76,7 @@ const AsideFormSummary = ({ defaultValues, handleSubmit }: AsideFormSummaryProps
 								<Textarea
 									placeholder='Description'
 									className='min-h-[150px]'
+									required
 									{...field}
 								/>
 							</FormControl>

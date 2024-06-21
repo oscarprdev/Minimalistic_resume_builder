@@ -49,6 +49,7 @@ const AsideFormLanguages = ({ defaultValues, handleSubmit }: AsideFormLanguagesP
 							<FormLabel className='text-sm text-gray-500'>Languages title</FormLabel>
 							<FormControl>
 								<Input
+									required
 									placeholder='Title'
 									{...field}
 								/>

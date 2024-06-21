@@ -52,6 +52,7 @@ const AsideFormExperience = ({ defaultValues, handleSubmit }: AsideFormExperienc
 							<FormControl>
 								<Input
 									placeholder='Title'
+									required
 									{...field}
 								/>
 							</FormControl>

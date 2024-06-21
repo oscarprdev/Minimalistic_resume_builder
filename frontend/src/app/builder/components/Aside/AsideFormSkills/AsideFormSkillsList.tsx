@@ -50,6 +50,7 @@ const AsideFormSkillsList = ({ form }: AsideFormSkillsListProps) => {
 								<FormControl>
 									<Input
 										placeholder='Your skill'
+										required
 										{...field}
 										{...form.register(`skillList.${index}.name`)}
 									/>

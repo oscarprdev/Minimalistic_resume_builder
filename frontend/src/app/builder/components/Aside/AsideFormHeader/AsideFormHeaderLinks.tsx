@@ -44,6 +44,7 @@ const AsideFormHeaderLinks = ({ form }: AsideFormHeaderLinksProps) => {
 										placeholder='Link'
 										{...field}
 										{...form.register(`links.${index}`)}
+										required
 									/>
 								</FormControl>
 								<FormMessage className='text-xs' />

@@ -54,6 +54,7 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 								<FormControl>
 									<Input
 										placeholder='Your education title'
+										required
 										{...field}
 										{...form.register(`educationList.${index}.title`)}
 									/>
@@ -72,6 +73,7 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 									<FormControl>
 										<Input
 											placeholder='Start date'
+											required
 											{...field}
 											{...form.register(`educationList.${index}.startDate`)}
 										/>
@@ -89,6 +91,7 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 									<FormControl>
 										<Input
 											placeholder='End date'
+											required
 											{...field}
 											{...form.register(`educationList.${index}.endDate`)}
 										/>
@@ -107,6 +110,7 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 								<FormControl>
 									<Input
 										placeholder='School name'
+										required
 										{...field}
 										{...form.register(`educationList.${index}.career`)}
 									/>
@@ -125,6 +129,7 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 									<Textarea
 										className='min-h-[80px]'
 										placeholder='Description'
+										required
 										{...field}
 										{...form.register(`educationList.${index}.description`)}
 									/>

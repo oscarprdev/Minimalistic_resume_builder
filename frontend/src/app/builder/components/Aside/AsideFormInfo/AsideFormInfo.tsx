@@ -1,12 +1,10 @@
 'use client';
 
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { IconLoader2 } from '@tabler/icons-react';
 import { ResumeInfoDefaultValues } from '@/store/useResumeInfoStore';
 import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
@@ -53,6 +51,7 @@ const AsideFormInfo = ({ defaultValues, handleSubmit }: AsideFormInfoProps) => {
 							<FormLabel className='text-sm text-gray-500'>Resume title</FormLabel>
 							<FormControl>
 								<Input
+									required
 									placeholder='Title'
 									{...field}
 								/>

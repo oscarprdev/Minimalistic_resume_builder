@@ -50,6 +50,7 @@ const AsideFormEducation = ({ defaultValues, handleSubmit }: AsideFormEducationP
 							<FormControl>
 								<Input
 									placeholder='Title'
+									required
 									{...field}
 								/>
 							</FormControl>

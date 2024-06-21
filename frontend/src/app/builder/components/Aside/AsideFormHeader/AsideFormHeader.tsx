@@ -1,7 +1,6 @@
 'use client';
 
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -109,6 +108,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 							<FormControl>
 								<Input
 									placeholder='Name'
+									required
 									{...field}
 								/>
 							</FormControl>
@@ -126,6 +126,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 								<Textarea
 									placeholder='Job'
 									className='min-h-[80px]'
+									required
 									{...field}
 								/>
 							</FormControl>
@@ -142,6 +143,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 							<FormControl>
 								<Input
 									placeholder='Location'
+									required
 									{...field}
 								/>
 							</FormControl>
@@ -158,6 +160,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 							<FormControl>
 								<Input
 									placeholder='Phone'
+									required
 									{...field}
 								/>
 							</FormControl>

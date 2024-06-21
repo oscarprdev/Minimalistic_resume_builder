@@ -50,6 +50,7 @@ const AsideFormSkills = ({ defaultValues, handleSubmit }: AsideFormSkillsProps) 
 							<FormControl>
 								<Input
 									placeholder='Title'
+									required
 									{...field}
 								/>
 							</FormControl>

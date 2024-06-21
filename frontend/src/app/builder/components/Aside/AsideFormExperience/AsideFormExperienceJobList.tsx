@@ -54,6 +54,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 								<FormControl>
 									<Input
 										placeholder='Your job title'
+										required
 										{...field}
 										{...form.register(`jobList.${index}.title`)}
 									/>
@@ -72,6 +73,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 									<FormControl>
 										<Input
 											placeholder='Start date'
+											required
 											{...field}
 											{...form.register(`jobList.${index}.startDate`)}
 										/>
@@ -89,6 +91,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 									<FormControl>
 										<Input
 											placeholder='End date'
+											required
 											{...field}
 											{...form.register(`jobList.${index}.endDate`)}
 										/>
@@ -107,6 +110,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 								<FormControl>
 									<Input
 										placeholder='Company name'
+										required
 										{...field}
 										{...form.register(`jobList.${index}.company`)}
 									/>
@@ -125,6 +129,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 									<Textarea
 										className='min-h-[80px]'
 										placeholder='Job description'
+										required
 										{...field}
 										{...form.register(`jobList.${index}.description`)}
 									/>
