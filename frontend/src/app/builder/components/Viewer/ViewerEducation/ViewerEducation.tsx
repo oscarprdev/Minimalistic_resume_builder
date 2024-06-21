@@ -3,6 +3,7 @@
 import { useRouterError } from '@/hooks/use-router-error';
 import { OptionalSchool } from '@/store/useResumeEducationStore';
 import { useRouter } from 'next/navigation';
+import ViewerResumeContainer from '../ViewerResumeContainer';
 
 interface ViewerEducationProps {
 	title: string;
@@ -15,7 +16,7 @@ const ViewerEducation = ({ title, educationList, error }: ViewerEducationProps) 
 	useRouterError(router, error);
 
 	return (
-		<section className='p-5'>
+		<ViewerResumeContainer>
 			<h3 className='font-bold text-lg'>{title}</h3>
 			{educationList.length > 0 ? (
 				<div className='flex flex-col gap-4 mt-2'>
@@ -39,7 +40,7 @@ const ViewerEducation = ({ title, educationList, error }: ViewerEducationProps) 
 			) : (
 				<p>No education</p>
 			)}
-		</section>
+		</ViewerResumeContainer>
 	);
 };
 

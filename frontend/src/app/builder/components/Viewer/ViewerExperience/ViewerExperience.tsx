@@ -3,6 +3,7 @@
 import { useRouterError } from '@/hooks/use-router-error';
 import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { useRouter } from 'next/navigation';
+import ViewerResumeContainer from '../ViewerResumeContainer';
 
 interface ViewerExperienceProps {
 	title: string;
@@ -15,7 +16,7 @@ const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
 	useRouterError(router, error);
 
 	return (
-		<section className='p-5'>
+		<ViewerResumeContainer>
 			<h3 className='font-bold text-lg'>{title}</h3>
 			{jobList.length > 0 ? (
 				<div className='flex flex-col gap-4 mt-2'>
@@ -39,7 +40,7 @@ const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
 			) : (
 				<p>0 jobs</p>
 			)}
-		</section>
+		</ViewerResumeContainer>
 	);
 };
 

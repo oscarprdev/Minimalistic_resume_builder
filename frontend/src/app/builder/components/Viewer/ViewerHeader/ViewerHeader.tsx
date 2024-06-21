@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import ViewerHeaderIcons from './ViewerHeaderIcons';
 import Image from 'next/image';
 import { DEFAULT_IMAGE } from '../../Aside/AsideFormHeader/AsideFormHeaderImage';
+import ViewerResumeContainer from '../ViewerResumeContainer';
 
 interface ViewerHeaderProps {
 	name: string;
@@ -24,7 +25,7 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 	useRouterError(router, error);
 
 	return (
-		<section className='relative p-5'>
+		<ViewerResumeContainer>
 			<h3 className='text-2xl'>{name}</h3>
 			<p className='text-lg text-gray-900'>{job}</p>
 			{image && image !== DEFAULT_IMAGE && (
@@ -70,7 +71,7 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 						</ul>
 					))}
 			</div>
-		</section>
+		</ViewerResumeContainer>
 	);
 };
 
