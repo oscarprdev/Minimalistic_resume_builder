@@ -41,7 +41,8 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
                 Job.company AS "jobCompany", 
                 Job.startDate AS "jobStartDate", 
                 Job.endDate AS "jobEndDate", 
-                Job.description AS "jobDescription"
+                Job.description AS "jobDescription",
+                Job.formatTime AS "formatTime"
             FROM 
                 Experience
             LEFT JOIN 
@@ -63,6 +64,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 					startDate: r.jobStartDate,
 					endDate: r.jobEndDate,
 					description: r.jobDescription,
+					formatTime: r.formatTime,
 				};
 			});
 
@@ -88,7 +90,8 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				Job.company, 
 				Job.startDate, 
 				Job.endDate, 
-				Job.description
+				Job.description,
+				Job.formatTime
             FROM 
                 Experience
             LEFT JOIN 
@@ -172,15 +175,15 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				[experienceResumeId, title]
 			);
 
-			for (const { title, company, startDate, endDate, description } of jobList) {
+			for (const { title, company, startDate, endDate, description, formatTime } of jobList) {
 				const jobId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO Job 
-                        (id, title, company, startDate, endDate, description) 
-                        VALUES ($1, $2, $3, $4, $5, $6)
+                        (id, title, company, startDate, endDate, description, formatTime) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7)
                     ;`,
-					[jobId, title, company, startDate, endDate, description]
+					[jobId, title, company, startDate, endDate, description, formatTime]
 				);
 
 				await this.database.query(
@@ -220,29 +223,30 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				[experienceResumeId, title]
 			);
 
-			for (const { id, title, company, startDate, endDate, description } of jobList) {
+			for (const { id, title, company, startDate, endDate, description, formatTime } of jobList) {
 				await this.database.query(
 					`UPDATE Job
                         SET title = $2, 
                         company = $3, 
                         startDate = $4, 
                         endDate = $5, 
-                        description = $6 
+                        description = $6,
+						formatTime = $7
                     WHERE id = $1
 				    ;`,
-					[id, title, company, startDate, endDate, description]
+					[id, title, company, startDate, endDate, description, formatTime]
 				);
 			}
 
-			for (const { title, company, startDate, endDate, description } of newJobs) {
+			for (const { title, company, startDate, endDate, description, formatTime } of newJobs) {
 				const jobId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO Job 
-                        (id, title, company, startDate, endDate, description) 
-                        VALUES ($1, $2, $3, $4, $5, $6)
+                        (id, title, company, startDate, endDate, description, formatTime) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7)
                     ;`,
-					[jobId, title, company, startDate, endDate, description]
+					[jobId, title, company, startDate, endDate, description, formatTime]
 				);
 
 				await this.database.query(

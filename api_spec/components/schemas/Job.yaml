@@ -6,6 +6,7 @@ required:
   - startDate
   - endDate
   - description
+  - formatTime
 properties:
   id:
     type: string
@@ -33,6 +34,10 @@ properties:
     type: string
     description: A brief description of the job responsibilities and achievements.
     example: Developed web applications using React and Node.js.
+  formatTime:
+    type: string
+    description: Format time config.
+    example: year,currently.
 example:
   title: Software Engineer
   company: Acme Corporation

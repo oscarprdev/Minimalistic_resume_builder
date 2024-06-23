@@ -34,7 +34,6 @@ const AsideFormExperience = ({ defaultValues, handleSubmit }: AsideFormExperienc
 
 	const onSubmit = async (values: z.infer<typeof asideFormExperienceSchema>) => {
 		const response = await handleSubmit(values);
-
 		routerAfterSubmit(response);
 	};
 

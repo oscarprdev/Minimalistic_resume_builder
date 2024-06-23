@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { OptionalSchool } from '@/store/useResumeEducationStore';
 import { useMemo } from 'react';
 import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
+import FormDates from '../shared/components/FormDates';
 
 interface AsideFormEducationListProps {
 	form: UseFormReturn<EducationFormState, any, undefined>;
@@ -22,6 +23,7 @@ const DEFAULT_EDUCATION: OptionalSchool = {
 	startDate: '',
 	endDate: '',
 	description: '',
+	formatTime: '',
 };
 
 const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
@@ -63,44 +65,11 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 							</FormItem>
 						)}
 					/>
-					<div className='flex gap-1 items-start w-full'>
-						<FormField
-							control={form.control}
-							name={`educationList.${index}.startDate`}
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel className='text-sm text-gray-500'>Start date</FormLabel>
-									<FormControl>
-										<Input
-											placeholder='Start date'
-											required
-											{...field}
-											{...form.register(`educationList.${index}.startDate`)}
-										/>
-									</FormControl>
-									<FormMessage className='text-xs' />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name={`educationList.${index}.endDate`}
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel className='text-sm text-gray-500'>End date</FormLabel>
-									<FormControl>
-										<Input
-											placeholder='End date'
-											required
-											{...field}
-											{...form.register(`educationList.${index}.endDate`)}
-										/>
-									</FormControl>
-									<FormMessage className='text-xs' />
-								</FormItem>
-							)}
-						/>
-					</div>
+					<FormDates
+						form={form}
+						index={index}
+						label='educationList'
+					/>
 					<FormField
 						control={form.control}
 						name={`educationList.${index}.career`}

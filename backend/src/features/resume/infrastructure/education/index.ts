@@ -41,7 +41,8 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
                 School.career AS "schoolCareer", 
                 School.startDate AS "schoolStartDate", 
                 School.endDate AS "schoolEndDate", 
-                School.description AS "schoolDescription"
+                School.description AS "schoolDescription",
+                School.formatTime AS "schoolFormatTime"
             FROM 
                 Education
             LEFT JOIN 
@@ -67,6 +68,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 					startDate: r.schoolStartDate,
 					endDate: r.schoolEndDate,
 					description: r.schoolDescription,
+					formatTime: r.schoolFormatTime,
 				};
 			});
 
@@ -93,7 +95,8 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				School.career, 
 				School.startDate, 
 				School.endDate, 
-				School.description
+				School.description,
+				School.formatTime
             FROM 
                 Education
             LEFT JOIN 
@@ -177,15 +180,15 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title]
 			);
 
-			for (const { title, career, startDate, endDate, description } of educationList) {
+			for (const { title, career, startDate, endDate, description, formatTime } of educationList) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, startDate, endDate, description) 
-                        VALUES ($1, $2, $3, $4, $5, $6)
+                        (id, title, career, startDate, endDate, description, formatTime) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7)
                     ;`,
-					[schoolId, title, career, startDate, endDate, description]
+					[schoolId, title, career, startDate, endDate, description, formatTime]
 				);
 
 				await this.database.query(
@@ -225,29 +228,30 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title]
 			);
 
-			for (const { id, title, career, startDate, endDate, description } of educationList) {
+			for (const { id, title, career, startDate, endDate, description, formatTime } of educationList) {
 				await this.database.query(
 					`UPDATE School
                         SET title = $2, 
                         career = $3, 
                         startDate = $4, 
                         endDate = $5, 
-                        description = $6 
+                        description = $6,
+                        formatTime = $7
                     WHERE id = $1
 				    ;`,
-					[id, title, career, startDate, endDate, description]
+					[id, title, career, startDate, endDate, description, formatTime]
 				);
 			}
 
-			for (const { title, career, startDate, endDate, description } of newSchools) {
+			for (const { title, career, startDate, endDate, description, formatTime } of newSchools) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, startDate, endDate, description) 
-                        VALUES ($1, $2, $3, $4, $5, $6)
+                        (id, title, career, startDate, endDate, description, formatTime) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7)
                     ;`,
-					[schoolId, title, career, startDate, endDate, description]
+					[schoolId, title, career, startDate, endDate, description, formatTime]
 				);
 
 				await this.database.query(

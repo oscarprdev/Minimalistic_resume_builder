@@ -12,6 +12,7 @@ const config = {
 			colors: {
 				purple_100: 'var(--purple-100)',
 				purple_200: 'var(--purple-200)',
+				purple_light_200: 'var(--purple-light-100)',
 			},
 			keyframes: {
 				'accordion-down': {

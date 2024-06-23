@@ -38,6 +38,7 @@ export interface JobDb {
 	startDate: string;
 	endDate: string;
 	description: string;
+	formatTime: string;
 }
 
 export interface ExperienceDb {
@@ -53,6 +54,7 @@ export interface SchoolDb {
 	startDate: string;
 	endDate: string;
 	description: string;
+	formatTime: string;
 }
 
 export interface EducationDb {

@@ -27,5 +27,9 @@ export type Job = {
      * A brief description of the job responsibilities and achievements.
      */
     description: string;
+    /**
+     * Format time config.
+     */
+    formatTime: string;
 };
 

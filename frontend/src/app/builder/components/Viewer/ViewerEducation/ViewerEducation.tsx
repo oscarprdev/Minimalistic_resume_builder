@@ -40,6 +40,7 @@ const ViewerEducation = ({ title, educationList, error }: ViewerEducationProps) 
 								label={school.title}
 								startDate={school.startDate}
 								endDate={school.endDate}
+								formatTime={school.formatTime}
 							/>
 							<p className='text-xs text-gray-600 pl-6 '>{school.description}</p>
 						</div>

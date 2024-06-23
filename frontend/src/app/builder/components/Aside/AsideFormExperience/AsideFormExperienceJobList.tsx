@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { useMemo } from 'react';
 import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
+import FormDates from '../shared/components/FormDates';
 
 interface AsideFormExperienceJobListProps {
 	form: UseFormReturn<ExperienceFormState, any, undefined>;
@@ -22,6 +23,7 @@ const DEFAULT_JOB: OptionalJob = {
 	startDate: '',
 	endDate: '',
 	description: '',
+	formatTime: '',
 };
 
 const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) => {
@@ -63,44 +65,11 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 							</FormItem>
 						)}
 					/>
-					<div className='flex gap-1 items-start w-full'>
-						<FormField
-							control={form.control}
-							name={`jobList.${index}.startDate`}
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel className='text-sm text-gray-500'>Start date</FormLabel>
-									<FormControl>
-										<Input
-											placeholder='Start date'
-											required
-											{...field}
-											{...form.register(`jobList.${index}.startDate`)}
-										/>
-									</FormControl>
-									<FormMessage className='text-xs' />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name={`jobList.${index}.endDate`}
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel className='text-sm text-gray-500'>End date</FormLabel>
-									<FormControl>
-										<Input
-											placeholder='End date'
-											required
-											{...field}
-											{...form.register(`jobList.${index}.endDate`)}
-										/>
-									</FormControl>
-									<FormMessage className='text-xs' />
-								</FormItem>
-							)}
-						/>
-					</div>
+					<FormDates
+						form={form}
+						index={index}
+						label='jobList'
+					/>
 					<FormField
 						control={form.control}
 						name={`jobList.${index}.company`}

@@ -6,6 +6,7 @@ required:
   - startDate
   - endDate
   - description
+  - formatTime
 properties:
   id:
     type: string
@@ -33,6 +34,10 @@ properties:
     type: string
     description: A brief description of the education, coursework, or achievements.
     example: Graduated with a Bachelor's degree in Computer Science.
+  formatTime:
+    type: string
+    description: Format time config.
+    example: year,currently.
 example:
   title: University of Example
   career: Software engineering

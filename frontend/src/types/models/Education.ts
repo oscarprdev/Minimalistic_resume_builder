@@ -39,6 +39,10 @@ export type Education = {
          * A brief description of the education, coursework, or achievements.
          */
         description: string;
+        /**
+         * Format time config.
+         */
+        formatTime: string;
     }>;
 };
 

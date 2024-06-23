@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+	--purple-light-100: #ecdfff;
 	--purple-100: #a673ef;
 	--purple-200: #8247e5;
 }
