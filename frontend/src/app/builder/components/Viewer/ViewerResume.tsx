@@ -15,13 +15,15 @@ const ViewerResume = async ({ resumeId }: ViewerResumeProps) => {
 	return (
 		<article
 			id='resume-viewer'
-			className='w-[650px] bg-white shadow-sm h-fit mb-[100px] p-5'>
+			className='w-[800px] bg-white shadow-sm h-fit mb-[100px] p-5'>
 			<ViewerHeaderController resumeId={resumeId} />
 			<ViewerSummaryController resumeId={resumeId} />
 			<ViewerExperienceController resumeId={resumeId} />
 			<ViewerEducationController resumeId={resumeId} />
-			<ViewerLanguagesController resumeId={resumeId} />
-			<ViewerSkillsController resumeId={resumeId} />
+			<div className='flex flex-wrap gap-5'>
+				<ViewerLanguagesController resumeId={resumeId} />
+				<ViewerSkillsController resumeId={resumeId} />
+			</div>
 		</article>
 	);
 };

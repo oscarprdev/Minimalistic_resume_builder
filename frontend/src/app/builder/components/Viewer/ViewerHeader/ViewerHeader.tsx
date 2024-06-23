@@ -27,17 +27,12 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 	const router = useRouter();
 	useRouterError(router, error);
 
-	const hardcodedURL =
-		'https://pub-0e9cd559fbf645019c4e68f378549dc6.r2.dev/9ec614ac-7984-40d9-983d-158d58e93ee1/5560497d-5b31-4e02-9e55-2e7723c34dc3/312f30d7-bb0e-42e2-b83d-efbd5c9b6215';
-
 	const imageUrl = useMemo(() => image, [image]);
-
-	console.log(imageUrl);
 
 	return (
 		<ViewerResumeContainer>
-			<h3 className='text-2xl'>{name}</h3>
-			<p className='text-lg text-gray-900'>{job}</p>
+			<h3 className='text-2xl font-light uppercase'>{name}</h3>
+			<p className='text-md font-light uppercase'>{job}</p>
 			{image && image !== DEFAULT_IMAGE && (
 				<picture className={cn('w-[100px] h-[100px] absolute top-8 right-8')}>
 					<img
@@ -49,34 +44,36 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 					/>
 				</picture>
 			)}
-			<div className='flex flex-col space-y-2 mt-2'>
-				<ul className='flex flex-col space-y-2 items-start'>
+			<span
+				aria-hidden
+				className='block w-16 h-[1px] bg-gray-800 my-3'
+			/>
+			<div className='flex flex-col space-y-2'>
+				<ul className='flex gap-4 items-center mt-2'>
 					<li className='flex space-x-1 items-center relative'>
 						<ViewerHeaderIcons value='location' />
 						<p
 							id='li-text'
-							className='text-xs text-gray-700'>
+							className='text-xs text-gray-600'>
 							{location}
 						</p>
 					</li>
-					<div className='flex space-x-2 '>
-						<li className='flex space-x-1 items-center relative'>
-							<ViewerHeaderIcons value='phone' />
-							<p
-								id='li-text'
-								className='text-xs text-gray-700'>
-								{phone}
-							</p>
-						</li>
-						<li className='flex space-x-1 items-center relative'>
-							<ViewerHeaderIcons value='email' />
-							<p
-								id='li-text'
-								className='text-xs text-gray-700'>
-								{email}
-							</p>
-						</li>
-					</div>
+					<li className='flex space-x-1 items-center relative'>
+						<ViewerHeaderIcons value='phone' />
+						<p
+							id='li-text'
+							className='text-xs text-gray-600'>
+							{phone}
+						</p>
+					</li>
+					<li className='flex space-x-1 items-center relative'>
+						<ViewerHeaderIcons value='email' />
+						<p
+							id='li-text'
+							className='text-xs text-gray-600'>
+							{email}
+						</p>
+					</li>
 				</ul>
 				{Array.isArray(links) && links.length > 0 && (
 					<ul className='flex flex-col space-y-2'>
@@ -89,7 +86,7 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 									href={link}
 									id='li-text'
 									target='_blank'
-									className='text-xs text-gray-700'>
+									className='text-xs text-gray-600'>
 									{link}
 								</Link>
 							</li>
@@ -97,6 +94,10 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 					</ul>
 				)}
 			</div>
+			<span
+				aria-hidden
+				className='block w-full h-[1px] bg-gray-300 mt-3'
+			/>
 		</ViewerResumeContainer>
 	);
 };

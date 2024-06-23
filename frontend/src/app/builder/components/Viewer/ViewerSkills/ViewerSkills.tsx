@@ -17,10 +17,9 @@ const ViewerSkills = ({ title, skillList, error }: ViewerSkillsProps) => {
 	useRouterError(router, error);
 
 	return (
-		<ViewerResumeContainer>
-			<h3 className='font-bold text-lg'>{title}</h3>
+		<ViewerResumeContainer title={title}>
 			{skillList.length > 0 ? (
-				<ul className='flex gap-2 items-center mt-2 flex-wrap'>
+				<ul className='flex gap-2 items-center flex-wrap'>
 					{skillList.map((skill) => (
 						<li
 							key={skill.name}

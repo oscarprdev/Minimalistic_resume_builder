@@ -8,8 +8,10 @@ const Header = () => {
 	return (
 		<header className='bg-white py-4 px-10 border-b border-b-gray-200 shadow-b-lg flex items-center justify-between'>
 			<Link href={'/'}>Resume builder</Link>
-			<DownloadResumeButton />
-			<AuthButton />
+			<div className='flex items-center gap-2'>
+				<DownloadResumeButton />
+				<AuthButton />
+			</div>
 		</header>
 	);
 };

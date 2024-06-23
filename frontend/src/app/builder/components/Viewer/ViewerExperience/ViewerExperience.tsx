@@ -4,6 +4,9 @@ import { useRouterError } from '@/hooks/use-router-error';
 import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { useRouter } from 'next/navigation';
 import ViewerResumeContainer from '../ViewerResumeContainer';
+import { IconChevronRight } from '@tabler/icons-react';
+import LabelWithDates from '../shared/LabelWithDates';
+import LabelWithIcon from '../shared/LabelWithIcon';
 
 interface ViewerExperienceProps {
 	title: string;
@@ -16,24 +19,30 @@ const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
 	useRouterError(router, error);
 
 	return (
-		<ViewerResumeContainer>
-			<h3 className='font-bold text-lg'>{title}</h3>
+		<ViewerResumeContainer title={title}>
 			{jobList.length > 0 ? (
 				<div className='flex flex-col gap-4 mt-2'>
 					{jobList.map((job) => (
 						<div
 							key={job.title}
-							className='flex flex-col'>
-							<div className='w-full flex items-center justify-between'>
-								<p>{job.company}</p>
-								<div className='flex items-center gap-2'>
-									<p className='text-xs text-gray-600'>{job.startDate}</p>
-									<p className='text-xs text-gray-600'>{'/'}</p>
-									<p className='text-xs text-gray-600'>{job.endDate}</p>
-								</div>
-							</div>
-							<p>{job.title}</p>
-							<p className='text-sm text-gray-700'>{job.description}</p>
+							className='flex flex-col relative'>
+							<LabelWithIcon
+								label={job.title}
+								icon={
+									<IconChevronRight
+										id='svg'
+										size={16}
+										stroke={1}
+									/>
+								}
+							/>
+							<LabelWithDates
+								label={job.company}
+								startDate={job.startDate}
+								endDate={job.endDate}
+							/>
+
+							<p className='text-xs text-gray-600 pl-6 mt-1'>{job.description}</p>
 						</div>
 					))}
 				</div>

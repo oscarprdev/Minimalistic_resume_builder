@@ -15,9 +15,8 @@ const ViewerSummary = ({ title, summary, error }: ViewerSummaryProps) => {
 	useRouterError(router, error);
 
 	return (
-		<ViewerResumeContainer>
-			<h3 className='font-bold text-lg'>{title}</h3>
-			<p className='text-sm text-gray-700 text-pretty'>{summary}</p>
+		<ViewerResumeContainer title={title}>
+			<p className='text-sm text-gray-600 text-pretty'>{summary}</p>
 		</ViewerResumeContainer>
 	);
 };

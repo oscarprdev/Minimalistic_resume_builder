@@ -4,6 +4,9 @@ import { useRouterError } from '@/hooks/use-router-error';
 import { OptionalSchool } from '@/store/useResumeEducationStore';
 import { useRouter } from 'next/navigation';
 import ViewerResumeContainer from '../ViewerResumeContainer';
+import LabelWithDates from '../shared/LabelWithDates';
+import LabelWithIcon from '../shared/LabelWithIcon';
+import { IconChevronRight } from '@tabler/icons-react';
 
 interface ViewerEducationProps {
 	title: string;
@@ -16,24 +19,29 @@ const ViewerEducation = ({ title, educationList, error }: ViewerEducationProps) 
 	useRouterError(router, error);
 
 	return (
-		<ViewerResumeContainer>
-			<h3 className='font-bold text-lg'>{title}</h3>
+		<ViewerResumeContainer title={title}>
 			{educationList.length > 0 ? (
 				<div className='flex flex-col gap-4 mt-2'>
 					{educationList.map((school) => (
 						<div
 							key={school.title}
-							className='flex flex-col'>
-							<div className='w-full flex items-center justify-between'>
-								<p>{school.career}</p>
-								<div className='flex items-center gap-2'>
-									<p className='text-xs text-gray-600'>{school.startDate}</p>
-									<p className='text-xs text-gray-600'>{'/'}</p>
-									<p className='text-xs text-gray-600'>{school.endDate}</p>
-								</div>
-							</div>
-							<p>{school.title}</p>
-							<p className='text-sm text-gray-700'>{school.description}</p>
+							className='flex flex-col relative'>
+							<LabelWithIcon
+								label={school.career}
+								icon={
+									<IconChevronRight
+										id='svg'
+										size={16}
+										stroke={1}
+									/>
+								}
+							/>
+							<LabelWithDates
+								label={school.title}
+								startDate={school.startDate}
+								endDate={school.endDate}
+							/>
+							<p className='text-xs text-gray-600 pl-6 '>{school.description}</p>
 						</div>
 					))}
 				</div>
