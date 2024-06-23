@@ -19,7 +19,7 @@ const ViewerLanguages = ({ title, languageList, error }: ViewerLanguagesProps) =
 	return (
 		<ViewerResumeContainer title={title}>
 			{languageList.length > 0 ? (
-				<ul className='flex items-center gap-4 flex-wrap'>
+				<ul className='flex items-center gap-4 flex-wrap -mt-1'>
 					{languageList.map((lang) => (
 						<li
 							key={lang.name}
