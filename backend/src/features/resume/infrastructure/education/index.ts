@@ -42,7 +42,8 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
                 School.startDate AS "schoolStartDate", 
                 School.endDate AS "schoolEndDate", 
                 School.description AS "schoolDescription",
-                School.formatTime AS "schoolFormatTime"
+                School.formatTime AS "schoolFormatTime",
+                School.descriptionDisabled AS "descriptionDisabled"
             FROM 
                 Education
             LEFT JOIN 
@@ -69,6 +70,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 					endDate: r.schoolEndDate,
 					description: r.schoolDescription,
 					formatTime: r.schoolFormatTime,
+					descriptionDisabled: r.descriptionDisabled,
 				};
 			});
 
@@ -96,7 +98,8 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				School.startDate, 
 				School.endDate, 
 				School.description,
-				School.formatTime
+				School.formatTime,
+				School.descriptionDisabled
             FROM 
                 Education
             LEFT JOIN 
@@ -180,15 +183,15 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title]
 			);
 
-			for (const { title, career, startDate, endDate, description, formatTime } of educationList) {
+			for (const { title, career, startDate, endDate, description, formatTime, descriptionDisabled } of educationList) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, startDate, endDate, description, formatTime) 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7)
+                        (id, title, career, startDate, endDate, description, formatTime, descriptionDisabled) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                     ;`,
-					[schoolId, title, career, startDate, endDate, description, formatTime]
+					[schoolId, title, career, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
 				);
 
 				await this.database.query(
@@ -228,7 +231,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title]
 			);
 
-			for (const { id, title, career, startDate, endDate, description, formatTime } of educationList) {
+			for (const { id, title, career, startDate, endDate, description, formatTime, descriptionDisabled } of educationList) {
 				await this.database.query(
 					`UPDATE School
                         SET title = $2, 
@@ -236,22 +239,23 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
                         startDate = $4, 
                         endDate = $5, 
                         description = $6,
-                        formatTime = $7
+                        formatTime = $7,
+                        descriptionDisabled = $8
                     WHERE id = $1
 				    ;`,
-					[id, title, career, startDate, endDate, description, formatTime]
+					[id, title, career, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
 				);
 			}
 
-			for (const { title, career, startDate, endDate, description, formatTime } of newSchools) {
+			for (const { title, career, startDate, endDate, description, formatTime, descriptionDisabled } of newSchools) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, startDate, endDate, description, formatTime) 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7)
+                        (id, title, career, startDate, endDate, description, formatTime, descriptionDisabled) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                     ;`,
-					[schoolId, title, career, startDate, endDate, description, formatTime]
+					[schoolId, title, career, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
 				);
 
 				await this.database.query(

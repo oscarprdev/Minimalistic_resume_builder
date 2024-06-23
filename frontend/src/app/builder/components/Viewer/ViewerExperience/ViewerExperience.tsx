@@ -43,7 +43,7 @@ const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
 								formatTime={job.formatTime}
 							/>
 
-							<p className='text-xs text-gray-600 pl-6 mt-1'>{job.description}</p>
+							{!job.descriptionDisabled && <p className='text-xs text-gray-600 pl-6 mt-1'>{job.description}</p>}
 						</div>
 					))}
 				</div>

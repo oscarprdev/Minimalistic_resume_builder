@@ -14,6 +14,7 @@ const schoolFormSchema = z.object({
 		message: 'Education description must be less than 200 characters.',
 	}),
 	formatTime: z.string().default(''),
+	descriptionDisabled: z.boolean().default(false),
 });
 
 export const asideFormEducationSchema = z.object({

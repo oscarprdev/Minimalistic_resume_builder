@@ -42,7 +42,7 @@ const ViewerEducation = ({ title, educationList, error }: ViewerEducationProps) 
 								endDate={school.endDate}
 								formatTime={school.formatTime}
 							/>
-							<p className='text-xs text-gray-600 pl-6 '>{school.description}</p>
+							{!school.descriptionDisabled && <p className='text-xs text-gray-600 pl-6 mt-1'>{school.description}</p>}
 						</div>
 					))}
 				</div>

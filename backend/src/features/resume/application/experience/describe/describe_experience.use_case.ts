@@ -17,7 +17,10 @@ export interface DescribeExperienceUsecase {
 }
 
 export class DefaultDescribeExperienceUsecase extends DefaultCommonResumeUsecase implements DescribeExperienceUsecase {
-	constructor(private readonly ports: DescribeExperiencePorts, protected readonly commonPorts: CommonResumePorts) {
+	constructor(
+		private readonly ports: DescribeExperiencePorts,
+		protected readonly commonPorts: CommonResumePorts
+	) {
 		super(commonPorts);
 	}
 

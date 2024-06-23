@@ -7,6 +7,7 @@ required:
   - endDate
   - description
   - formatTime
+  - descriptionDisabled
 properties:
   id:
     type: string
@@ -38,6 +39,11 @@ properties:
     type: string
     description: Format time config.
     example: year,currently.
+  descriptionDisabled:
+    type: boolean
+    description: Is description field disabled on resume viewwe?.
+    default: false
+    example: false
 example:
   title: Software Engineer
   company: Acme Corporation

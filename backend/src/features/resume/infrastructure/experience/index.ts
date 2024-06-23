@@ -42,7 +42,8 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
                 Job.startDate AS "jobStartDate", 
                 Job.endDate AS "jobEndDate", 
                 Job.description AS "jobDescription",
-                Job.formatTime AS "formatTime"
+                Job.formatTime AS "formatTime",
+                Job.descriptionDisabled AS "descriptionDisabled"
             FROM 
                 Experience
             LEFT JOIN 
@@ -57,6 +58,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			const { id, title } = result[0];
 
 			const jobList: JobDb[] = result.map((r) => {
+				console.log('descriptionDisabled get:', r.descriptionDisabled);
 				return {
 					id: r.jobId,
 					title: r.jobTitle,
@@ -65,6 +67,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 					endDate: r.jobEndDate,
 					description: r.jobDescription,
 					formatTime: r.formatTime,
+					descriptionDisabled: r.descriptionDisabled,
 				};
 			});
 
@@ -91,7 +94,8 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				Job.startDate, 
 				Job.endDate, 
 				Job.description,
-				Job.formatTime
+				Job.formatTime,
+				Job.descriptionDisabled
             FROM 
                 Experience
             LEFT JOIN 
@@ -175,15 +179,15 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				[experienceResumeId, title]
 			);
 
-			for (const { title, company, startDate, endDate, description, formatTime } of jobList) {
+			for (const { title, company, startDate, endDate, description, formatTime, descriptionDisabled } of jobList) {
 				const jobId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO Job 
-                        (id, title, company, startDate, endDate, description, formatTime) 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7)
+                        (id, title, company, startDate, endDate, description, formatTime, descriptionDisabled) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                     ;`,
-					[jobId, title, company, startDate, endDate, description, formatTime]
+					[jobId, title, company, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
 				);
 
 				await this.database.query(
@@ -223,7 +227,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				[experienceResumeId, title]
 			);
 
-			for (const { id, title, company, startDate, endDate, description, formatTime } of jobList) {
+			for (const { id, title, company, startDate, endDate, description, formatTime, descriptionDisabled } of jobList) {
 				await this.database.query(
 					`UPDATE Job
                         SET title = $2, 
@@ -231,22 +235,25 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
                         startDate = $4, 
                         endDate = $5, 
                         description = $6,
-						formatTime = $7
+						formatTime = $7,
+						descriptionDisabled = $8
                     WHERE id = $1
 				    ;`,
-					[id, title, company, startDate, endDate, description, formatTime]
+					[id, title, company, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
 				);
 			}
 
-			for (const { title, company, startDate, endDate, description, formatTime } of newJobs) {
+			for (const { title, company, startDate, endDate, description, formatTime, descriptionDisabled } of newJobs) {
 				const jobId = crypto.randomUUID().toString();
+
+				console.log('descriptionDisabled', descriptionDisabled);
 
 				await this.database.query(
 					`INSERT INTO Job 
-                        (id, title, company, startDate, endDate, description, formatTime) 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7)
+                        (id, title, company, startDate, endDate, description, formatTime, descriptionDisabled) 
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                     ;`,
-					[jobId, title, company, startDate, endDate, description, formatTime]
+					[jobId, title, company, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
 				);
 
 				await this.database.query(

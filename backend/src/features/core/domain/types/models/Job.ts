@@ -31,5 +31,9 @@ export type Job = {
      * Format time config.
      */
     formatTime: string;
+    /**
+     * Is description field disabled on resume viewwe?.
+     */
+    descriptionDisabled: boolean;
 };
 

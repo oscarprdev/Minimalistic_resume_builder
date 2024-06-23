@@ -5,11 +5,11 @@ import { EducationFormState } from './AsideFormEducation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
 import { OptionalSchool } from '@/store/useResumeEducationStore';
 import { useMemo } from 'react';
 import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
 import FormDates from '../shared/components/FormDates';
+import FormDescription from '../shared/components/FormDescription';
 
 interface AsideFormEducationListProps {
 	form: UseFormReturn<EducationFormState, any, undefined>;
@@ -24,6 +24,7 @@ const DEFAULT_EDUCATION: OptionalSchool = {
 	endDate: '',
 	description: '',
 	formatTime: '',
+	descriptionDisabled: false,
 };
 
 const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
@@ -49,7 +50,7 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 					/>
 					<FormField
 						control={form.control}
-						name={`educationList.${index}.title`}
+						name={`${EDUCATION_LIST_NAME}.${index}.title`}
 						render={({ field }) => (
 							<FormItem className='w-full'>
 								<FormLabel className='text-sm text-gray-500'>Education title</FormLabel>
@@ -58,7 +59,7 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 										placeholder='Your education title'
 										required
 										{...field}
-										{...form.register(`educationList.${index}.title`)}
+										{...form.register(`${EDUCATION_LIST_NAME}.${index}.title`)}
 									/>
 								</FormControl>
 								<FormMessage className='text-xs' />
@@ -68,11 +69,11 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 					<FormDates
 						form={form}
 						index={index}
-						label='educationList'
+						label={EDUCATION_LIST_NAME}
 					/>
 					<FormField
 						control={form.control}
-						name={`educationList.${index}.career`}
+						name={`${EDUCATION_LIST_NAME}.${index}.career`}
 						render={({ field }) => (
 							<FormItem className='w-full'>
 								<FormLabel className='text-sm text-gray-500'>School</FormLabel>
@@ -81,31 +82,18 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 										placeholder='School name'
 										required
 										{...field}
-										{...form.register(`educationList.${index}.career`)}
+										{...form.register(`${EDUCATION_LIST_NAME}.${index}.career`)}
 									/>
 								</FormControl>
 								<FormMessage className='text-xs' />
 							</FormItem>
 						)}
 					/>
-					<FormField
-						control={form.control}
-						name={`educationList.${index}.description`}
-						render={({ field }) => (
-							<FormItem className='w-full'>
-								<FormLabel className='text-sm text-gray-500'>Description</FormLabel>
-								<FormControl>
-									<Textarea
-										className='min-h-[80px]'
-										placeholder='Description'
-										required
-										{...field}
-										{...form.register(`educationList.${index}.description`)}
-									/>
-								</FormControl>
-								<FormMessage className='text-xs' />
-							</FormItem>
-						)}
+					<FormDescription
+						form={form}
+						index={index}
+						label={EDUCATION_LIST_NAME}
+						isDisabled={form.getValues(EDUCATION_LIST_NAME)[index].descriptionDisabled}
 					/>
 					<Button
 						type='button'

@@ -1,12 +1,10 @@
 'use client';
 
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { IconLoader2 } from '@tabler/icons-react';
 import AsideFormExperienceJobList from './AsideFormExperienceJobList';
 import { ResumeExperienceDefaultValues } from '@/store/useResumeExperienceStore';
 import { Either } from '@/lib/either';

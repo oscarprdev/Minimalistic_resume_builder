@@ -5,11 +5,11 @@ import { ExperienceFormState } from './AsideFormExperience';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
 import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { useMemo } from 'react';
 import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
 import FormDates from '../shared/components/FormDates';
+import FormDescription from '../shared/components/FormDescription';
 
 interface AsideFormExperienceJobListProps {
 	form: UseFormReturn<ExperienceFormState, any, undefined>;
@@ -24,6 +24,7 @@ const DEFAULT_JOB: OptionalJob = {
 	endDate: '',
 	description: '',
 	formatTime: '',
+	descriptionDisabled: false,
 };
 
 const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) => {
@@ -49,7 +50,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 					/>
 					<FormField
 						control={form.control}
-						name={`jobList.${index}.title`}
+						name={`${JOB_LIST_NAME}.${index}.title`}
 						render={({ field }) => (
 							<FormItem className='w-full'>
 								<FormLabel className='text-sm text-gray-500'>Job title</FormLabel>
@@ -58,7 +59,7 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 										placeholder='Your job title'
 										required
 										{...field}
-										{...form.register(`jobList.${index}.title`)}
+										{...form.register(`${JOB_LIST_NAME}.${index}.title`)}
 									/>
 								</FormControl>
 								<FormMessage className='text-xs' />
@@ -68,11 +69,11 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 					<FormDates
 						form={form}
 						index={index}
-						label='jobList'
+						label={JOB_LIST_NAME}
 					/>
 					<FormField
 						control={form.control}
-						name={`jobList.${index}.company`}
+						name={`${JOB_LIST_NAME}.${index}.company`}
 						render={({ field }) => (
 							<FormItem className='w-full'>
 								<FormLabel className='text-sm text-gray-500'>Company</FormLabel>
@@ -81,31 +82,18 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 										placeholder='Company name'
 										required
 										{...field}
-										{...form.register(`jobList.${index}.company`)}
+										{...form.register(`${JOB_LIST_NAME}.${index}.company`)}
 									/>
 								</FormControl>
 								<FormMessage className='text-xs' />
 							</FormItem>
 						)}
 					/>
-					<FormField
-						control={form.control}
-						name={`jobList.${index}.description`}
-						render={({ field }) => (
-							<FormItem className='w-full'>
-								<FormLabel className='text-sm text-gray-500'>Job Description</FormLabel>
-								<FormControl>
-									<Textarea
-										className='min-h-[80px]'
-										placeholder='Job description'
-										required
-										{...field}
-										{...form.register(`jobList.${index}.description`)}
-									/>
-								</FormControl>
-								<FormMessage className='text-xs' />
-							</FormItem>
-						)}
+					<FormDescription
+						form={form}
+						index={index}
+						label={JOB_LIST_NAME}
+						isDisabled={form.getValues(JOB_LIST_NAME)[index].descriptionDisabled}
 					/>
 					<Button
 						type='button'

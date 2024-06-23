@@ -41,6 +41,7 @@ const jobFormSchema = z
 			message: 'Job description must be less than 200 characters.',
 		}),
 		formatTime: z.string().default(''),
+		descriptionDisabled: z.boolean().default(false),
 	})
 	.superRefine((data, ctx) => {
 		if (!isEndDateGreaterThanStartDate(data)) {

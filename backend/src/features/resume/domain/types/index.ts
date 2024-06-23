@@ -39,6 +39,7 @@ export interface JobDb {
 	endDate: string;
 	description: string;
 	formatTime: string;
+	descriptionDisabled: boolean;
 }
 
 export interface ExperienceDb {
@@ -55,6 +56,7 @@ export interface SchoolDb {
 	endDate: string;
 	description: string;
 	formatTime: string;
+	descriptionDisabled: boolean;
 }
 
 export interface EducationDb {
