@@ -15,7 +15,7 @@ const ViewerResume = async ({ resumeId }: ViewerResumeProps) => {
 	return (
 		<article
 			id='resume-viewer'
-			className='w-[800px] bg-white shadow-sm h-fit mb-[100px] p-5'>
+			className='w-[650px] bg-white shadow-sm h-fit mb-[100px] p-5'>
 			<ViewerHeaderController resumeId={resumeId} />
 			<ViewerSummaryController resumeId={resumeId} />
 			<ViewerExperienceController resumeId={resumeId} />

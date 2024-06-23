@@ -22,6 +22,9 @@ const DownloadResumeButton = () => {
 					allowTaint: true,
 					useCORS: true,
 					onclone: (doc) => {
+						const resume = doc.getElementById('resume-viewer') as HTMLElement;
+						resume.style.width = '800px';
+
 						const svgElements = doc.querySelectorAll('#svg') as NodeListOf<HTMLElement>;
 						for (let i = 0; i < svgElements.length; i++) {
 							svgElements[i].style.position = 'absolute';
