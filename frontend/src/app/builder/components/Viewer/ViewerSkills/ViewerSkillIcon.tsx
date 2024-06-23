@@ -55,6 +55,7 @@ const SIZE = 16;
 const SKILLS_ICONS = {
 	javascript: (
 		<IconBrandJavascript
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -62,6 +63,7 @@ const SKILLS_ICONS = {
 	),
 	typescript: (
 		<IconBrandTypescript
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -69,6 +71,7 @@ const SKILLS_ICONS = {
 	),
 	html: (
 		<IconBrandHtml5
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -76,6 +79,7 @@ const SKILLS_ICONS = {
 	),
 	css: (
 		<IconBrandCss3
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -83,6 +87,7 @@ const SKILLS_ICONS = {
 	),
 	node: (
 		<IconBrandNodejs
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -90,6 +95,7 @@ const SKILLS_ICONS = {
 	),
 	github: (
 		<IconBrandGithub
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -97,6 +103,7 @@ const SKILLS_ICONS = {
 	),
 	git: (
 		<IconBrandGit
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -104,6 +111,7 @@ const SKILLS_ICONS = {
 	),
 	sass: (
 		<IconBrandSass
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -111,6 +119,7 @@ const SKILLS_ICONS = {
 	),
 	tailwind: (
 		<IconBrandTailwind
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -118,6 +127,7 @@ const SKILLS_ICONS = {
 	),
 	react: (
 		<IconBrandReact
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -125,6 +135,7 @@ const SKILLS_ICONS = {
 	),
 	angular: (
 		<IconBrandAngular
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -132,6 +143,7 @@ const SKILLS_ICONS = {
 	),
 	vue: (
 		<IconBrandVue
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -139,6 +151,7 @@ const SKILLS_ICONS = {
 	),
 	next: (
 		<IconBrandNextjs
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -146,6 +159,7 @@ const SKILLS_ICONS = {
 	),
 	vite: (
 		<IconBrandVite
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -153,6 +167,7 @@ const SKILLS_ICONS = {
 	),
 	aws: (
 		<IconBrandAws
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -160,6 +175,7 @@ const SKILLS_ICONS = {
 	),
 	cpp: (
 		<IconBrandCpp
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -167,6 +183,7 @@ const SKILLS_ICONS = {
 	),
 	npm: (
 		<IconBrandNpm
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -174,6 +191,7 @@ const SKILLS_ICONS = {
 	),
 	php: (
 		<IconBrandPhp
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -181,6 +199,7 @@ const SKILLS_ICONS = {
 	),
 	three: (
 		<IconBrandThreejs
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -188,6 +207,7 @@ const SKILLS_ICONS = {
 	),
 	deno: (
 		<IconBrandDeno
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -195,6 +215,7 @@ const SKILLS_ICONS = {
 	),
 	rust: (
 		<IconBrandRust
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -202,6 +223,7 @@ const SKILLS_ICONS = {
 	),
 	adobe: (
 		<IconBrandAdobe
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -209,6 +231,7 @@ const SKILLS_ICONS = {
 	),
 	astro: (
 		<IconBrandAstro
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -216,6 +239,7 @@ const SKILLS_ICONS = {
 	),
 	azure: (
 		<IconBrandAzure
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -223,6 +247,7 @@ const SKILLS_ICONS = {
 	),
 	figma: (
 		<IconBrandFigma
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -230,6 +255,7 @@ const SKILLS_ICONS = {
 	),
 	mysql: (
 		<IconBrandMysql
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -237,6 +263,7 @@ const SKILLS_ICONS = {
 	),
 	swift: (
 		<IconBrandSwift
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -244,6 +271,7 @@ const SKILLS_ICONS = {
 	),
 	unity: (
 		<IconBrandUnity
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -251,6 +279,7 @@ const SKILLS_ICONS = {
 	),
 	docker: (
 		<IconBrandDocker
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -258,6 +287,7 @@ const SKILLS_ICONS = {
 	),
 	go: (
 		<IconBrandGolang
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -265,6 +295,7 @@ const SKILLS_ICONS = {
 	),
 	kotlin: (
 		<IconBrandKotlin
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -272,6 +303,7 @@ const SKILLS_ICONS = {
 	),
 	django: (
 		<IconBrandDjango
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -279,6 +311,7 @@ const SKILLS_ICONS = {
 	),
 	prisma: (
 		<IconBrandPrisma
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -286,6 +319,7 @@ const SKILLS_ICONS = {
 	),
 	graphql: (
 		<IconBrandGraphql
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -293,6 +327,7 @@ const SKILLS_ICONS = {
 	),
 	svelte: (
 		<IconBrandSvelte
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -300,6 +335,7 @@ const SKILLS_ICONS = {
 	),
 	laravel: (
 		<IconBrandLaravel
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -307,6 +343,7 @@ const SKILLS_ICONS = {
 	),
 	firebase: (
 		<IconBrandFirebase
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -314,6 +351,7 @@ const SKILLS_ICONS = {
 	),
 	supabase: (
 		<IconBrandSupabase
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -321,6 +359,7 @@ const SKILLS_ICONS = {
 	),
 	bootstrap: (
 		<IconBrandBootstrap
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -328,6 +367,7 @@ const SKILLS_ICONS = {
 	),
 	wordpress: (
 		<IconBrandWordpress
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -335,6 +375,7 @@ const SKILLS_ICONS = {
 	),
 	cloudflare: (
 		<IconBrandCloudflare
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -342,6 +383,7 @@ const SKILLS_ICONS = {
 	),
 	csharp: (
 		<IconBrandCSharp
+			id='svg'
 			stroke={2}
 			size={SIZE}
 			className='text-gray-500'
@@ -396,6 +438,7 @@ const AVAILABLE_ICONS: Record<IconsKeys, string[]> = {
 
 const DEFAULT_ICON = (
 	<IconPointFilled
+		id='svg'
 		stroke={2}
 		size={10}
 		className='text-gray-500 mt-1'

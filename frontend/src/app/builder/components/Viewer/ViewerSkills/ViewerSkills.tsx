@@ -22,9 +22,15 @@ const ViewerSkills = ({ title, skillList, error }: ViewerSkillsProps) => {
 			{skillList.length > 0 ? (
 				<ul className='flex gap-2 items-center mt-2 flex-wrap'>
 					{skillList.map((skill) => (
-						<li className='flex items-center space-x-1'>
+						<li
+							key={skill.name}
+							className='flex space-x-1 items-center relative'>
 							<ViewerSkillIcon value={skill.name} />
-							<p className='text-sm text-gray-700'>{skill.name}</p>
+							<p
+								id='li-text'
+								className='text-xs text-gray-700'>
+								{skill.name}
+							</p>
 						</li>
 					))}
 				</ul>

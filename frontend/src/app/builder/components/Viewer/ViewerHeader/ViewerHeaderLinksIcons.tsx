@@ -16,6 +16,7 @@ const LINKS_ICONS = {
 	),
 	linkedin: (
 		<IconBrandLinkedin
+			id='svg'
 			stroke={2}
 			size={16}
 			className='text-gray-500'
@@ -23,6 +24,7 @@ const LINKS_ICONS = {
 	),
 	github: (
 		<IconBrandGithub
+			id='svg'
 			stroke={2}
 			size={16}
 			className='text-gray-500'
@@ -30,6 +32,7 @@ const LINKS_ICONS = {
 	),
 	twitter: (
 		<IconBrandX
+			id='svg'
 			stroke={2}
 			size={16}
 			className='text-gray-500'
@@ -37,6 +40,7 @@ const LINKS_ICONS = {
 	),
 	instagram: (
 		<IconBrandInstagram
+			id='svg'
 			stroke={2}
 			size={16}
 			className='text-gray-500'

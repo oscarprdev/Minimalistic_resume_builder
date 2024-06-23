@@ -3,6 +3,6 @@
 import { signIn } from '@/auth';
 import { UserCredentials } from '@/types';
 
-export const loginUserAction = async (input: UserCredentials) => {
+export const loginUser = async (input: UserCredentials) => {
 	await signIn('credentials', input);
 };

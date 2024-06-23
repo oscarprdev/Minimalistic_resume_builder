@@ -2,6 +2,6 @@
 
 import { signOut } from '@/auth';
 
-export const logoutUserAction = async () => {
+export const logoutUser = async () => {
 	await signOut({ redirectTo: '/' });
 };

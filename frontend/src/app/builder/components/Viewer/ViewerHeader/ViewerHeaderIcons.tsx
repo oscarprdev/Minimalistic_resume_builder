@@ -9,6 +9,7 @@ type IconsKeys = keyof typeof HEADER_ICONS;
 const HEADER_ICONS = {
 	location: (
 		<IconMapPin
+			id='svg'
 			stroke={2}
 			size={16}
 			className='text-gray-500'
@@ -16,6 +17,7 @@ const HEADER_ICONS = {
 	),
 	phone: (
 		<IconPhone
+			id='svg'
 			stroke={2}
 			size={16}
 			className='text-gray-500'
@@ -23,6 +25,7 @@ const HEADER_ICONS = {
 	),
 	mail: (
 		<IconMail
+			id='svg'
 			stroke={2}
 			size={16}
 			className='text-gray-500'
