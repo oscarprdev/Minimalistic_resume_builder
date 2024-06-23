@@ -38,7 +38,7 @@ const ViewerLanguages = ({ title, languageList, error }: ViewerLanguagesProps) =
 					))}
 				</ul>
 			) : (
-				<p>No languages</p>
+				<p className='text-xs text-gray-500'>No languages</p>
 			)}
 		</ViewerResumeContainer>
 	);

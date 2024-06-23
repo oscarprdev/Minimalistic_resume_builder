@@ -34,7 +34,7 @@ const ViewerSkills = ({ title, skillList, error }: ViewerSkillsProps) => {
 					))}
 				</ul>
 			) : (
-				<p>No skills</p>
+				<p className='text-xs text-gray-500'>No skills</p>
 			)}
 		</ViewerResumeContainer>
 	);

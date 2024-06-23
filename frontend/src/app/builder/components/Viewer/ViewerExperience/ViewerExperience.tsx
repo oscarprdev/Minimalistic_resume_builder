@@ -48,7 +48,7 @@ const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
 					))}
 				</div>
 			) : (
-				<p>0 jobs</p>
+				<p className='text-xs text-gray-500'>No jobs</p>
 			)}
 		</ViewerResumeContainer>
 	);

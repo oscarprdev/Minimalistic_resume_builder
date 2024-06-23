@@ -6,7 +6,7 @@ interface LabelWithIconProps {
 const LabelWithIcon = ({ label, icon }: LabelWithIconProps) => {
 	return (
 		<div className='w-full flex items-center justify-between'>
-			<div className='flex space-x-1 items-center relative'>
+			<div className='flex space-x-1 items-center relative ml-1'>
 				{icon}
 				<p
 					id='li-title'

@@ -47,7 +47,7 @@ const ViewerEducation = ({ title, educationList, error }: ViewerEducationProps) 
 					))}
 				</div>
 			) : (
-				<p>No education</p>
+				<p className='text-xs text-gray-500'>No education</p>
 			)}
 		</ViewerResumeContainer>
 	);
