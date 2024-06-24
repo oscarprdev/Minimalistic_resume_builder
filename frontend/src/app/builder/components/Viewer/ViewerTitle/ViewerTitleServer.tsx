@@ -1,7 +1,7 @@
 'use server';
 
 import { isLeft } from '@/lib/either';
-import { getCallback } from '@/lib/service.utils';
+import { getCallback } from '@/services';
 import ViewerTitle from './ViewerTitle';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { DEFAULT_INFO_VALUES } from '@/store/useResumeInfoStore';

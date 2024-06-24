@@ -2,9 +2,11 @@
 
 import { isLeft } from '@/lib/either';
 import ViewerExperience from './ViewerExperience';
-import { getCallback } from '@/lib/service.utils';
+import { getCallback } from '@/services';
 import { DEFAULT_EXPERIENCE_VALUES } from '@/store/useResumeExperienceStore';
 import { describeResumeExperienceAction } from '../../Aside/AsideFormExperience/actions/describe-resume-experience';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import ErrorMessage from '../../ErrorMessage';
 
 interface ViewerExperienceServerProps {
 	userId: string;
@@ -13,6 +15,20 @@ interface ViewerExperienceServerProps {
 
 const ViewerExperienceServer = async ({ userId, resumeId }: ViewerExperienceServerProps) => {
 	if (!resumeId) {
+		return (
+			<ViewerExperience
+				title={DEFAULT_EXPERIENCE_VALUES.title}
+				jobList={DEFAULT_EXPERIENCE_VALUES.jobList}
+			/>
+		);
+	}
+
+	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
+	if (isLeft(describeResumeActionResponse)) {
+		return <ErrorMessage />;
+	}
+
+	if (!describeResumeActionResponse.right.experience) {
 		return (
 			<ViewerExperience
 				title={DEFAULT_EXPERIENCE_VALUES.title}

@@ -2,9 +2,11 @@
 
 import { isLeft } from '@/lib/either';
 import ViewerLanguages from './ViewerLanguages';
-import { getCallback } from '@/lib/service.utils';
+import { getCallback } from '@/services';
 import { DEFAULT_LANGUAGES_VALUES } from '@/store/useResumeLanguagesStore';
 import { describeResumeLanguagesAction } from '../../Aside/AsideFormLanguages/actions/describe-resume-languages';
+import ErrorMessage from '../../ErrorMessage';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 
 interface ViewerLanguagesServerProps {
 	userId: string;
@@ -13,6 +15,20 @@ interface ViewerLanguagesServerProps {
 
 const ViewerLanguagesServer = async ({ userId, resumeId }: ViewerLanguagesServerProps) => {
 	if (!resumeId) {
+		return (
+			<ViewerLanguages
+				title={DEFAULT_LANGUAGES_VALUES.title}
+				languageList={DEFAULT_LANGUAGES_VALUES.languageList}
+			/>
+		);
+	}
+
+	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
+	if (isLeft(describeResumeActionResponse)) {
+		return <ErrorMessage />;
+	}
+
+	if (!describeResumeActionResponse.right.languages) {
 		return (
 			<ViewerLanguages
 				title={DEFAULT_LANGUAGES_VALUES.title}

@@ -1,6 +1,6 @@
 'use server';
 
-import { Either, left, right } from './either';
+import { Either, left, right } from '../lib/either';
 
 export const getCallback = async <R>(path: string): Promise<Either<string, R>> => {
 	try {

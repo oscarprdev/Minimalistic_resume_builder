@@ -1,6 +1,6 @@
 'use server';
 
-import { postCallback, getCallback } from '@/lib/service.utils';
+import { postCallback, getCallback } from '@/services';
 import AsideFormSummary, { asideFormSummarySchema } from './AsideFormSummary';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';

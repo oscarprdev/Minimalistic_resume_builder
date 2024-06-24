@@ -2,7 +2,7 @@ import Credentials from 'next-auth/providers/credentials';
 import zod from 'zod';
 import { NextAuthConfig } from 'next-auth';
 import { loginUserService } from './services/auth/login-user';
-import { postCallback } from './lib/service.utils';
+import { postCallback } from './services';
 
 export const loginSchema = zod.object({
 	username: zod.string(),

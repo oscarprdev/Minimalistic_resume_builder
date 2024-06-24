@@ -2,9 +2,11 @@
 
 import { isLeft } from '@/lib/either';
 import ViewerEducation from './ViewerEducation';
-import { getCallback } from '@/lib/service.utils';
+import { getCallback } from '@/services';
 import { DEFAULT_EDUCATION_VALUES } from '@/store/useResumeEducationStore';
 import { describeResumeEducationAction } from '../../Aside/AsideFormEducation/actions/describe-resume-education';
+import ErrorMessage from '../../ErrorMessage';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 
 interface ViewerEducationServerProps {
 	userId: string;
@@ -13,6 +15,20 @@ interface ViewerEducationServerProps {
 
 const ViewerEducationServer = async ({ userId, resumeId }: ViewerEducationServerProps) => {
 	if (!resumeId) {
+		return (
+			<ViewerEducation
+				title={DEFAULT_EDUCATION_VALUES.title}
+				educationList={DEFAULT_EDUCATION_VALUES.educationList}
+			/>
+		);
+	}
+
+	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
+	if (isLeft(describeResumeActionResponse)) {
+		return <ErrorMessage />;
+	}
+
+	if (!describeResumeActionResponse.right.education) {
 		return (
 			<ViewerEducation
 				title={DEFAULT_EDUCATION_VALUES.title}
