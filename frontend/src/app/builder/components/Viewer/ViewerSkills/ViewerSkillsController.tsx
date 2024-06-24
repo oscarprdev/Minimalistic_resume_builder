@@ -4,6 +4,7 @@ import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerSkillsClient from './ViewerSkillsClient';
 import { Suspense } from 'react';
 import ViewerSkillsServer from './ViewerSkillsServer';
+import ViewerSkillsSkeleton from './ViewerSkillsSkeleton';
 
 interface ViewerSkillsControllerProps {
 	resumeId: string | null;
@@ -17,7 +18,7 @@ const ViewerSkillsController = async ({ resumeId }: ViewerSkillsControllerProps)
 	}
 
 	return (
-		<Suspense fallback={<div className='w-[250px] h-5 animate-pulse rounded-xl bg-gray-300' />}>
+		<Suspense fallback={<ViewerSkillsSkeleton />}>
 			<ViewerSkillsServer
 				userId={user.id}
 				resumeId={resumeId}

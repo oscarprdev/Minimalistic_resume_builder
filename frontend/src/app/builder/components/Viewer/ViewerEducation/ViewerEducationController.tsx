@@ -4,6 +4,7 @@ import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerEducationClient from './ViewerEducationClient';
 import { Suspense } from 'react';
 import ViewerEducationServer from './ViewerEducationServer';
+import ViewerEducationSkeleton from './ViewerEducationSkeleton';
 
 interface ViewerEducationControllerProps {
 	resumeId: string | null;
@@ -17,7 +18,7 @@ const ViewerEducationController = async ({ resumeId }: ViewerEducationController
 	}
 
 	return (
-		<Suspense fallback={<div className='w-[250px] h-5 animate-pulse rounded-xl bg-gray-300' />}>
+		<Suspense fallback={<ViewerEducationSkeleton />}>
 			<ViewerEducationServer
 				userId={user.id}
 				resumeId={resumeId}

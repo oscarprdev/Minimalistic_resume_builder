@@ -15,7 +15,7 @@ const ViewerTitleController = async ({ resumeId }: ViewerTitleControllerProps) =
 	}
 
 	return (
-		<Suspense fallback={<div className='w-[250px] h-5 animate-pulse rounded-xl bg-gray-300' />}>
+		<Suspense fallback={<div className='w-[200px] h-5 bg-gray-200 animate-pulse'></div>}>
 			<ViewerTitleServer
 				userId={user.id}
 				resumeId={resumeId}

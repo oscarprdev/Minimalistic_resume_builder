@@ -4,6 +4,7 @@ import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerSummaryClient from './ViewerSummaryClient';
 import { Suspense } from 'react';
 import ViewerSummaryServer from './ViewerSummaryServer';
+import ViewerSummarySkeleton from './ViewerSummarySkeleton';
 
 interface ViewerSummaryControllerProps {
 	resumeId: string | null;
@@ -17,7 +18,7 @@ const ViewerSummaryController = async ({ resumeId }: ViewerSummaryControllerProp
 	}
 
 	return (
-		<Suspense fallback={<div className='w-[250px] h-5 animate-pulse rounded-xl bg-gray-300' />}>
+		<Suspense fallback={<ViewerSummarySkeleton />}>
 			<ViewerSummaryServer
 				userId={user.id}
 				resumeId={resumeId}

@@ -4,6 +4,7 @@ import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerExperienceClient from './ViewerExperienceClient';
 import { Suspense } from 'react';
 import ViewerExperienceServer from './ViewerExperienceServer';
+import ViewerExperienceSkeleton from './ViewerExperienceSkeleton';
 
 interface ViewerExperienceControllerProps {
 	resumeId: string | null;
@@ -17,7 +18,7 @@ const ViewerExperienceController = async ({ resumeId }: ViewerExperienceControll
 	}
 
 	return (
-		<Suspense fallback={<div className='w-[250px] h-5 animate-pulse rounded-xl bg-gray-300' />}>
+		<Suspense fallback={<ViewerExperienceSkeleton />}>
 			<ViewerExperienceServer
 				userId={user.id}
 				resumeId={resumeId}

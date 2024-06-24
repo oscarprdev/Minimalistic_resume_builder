@@ -4,6 +4,7 @@ import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerLanguagesClient from './ViewerLanguagesClient';
 import { Suspense } from 'react';
 import ViewerLanguagesServer from './ViewerLanguagesServer';
+import ViewerLanguagesSkeleton from './ViewerLanguagesSkeleton';
 
 interface ViewerLanguagesControllerProps {
 	resumeId: string | null;
@@ -17,7 +18,7 @@ const ViewerLanguagesController = async ({ resumeId }: ViewerLanguagesController
 	}
 
 	return (
-		<Suspense fallback={<div className='w-[250px] h-5 animate-pulse rounded-xl bg-gray-300' />}>
+		<Suspense fallback={<ViewerLanguagesSkeleton />}>
 			<ViewerLanguagesServer
 				userId={user.id}
 				resumeId={resumeId}
