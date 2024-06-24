@@ -4,7 +4,7 @@ import { isLeft } from '@/lib/either';
 import ViewerLanguages from './ViewerLanguages';
 import { getCallback } from '@/lib/service.utils';
 import { DEFAULT_LANGUAGES_VALUES } from '@/store/useResumeLanguagesStore';
-import { describeResumeLanguagesAction } from '../../Aside/AsideFormLanguages/actions';
+import { describeResumeLanguagesAction } from '../../Aside/AsideFormLanguages/actions/describe-resume-languages';
 
 interface ViewerLanguagesServerProps {
 	userId: string;

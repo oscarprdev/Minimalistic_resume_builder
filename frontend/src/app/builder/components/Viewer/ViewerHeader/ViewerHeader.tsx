@@ -1,7 +1,7 @@
 'use client';
 
 import ViewerHeaderLinksIcons from './ViewerHeaderLinksIcons';
-import { useRouterError } from '@/hooks/use-router-error';
+import { useRouterError } from '@/hooks/useRouterError';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import ViewerHeaderIcons from './ViewerHeaderIcons';

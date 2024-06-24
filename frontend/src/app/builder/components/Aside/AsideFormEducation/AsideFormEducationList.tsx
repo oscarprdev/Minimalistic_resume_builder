@@ -7,9 +7,9 @@ import { Input } from '@/components/ui/input';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { OptionalSchool } from '@/store/useResumeEducationStore';
 import { useMemo } from 'react';
-import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
 import FormDates from '../shared/components/FormDates';
 import FormDescription from '../shared/components/FormDescription';
+import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
 
 interface AsideFormEducationListProps {
 	form: UseFormReturn<EducationFormState, any, undefined>;

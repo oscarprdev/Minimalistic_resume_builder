@@ -5,9 +5,10 @@ import AsideFormSkills from './AsideFormSkills';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { describeResumeAction } from '@/app/actions';
-import { describeResumeSkillsAction, updateResumeSkillsAction } from '@/app/builder/components/Aside/AsideFormSkills/actions';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { asideFormSkillsSchema } from './schema-validations';
+import { updateResumeSkillsAction } from './actions/update-resume-skills';
+import { describeResumeSkillsAction } from './actions/describe-resume-skills';
 
 interface AsideFormSkillsServerProps {
 	userId: string;

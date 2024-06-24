@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { OptionalSkill } from '@/store/useResumeSkillsStore';
 import { useMemo } from 'react';
-import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
+import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
 
 interface AsideFormSkillsListProps {
 	form: UseFormReturn<SkillsFormState, any, undefined>;

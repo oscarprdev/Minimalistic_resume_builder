@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouterError } from '@/hooks/use-router-error';
+import { useRouterError } from '@/hooks/useRouterError';
 import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { useRouter } from 'next/navigation';
 import ViewerResumeContainer from '../ViewerResumeContainer';

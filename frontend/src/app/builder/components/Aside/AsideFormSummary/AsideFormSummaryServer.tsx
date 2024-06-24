@@ -5,8 +5,9 @@ import AsideFormSummary, { asideFormSummarySchema } from './AsideFormSummary';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { describeResumeAction } from '@/app/actions';
-import { describeResumeSummaryAction, updateResumeSummaryAction } from './actions';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import { updateResumeSummaryAction } from './actions/update-resume-summary';
+import { describeResumeSummaryAction } from './actions/describe-resume-summary';
 
 interface AsideFormSummaryServerProps {
 	userId: string;

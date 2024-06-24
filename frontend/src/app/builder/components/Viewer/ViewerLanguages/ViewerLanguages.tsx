@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouterError } from '@/hooks/use-router-error';
+import { useRouterError } from '@/hooks/useRouterError';
 import { OptionalLanguage } from '@/store/useResumeLanguagesStore';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

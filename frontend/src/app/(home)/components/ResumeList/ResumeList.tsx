@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { listResumeAction } from '../../../actions/resume/list-resume.action';
 import { getCallback } from '@/lib/service.utils';
 import { isLeft } from '@/lib/either';
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import ResumeListError from './ResumeListError';
 import ResumeListContainer from './ResumeListContainer';
 

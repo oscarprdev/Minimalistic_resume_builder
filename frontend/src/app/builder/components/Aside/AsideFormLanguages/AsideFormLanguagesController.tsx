@@ -1,4 +1,4 @@
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import AsideLanguagesClient from './AsideFormLanguagesClient';
 import AsideLanguagesServer from './AsideFormLanguagesServer';
 

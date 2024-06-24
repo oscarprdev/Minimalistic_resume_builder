@@ -1,6 +1,6 @@
 'use server';
 
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerSkillsClient from './ViewerSkillsClient';
 import { Suspense } from 'react';
 import ViewerSkillsServer from './ViewerSkillsServer';

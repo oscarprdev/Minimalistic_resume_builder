@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouterError } from '@/hooks/use-router-error';
+import { useRouterError } from '@/hooks/useRouterError';
 import { OptionalSchool } from '@/store/useResumeEducationStore';
 import { useRouter } from 'next/navigation';
 import ViewerResumeContainer from '../ViewerResumeContainer';

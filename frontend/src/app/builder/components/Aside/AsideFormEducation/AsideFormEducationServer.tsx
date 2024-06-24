@@ -5,9 +5,10 @@ import AsideFormEducation from './AsideFormEducation';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { describeResumeAction } from '@/app/actions';
-import { describeResumeEducationAction, updateResumeEducationAction } from '@/app/builder/components/Aside/AsideFormEducation/actions';
 import { asideFormEducationSchema } from './schema-validations';
+import { updateResumeEducationAction } from './actions/update-resume-education';
+import { describeResumeEducationAction } from './actions/describe-resume-education';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 
 interface AsideFormEducationServerProps {
 	userId: string;

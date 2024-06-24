@@ -2,7 +2,7 @@
 
 import { loginUser } from '@/app/actions/auth/login-user';
 import { logoutUser } from '@/app/actions/auth/logout-user';
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import { Button } from '@/components/ui/button';
 
 const AuthButton = async () => {

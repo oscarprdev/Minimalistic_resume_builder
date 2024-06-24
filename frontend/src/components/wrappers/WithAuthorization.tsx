@@ -1,6 +1,6 @@
 'use server';
 
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import { ReactNode } from 'react';
 
 export const WithAuthorization = async ({ children }: { children: ReactNode }) => {

@@ -4,7 +4,7 @@ import { isLeft } from '@/lib/either';
 import ViewerExperience from './ViewerExperience';
 import { getCallback } from '@/lib/service.utils';
 import { DEFAULT_EXPERIENCE_VALUES } from '@/store/useResumeExperienceStore';
-import { describeResumeExperienceAction } from '../../Aside/AsideFormExperience/actions';
+import { describeResumeExperienceAction } from '../../Aside/AsideFormExperience/actions/describe-resume-experience';
 
 interface ViewerExperienceServerProps {
 	userId: string;

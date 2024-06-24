@@ -4,7 +4,7 @@ import { IconPlus, IconMinus } from '@tabler/icons-react';
 import Link from 'next/link';
 import { SECTION_CONTROL, SectionControl } from '../_utils/sections';
 import { cn } from '@/lib/utils';
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 
 interface AsideSectionItemProps {
 	label: string;

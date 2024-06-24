@@ -6,8 +6,11 @@ import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
 import { useCallback } from 'react';
-import { updateResumeHeaderAction, uploadImageAction, removeImageAction, describeResumeHeaderAction } from './actions';
-import { describeResumeAction } from '@/app/actions';
+import { updateResumeHeaderAction } from './actions/update-resume-header';
+import { uploadImageAction } from './actions/upload-image';
+import { removeImageAction } from './actions/remove-image';
+import { describeResumeHeaderAction } from './actions/describe-resume-header';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 
 interface AsideFormHeaderServerProps {
 	userId: string;

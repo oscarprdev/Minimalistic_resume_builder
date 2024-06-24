@@ -1,6 +1,6 @@
 'use server';
 
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import AsideFormInfoClient from './AsideFormInfoClient';
 import AsideFormInfoServer from './AsideFormInfoServer';
 

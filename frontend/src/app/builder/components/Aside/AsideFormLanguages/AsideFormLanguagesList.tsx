@@ -5,10 +5,9 @@ import { LanguagesFormState } from './AsideFormLanguages';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
 import { OptionalLanguage } from '@/store/useResumeLanguagesStore';
 import { useMemo } from 'react';
-import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
+import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
 
 interface AsideFormLanguagesListProps {
 	form: UseFormReturn<LanguagesFormState, any, undefined>;

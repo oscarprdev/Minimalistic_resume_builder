@@ -4,7 +4,7 @@ import { isLeft } from '@/lib/either';
 import ViewerHeader from './ViewerHeader';
 import { getCallback } from '@/lib/service.utils';
 import { DEFAULT_HEADER_VALUES } from '@/store/useResumeHeaderStore';
-import { describeResumeHeaderAction } from '../../Aside/AsideFormHeader/actions';
+import { describeResumeHeaderAction } from '../../Aside/AsideFormHeader/actions/describe-resume-header';
 
 interface ViewerHeaderServerProps {
 	userId: string;

@@ -5,9 +5,10 @@ import AsideFormLanguages from './AsideFormLanguages';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { describeResumeAction } from '@/app/actions';
-import { describeResumeLanguagesAction, updateResumeLanguagesAction } from '@/app/builder/components/Aside/AsideFormLanguages/actions';
+import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { asideFormLanguagesSchema } from './schema-validations';
+import { updateResumeLanguagesAction } from './actions/update-resume-languages';
+import { describeResumeLanguagesAction } from './actions/describe-resume-languages';
 
 interface AsideFormLanguagesServerProps {
 	userId: string;

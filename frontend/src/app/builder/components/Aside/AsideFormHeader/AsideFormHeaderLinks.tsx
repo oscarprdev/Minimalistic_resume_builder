@@ -5,7 +5,7 @@ import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
 import { UseFormReturn, useFieldArray } from 'react-hook-form';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useFieldArrayAnimations } from '@/hooks/use-field-array-animations';
+import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
 
 interface AsideFormHeaderLinksProps {
 	form: UseFormReturn<ResumeHeaderDefaultValues, any, undefined>;

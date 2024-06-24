@@ -1,6 +1,6 @@
 'use server';
 
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerEducationClient from './ViewerEducationClient';
 import { Suspense } from 'react';
 import ViewerEducationServer from './ViewerEducationServer';

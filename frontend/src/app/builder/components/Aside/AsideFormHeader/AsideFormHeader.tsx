@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
-import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
+import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { Either, isLeft } from '@/lib/either';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';

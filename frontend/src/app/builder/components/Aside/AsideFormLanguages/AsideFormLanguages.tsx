@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import AsideFormLanguagesList from './AsideFormLanguagesList';
 import { ResumeLanguagesDefaultValues } from '@/store/useResumeLanguagesStore';
 import { Either } from '@/lib/either';
-import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
+import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { asideFormLanguagesSchema } from './schema-validations';
 import SectionActions from '../shared/components/SectionActions';

@@ -1,15 +1,13 @@
 'use client';
 
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { IconLoader2 } from '@tabler/icons-react';
 import { Textarea } from '@/components/ui/textarea';
 import { ResumeSummaryDefaultValues } from '@/store/useResumeSummaryStore';
-import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
+import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { Either } from '@/lib/either';
 import { useSearchParams, useRouter } from 'next/navigation';
 import SectionActions from '../shared/components/SectionActions';

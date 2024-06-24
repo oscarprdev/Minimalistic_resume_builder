@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ResumeInfoDefaultValues } from '@/store/useResumeInfoStore';
 import { Either } from '@/lib/either';
-import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
+import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import SectionActions from '../shared/components/SectionActions';
 

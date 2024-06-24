@@ -4,7 +4,7 @@ import { isLeft } from '@/lib/either';
 import ViewerSkills from './ViewerSkills';
 import { getCallback } from '@/lib/service.utils';
 import { DEFAULT_SKILLS_VALUES } from '@/store/useResumeSkillsStore';
-import { describeResumeSkillsAction } from '../../Aside/AsideFormSkills/actions';
+import { describeResumeSkillsAction } from '../../Aside/AsideFormSkills/actions/describe-resume-skills';
 
 interface ViewerSkillsServerProps {
 	userId: string;

@@ -4,7 +4,7 @@ import { isLeft } from '@/lib/either';
 import ViewerEducation from './ViewerEducation';
 import { getCallback } from '@/lib/service.utils';
 import { DEFAULT_EDUCATION_VALUES } from '@/store/useResumeEducationStore';
-import { describeResumeEducationAction } from '../../Aside/AsideFormEducation/actions';
+import { describeResumeEducationAction } from '../../Aside/AsideFormEducation/actions/describe-resume-education';
 
 interface ViewerEducationServerProps {
 	userId: string;

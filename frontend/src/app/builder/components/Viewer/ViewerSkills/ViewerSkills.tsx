@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouterError } from '@/hooks/use-router-error';
+import { useRouterError } from '@/hooks/useRouterError';
 import { OptionalSkill } from '@/store/useResumeSkillsStore';
 import { useRouter } from 'next/navigation';
 import ViewerSkillIcon from './ViewerSkillIcon';

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Lato } from 'next/font/google';
 import './globals.css';
-import Header from './_components/header/Header';
 import { cn } from '@/lib/utils';
-import ToastWrapper from './_containers/ToastWrapper';
+import ToastWrapper from '../components/wrappers/ToastWrapper';
+import Header from '@/components/core/header/Header';
 
 const inter = Lato({ weight: ['100', '300', '400', '700'], subsets: ['latin'] });
 

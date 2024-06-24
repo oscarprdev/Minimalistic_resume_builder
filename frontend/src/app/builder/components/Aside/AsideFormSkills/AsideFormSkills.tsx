@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import AsideFormSkillsList from './AsideFormSkillsList';
 import { ResumeSkillsDefaultValues } from '@/store/useResumeSkillsStore';
 import { Either } from '@/lib/either';
-import { useRouterAfterSubmit } from '@/hooks/use-router-after-submit';
+import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { asideFormSkillsSchema } from './schema-validations';
 import SectionActions from '../shared/components/SectionActions';

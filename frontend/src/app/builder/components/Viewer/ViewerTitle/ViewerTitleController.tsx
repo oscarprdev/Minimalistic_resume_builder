@@ -1,4 +1,4 @@
-import { useUserLogged } from '@/hooks/use-user-logged';
+import { useUserLogged } from '@/hooks/useUserLogged';
 import React, { Suspense } from 'react';
 import ViewerTitleClient from './ViewerTitleClient';
 import ViewerTitleServer from './ViewerTitleServer';
