@@ -1,5 +1,6 @@
 'use server';
 
+import { User } from 'next-auth';
 import ViewerEducationController from './ViewerEducation/ViewerEducationController';
 import ViewerExperienceController from './ViewerExperience/ViewerExperienceController';
 import ViewerHeaderController from './ViewerHeader/ViewerHeaderController';
@@ -9,20 +10,39 @@ import ViewerSummaryController from './ViewerSummary/ViewerSummaryController';
 
 interface ViewerResumeProps {
 	resumeId: string | null;
+	user?: User;
 }
 
-const ViewerResume = async ({ resumeId }: ViewerResumeProps) => {
+const ViewerResume = async ({ resumeId, user }: ViewerResumeProps) => {
 	return (
 		<article
 			id='resume-viewer'
 			className='w-[650px] bg-white shadow-sm h-fit mb-[100px] p-5'>
-			<ViewerHeaderController resumeId={resumeId} />
-			<ViewerSummaryController resumeId={resumeId} />
-			<ViewerExperienceController resumeId={resumeId} />
-			<ViewerEducationController resumeId={resumeId} />
+			<ViewerHeaderController
+				resumeId={resumeId}
+				user={user}
+			/>
+			<ViewerSummaryController
+				resumeId={resumeId}
+				user={user}
+			/>
+			<ViewerExperienceController
+				resumeId={resumeId}
+				user={user}
+			/>
+			<ViewerEducationController
+				resumeId={resumeId}
+				user={user}
+			/>
 			<div className='flex flex-wrap gap-5'>
-				<ViewerLanguagesController resumeId={resumeId} />
-				<ViewerSkillsController resumeId={resumeId} />
+				<ViewerLanguagesController
+					resumeId={resumeId}
+					user={user}
+				/>
+				<ViewerSkillsController
+					resumeId={resumeId}
+					user={user}
+				/>
 			</div>
 		</article>
 	);

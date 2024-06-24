@@ -9,29 +9,66 @@ import AsideFormSummaryController from './AsideFormSummary/AsideFormSummaryContr
 import AsideFormEducationController from './AsideFormEducation/AsideFormEducationController';
 import AsideFormLanguagesController from './AsideFormLanguages/AsideFormLanguagesController';
 import AsideFormSkillsController from './AsideFormSkills/AsideFormSkillsController';
+import { User } from 'next-auth';
 
 interface AsideFormProps {
 	sectionSelected: SectionControl | null;
 	resumeId: string | null;
+	user?: User;
 }
 
-const AsideForm = async ({ sectionSelected, resumeId }: AsideFormProps) => {
+const AsideForm = async ({ sectionSelected, resumeId, user }: AsideFormProps) => {
 	const renderSelectedForm = (sectionSelected: SectionControl | null) => {
 		switch (sectionSelected) {
 			case SECTION_CONTROL.INFO:
-				return <AsideFormInfoController resumeId={resumeId} />;
+				return (
+					<AsideFormInfoController
+						resumeId={resumeId}
+						user={user}
+					/>
+				);
 			case SECTION_CONTROL.HEADER:
-				return <AsideFormHeaderController resumeId={resumeId} />;
+				return (
+					<AsideFormHeaderController
+						resumeId={resumeId}
+						user={user}
+					/>
+				);
 			case SECTION_CONTROL.SUMMARY:
-				return <AsideFormSummaryController resumeId={resumeId} />;
+				return (
+					<AsideFormSummaryController
+						resumeId={resumeId}
+						user={user}
+					/>
+				);
 			case SECTION_CONTROL.EXPERIENCE:
-				return <AsideFormExperienceController resumeId={resumeId} />;
+				return (
+					<AsideFormExperienceController
+						resumeId={resumeId}
+						user={user}
+					/>
+				);
 			case SECTION_CONTROL.EDUCATION:
-				return <AsideFormEducationController resumeId={resumeId} />;
+				return (
+					<AsideFormEducationController
+						resumeId={resumeId}
+						user={user}
+					/>
+				);
 			case SECTION_CONTROL.LANGUAGES:
-				return <AsideFormLanguagesController resumeId={resumeId} />;
+				return (
+					<AsideFormLanguagesController
+						resumeId={resumeId}
+						user={user}
+					/>
+				);
 			case SECTION_CONTROL.SKILLS:
-				return <AsideFormSkillsController resumeId={resumeId} />;
+				return (
+					<AsideFormSkillsController
+						resumeId={resumeId}
+						user={user}
+					/>
+				);
 			default:
 				break;
 		}

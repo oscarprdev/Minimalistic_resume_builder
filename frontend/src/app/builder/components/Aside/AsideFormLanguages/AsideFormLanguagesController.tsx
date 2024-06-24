@@ -1,23 +1,26 @@
-import { useUserLogged } from '@/hooks/useUserLogged';
+import { User } from 'next-auth';
 import AsideLanguagesClient from './AsideFormLanguagesClient';
 import AsideLanguagesServer from './AsideFormLanguagesServer';
+import { Suspense } from 'react';
+import AsideFormLanguagesSkeleton from './AsideFormLanguagesSkeleton';
 
 interface AsideFormLanguagesControllerProps {
 	resumeId: string | null;
+	user?: User;
 }
 
-const AsideFormLanguagesController = async ({ resumeId }: AsideFormLanguagesControllerProps) => {
-	const user = await useUserLogged();
-
+const AsideFormLanguagesController = ({ resumeId, user }: AsideFormLanguagesControllerProps) => {
 	if (!user?.id) {
 		return <AsideLanguagesClient />;
 	}
 
 	return (
-		<AsideLanguagesServer
-			userId={user.id}
-			resumeId={resumeId}
-		/>
+		<Suspense fallback={<AsideFormLanguagesSkeleton />}>
+			<AsideLanguagesServer
+				userId={user.id}
+				resumeId={resumeId}
+			/>
+		</Suspense>
 	);
 };
 

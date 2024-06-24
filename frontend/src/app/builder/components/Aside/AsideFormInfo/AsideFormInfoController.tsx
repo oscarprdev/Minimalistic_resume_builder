@@ -1,25 +1,26 @@
-'use server';
-
-import { useUserLogged } from '@/hooks/useUserLogged';
+import { Suspense } from 'react';
 import AsideFormInfoClient from './AsideFormInfoClient';
 import AsideFormInfoServer from './AsideFormInfoServer';
+import { User } from 'next-auth';
+import AsideFormInfoSkeleton from './AsideFormInfoSkeleton';
 
 interface AsideFormInfoControllerProps {
 	resumeId: string | null;
+	user?: User;
 }
 
-const AsideFormInfoController = async ({ resumeId }: AsideFormInfoControllerProps) => {
-	const user = await useUserLogged();
-
+const AsideFormInfoController = ({ resumeId, user }: AsideFormInfoControllerProps) => {
 	if (!user?.id) {
 		return <AsideFormInfoClient />;
 	}
 
 	return (
-		<AsideFormInfoServer
-			userId={user.id}
-			resumeId={resumeId}
-		/>
+		<Suspense fallback={<AsideFormInfoSkeleton />}>
+			<AsideFormInfoServer
+				userId={user.id}
+				resumeId={resumeId}
+			/>
+		</Suspense>
 	);
 };
 

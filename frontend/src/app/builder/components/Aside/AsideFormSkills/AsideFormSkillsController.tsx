@@ -1,23 +1,26 @@
-import { useUserLogged } from '@/hooks/useUserLogged';
+import { Suspense } from 'react';
 import AsideSkillsClient from './AsideFormSkillsClient';
 import AsideSkillsServer from './AsideFormSkillsServer';
+import { User } from 'next-auth';
+import AsideFormSkillsSkeleton from './AsideFormSkillsSkeleton';
 
 interface AsideFormSkillsControllerProps {
 	resumeId: string | null;
+	user?: User;
 }
 
-const AsideFormSkillsController = async ({ resumeId }: AsideFormSkillsControllerProps) => {
-	const user = await useUserLogged();
-
+const AsideFormSkillsController = ({ resumeId, user }: AsideFormSkillsControllerProps) => {
 	if (!user?.id) {
 		return <AsideSkillsClient />;
 	}
 
 	return (
-		<AsideSkillsServer
-			userId={user.id}
-			resumeId={resumeId}
-		/>
+		<Suspense fallback={<AsideFormSkillsSkeleton />}>
+			<AsideSkillsServer
+				userId={user.id}
+				resumeId={resumeId}
+			/>
+		</Suspense>
 	);
 };
 

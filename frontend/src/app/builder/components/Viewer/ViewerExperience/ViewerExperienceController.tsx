@@ -1,18 +1,17 @@
 'use server';
 
-import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerExperienceClient from './ViewerExperienceClient';
 import { Suspense } from 'react';
 import ViewerExperienceServer from './ViewerExperienceServer';
 import ViewerExperienceSkeleton from './ViewerExperienceSkeleton';
+import { User } from 'next-auth';
 
 interface ViewerExperienceControllerProps {
 	resumeId: string | null;
+	user?: User;
 }
 
-const ViewerExperienceController = async ({ resumeId }: ViewerExperienceControllerProps) => {
-	const user = await useUserLogged();
-
+const ViewerExperienceController = async ({ resumeId, user }: ViewerExperienceControllerProps) => {
 	if (!user?.id) {
 		return <ViewerExperienceClient />;
 	}

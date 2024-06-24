@@ -5,14 +5,14 @@ import ViewerEducationClient from './ViewerEducationClient';
 import { Suspense } from 'react';
 import ViewerEducationServer from './ViewerEducationServer';
 import ViewerEducationSkeleton from './ViewerEducationSkeleton';
+import { User } from 'next-auth';
 
 interface ViewerEducationControllerProps {
 	resumeId: string | null;
+	user?: User;
 }
 
-const ViewerEducationController = async ({ resumeId }: ViewerEducationControllerProps) => {
-	const user = await useUserLogged();
-
+const ViewerEducationController = async ({ resumeId, user }: ViewerEducationControllerProps) => {
 	if (!user?.id) {
 		return <ViewerEducationClient />;
 	}

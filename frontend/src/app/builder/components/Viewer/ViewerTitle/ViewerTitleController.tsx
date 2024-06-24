@@ -1,15 +1,16 @@
-import { useUserLogged } from '@/hooks/useUserLogged';
-import React, { Suspense } from 'react';
+'use server';
+
 import ViewerTitleClient from './ViewerTitleClient';
 import ViewerTitleServer from './ViewerTitleServer';
+import { Suspense } from 'react';
+import { User } from 'next-auth';
 
 interface ViewerTitleControllerProps {
 	resumeId: string | null;
+	user?: User;
 }
 
-const ViewerTitleController = async ({ resumeId }: ViewerTitleControllerProps) => {
-	const user = await useUserLogged();
-
+const ViewerTitleController = async ({ resumeId, user }: ViewerTitleControllerProps) => {
 	if (!user?.id) {
 		return <ViewerTitleClient />;
 	}

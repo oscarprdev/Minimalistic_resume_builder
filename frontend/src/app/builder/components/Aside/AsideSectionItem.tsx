@@ -4,18 +4,17 @@ import { IconPlus, IconMinus } from '@tabler/icons-react';
 import Link from 'next/link';
 import { SECTION_CONTROL, SectionControl } from '../_utils/sections';
 import { cn } from '@/lib/utils';
-import { useUserLogged } from '@/hooks/useUserLogged';
+import { User } from 'next-auth';
 
 interface AsideSectionItemProps {
 	label: string;
 	control: SectionControl;
 	sectionSelected: SectionControl | null;
 	resumeId: string | null;
+	user?: User;
 }
 
-const AsideSectionItem = async ({ label, control, sectionSelected, resumeId }: AsideSectionItemProps) => {
-	const user = await useUserLogged();
-
+const AsideSectionItem = async ({ label, control, sectionSelected, resumeId, user }: AsideSectionItemProps) => {
 	const isSectionSelected = (control: SectionControl, sectionSelected: SectionControl | null) => {
 		if (control === SECTION_CONTROL.HEADER && !!sectionSelected) true;
 
@@ -39,12 +38,12 @@ const AsideSectionItem = async ({ label, control, sectionSelected, resumeId }: A
 	return (
 		<li
 			className={cn(
-				'cursor-pointer group w-full p-5 border border-transparent border-b-gray-200',
+				'cursor-pointer group w-full p-0 border border-transparent border-b-gray-200',
 				isItemDisabled && 'bg-gray-100 cursor-not-allowed'
 			)}>
 			<Link
 				href={pathToRedirect(resumeId, sectionSelected)}
-				className={cn('flex items-center justify-between', isItemDisabled && 'text-gray-300 cursor-not-allowed')}>
+				className={cn('flex items-center p-5 justify-between', isItemDisabled && 'text-gray-300 cursor-not-allowed')}>
 				<p
 					className={cn(
 						'text-sm group-hover:text-purple_200',

@@ -5,6 +5,8 @@ import { getCallback } from '@/services';
 import ViewerTitle from './ViewerTitle';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { DEFAULT_INFO_VALUES } from '@/store/useResumeInfoStore';
+import { listResumeAction } from '@/app/actions/resume/list-resume.action';
+import ErrorMessage from '../../ErrorMessage';
 
 interface ViewerTitleServerProps {
 	userId: string;
@@ -14,6 +16,14 @@ interface ViewerTitleServerProps {
 const ViewerTitleServer = async ({ userId, resumeId }: ViewerTitleServerProps) => {
 	if (!resumeId) {
 		return <ViewerTitle resumeTitle={DEFAULT_INFO_VALUES.title} />;
+	}
+
+	const listResumeActionResponse = await listResumeAction({
+		userId: userId,
+		getCallback,
+	});
+	if (isLeft(listResumeActionResponse)) {
+		return <ErrorMessage />;
 	}
 
 	const response = await describeResumeAction({ userId, resumeId, getCallback });
