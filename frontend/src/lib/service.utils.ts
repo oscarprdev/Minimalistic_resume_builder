@@ -6,8 +6,8 @@ export const getCallback = async <R>(path: string): Promise<Either<string, R>> =
 	try {
 		const response = await fetch(path, { cache: 'no-store' });
 
-		if (response.status === 404) {
-			throw new Error('Error not found');
+		if (response.status === 404 || !response.ok) {
+			throw new Error(`Error: ${response.status} - ${response.url}`);
 		}
 
 		const jsonResponse = await response.json();
@@ -27,7 +27,7 @@ export const postCallback = async <P, R>(path: string, payload: P): Promise<Eith
 		});
 
 		if (!response.ok) {
-			throw new Error('Error');
+			throw new Error(`Error: ${response.status} - ${response.url}`);
 		}
 
 		const jsonResponse = await response.json();
