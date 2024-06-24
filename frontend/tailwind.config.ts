@@ -33,7 +33,7 @@ const config = {
 				},
 				'fade-right': {
 					from: { opacity: '0', transform: 'translateX(-15px)' },
-					to: { opacity: '1', transform: 'translateX(0px)' },
+					to: { opacity: '1', transform: 'translateX(0px)', display: 'block' },
 				},
 				'fade-left': {
 					from: { opacity: '1', transform: 'translateX(0px)' },
