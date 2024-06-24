@@ -1,5 +1,3 @@
-'use server';
-
 import ViewerLanguagesClient from './ViewerLanguagesClient';
 import { Suspense } from 'react';
 import ViewerLanguagesServer from './ViewerLanguagesServer';
@@ -11,7 +9,7 @@ interface ViewerLanguagesControllerProps {
 	user?: User;
 }
 
-const ViewerLanguagesController = async ({ resumeId, user }: ViewerLanguagesControllerProps) => {
+const ViewerLanguagesController = ({ resumeId, user }: ViewerLanguagesControllerProps) => {
 	if (!user?.id) {
 		return <ViewerLanguagesClient />;
 	}

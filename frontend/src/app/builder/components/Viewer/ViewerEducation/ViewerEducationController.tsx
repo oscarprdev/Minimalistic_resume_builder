@@ -1,6 +1,3 @@
-'use server';
-
-import { useUserLogged } from '@/hooks/useUserLogged';
 import ViewerEducationClient from './ViewerEducationClient';
 import { Suspense } from 'react';
 import ViewerEducationServer from './ViewerEducationServer';
@@ -12,7 +9,7 @@ interface ViewerEducationControllerProps {
 	user?: User;
 }
 
-const ViewerEducationController = async ({ resumeId, user }: ViewerEducationControllerProps) => {
+const ViewerEducationController = ({ resumeId, user }: ViewerEducationControllerProps) => {
 	if (!user?.id) {
 		return <ViewerEducationClient />;
 	}

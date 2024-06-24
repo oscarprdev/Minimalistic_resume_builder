@@ -1,5 +1,3 @@
-'use server';
-
 import ViewerSummaryClient from './ViewerSummaryClient';
 import { Suspense } from 'react';
 import ViewerSummaryServer from './ViewerSummaryServer';
@@ -11,7 +9,7 @@ interface ViewerSummaryControllerProps {
 	user?: User;
 }
 
-const ViewerSummaryController = async ({ resumeId, user }: ViewerSummaryControllerProps) => {
+const ViewerSummaryController = ({ resumeId, user }: ViewerSummaryControllerProps) => {
 	if (!user?.id) {
 		return <ViewerSummaryClient />;
 	}

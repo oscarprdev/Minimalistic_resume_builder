@@ -1,5 +1,3 @@
-'use server';
-
 import ViewerSkillsClient from './ViewerSkillsClient';
 import { Suspense } from 'react';
 import ViewerSkillsServer from './ViewerSkillsServer';
@@ -11,7 +9,7 @@ interface ViewerSkillsControllerProps {
 	user?: User;
 }
 
-const ViewerSkillsController = async ({ resumeId, user }: ViewerSkillsControllerProps) => {
+const ViewerSkillsController = ({ resumeId, user }: ViewerSkillsControllerProps) => {
 	if (!user?.id) {
 		return <ViewerSkillsClient />;
 	}

@@ -1,5 +1,3 @@
-'use server';
-
 import ViewerTitleClient from './ViewerTitleClient';
 import ViewerTitleServer from './ViewerTitleServer';
 import { Suspense } from 'react';
@@ -10,7 +8,7 @@ interface ViewerTitleControllerProps {
 	user?: User;
 }
 
-const ViewerTitleController = async ({ resumeId, user }: ViewerTitleControllerProps) => {
+const ViewerTitleController = ({ resumeId, user }: ViewerTitleControllerProps) => {
 	if (!user?.id) {
 		return <ViewerTitleClient />;
 	}

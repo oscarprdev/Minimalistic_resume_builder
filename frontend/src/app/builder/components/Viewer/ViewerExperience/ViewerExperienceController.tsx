@@ -1,5 +1,3 @@
-'use server';
-
 import ViewerExperienceClient from './ViewerExperienceClient';
 import { Suspense } from 'react';
 import ViewerExperienceServer from './ViewerExperienceServer';
@@ -11,7 +9,7 @@ interface ViewerExperienceControllerProps {
 	user?: User;
 }
 
-const ViewerExperienceController = async ({ resumeId, user }: ViewerExperienceControllerProps) => {
+const ViewerExperienceController = ({ resumeId, user }: ViewerExperienceControllerProps) => {
 	if (!user?.id) {
 		return <ViewerExperienceClient />;
 	}
