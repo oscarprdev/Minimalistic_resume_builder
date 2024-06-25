@@ -1,12 +1,12 @@
 'use server';
 
 import Link from 'next/link';
-import { listResumeAction } from '../../../actions/resume/list-resume.action';
 import { getCallback } from '@/services';
 import { isLeft } from '@/lib/either';
 import { useUserLogged } from '@/hooks/useUserLogged';
 import ResumeListError from './ResumeListError';
 import ResumeListContainer from './ResumeListContainer';
+import { listResumeAction } from '@/app/actions/resume/list-resume.action';
 
 const ResumeList = async () => {
 	const user = await useUserLogged();

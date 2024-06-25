@@ -4,10 +4,10 @@ import { Either, isLeft } from '@/lib/either';
 import AsideFormInfo, { asideFormInfoSchema } from './AsideFormInfo';
 import { z } from 'zod';
 import { postCallback, getCallback } from '@/services';
-import { updateResumeInfoAction } from '@/app/builder/components/Aside/AsideFormInfo/actions/update-resume-info';
 import ErrorMessage from '../../ErrorMessage';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { ResumeInfoDefaultValues } from '@/store/useResumeInfoStore';
+import { updateResumeInfoAction } from './actions/update-resume-info';
 
 interface AsideFormInfoServerProps {
 	userId: string;

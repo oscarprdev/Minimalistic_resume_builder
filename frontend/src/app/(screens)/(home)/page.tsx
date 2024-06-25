@@ -3,8 +3,8 @@
 import { Suspense } from 'react';
 import ResumeList from './components/ResumeList/ResumeList';
 import CreateNewResumeCta from './components/CreateNewResumeCta';
-import { WithAuthorization } from '../../components/wrappers/WithAuthorization';
 import ResumeListSkeleton from './components/ResumeList/ResumeListSkeleton';
+import { WithAuthorization } from '@/components/wrappers/WithAuthorization';
 
 export default async function HomePage() {
 	return (
