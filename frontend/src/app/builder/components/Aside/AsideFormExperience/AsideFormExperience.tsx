@@ -3,8 +3,6 @@
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import AsideFormExperienceJobList from './AsideFormExperienceJobList';
 import { ResumeExperienceDefaultValues } from '@/store/useResumeExperienceStore';
 import { Either } from '@/lib/either';
@@ -12,6 +10,7 @@ import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { asideFormExperienceSchema } from './schema-validations';
 import SectionActions from '../shared/components/SectionActions';
+import { useDynamicForm } from '@/hooks/useDynamicForm';
 
 interface AsideFormExperienceProps {
 	handleSubmit: (values: z.infer<typeof asideFormExperienceSchema>) => Promise<Either<string, string>>;
@@ -25,10 +24,7 @@ const AsideFormExperience = ({ defaultValues, handleSubmit }: AsideFormExperienc
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useForm<z.infer<typeof asideFormExperienceSchema>>({
-		resolver: zodResolver(asideFormExperienceSchema),
-		defaultValues,
-	});
+	const form = useDynamicForm<ExperienceFormState>({ schema: asideFormExperienceSchema, defaultValues });
 
 	const onSubmit = async (values: z.infer<typeof asideFormExperienceSchema>) => {
 		const response = await handleSubmit(values);

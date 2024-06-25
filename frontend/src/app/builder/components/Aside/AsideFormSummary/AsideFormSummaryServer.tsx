@@ -8,11 +8,17 @@ import ErrorMessage from '../../ErrorMessage';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { updateResumeSummaryAction } from './actions/update-resume-summary';
 import { describeResumeSummaryAction } from './actions/describe-resume-summary';
+import { ResumeSummaryDefaultValues } from '@/store/useResumeSummaryStore';
 
 interface AsideFormSummaryServerProps {
 	userId: string;
 	resumeId?: string | null;
 }
+
+const DEFAULT_SUMMARY_VALUES: ResumeSummaryDefaultValues = {
+	title: '',
+	summary: '',
+};
 
 const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServerProps) => {
 	const handleServerSubmit = async (values: z.infer<typeof asideFormSummarySchema>): Promise<Either<string, string>> => {
@@ -26,7 +32,12 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 	};
 
 	if (!resumeId) {
-		return <AsideFormSummary handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormSummary
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_SUMMARY_VALUES}
+			/>
+		);
 	}
 
 	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
@@ -35,7 +46,12 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 	}
 
 	if (!describeResumeActionResponse.right.summary) {
-		return <AsideFormSummary handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormSummary
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_SUMMARY_VALUES}
+			/>
+		);
 	}
 
 	const response = await describeResumeSummaryAction({ userId, resumeId, getCallback });

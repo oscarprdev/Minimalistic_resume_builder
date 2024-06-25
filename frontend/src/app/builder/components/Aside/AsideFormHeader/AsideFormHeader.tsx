@@ -15,6 +15,7 @@ import { ChangeEvent } from 'react';
 import { toast } from '@/components/ui/use-toast';
 import SectionActions from '../shared/components/SectionActions';
 import AsideFormHeaderLinks from './AsideFormHeaderLinks';
+import { useDynamicForm } from '@/hooks/useDynamicForm';
 
 interface AsideFormHeaderProps {
 	defaultValues?: ResumeHeaderDefaultValues;
@@ -38,10 +39,7 @@ const AsideFormHeader = ({ defaultValues, handleSubmit, updateImage, removeImage
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useForm<z.infer<typeof asideFormHeaderSchema>>({
-		resolver: zodResolver(asideFormHeaderSchema),
-		defaultValues,
-	});
+	const form = useDynamicForm<ResumeHeaderDefaultValues>({ schema: asideFormHeaderSchema, defaultValues });
 
 	const onSubmit = async (values: z.infer<typeof asideFormHeaderSchema>) => {
 		const response = await handleSubmit(values);

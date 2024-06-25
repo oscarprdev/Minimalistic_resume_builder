@@ -3,14 +3,13 @@
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import { ResumeSummaryDefaultValues } from '@/store/useResumeSummaryStore';
 import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { Either } from '@/lib/either';
 import { useSearchParams, useRouter } from 'next/navigation';
 import SectionActions from '../shared/components/SectionActions';
+import { useDynamicForm } from '@/hooks/useDynamicForm';
 
 interface AsideFormSummaryProps {
 	defaultValues?: ResumeSummaryDefaultValues;
@@ -31,10 +30,7 @@ const AsideFormSummary = ({ defaultValues, handleSubmit }: AsideFormSummaryProps
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useForm<z.infer<typeof asideFormSummarySchema>>({
-		resolver: zodResolver(asideFormSummarySchema),
-		defaultValues,
-	});
+	const form = useDynamicForm<ResumeSummaryDefaultValues>({ schema: asideFormSummarySchema, defaultValues });
 
 	const onSubmit = async (values: z.infer<typeof asideFormSummarySchema>) => {
 		const response = await handleSubmit(values);

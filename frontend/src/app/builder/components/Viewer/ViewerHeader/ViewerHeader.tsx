@@ -49,7 +49,7 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error }
 				className='block w-16 h-[1px] bg-gray-800 my-3'
 			/>
 			<div className='flex flex-col space-y-2'>
-				<ul className='flex gap-4 items-center mt-2'>
+				<ul className={cn('flex gap-4 items-center mt-2', `${Array.isArray(links) && links.length === 0 && 'flex-col items-start gap-2'}`)}>
 					<li className='flex space-x-1 items-center relative'>
 						<ViewerHeaderIcons value='location' />
 						<p

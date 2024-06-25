@@ -3,8 +3,6 @@
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import AsideFormLanguagesList from './AsideFormLanguagesList';
 import { ResumeLanguagesDefaultValues } from '@/store/useResumeLanguagesStore';
 import { Either } from '@/lib/either';
@@ -12,6 +10,7 @@ import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { asideFormLanguagesSchema } from './schema-validations';
 import SectionActions from '../shared/components/SectionActions';
+import { useDynamicForm } from '@/hooks/useDynamicForm';
 
 interface AsideFormLanguagesProps {
 	handleSubmit: (values: z.infer<typeof asideFormLanguagesSchema>) => Promise<Either<string, string>>;
@@ -25,10 +24,7 @@ const AsideFormLanguages = ({ defaultValues, handleSubmit }: AsideFormLanguagesP
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useForm<z.infer<typeof asideFormLanguagesSchema>>({
-		resolver: zodResolver(asideFormLanguagesSchema),
-		defaultValues,
-	});
+	const form = useDynamicForm<LanguagesFormState>({ schema: asideFormLanguagesSchema, defaultValues });
 
 	const onSubmit = async (values: z.infer<typeof asideFormLanguagesSchema>) => {
 		const response = await handleSubmit(values);

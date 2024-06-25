@@ -14,10 +14,6 @@ interface ViewerTitleServerProps {
 }
 
 const ViewerTitleServer = async ({ userId, resumeId }: ViewerTitleServerProps) => {
-	if (!resumeId) {
-		return <ViewerTitle resumeTitle={DEFAULT_INFO_VALUES.title} />;
-	}
-
 	const listResumeActionResponse = await listResumeAction({
 		userId: userId,
 		getCallback,
@@ -26,17 +22,38 @@ const ViewerTitleServer = async ({ userId, resumeId }: ViewerTitleServerProps) =
 		return <ErrorMessage />;
 	}
 
+	const allResumesIds = listResumeActionResponse.right.map((resume) => resume.id);
+	const currentResumeIndex = allResumesIds.findIndex((id) => id === resumeId);
+
+	if (!resumeId) {
+		return (
+			<ViewerTitle
+				resumeTitle={DEFAULT_INFO_VALUES.title}
+				allResumesIds={allResumesIds}
+				index={currentResumeIndex}
+			/>
+		);
+	}
+
 	const response = await describeResumeAction({ userId, resumeId, getCallback });
 	if (isLeft(response)) {
 		return (
 			<ViewerTitle
 				resumeTitle={DEFAULT_INFO_VALUES.title}
 				error={response.left}
+				allResumesIds={allResumesIds}
+				index={currentResumeIndex}
 			/>
 		);
 	}
 
-	return <ViewerTitle resumeTitle={response.right.title} />;
+	return (
+		<ViewerTitle
+			resumeTitle={response.right.title}
+			allResumesIds={allResumesIds}
+			index={currentResumeIndex}
+		/>
+	);
 };
 
 export default ViewerTitleServer;

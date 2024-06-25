@@ -7,12 +7,16 @@ import { postCallback, getCallback } from '@/services';
 import { updateResumeInfoAction } from '@/app/builder/components/Aside/AsideFormInfo/actions/update-resume-info';
 import ErrorMessage from '../../ErrorMessage';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
-import { DEFAULT_INFO_VALUES } from '@/store/useResumeInfoStore';
+import { ResumeInfoDefaultValues } from '@/store/useResumeInfoStore';
 
 interface AsideFormInfoServerProps {
 	userId: string;
 	resumeId?: string | null;
 }
+
+const DEFAULT_INFO_VALUES: ResumeInfoDefaultValues = {
+	title: '',
+};
 
 const AsideFormInfoServer = async ({ userId, resumeId }: AsideFormInfoServerProps) => {
 	const handleServerSubmit = async (values: z.infer<typeof asideFormInfoSchema>): Promise<Either<string, string>> => {
@@ -26,7 +30,12 @@ const AsideFormInfoServer = async ({ userId, resumeId }: AsideFormInfoServerProp
 	};
 
 	if (!resumeId) {
-		return <AsideFormInfo handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormInfo
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_INFO_VALUES}
+			/>
+		);
 	}
 
 	const response = await describeResumeAction({ userId, resumeId, getCallback });

@@ -1,6 +1,6 @@
 'use client';
 
-import { useResumeHeaderStore } from '@/store/useResumeHeaderStore';
+import { DEFAULT_HEADER_VALUES, useResumeHeaderStore } from '@/store/useResumeHeaderStore';
 import { z } from 'zod';
 import AsideFormHeader, { asideFormHeaderSchema } from './AsideFormHeader';
 import { left, right } from '@/lib/either';

@@ -9,11 +9,17 @@ import { describeResumeAction } from '@/app/actions/resume/describe-resume.actio
 import { asideFormSkillsSchema } from './schema-validations';
 import { updateResumeSkillsAction } from './actions/update-resume-skills';
 import { describeResumeSkillsAction } from './actions/describe-resume-skills';
+import { ResumeSkillsDefaultValues } from '@/store/useResumeSkillsStore';
 
 interface AsideFormSkillsServerProps {
 	userId: string;
 	resumeId?: string | null;
 }
+
+const DEFAULT_SKILLS_VALUES: ResumeSkillsDefaultValues = {
+	title: '',
+	skillList: [],
+};
 
 const AsideFormSkillsServer = async ({ userId, resumeId }: AsideFormSkillsServerProps) => {
 	const handleServerSubmit = async (values: z.infer<typeof asideFormSkillsSchema>): Promise<Either<string, string>> => {
@@ -27,7 +33,12 @@ const AsideFormSkillsServer = async ({ userId, resumeId }: AsideFormSkillsServer
 	};
 
 	if (!resumeId) {
-		return <AsideFormSkills handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormSkills
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_SKILLS_VALUES}
+			/>
+		);
 	}
 
 	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
@@ -36,7 +47,12 @@ const AsideFormSkillsServer = async ({ userId, resumeId }: AsideFormSkillsServer
 	}
 
 	if (!describeResumeActionResponse.right.skills) {
-		return <AsideFormSkills handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormSkills
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_SKILLS_VALUES}
+			/>
+		);
 	}
 
 	const response = await describeResumeSkillsAction({ userId, resumeId, getCallback });

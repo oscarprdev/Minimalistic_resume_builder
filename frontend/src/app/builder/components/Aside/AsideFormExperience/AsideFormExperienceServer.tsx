@@ -9,11 +9,17 @@ import { asideFormExperienceSchema } from './schema-validations';
 import { updateResumeExperienceAction } from './actions/update-resume-experience';
 import { describeResumeExperienceAction } from './actions/describe-resume-experience';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import { ResumeExperienceDefaultValues } from '@/store/useResumeExperienceStore';
 
 interface AsideFormExperienceServerProps {
 	userId: string;
 	resumeId?: string | null;
 }
+
+const DEFAULT_EXPERIENCE_VALUES: ResumeExperienceDefaultValues = {
+	title: '',
+	jobList: [],
+};
 
 const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperienceServerProps) => {
 	const handleServerSubmit = async (values: z.infer<typeof asideFormExperienceSchema>): Promise<Either<string, string>> => {
@@ -27,7 +33,12 @@ const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperien
 	};
 
 	if (!resumeId) {
-		return <AsideFormExperience handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormExperience
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_EXPERIENCE_VALUES}
+			/>
+		);
 	}
 
 	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
@@ -36,7 +47,12 @@ const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperien
 	}
 
 	if (!describeResumeActionResponse.right.experience) {
-		return <AsideFormExperience handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormExperience
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_EXPERIENCE_VALUES}
+			/>
+		);
 	}
 
 	const response = await describeResumeExperienceAction({ userId, resumeId, getCallback });

@@ -11,11 +11,21 @@ import { uploadImageAction } from './actions/upload-image';
 import { removeImageAction } from './actions/remove-image';
 import { describeResumeHeaderAction } from './actions/describe-resume-header';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
 
 interface AsideFormHeaderServerProps {
 	userId: string;
 	resumeId?: string | null;
 }
+
+const DEFAULT_HEADER_VALUES: ResumeHeaderDefaultValues = {
+	name: '',
+	job: '',
+	location: '',
+	email: '',
+	phone: '',
+	links: [],
+};
 
 const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServerProps) => {
 	const defaultResumeId = crypto.randomUUID().toString();
@@ -46,6 +56,7 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 				handleSubmit={handleServerSubmit}
 				updateImage={updateImage}
 				removeImage={removeImage}
+				defaultValues={DEFAULT_HEADER_VALUES}
 			/>
 		);
 	}
@@ -61,6 +72,7 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 				handleSubmit={handleServerSubmit}
 				updateImage={updateImage}
 				removeImage={removeImage}
+				defaultValues={DEFAULT_HEADER_VALUES}
 			/>
 		);
 	}

@@ -9,11 +9,17 @@ import { describeResumeAction } from '@/app/actions/resume/describe-resume.actio
 import { asideFormLanguagesSchema } from './schema-validations';
 import { updateResumeLanguagesAction } from './actions/update-resume-languages';
 import { describeResumeLanguagesAction } from './actions/describe-resume-languages';
+import { ResumeLanguagesDefaultValues } from '@/store/useResumeLanguagesStore';
 
 interface AsideFormLanguagesServerProps {
 	userId: string;
 	resumeId?: string | null;
 }
+
+const DEFAULT_LANGUAGES_VALUES: ResumeLanguagesDefaultValues = {
+	title: '',
+	languageList: [],
+};
 
 const AsideFormLanguagesServer = async ({ userId, resumeId }: AsideFormLanguagesServerProps) => {
 	const handleServerSubmit = async (values: z.infer<typeof asideFormLanguagesSchema>): Promise<Either<string, string>> => {
@@ -27,7 +33,12 @@ const AsideFormLanguagesServer = async ({ userId, resumeId }: AsideFormLanguages
 	};
 
 	if (!resumeId) {
-		return <AsideFormLanguages handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormLanguages
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_LANGUAGES_VALUES}
+			/>
+		);
 	}
 
 	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
@@ -36,7 +47,12 @@ const AsideFormLanguagesServer = async ({ userId, resumeId }: AsideFormLanguages
 	}
 
 	if (!describeResumeActionResponse.right.languages) {
-		return <AsideFormLanguages handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormLanguages
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_LANGUAGES_VALUES}
+			/>
+		);
 	}
 
 	const response = await describeResumeLanguagesAction({ userId, resumeId, getCallback });

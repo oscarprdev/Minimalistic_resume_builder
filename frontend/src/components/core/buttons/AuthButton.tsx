@@ -2,12 +2,14 @@
 
 import { loginUser } from '@/app/actions/auth/login-user';
 import { logoutUser } from '@/app/actions/auth/logout-user';
-import { useUserLogged } from '@/hooks/useUserLogged';
 import { Button } from '@/components/ui/button';
+import { User } from 'next-auth';
 
-const AuthButton = async () => {
-	const user = await useUserLogged();
+interface AuthButtonProps {
+	user?: User;
+}
 
+const AuthButton = async ({ user }: AuthButtonProps) => {
 	const onAuthClick = async () => {
 		'use server';
 		user ? await logoutUser() : await loginUser({ username: 'oscarpr', password: '1234' });
@@ -17,7 +19,7 @@ const AuthButton = async () => {
 		<form action={onAuthClick}>
 			<Button
 				type='submit'
-				variant={user ? 'outline' : 'default'}>
+				variant={user ? 'darkOutline' : 'dark'}>
 				{user ? 'Logout' : 'Login'}
 			</Button>
 		</form>

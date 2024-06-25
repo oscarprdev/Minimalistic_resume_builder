@@ -8,7 +8,6 @@ import { SectionControl } from './components/_utils/sections';
 export interface HomeProps {
 	searchParams: { resume?: string; selected?: string };
 }
-
 export default async function BuilderPage({ searchParams }: HomeProps) {
 	let resumeSelected = searchParams.resume || null;
 	let sectionSelected = (searchParams.selected as SectionControl) || null;

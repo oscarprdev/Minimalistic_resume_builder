@@ -10,6 +10,8 @@ import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import SectionActions from '../shared/components/SectionActions';
+import { useEffect } from 'react';
+import { useDynamicForm } from '@/hooks/useDynamicForm';
 
 interface AsideFormInfoProps {
 	defaultValues?: ResumeInfoDefaultValues;
@@ -27,10 +29,7 @@ const AsideFormInfo = ({ defaultValues, handleSubmit }: AsideFormInfoProps) => {
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useForm<z.infer<typeof asideFormInfoSchema>>({
-		resolver: zodResolver(asideFormInfoSchema),
-		defaultValues,
-	});
+	const form = useDynamicForm<ResumeInfoDefaultValues>({ schema: asideFormInfoSchema, defaultValues });
 
 	const onSubmit = async (values: z.infer<typeof asideFormInfoSchema>) => {
 		const response = await handleSubmit(values);

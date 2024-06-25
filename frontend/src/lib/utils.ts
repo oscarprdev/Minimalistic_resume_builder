@@ -47,3 +47,7 @@ export function getTimeDifference(date1: string, date2: string) {
 		return 'less than 1 month';
 	}
 }
+
+export function isTruthyNumber(value: any) {
+	return typeof value === 'number' && !isNaN(value);
+}

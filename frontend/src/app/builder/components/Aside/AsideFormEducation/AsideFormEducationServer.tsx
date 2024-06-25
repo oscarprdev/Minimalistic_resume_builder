@@ -9,11 +9,17 @@ import { asideFormEducationSchema } from './schema-validations';
 import { updateResumeEducationAction } from './actions/update-resume-education';
 import { describeResumeEducationAction } from './actions/describe-resume-education';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
+import { ResumeEducationDefaultValues } from '@/store/useResumeEducationStore';
 
 interface AsideFormEducationServerProps {
 	userId: string;
 	resumeId?: string | null;
 }
+
+const DEFAULT_EDUCATION_VALUES: ResumeEducationDefaultValues = {
+	title: '',
+	educationList: [],
+};
 
 const AsideFormEducationServer = async ({ userId, resumeId }: AsideFormEducationServerProps) => {
 	const handleServerSubmit = async (values: z.infer<typeof asideFormEducationSchema>): Promise<Either<string, string>> => {
@@ -27,7 +33,12 @@ const AsideFormEducationServer = async ({ userId, resumeId }: AsideFormEducation
 	};
 
 	if (!resumeId) {
-		return <AsideFormEducation handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormEducation
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_EDUCATION_VALUES}
+			/>
+		);
 	}
 
 	const describeResumeActionResponse = await describeResumeAction({ userId, resumeId, getCallback });
@@ -36,7 +47,12 @@ const AsideFormEducationServer = async ({ userId, resumeId }: AsideFormEducation
 	}
 
 	if (!describeResumeActionResponse.right.education) {
-		return <AsideFormEducation handleSubmit={handleServerSubmit} />;
+		return (
+			<AsideFormEducation
+				handleSubmit={handleServerSubmit}
+				defaultValues={DEFAULT_EDUCATION_VALUES}
+			/>
+		);
 	}
 
 	const response = await describeResumeEducationAction({ userId, resumeId, getCallback });

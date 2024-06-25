@@ -4,10 +4,20 @@ import { Button } from '@/components/ui/button';
 import { IconLoader2 } from '@tabler/icons-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { User } from 'next-auth';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { startTransition, useState } from 'react';
 
-const DownloadResumeButton = () => {
+interface DownloadResumeButtonProps {
+	user?: User;
+}
+
+const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
 	const [loading, setLoading] = useState(false);
+	const pathname = usePathname();
+	const params = useSearchParams();
+
+	const buttonIsVisible = pathname.match('builder') && user ? params.get('resume') : true;
 
 	const handleDownloadResumeClick = async () => {
 		setLoading(true);
@@ -17,7 +27,7 @@ const DownloadResumeButton = () => {
 
 			if (domElement) {
 				html2canvas(domElement, {
-					scale: 3,
+					scale: 2,
 					logging: true,
 					allowTaint: true,
 					useCORS: true,
@@ -68,12 +78,16 @@ const DownloadResumeButton = () => {
 	};
 
 	return (
-		<Button
-			onClick={handleDownloadResumeClick}
-			disabled={loading}
-			className='flex gap-2'>
-			{loading ? <IconLoader2 className='animate-spin text-white' /> : 'Download'}
-		</Button>
+		<>
+			{buttonIsVisible && (
+				<Button
+					onClick={handleDownloadResumeClick}
+					disabled={loading}
+					className='flex gap-2'>
+					{loading ? <IconLoader2 className='animate-spin text-white' /> : 'Download'}
+				</Button>
+			)}
+		</>
 	);
 };
 
