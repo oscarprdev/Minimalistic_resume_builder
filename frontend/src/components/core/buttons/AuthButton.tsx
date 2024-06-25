@@ -1,28 +1,24 @@
-'use server';
+'use client';
 
-import { loginUser } from '@/app/actions/auth/login-user';
-import { logoutUser } from '@/app/actions/auth/logout-user';
+import { authAction } from '@/app/actions/auth/auth';
 import { Button } from '@/components/ui/button';
 import { User } from 'next-auth';
+import { usePathname } from 'next/navigation';
 
 interface AuthButtonProps {
 	user?: User;
 }
 
-const AuthButton = async ({ user }: AuthButtonProps) => {
-	const onAuthClick = async () => {
-		'use server';
-		user ? await logoutUser() : await loginUser({ username: 'oscarpr', password: '1234' });
-	};
+const AuthButton = ({ user }: AuthButtonProps) => {
+	const pathname = usePathname();
+	const isHome = !pathname.includes('builder');
 
 	return (
-		<form action={onAuthClick}>
-			<Button
-				type='submit'
-				variant={user ? 'darkOutline' : 'dark'}>
-				{user ? 'Logout' : 'Login'}
-			</Button>
-		</form>
+		<Button
+			onClick={() => authAction(user)}
+			variant={(user && isHome) || !isHome ? 'outline' : 'default'}>
+			{user ? 'Logout' : 'Login'}
+		</Button>
 	);
 };
 
