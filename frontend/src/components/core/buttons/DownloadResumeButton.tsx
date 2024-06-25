@@ -17,7 +17,7 @@ const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
 	const pathname = usePathname();
 	const params = useSearchParams();
 
-	const buttonIsVisible = pathname.match('builder') && user ? params.get('resume') : true;
+	const buttonIsVisible = user ? params.get('resume') : true && pathname.includes('builder');
 
 	const handleDownloadResumeClick = async () => {
 		setLoading(true);
