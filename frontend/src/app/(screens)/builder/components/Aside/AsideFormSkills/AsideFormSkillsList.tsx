@@ -8,6 +8,8 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { OptionalSkill } from '@/store/useResumeSkillsStore';
 import { useMemo } from 'react';
 import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
+import RemoveListItemCta from '../shared/components/RemoveListItemCta';
+import { IconPlus } from '@tabler/icons-react';
 
 interface AsideFormSkillsListProps {
 	form: UseFormReturn<SkillsFormState, any, undefined>;
@@ -59,13 +61,10 @@ const AsideFormSkillsList = ({ form }: AsideFormSkillsListProps) => {
 							</FormItem>
 						)}
 					/>
-					<Button
-						type='button'
-						className='w-full'
-						variant={'clean'}
-						onClick={() => onRemoveListElement(index, _.id)}>
-						Remove skill
-					</Button>
+					<RemoveListItemCta
+						onClick={() => onRemoveListElement(index, _.id)}
+						label='Remove skill'
+					/>
 				</article>
 			))}
 			{formSkillsListFieldsError && <FormMessage className='text-xs'>{formSkillsListFieldsError.root?.message}</FormMessage>}

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { IconLoader2 } from '@tabler/icons-react';
+import { IconEdit, IconLoader2 } from '@tabler/icons-react';
 
 interface SectionActionsProps {
 	loading: boolean;

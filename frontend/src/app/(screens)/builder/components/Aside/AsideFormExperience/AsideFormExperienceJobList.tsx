@@ -10,6 +10,7 @@ import { useMemo } from 'react';
 import FormDates from '../shared/components/FormDates';
 import FormDescription from '../shared/components/FormDescription';
 import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
+import RemoveListItemCta from '../shared/components/RemoveListItemCta';
 
 interface AsideFormExperienceJobListProps {
 	form: UseFormReturn<ExperienceFormState, any, undefined>;
@@ -95,13 +96,10 @@ const AsideFormExperienceJobList = ({ form }: AsideFormExperienceJobListProps) =
 						label={JOB_LIST_NAME}
 						isDisabled={form.getValues(JOB_LIST_NAME)[index].descriptionDisabled}
 					/>
-					<Button
-						type='button'
-						className='w-full'
-						variant={'clean'}
-						onClick={() => onRemoveListElement(index, _.id)}>
-						Remove job
-					</Button>
+					<RemoveListItemCta
+						onClick={() => onRemoveListElement(index, _.id)}
+						label='Remove job'
+					/>
 				</article>
 			))}
 			{formJobListFieldsError && <FormMessage className='text-xs'>{formJobListFieldsError.root?.message}</FormMessage>}

@@ -17,7 +17,28 @@ const FormDescription = ({ form, index, label, isDisabled }: FormDescriptionProp
 				name={`${label}.${index}.description`}
 				render={({ field }) => (
 					<FormItem className='w-full'>
-						<FormLabel className='text-sm text-gray-500'>Job Description</FormLabel>
+						<FormLabel className='flex items-center justify-between w-full text-sm text-gray-500'>
+							Job Description
+							<FormField
+								control={form.control}
+								name={`${label}.${index}.descriptionDisabled`}
+								render={({ field }) => (
+									<FormItem>
+										<FormControl>
+											<div className='flex items-center gap-2'>
+												<p className='text-sm text-purple_200'>Hidden?</p>
+												<Switch
+													checked={field.value}
+													onCheckedChange={field.onChange}
+													aria-readonly
+												/>
+											</div>
+										</FormControl>
+										<FormMessage className='text-xs' />
+									</FormItem>
+								)}
+							/>
+						</FormLabel>
 						<FormControl>
 							<Textarea
 								className='min-h-[100px]'
@@ -27,25 +48,6 @@ const FormDescription = ({ form, index, label, isDisabled }: FormDescriptionProp
 								{...field}
 								{...form.register(`${label}.${index}.description`)}
 							/>
-						</FormControl>
-						<FormMessage className='text-xs' />
-					</FormItem>
-				)}
-			/>
-			<FormField
-				control={form.control}
-				name={`${label}.${index}.descriptionDisabled`}
-				render={({ field }) => (
-					<FormItem>
-						<FormControl>
-							<div className='flex items-center gap-2'>
-								<p className='text-sm text-purple_200'>Hide description?</p>
-								<Switch
-									checked={field.value}
-									onCheckedChange={field.onChange}
-									aria-readonly
-								/>
-							</div>
 						</FormControl>
 						<FormMessage className='text-xs' />
 					</FormItem>

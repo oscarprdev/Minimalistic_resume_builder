@@ -6,6 +6,7 @@ import { UseFormReturn, useFieldArray } from 'react-hook-form';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
+import RemoveListItemCta from '../shared/components/RemoveListItemCta';
 
 interface AsideFormHeaderLinksProps {
 	form: UseFormReturn<ResumeHeaderDefaultValues, any, undefined>;
@@ -51,13 +52,10 @@ const AsideFormHeaderLinks = ({ form }: AsideFormHeaderLinksProps) => {
 							</FormItem>
 						)}
 					/>
-					<Button
-						type='button'
-						className='w-full'
-						variant={'clean'}
-						onClick={() => onRemoveListElement(index, _.id)}>
-						Remove link
-					</Button>
+					<RemoveListItemCta
+						onClick={() => onRemoveListElement(index, _.id)}
+						label='Remove link'
+					/>
 				</article>
 			))}
 			<Button

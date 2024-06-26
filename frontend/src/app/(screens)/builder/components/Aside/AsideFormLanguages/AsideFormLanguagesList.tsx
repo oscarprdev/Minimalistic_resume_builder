@@ -8,6 +8,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { OptionalLanguage } from '@/store/useResumeLanguagesStore';
 import { useMemo } from 'react';
 import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
+import RemoveListItemCta from '../shared/components/RemoveListItemCta';
 
 interface AsideFormLanguagesListProps {
 	form: UseFormReturn<LanguagesFormState, any, undefined>;
@@ -94,13 +95,10 @@ const AsideFormLanguagesList = ({ form }: AsideFormLanguagesListProps) => {
 							</FormItem>
 						)}
 					/>
-					<Button
-						type='button'
-						className='w-full'
-						variant={'clean'}
-						onClick={() => onRemoveListElement(index, _.id)}>
-						Remove language
-					</Button>
+					<RemoveListItemCta
+						onClick={() => onRemoveListElement(index, _.id)}
+						label='Remove language'
+					/>
 				</article>
 			))}
 			{formLanguagesListFieldsError && <FormMessage className='text-xs'>{formLanguagesListFieldsError.root?.message}</FormMessage>}

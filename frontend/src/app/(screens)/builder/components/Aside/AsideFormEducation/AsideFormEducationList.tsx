@@ -10,6 +10,7 @@ import { useMemo } from 'react';
 import FormDates from '../shared/components/FormDates';
 import FormDescription from '../shared/components/FormDescription';
 import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
+import RemoveListItemCta from '../shared/components/RemoveListItemCta';
 
 interface AsideFormEducationListProps {
 	form: UseFormReturn<EducationFormState, any, undefined>;
@@ -95,13 +96,10 @@ const AsideFormEducationList = ({ form }: AsideFormEducationListProps) => {
 						label={EDUCATION_LIST_NAME}
 						isDisabled={form.getValues(EDUCATION_LIST_NAME)[index].descriptionDisabled}
 					/>
-					<Button
-						type='button'
-						className='w-full'
-						variant={'clean'}
-						onClick={() => onRemoveListElement(index, _.id)}>
-						Remove education
-					</Button>
+					<RemoveListItemCta
+						onClick={() => onRemoveListElement(index, _.id)}
+						label='Remove education'
+					/>
 				</article>
 			))}
 			{formEducationListFieldsError && <FormMessage className='text-xs'>{formEducationListFieldsError.root?.message}</FormMessage>}
