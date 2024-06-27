@@ -1,63 +1,55 @@
 'use client';
 
-import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import AsideFormEducationList from './AsideFormEducationList';
 import { ResumeEducationDefaultValues } from '@/store/useResumeEducationStore';
 import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { asideFormEducationSchema } from './schema-validations';
-import SectionActions from '../shared/components/SectionActions';
-import { useDynamicForm } from '@/hooks/useDynamicForm';
+import { FormEducationValues } from './schema-validations';
+import { deleteCallback } from '@/services';
+import { useDeleteFormCta } from '@/hooks/useDeleteFormCta';
+import { revalidatePath } from '@/app/actions/revalidate';
+import AsideFormEducationPresentation from './AsideFormEducationPresentation';
+import { API_URL } from '@/constants';
 
 interface AsideFormEducationProps {
-	handleSubmit: (values: z.infer<typeof asideFormEducationSchema>) => Promise<Either<string, string>>;
 	defaultValues?: ResumeEducationDefaultValues;
+	userId?: string;
+	resumeId?: string;
+	handleSubmit: (values: FormEducationValues) => Promise<Either<string, string>>;
 }
 
 export type EducationFormState = ResumeEducationDefaultValues;
 
-const AsideFormEducation = ({ defaultValues, handleSubmit }: AsideFormEducationProps) => {
+const AsideFormEducation = ({ defaultValues, userId, resumeId, handleSubmit }: AsideFormEducationProps) => {
 	const router = useRouter();
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useDynamicForm<EducationFormState>({ schema: asideFormEducationSchema, defaultValues });
-
-	const onSubmit = async (values: z.infer<typeof asideFormEducationSchema>) => {
+	const onSubmit = async (values: FormEducationValues) => {
 		const response = await handleSubmit(values);
 
 		routerAfterSubmit(response);
 	};
 
+	const { deleteInfo, isDeleteCtaPending } = useDeleteFormCta({
+		path: userId && resumeId ? `${API_URL}/resume/${userId}/${resumeId}/education` : null,
+		deleteServerCallback: deleteCallback,
+		afterDeleteCallback: () => {
+			const nextPath = resumeId ? `/builder?resume=${resumeId}&selected=education` : '/builder?selected=education';
+			revalidatePath(nextPath);
+		},
+	});
+
+	const onDestructiveClick = () => deleteInfo && deleteInfo();
+
 	return (
-		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-6 animate-fade-up'>
-				<FormField
-					control={form.control}
-					name='title'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Education title</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Title'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<AsideFormEducationList form={form} />
-				<SectionActions loading={form.formState.isSubmitting} />
-			</form>
-		</Form>
+		<AsideFormEducationPresentation
+			defaultValues={defaultValues}
+			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
+			isDeleteCtaPending={isDeleteCtaPending}
+			onSubmit={onSubmit}
+			onDestructiveClick={onDestructiveClick}
+		/>
 	);
 };
 

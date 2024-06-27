@@ -2,10 +2,9 @@
 
 import { postCallback, getCallback } from '@/services';
 import AsideFormEducation from './AsideFormEducation';
-import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { asideFormEducationSchema } from './schema-validations';
+import { FormEducationValues } from './schema-validations';
 import { updateResumeEducationAction } from './actions/update-resume-education';
 import { describeResumeEducationAction } from './actions/describe-resume-education';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
@@ -22,7 +21,7 @@ const DEFAULT_EDUCATION_VALUES: ResumeEducationDefaultValues = {
 };
 
 const AsideFormEducationServer = async ({ userId, resumeId }: AsideFormEducationServerProps) => {
-	const handleServerSubmit = async (values: z.infer<typeof asideFormEducationSchema>): Promise<Either<string, string>> => {
+	const handleServerSubmit = async (values: FormEducationValues): Promise<Either<string, string>> => {
 		'use server';
 		return await updateResumeEducationAction({
 			userId,
@@ -64,6 +63,8 @@ const AsideFormEducationServer = async ({ userId, resumeId }: AsideFormEducation
 		<AsideFormEducation
 			defaultValues={response.right}
 			handleSubmit={handleServerSubmit}
+			userId={userId}
+			resumeId={resumeId}
 		/>
 	);
 };
