@@ -16,7 +16,7 @@ export const SECTION_CONTROL: Record<string, SectionControl> = {
 
 export const SECTIONS: Section[] = [
 	{
-		label: 'Resume information',
+		label: 'Resume config',
 		control: SECTION_CONTROL.INFO,
 	},
 	{

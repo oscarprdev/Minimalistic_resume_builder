@@ -1,25 +1,36 @@
 import { Button } from '@/components/ui/button';
-import { IconEdit, IconLoader2 } from '@tabler/icons-react';
+import { IconLoader2 } from '@tabler/icons-react';
 
 interface SectionActionsProps {
 	loading: boolean;
+	destructiveLabel?: string;
+	isDestructiveCtaDisabled?: boolean;
+	isDeleteCtaPending?: boolean;
+	onDestructiveClick?: () => void;
 }
 
-const SectionActions = ({ loading }: SectionActionsProps) => {
+const SectionActions = ({
+	loading,
+	destructiveLabel = 'Remove section',
+	isDestructiveCtaDisabled,
+	isDeleteCtaPending,
+	onDestructiveClick,
+}: SectionActionsProps) => {
 	return (
 		<div className='flex flex-col items-center space-y-3 h-[150px]'>
 			<Button
 				type='submit'
 				className='w-full'
-				disabled={loading}>
+				disabled={loading || isDeleteCtaPending}>
 				{loading ? <IconLoader2 className='animate-spin text-white' /> : 'Update'}
 			</Button>
 			<Button
 				type='button'
 				variant={'clean'}
-				disabled={loading}
+				disabled={loading || isDestructiveCtaDisabled}
+				onClick={onDestructiveClick}
 				className='w-full'>
-				{loading ? <IconLoader2 className='animate-spin text-white' /> : 'Remove section'}
+				{isDeleteCtaPending ? <IconLoader2 className='animate-spin text-purple_200' /> : destructiveLabel}
 			</Button>
 		</div>
 	);

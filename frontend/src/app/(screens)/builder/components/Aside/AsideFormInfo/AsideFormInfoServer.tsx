@@ -1,13 +1,13 @@
 'use server';
 
-import { Either, isLeft } from '@/lib/either';
-import AsideFormInfo, { asideFormInfoSchema } from './AsideFormInfo';
-import { z } from 'zod';
+import { Either, isLeft, right } from '@/lib/either';
+import AsideFormInfo from './AsideFormInfo';
 import { postCallback, getCallback } from '@/services';
 import ErrorMessage from '../../ErrorMessage';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { ResumeInfoDefaultValues } from '@/store/useResumeInfoStore';
 import { updateResumeInfoAction } from './actions/update-resume-info';
+import { FormInfoValues } from './schema-validations';
 
 interface AsideFormInfoServerProps {
 	userId: string;
@@ -19,7 +19,7 @@ const DEFAULT_INFO_VALUES: ResumeInfoDefaultValues = {
 };
 
 const AsideFormInfoServer = async ({ userId, resumeId }: AsideFormInfoServerProps) => {
-	const handleServerSubmit = async (values: z.infer<typeof asideFormInfoSchema>): Promise<Either<string, string>> => {
+	const handleServerSubmit = async (values: FormInfoValues): Promise<Either<string, string>> => {
 		'use server';
 		return await updateResumeInfoAction({
 			userId,
@@ -47,6 +47,8 @@ const AsideFormInfoServer = async ({ userId, resumeId }: AsideFormInfoServerProp
 		<AsideFormInfo
 			defaultValues={{ title: response.right.title }}
 			handleSubmit={handleServerSubmit}
+			userId={userId}
+			resumeId={resumeId}
 		/>
 	);
 };

@@ -1,67 +1,54 @@
 'use client';
 
-import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { ResumeInfoDefaultValues } from '@/store/useResumeInfoStore';
 import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
-import SectionActions from '../shared/components/SectionActions';
-import { useEffect } from 'react';
-import { useDynamicForm } from '@/hooks/useDynamicForm';
+import { useDeleteFormCta } from '../../../../../../hooks/useDeleteFormCta';
+import { deleteCallback } from '@/services';
+import { API_URL } from '@/constants';
+import { FormInfoValues } from './schema-validations';
+import AsideFormInfoPresentation from './AsideFormInfoPresentation';
+import { revalidatePath } from '@/app/actions/revalidate';
 
 interface AsideFormInfoProps {
 	defaultValues?: ResumeInfoDefaultValues;
-	handleSubmit: (values: z.infer<typeof asideFormInfoSchema>) => Promise<Either<string, string>>;
+	userId?: string;
+	resumeId?: string;
+	handleSubmit: (values: FormInfoValues) => Promise<Either<string, string>>;
 }
 
-export const asideFormInfoSchema = z.object({
-	title: z.string().min(5, {
-		message: 'Title must be at least 5 characters.',
-	}),
-});
-
-const AsideFormInfo = ({ defaultValues, handleSubmit }: AsideFormInfoProps) => {
+const AsideFormInfo = ({ defaultValues, userId, resumeId, handleSubmit }: AsideFormInfoProps) => {
 	const router = useRouter();
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useDynamicForm<ResumeInfoDefaultValues>({ schema: asideFormInfoSchema, defaultValues });
+	const { deleteInfo, isDeleteCtaPending } = useDeleteFormCta({
+		path: userId && resumeId ? `${API_URL}/resume/${userId}/${resumeId}/delete` : null,
+		deleteCallback,
+		afterDeleteCallback: () => {
+			const nextPath = '/';
+			revalidatePath(nextPath);
+			router.push(nextPath);
+		},
+	});
 
-	const onSubmit = async (values: z.infer<typeof asideFormInfoSchema>) => {
+	const onSubmit = async (values: FormInfoValues) => {
 		const response = await handleSubmit(values);
 
 		routerAfterSubmit(response);
 	};
 
+	const onDestructiveClick = () => deleteInfo && deleteInfo();
+
 	return (
-		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-6 animate-fade-up'>
-				<FormField
-					control={form.control}
-					name='title'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Resume title</FormLabel>
-							<FormControl>
-								<Input
-									required
-									placeholder='Title'
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<SectionActions loading={form.formState.isSubmitting} />
-			</form>
-		</Form>
+		<AsideFormInfoPresentation
+			defaultValues={defaultValues}
+			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
+			isDeleteCtaPending={isDeleteCtaPending}
+			onSubmit={onSubmit}
+			onDestructiveClick={onDestructiveClick}
+		/>
 	);
 };
 

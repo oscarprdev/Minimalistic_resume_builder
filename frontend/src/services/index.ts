@@ -34,6 +34,25 @@ export const postCallback = async <P, R>(path: string, payload: P): Promise<Eith
 
 		return right(jsonResponse);
 	} catch (error) {
-		return left(error instanceof Error ? error.message : 'Error fetching data');
+		return left(error instanceof Error ? error.message : 'Error updating data');
+	}
+};
+
+export const deleteCallback = async <R>(path: string): Promise<Either<string, R>> => {
+	try {
+		const response = await fetch(path, {
+			method: 'DELETE',
+			cache: 'no-store',
+		});
+
+		if (!response.ok) {
+			throw new Error(`Error: ${response.status} - ${response.url}`);
+		}
+
+		const jsonResponse = await response.json();
+
+		return right(jsonResponse);
+	} catch (error) {
+		return left(error instanceof Error ? error.message : 'Error deleting data');
 	}
 };
