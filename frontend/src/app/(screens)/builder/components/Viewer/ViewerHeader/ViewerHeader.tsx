@@ -1,16 +1,13 @@
 'use client';
 
 import ViewerHeaderLinksIcons from './ViewerHeaderLinksIcons';
-import { useRouterError } from '@/hooks/useRouterError';
+import { useToastError } from '@/hooks/useRouterError';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import ViewerHeaderIcons from './ViewerHeaderIcons';
-import Image from 'next/image';
 import { DEFAULT_IMAGE } from '../../Aside/AsideFormHeader/AsideFormHeaderImage';
 import ViewerResumeContainer from '../ViewerResumeContainer';
-import { IconMapPin } from '@tabler/icons-react';
 import { cn } from '@/lib/utils';
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 
 interface ViewerHeaderProps {
 	name: string;
@@ -24,8 +21,7 @@ interface ViewerHeaderProps {
 }
 
 const ViewerHeader = ({ name, job, location, phone, links, email, image, error }: ViewerHeaderProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	const imageUrl = useMemo(() => image, [image]);
 

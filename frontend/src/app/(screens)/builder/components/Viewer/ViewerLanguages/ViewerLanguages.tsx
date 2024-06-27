@@ -1,9 +1,8 @@
 'use client';
 
-import { useRouterError } from '@/hooks/useRouterError';
+import { useToastError } from '@/hooks/useRouterError';
 import { OptionalLanguage } from '@/store/useResumeLanguagesStore';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import ViewerResumeContainer from '../ViewerResumeContainer';
 
 interface ViewerLanguagesProps {
@@ -13,8 +12,7 @@ interface ViewerLanguagesProps {
 }
 
 const ViewerLanguages = ({ title, languageList, error }: ViewerLanguagesProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	return (
 		<ViewerResumeContainer title={title}>

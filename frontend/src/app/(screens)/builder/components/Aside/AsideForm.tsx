@@ -10,6 +10,14 @@ import AsideFormEducationController from './AsideFormEducation/AsideFormEducatio
 import AsideFormLanguagesController from './AsideFormLanguages/AsideFormLanguagesController';
 import AsideFormSkillsController from './AsideFormSkills/AsideFormSkillsController';
 import { User } from 'next-auth';
+import { Suspense } from 'react';
+import AsideFormEducationSkeleton from './AsideFormEducation/AsideFormEducationSkeleton';
+import AsideFormInfoSkeleton from './AsideFormInfo/AsideFormInfoSkeleton';
+import AsideFormHeaderSkeleton from './AsideFormHeader/AsideFormHeaderSkeleton';
+import AsideFormSummarySkeleton from './AsideFormSummary/AsideFormSummarySkeleton';
+import AsideFormExperienceSkeleton from './AsideFormExperience/AsideFormExperienceSkeleton';
+import AsideFormLanguagesSkeleton from './AsideFormLanguages/AsideFormLanguagesSkeleton';
+import AsideFormSkillsSkeleton from './AsideFormSkills/AsideFormSkillsSkeleton';
 
 interface AsideFormProps {
 	sectionSelected: SectionControl | null;
@@ -22,52 +30,66 @@ const AsideForm = async ({ sectionSelected, resumeId, user }: AsideFormProps) =>
 		switch (sectionSelected) {
 			case SECTION_CONTROL.INFO:
 				return (
-					<AsideFormInfoController
-						resumeId={resumeId}
-						user={user}
-					/>
+					<Suspense fallback={<AsideFormInfoSkeleton />}>
+						<AsideFormInfoController
+							resumeId={resumeId}
+							user={user}
+						/>
+					</Suspense>
 				);
 			case SECTION_CONTROL.HEADER:
 				return (
-					<AsideFormHeaderController
-						resumeId={resumeId}
-						user={user}
-					/>
+					<Suspense fallback={<AsideFormHeaderSkeleton />}>
+						<AsideFormHeaderController
+							resumeId={resumeId}
+							user={user}
+						/>
+					</Suspense>
 				);
 			case SECTION_CONTROL.SUMMARY:
 				return (
-					<AsideFormSummaryController
-						resumeId={resumeId}
-						user={user}
-					/>
+					<Suspense fallback={<AsideFormSummarySkeleton />}>
+						<AsideFormSummaryController
+							resumeId={resumeId}
+							user={user}
+						/>
+					</Suspense>
 				);
 			case SECTION_CONTROL.EXPERIENCE:
 				return (
-					<AsideFormExperienceController
-						resumeId={resumeId}
-						user={user}
-					/>
+					<Suspense fallback={<AsideFormExperienceSkeleton />}>
+						<AsideFormExperienceController
+							resumeId={resumeId}
+							user={user}
+						/>
+					</Suspense>
 				);
 			case SECTION_CONTROL.EDUCATION:
 				return (
-					<AsideFormEducationController
-						resumeId={resumeId}
-						user={user}
-					/>
+					<Suspense fallback={<AsideFormEducationSkeleton />}>
+						<AsideFormEducationController
+							resumeId={resumeId}
+							user={user}
+						/>
+					</Suspense>
 				);
 			case SECTION_CONTROL.LANGUAGES:
 				return (
-					<AsideFormLanguagesController
-						resumeId={resumeId}
-						user={user}
-					/>
+					<Suspense fallback={<AsideFormLanguagesSkeleton />}>
+						<AsideFormLanguagesController
+							resumeId={resumeId}
+							user={user}
+						/>
+					</Suspense>
 				);
 			case SECTION_CONTROL.SKILLS:
 				return (
-					<AsideFormSkillsController
-						resumeId={resumeId}
-						user={user}
-					/>
+					<Suspense fallback={<AsideFormSkillsSkeleton />}>
+						<AsideFormSkillsController
+							resumeId={resumeId}
+							user={user}
+						/>
+					</Suspense>
 				);
 			default:
 				break;

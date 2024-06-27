@@ -30,7 +30,7 @@ export const useDeleteFormCta = ({ deleteCallback, afterDeleteCallback, path }: 
 		if (data && !isLeft(data)) {
 			afterDeleteCallback();
 		}
-	}, [data]);
+	}, [afterDeleteCallback, data]);
 
 	return {
 		deleteInfo: mutate,

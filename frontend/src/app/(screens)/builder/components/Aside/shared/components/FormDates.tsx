@@ -16,12 +16,9 @@ export const FORMAT_TIME_VALUES = {
 };
 
 const FormDates = ({ form, index, label }: FormDatesProps) => {
-	const generateValue = useCallback(
-		(checked: boolean, currentValue: string, key: string) => {
-			return checked ? currentValue + (currentValue !== '' ? `,${key}` : key) : currentValue.replace(key, '');
-		},
-		[form]
-	);
+	const generateValue = useCallback((checked: boolean, currentValue: string, key: string) => {
+		return checked ? currentValue + (currentValue !== '' ? `,${key}` : key) : currentValue.replace(key, '');
+	}, []);
 
 	return (
 		<div className='flex gap-1 items-start w-full'>

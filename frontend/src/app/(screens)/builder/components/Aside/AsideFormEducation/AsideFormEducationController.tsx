@@ -1,8 +1,6 @@
-import { Suspense } from 'react';
 import AsideEducationClient from './AsideFormEducationClient';
 import AsideEducationServer from './AsideFormEducationServer';
 import { User } from 'next-auth';
-import AsideFormEducationSkeleton from './AsideFormEducationSkeleton';
 
 interface AsideFormEducationControllerProps {
 	resumeId: string | null;
@@ -15,12 +13,10 @@ const AsideFormEducationController = ({ resumeId, user }: AsideFormEducationCont
 	}
 
 	return (
-		<Suspense fallback={<AsideFormEducationSkeleton />}>
-			<AsideEducationServer
-				userId={user.id}
-				resumeId={resumeId}
-			/>
-		</Suspense>
+		<AsideEducationServer
+			userId={user.id}
+			resumeId={resumeId}
+		/>
 	);
 };
 

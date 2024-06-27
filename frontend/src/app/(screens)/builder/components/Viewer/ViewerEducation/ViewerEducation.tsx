@@ -1,8 +1,7 @@
 'use client';
 
-import { useRouterError } from '@/hooks/useRouterError';
+import { useToastError } from '@/hooks/useRouterError';
 import { OptionalSchool } from '@/store/useResumeEducationStore';
-import { useRouter } from 'next/navigation';
 import ViewerResumeContainer from '../ViewerResumeContainer';
 import LabelWithDates from '../shared/LabelWithDates';
 import LabelWithIcon from '../shared/LabelWithIcon';
@@ -15,8 +14,7 @@ interface ViewerEducationProps {
 }
 
 const ViewerEducation = ({ title, educationList, error }: ViewerEducationProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	return (
 		<ViewerResumeContainer title={title}>

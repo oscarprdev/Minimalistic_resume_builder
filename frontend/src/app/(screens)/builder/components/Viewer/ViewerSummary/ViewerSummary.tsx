@@ -1,7 +1,6 @@
 'use client';
 
-import { useRouterError } from '@/hooks/useRouterError';
-import { useRouter } from 'next/navigation';
+import { useToastError } from '@/hooks/useRouterError';
 import ViewerResumeContainer from '../ViewerResumeContainer';
 
 interface ViewerSummaryProps {
@@ -11,8 +10,7 @@ interface ViewerSummaryProps {
 }
 
 const ViewerSummary = ({ title, summary, error }: ViewerSummaryProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	return (
 		<ViewerResumeContainer title={title}>

@@ -15,28 +15,36 @@ interface ViewerTitlePaginationProps {
 const ViewerTitlePagination = ({ children, allResumesIds, index }: ViewerTitlePaginationProps) => {
 	const allResumesIdsIsValid = Array.isArray(allResumesIds) && allResumesIds.some((id) => Boolean(id));
 	const indexIsValid = typeof index !== 'undefined' && isTruthyNumber(index);
-
-	if (!allResumesIdsIsValid || !indexIsValid) {
-		return <div className='w-fit flex items-center gap-4'>{children}</div>;
-	}
-
 	const queryParams = useSearchParams();
-	const sectionSelected = queryParams.get('selected');
 
 	const previousIndex = useMemo(() => {
+		if (!index || !allResumesIds) {
+			return -1;
+		}
+
 		const i = index - 1;
 		return i < 0 ? allResumesIds.length - 1 : i;
 	}, [index, allResumesIds]);
 
 	const nextIndex = useMemo(() => {
+		if (!index || !allResumesIds) {
+			return -1;
+		}
+
 		const i = index + 1;
 		return i > allResumesIds.length - 1 ? 0 : i;
 	}, [index, allResumesIds]);
 
+	if (!allResumesIdsIsValid || !indexIsValid) {
+		return <div className='w-fit flex items-center gap-4'>{children}</div>;
+	}
+
+	const sectionSelected = queryParams.get('selected');
+
 	const commonHref = sectionSelected ? `&selected=${sectionSelected}` : '';
 
 	return (
-		<div className='w-[650px] flex items-center justify-between gap-4'>
+		<div className='w-[650px] flex items-center justify-center gap-4'>
 			{previousIndex >= 0 && (
 				<Link href={`/builder?resume=${allResumesIds[previousIndex]}${commonHref}`}>
 					<IconArrowLeft

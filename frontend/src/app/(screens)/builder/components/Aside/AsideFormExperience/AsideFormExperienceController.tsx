@@ -1,8 +1,6 @@
-import { Suspense } from 'react';
 import AsideFormExperienceClient from './AsideFormExperienceClient';
 import AsideFormExperienceServer from './AsideFormExperienceServer';
 import { User } from 'next-auth';
-import AsideFormExperienceSkeleton from './AsideFormExperienceSkeleton';
 
 interface AsideFormExperienceControllerProps {
 	resumeId: string | null;
@@ -15,12 +13,10 @@ const AsideFormExperienceController = ({ resumeId, user }: AsideFormExperienceCo
 	}
 
 	return (
-		<Suspense fallback={<AsideFormExperienceSkeleton />}>
-			<AsideFormExperienceServer
-				userId={user.id}
-				resumeId={resumeId}
-			/>
-		</Suspense>
+		<AsideFormExperienceServer
+			userId={user.id}
+			resumeId={resumeId}
+		/>
 	);
 };
 

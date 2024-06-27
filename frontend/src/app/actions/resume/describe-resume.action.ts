@@ -1,7 +1,7 @@
 'use server';
 
 import { API_URL } from '@/constants';
-import { Either } from '@/lib/either';
+import { Either, left } from '@/lib/either';
 import { Resume } from '@/types';
 
 export interface DescribeResumeActionInput {

@@ -1,8 +1,7 @@
 'use client';
 
-import { useRouterError } from '@/hooks/useRouterError';
+import { useToastError } from '@/hooks/useRouterError';
 import { OptionalSkill } from '@/store/useResumeSkillsStore';
-import { useRouter } from 'next/navigation';
 import ViewerSkillIcon from './ViewerSkillIcon';
 import ViewerResumeContainer from '../ViewerResumeContainer';
 
@@ -13,8 +12,7 @@ interface ViewerSkillsProps {
 }
 
 const ViewerSkills = ({ title, skillList, error }: ViewerSkillsProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	return (
 		<ViewerResumeContainer title={title}>

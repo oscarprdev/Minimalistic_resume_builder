@@ -1,8 +1,7 @@
 'use client';
 
-import { useRouterError } from '@/hooks/useRouterError';
+import { useToastError } from '@/hooks/useRouterError';
 import { strToCapitalized } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import ViewerTitlePagination from './ViewerTitlePagination';
 
@@ -14,14 +13,13 @@ interface ViewerTitleProps {
 }
 
 const ViewerTitle = ({ resumeTitle, error, allResumesIds, index }: ViewerTitleProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	return (
 		<ViewerTitlePagination
 			allResumesIds={allResumesIds}
 			index={index}>
-			<p className='text-sm text-purple_200'>{strToCapitalized(resumeTitle)}</p>
+			<p className='w-full text-center text-sm text-purple_200'>{strToCapitalized(resumeTitle)}</p>
 		</ViewerTitlePagination>
 	);
 };

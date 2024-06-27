@@ -1,8 +1,7 @@
 'use client';
 
-import { useRouterError } from '@/hooks/useRouterError';
+import { useToastError } from '@/hooks/useRouterError';
 import { OptionalJob } from '@/store/useResumeExperienceStore';
-import { useRouter } from 'next/navigation';
 import ViewerResumeContainer from '../ViewerResumeContainer';
 import { IconChevronRight } from '@tabler/icons-react';
 import LabelWithDates from '../shared/LabelWithDates';
@@ -15,8 +14,7 @@ interface ViewerExperienceProps {
 }
 
 const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	return (
 		<ViewerResumeContainer title={title}>

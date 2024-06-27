@@ -1,8 +1,6 @@
 import AsideFormHeaderClient from './AsideFormHeaderClient';
 import AsideFormHeaderServer from './AsideFormHeaderServer';
 import { User } from 'next-auth';
-import AsideFormHeaderSkeleton from './AsideFormHeaderSkeleton';
-import { Suspense } from 'react';
 
 interface AsideFormHeaderControllerProps {
 	resumeId: string | null;
@@ -15,12 +13,10 @@ const AsideFormHeaderController = ({ resumeId, user }: AsideFormHeaderController
 	}
 
 	return (
-		<Suspense fallback={<AsideFormHeaderSkeleton />}>
-			<AsideFormHeaderServer
-				userId={user.id}
-				resumeId={resumeId}
-			/>
-		</Suspense>
+		<AsideFormHeaderServer
+			userId={user.id}
+			resumeId={resumeId}
+		/>
 	);
 };
 

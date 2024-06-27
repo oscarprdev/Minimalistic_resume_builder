@@ -18,18 +18,21 @@ const AsideFormHeaderClient = () => {
 	const removeImage = useCallback(async () => {
 		headerStore.updateHeader({ ...headerStore.resumeHeader, image: undefined });
 		return right('');
-	}, []);
+	}, [headerStore]);
 
-	const updateImage = useCallback(async (formData: FormData) => {
-		const file = formData.get('image') as File;
-		if (!file) {
-			return left('File not valid');
-		}
-		const imageUrl = URL.createObjectURL(file);
+	const updateImage = useCallback(
+		async (formData: FormData) => {
+			const file = formData.get('image') as File;
+			if (!file) {
+				return left('File not valid');
+			}
+			const imageUrl = URL.createObjectURL(file);
 
-		headerStore.updateHeader({ ...headerStore.resumeHeader, image: imageUrl });
-		return right(imageUrl);
-	}, []);
+			headerStore.updateHeader({ ...headerStore.resumeHeader, image: imageUrl });
+			return right(imageUrl);
+		},
+		[headerStore]
+	);
 
 	return (
 		<AsideFormHeader

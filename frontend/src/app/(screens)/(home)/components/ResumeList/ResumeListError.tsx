@@ -1,15 +1,13 @@
 'use client';
 
-import { useRouterError } from '@/hooks/useRouterError';
-import { useRouter } from 'next/navigation';
+import { useToastError } from '@/hooks/useRouterError';
 
 interface ResumeListErrorProps {
 	error: string;
 }
 
 const ResumeListError = ({ error }: ResumeListErrorProps) => {
-	const router = useRouter();
-	useRouterError(router, error);
+	useToastError(error);
 
 	return <p className='text-sm p-5 text-gray-700 w-[500px] text-center'>No data</p>;
 };

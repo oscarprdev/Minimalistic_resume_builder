@@ -30,25 +30,31 @@ const DEFAULT_HEADER_VALUES: ResumeHeaderDefaultValues = {
 const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServerProps) => {
 	const defaultResumeId = crypto.randomUUID().toString();
 
-	const handleServerSubmit = useCallback(async (values: z.infer<typeof asideFormHeaderSchema>): Promise<Either<string, string>> => {
-		'use server';
-		return await updateResumeHeaderAction({
-			userId,
-			resumeId: resumeId || defaultResumeId,
-			payload: { ...values },
-			postCallback,
-		});
-	}, []);
+	const handleServerSubmit = useCallback(
+		async (values: z.infer<typeof asideFormHeaderSchema>): Promise<Either<string, string>> => {
+			'use server';
+			return await updateResumeHeaderAction({
+				userId,
+				resumeId: resumeId || defaultResumeId,
+				payload: { ...values },
+				postCallback,
+			});
+		},
+		[defaultResumeId, resumeId, userId]
+	);
 
-	const updateImage = useCallback(async (formData: FormData) => {
-		'use server';
-		return await uploadImageAction({ formData, userId, resumeId: resumeId || defaultResumeId });
-	}, []);
+	const updateImage = useCallback(
+		async (formData: FormData) => {
+			'use server';
+			return await uploadImageAction({ formData, userId, resumeId: resumeId || defaultResumeId });
+		},
+		[defaultResumeId, resumeId, userId]
+	);
 
 	const removeImage = useCallback(async () => {
 		'use server';
 		return await removeImageAction({ resumeId: resumeId || defaultResumeId });
-	}, []);
+	}, [defaultResumeId, resumeId]);
 
 	if (!resumeId) {
 		return (

@@ -18,7 +18,7 @@ export const useDynamicForm = <S extends FieldValues>({ schema, defaultValues }:
 
 	useEffect(() => {
 		form.reset(defaultValues);
-	}, [defaultValues]);
+	}, [defaultValues, form]);
 
 	return form;
 };
