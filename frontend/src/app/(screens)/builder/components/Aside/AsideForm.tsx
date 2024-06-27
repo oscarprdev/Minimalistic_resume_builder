@@ -1,23 +1,23 @@
 'use server';
 
+import { User } from 'next-auth';
+import { Suspense } from 'react';
 import { cn } from '@/lib/utils';
 import { SECTION_CONTROL, SectionControl } from '../_utils/sections';
 import AsideFormExperienceController from './AsideFormExperience/AsideFormExperienceController';
 import AsideFormHeaderController from './AsideFormHeader/AsideFormHeaderController';
 import AsideFormInfoController from './AsideFormInfo/AsideFormInfoController';
 import AsideFormSummaryController from './AsideFormSummary/AsideFormSummaryController';
-import AsideFormEducationController from './AsideFormEducation/AsideFormEducationController';
 import AsideFormLanguagesController from './AsideFormLanguages/AsideFormLanguagesController';
 import AsideFormSkillsController from './AsideFormSkills/AsideFormSkillsController';
-import { User } from 'next-auth';
-import { Suspense } from 'react';
-import AsideFormEducationSkeleton from './AsideFormEducation/AsideFormEducationSkeleton';
 import AsideFormInfoSkeleton from './AsideFormInfo/AsideFormInfoSkeleton';
 import AsideFormHeaderSkeleton from './AsideFormHeader/AsideFormHeaderSkeleton';
 import AsideFormSummarySkeleton from './AsideFormSummary/AsideFormSummarySkeleton';
 import AsideFormExperienceSkeleton from './AsideFormExperience/AsideFormExperienceSkeleton';
 import AsideFormLanguagesSkeleton from './AsideFormLanguages/AsideFormLanguagesSkeleton';
 import AsideFormSkillsSkeleton from './AsideFormSkills/AsideFormSkillsSkeleton';
+import AsideFormEducationSkeleton from './AsideFormEducation/AsideFormEducationSkeleton';
+import AsideFormEducationController from './AsideFormEducation/AsideFormEducationController';
 
 interface AsideFormProps {
 	sectionSelected: SectionControl | null;

@@ -30,7 +30,7 @@ export const asideFormHeaderSchema = z.object({
 	location: z.string(),
 	email: z.string(),
 	phone: z.string(),
-	links: z.array(z.string()),
+	links: z.array(z.string()).default([]),
 	image: z.string().optional(),
 });
 

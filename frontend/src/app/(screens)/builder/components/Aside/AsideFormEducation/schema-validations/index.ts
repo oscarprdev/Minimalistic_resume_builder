@@ -19,5 +19,5 @@ const schoolFormSchema = z.object({
 
 export const asideFormEducationSchema = z.object({
 	title: z.string(),
-	educationList: z.array(schoolFormSchema),
+	educationList: z.array(schoolFormSchema).default([]),
 });

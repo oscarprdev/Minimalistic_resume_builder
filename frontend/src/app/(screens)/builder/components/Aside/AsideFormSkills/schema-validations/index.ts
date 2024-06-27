@@ -8,5 +8,5 @@ const skillFormSchema = z.object({
 
 export const asideFormSkillsSchema = z.object({
 	title: z.string(),
-	skillList: z.array(skillFormSchema),
+	skillList: z.array(skillFormSchema).default([]),
 });

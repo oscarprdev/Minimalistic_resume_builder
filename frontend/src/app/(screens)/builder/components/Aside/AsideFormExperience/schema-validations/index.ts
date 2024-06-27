@@ -55,19 +55,22 @@ const jobFormSchema = z
 
 export const asideFormExperienceSchema = z.object({
 	title: z.string(),
-	jobList: z.array(jobFormSchema).superRefine((values, ctx) => {
-		if (!isTitleUnique(values)) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: 'Job title must be unique',
-			});
-		}
+	jobList: z
+		.array(jobFormSchema)
+		.default([])
+		.superRefine((values, ctx) => {
+			if (!isTitleUnique(values)) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					message: 'Job title must be unique',
+				});
+			}
 
-		if (!areDateRangesUnique(values)) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: 'Start date and end date must be different',
-			});
-		}
-	}),
+			if (!areDateRangesUnique(values)) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					message: 'Start date and end date must be different',
+				});
+			}
+		}),
 });
