@@ -33,9 +33,11 @@ const LabelWithDates = ({ label, startDate, endDate, formatTime }: LabelWithDate
 			<p className='text-sm'>{label}</p>
 			<span
 				aria-hidden
-				className='block w-[1px] h-[10px] bg-gray-800'
+				className='block mt-[2px] w-[1px] h-[10px] bg-gray-800'
 			/>
-			<div className='flex items-center gap-2 '>
+			<div
+				id='dates'
+				className='flex items-center gap-2 mt-[2px]'>
 				<p className='text-xs text-gray-600'>{formatStartDate(startDate)}</p>
 				<p className='text-xs text-gray-600'>{'-'}</p>
 				<p className='text-xs text-gray-600'>{formatEndDate(endDate)}</p>

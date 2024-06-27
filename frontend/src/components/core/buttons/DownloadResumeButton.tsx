@@ -54,7 +54,12 @@ const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
 
 						const spanElements = doc.querySelectorAll('span') as NodeListOf<HTMLElement>;
 						for (let i = 0; i < spanElements.length; i++) {
-							spanElements[i].style.marginTop = '12px';
+							spanElements[i].style.marginTop = '14px';
+						}
+
+						const datesElements = doc.querySelectorAll('#dates') as NodeListOf<HTMLElement>;
+						for (let i = 0; i < datesElements.length; i++) {
+							datesElements[i].style.marginTop = '3px';
 						}
 					},
 				})
