@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export type FormLanguagesValues = z.infer<typeof asideFormLanguagesSchema>;
+
 const languageFormSchema = z.object({
 	id: z.string().optional(),
 	name: z.string(),

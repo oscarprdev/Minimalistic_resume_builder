@@ -1,15 +1,14 @@
 'use client';
 
 import { useResumeLanguagesStore } from '@/store/useResumeLanguagesStore';
-import { z } from 'zod';
 import AsideFormLanguages from './AsideFormLanguages';
 import { right } from '@/lib/either';
-import { asideFormLanguagesSchema } from './schema-validations';
+import { FormLanguagesValues } from './schema-validations';
 
 const AsideFormLanguagesClient = () => {
 	const languagesStore = useResumeLanguagesStore();
 
-	const handleClientSubmit = async ({ title, languageList }: z.infer<typeof asideFormLanguagesSchema>) => {
+	const handleClientSubmit = async ({ title, languageList }: FormLanguagesValues) => {
 		languagesStore.updateLanguages({ title, languageList });
 
 		return right('');

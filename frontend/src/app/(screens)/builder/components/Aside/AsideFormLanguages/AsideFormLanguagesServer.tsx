@@ -2,11 +2,10 @@
 
 import { postCallback, getCallback } from '@/services';
 import AsideFormLanguages from './AsideFormLanguages';
-import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
-import { asideFormLanguagesSchema } from './schema-validations';
+import { FormLanguagesValues } from './schema-validations';
 import { updateResumeLanguagesAction } from './actions/update-resume-languages';
 import { describeResumeLanguagesAction } from './actions/describe-resume-languages';
 import { ResumeLanguagesDefaultValues } from '@/store/useResumeLanguagesStore';
@@ -22,7 +21,7 @@ const DEFAULT_LANGUAGES_VALUES: ResumeLanguagesDefaultValues = {
 };
 
 const AsideFormLanguagesServer = async ({ userId, resumeId }: AsideFormLanguagesServerProps) => {
-	const handleServerSubmit = async (values: z.infer<typeof asideFormLanguagesSchema>): Promise<Either<string, string>> => {
+	const handleServerSubmit = async (values: FormLanguagesValues): Promise<Either<string, string>> => {
 		'use server';
 		return await updateResumeLanguagesAction({
 			userId,
@@ -64,6 +63,8 @@ const AsideFormLanguagesServer = async ({ userId, resumeId }: AsideFormLanguages
 		<AsideFormLanguages
 			defaultValues={response.right}
 			handleSubmit={handleServerSubmit}
+			userId={userId}
+			resumeId={resumeId}
 		/>
 	);
 };
