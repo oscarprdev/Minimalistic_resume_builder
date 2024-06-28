@@ -169,7 +169,7 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 			for (const { name, level, certificateLink } of languageList) {
 				const languageId = crypto.randomUUID().toString();
 
-				if (certificateLink) {
+				if (certificateLink || certificateLink === '') {
 					await this.database.query(
 						`INSERT INTO Language 
                             (id, name, level, certificateLink) 
@@ -225,7 +225,7 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 			);
 
 			for (const { id, name, level, certificateLink } of languageList) {
-				if (certificateLink) {
+				if (certificateLink || certificateLink === '') {
 					await this.database.query(
 						`UPDATE Language
                             SET name = $2, 
@@ -250,7 +250,7 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 			for (const { name, level, certificateLink } of newLanguages) {
 				const languageId = crypto.randomUUID().toString();
 
-				if (certificateLink) {
+				if (certificateLink || certificateLink === '') {
 					await this.database.query(
 						`INSERT INTO Language 
                             (id, name, level, certificateLink) 

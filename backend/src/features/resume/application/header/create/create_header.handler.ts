@@ -14,7 +14,7 @@ const HeaderSectionSchema = z.object({
 	location: z.string(),
 	email: z.string().email(),
 	phone: z.string(),
-	links: z.array(z.string()),
+	links: z.array(z.string().url()),
 	image: z.string().optional(),
 });
 

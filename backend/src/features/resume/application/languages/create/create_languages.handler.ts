@@ -12,7 +12,10 @@ const LangSchema = z.object({
 	id: z.string().uuid().optional(),
 	name: z.string(),
 	level: z.string(),
-	certificateLink: z.string().optional(),
+	certificateLink: z
+		.string()
+		.refine((value) => value === '' || /^[a-zA-Z]+:\/\//.test(value))
+		.optional(),
 });
 
 const LanguagesSectionSchema = z.object({
