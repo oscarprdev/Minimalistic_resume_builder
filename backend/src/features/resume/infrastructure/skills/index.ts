@@ -36,6 +36,7 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
             SELECT 
                 Skills.id AS "id", 
                 Skills.title AS "title",
+                Skills.isHidden AS "isHidden",
                 Skill.id AS "SkillId", 
                 Skill.name AS "SkillName", 
                 Skill.svgUrl AS "SkillSvgUrl"
@@ -50,7 +51,7 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 				[skillsResumeId]
 			);
 
-			const { id, title } = result[0];
+			const { id, title, isHidden } = result[0];
 
 			const skillList: SkillDb[] = result.map((r) => {
 				return {
@@ -63,6 +64,7 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 			const Skills: SkillsDb = {
 				id,
 				title,
+				isHidden,
 				skillList,
 			};
 
@@ -153,14 +155,14 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 
 	async createSkills({ skillsResumeId, data }: CreateSkillsInfrastructureInput): Promise<void> {
 		try {
-			const { title, skillList } = data;
+			const { title, skillList, isHidden } = data;
 
 			await this.database.query(
 				`INSERT INTO Skills 
-					(id, title) 
-					VALUES ($1, $2)
+					(id, title, isHidden) 
+					VALUES ($1, $2, $3)
 				;`,
-				[skillsResumeId, title]
+				[skillsResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { name, svgUrl } of skillList) {
@@ -202,13 +204,14 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 
 	async updateSkills({ skillsResumeId, data, newSkills }: UpdateSkillsInfrastructureInput): Promise<void> {
 		try {
-			const { title, skillList } = data;
+			const { title, skillList, isHidden } = data;
 			await this.database.query(
 				`UPDATE Skills
-					SET title = $2
+					SET title = $2,
+					isHidden = $3
                     WHERE id = $1
 				;`,
-				[skillsResumeId, title]
+				[skillsResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { id, name, svgUrl } of skillList) {

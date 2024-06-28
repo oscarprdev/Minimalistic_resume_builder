@@ -13,6 +13,7 @@ export class DescribeSkillsAdapter implements DescribeSkillsPorts {
 		return {
 			id: skillsDb.id,
 			title: skillsDb.title,
+			isHidden: skillsDb.isHidden,
 			skillList: skillsDb.skillList.every((skill) => !skill.id) ? [] : skillsDb.skillList,
 		};
 	}
