@@ -13,6 +13,7 @@ export class DescribeExperienceAdapter implements DescribeExperiencePorts {
 		return {
 			id: experienceDb.id,
 			title: experienceDb.title,
+			isHidden: experienceDb.isHidden,
 			jobList: experienceDb.jobList.every((job) => !job.id) ? [] : experienceDb.jobList,
 		};
 	}

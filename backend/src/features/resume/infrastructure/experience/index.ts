@@ -36,6 +36,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
             SELECT 
                 Experience.id AS "id", 
                 Experience.title AS "title",
+                Experience.isHidden AS "isHidden",
                 Job.id AS "jobId", 
                 Job.title AS "jobTitle", 
                 Job.company AS "jobCompany", 
@@ -55,7 +56,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 				[experienceResumeId]
 			);
 
-			const { id, title } = result[0];
+			const { id, title, isHidden } = result[0];
 
 			const jobList: JobDb[] = result.map((r) => {
 				console.log('descriptionDisabled get:', r.descriptionDisabled);
@@ -74,6 +75,7 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			const experience: ExperienceDb = {
 				id,
 				title,
+				isHidden,
 				jobList,
 			};
 
@@ -169,14 +171,14 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 
 	async createExperience({ experienceResumeId, data }: CreateExperienceInfrastructureInput): Promise<void> {
 		try {
-			const { title, jobList } = data;
+			const { title, jobList, isHidden } = data;
 
 			await this.database.query(
 				`INSERT INTO Experience 
-					(id, title) 
-					VALUES ($1, $2)
+					(id, title, isHidden) 
+					VALUES ($1, $2, $3)
 				;`,
-				[experienceResumeId, title]
+				[experienceResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { title, company, startDate, endDate, description, formatTime, descriptionDisabled } of jobList) {
@@ -218,13 +220,14 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 
 	async updateExperience({ experienceResumeId, data, newJobs }: UpdateExperienceInfrastructureInput): Promise<void> {
 		try {
-			const { title, jobList } = data;
+			const { title, jobList, isHidden } = data;
 			await this.database.query(
 				`UPDATE Experience
-					SET title = $2
+					SET title = $2,
+					isHidden = $3
                     WHERE id = $1
 				;`,
-				[experienceResumeId, title]
+				[experienceResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { id, title, company, startDate, endDate, description, formatTime, descriptionDisabled } of jobList) {
