@@ -18,7 +18,7 @@ const ViewerTitlePagination = ({ children, allResumesIds, index }: ViewerTitlePa
 	const queryParams = useSearchParams();
 
 	const previousIndex = useMemo(() => {
-		if (!index || !allResumesIds) {
+		if ((!index && index !== 0) || !allResumesIds) {
 			return -1;
 		}
 
@@ -27,7 +27,7 @@ const ViewerTitlePagination = ({ children, allResumesIds, index }: ViewerTitlePa
 	}, [index, allResumesIds]);
 
 	const nextIndex = useMemo(() => {
-		if (!index || !allResumesIds) {
+		if ((!index && index !== 0) || !allResumesIds) {
 			return -1;
 		}
 

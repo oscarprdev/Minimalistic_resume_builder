@@ -4,7 +4,7 @@ import { Either, left, right } from '../lib/either';
 
 export const getCallback = async <R>(path: string): Promise<Either<string, R>> => {
 	try {
-		const response = await fetch(path, { cache: 'no-store' });
+		const response = await fetch(path, { next: { revalidate: 3600 } });
 
 		if (response.status === 404 || !response.ok) {
 			throw new Error(`Error: ${response.status} - ${response.url}`);
@@ -23,7 +23,7 @@ export const postCallback = async <P, R>(path: string, payload: P): Promise<Eith
 		const response = await fetch(path, {
 			method: 'POST',
 			body: JSON.stringify(payload),
-			cache: 'no-store',
+			next: { revalidate: 3600 },
 		});
 
 		if (!response.ok) {
@@ -42,7 +42,7 @@ export const deleteCallback = async <R>(path: string): Promise<Either<string, R>
 	try {
 		const response = await fetch(path, {
 			method: 'DELETE',
-			cache: 'no-store',
+			next: { revalidate: 3600 },
 		});
 
 		if (!response.ok) {
