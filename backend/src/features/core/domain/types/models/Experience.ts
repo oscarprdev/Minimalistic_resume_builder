@@ -12,6 +12,10 @@ export type Experience = {
      */
     title: string;
     /**
+     * Experience section is hidden flag.
+     */
+    isHidden: boolean;
+    /**
      * An array of jobs.
      */
     jobList: Array<{

@@ -35,5 +35,9 @@ export type Header = {
      * The image url of the person associated with the resume.
      */
     image?: string;
+    /**
+     * Header section is hidden flag.
+     */
+    isHidden: boolean;
 };
 

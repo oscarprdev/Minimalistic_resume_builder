@@ -12,6 +12,10 @@ export type Languages = {
      */
     title: string;
     /**
+     * Languages section is hidden flag.
+     */
+    isHidden: boolean;
+    /**
      * An array of languages.
      */
     languageList: Array<{

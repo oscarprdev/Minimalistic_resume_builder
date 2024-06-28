@@ -12,6 +12,10 @@ export type Education = {
      */
     title: string;
     /**
+     * Education section is hidden flag.
+     */
+    isHidden: boolean;
+    /**
      * An array of formal education schools.
      */
     educationList: Array<{

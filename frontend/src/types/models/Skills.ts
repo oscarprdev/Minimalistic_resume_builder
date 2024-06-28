@@ -12,6 +12,10 @@ export type Skills = {
      */
     title: string;
     /**
+     * Skills section is hidden flag.
+     */
+    isHidden: boolean;
+    /**
      * An array of skills.
      */
     skillList: Array<{
