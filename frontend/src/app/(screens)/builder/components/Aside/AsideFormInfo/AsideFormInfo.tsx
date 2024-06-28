@@ -23,6 +23,12 @@ const AsideFormInfo = ({ defaultValues, userId, resumeId, handleSubmit }: AsideF
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
+	const onSubmit = async (values: FormInfoValues) => {
+		const response = await handleSubmit(values);
+
+		routerAfterSubmit(response);
+	};
+
 	const { deleteInfo, isDeleteCtaPending } = useDeleteFormCta({
 		path: userId && resumeId ? `${API_URL}/resume/${userId}/${resumeId}/delete` : null,
 		deleteCallback,
@@ -32,12 +38,6 @@ const AsideFormInfo = ({ defaultValues, userId, resumeId, handleSubmit }: AsideF
 			router.push(nextPath);
 		},
 	});
-
-	const onSubmit = async (values: FormInfoValues) => {
-		const response = await handleSubmit(values);
-
-		routerAfterSubmit(response);
-	};
 
 	const onDestructiveClick = () => deleteInfo && deleteInfo();
 

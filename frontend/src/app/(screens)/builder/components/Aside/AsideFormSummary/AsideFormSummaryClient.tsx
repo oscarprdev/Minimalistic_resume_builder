@@ -1,14 +1,14 @@
 'use client';
 
 import { useResumeSummaryStore } from '@/store/useResumeSummaryStore';
-import { z } from 'zod';
-import AsideFormSummary, { asideFormSummarySchema } from './AsideFormSummary';
+import AsideFormSummary from './AsideFormSummary';
 import { right } from '@/lib/either';
+import { FormSummaryValues } from './schema-validations';
 
 const AsideFormSummaryClient = () => {
 	const summaryStore = useResumeSummaryStore();
 
-	const handleClientSubmit = async (values: z.infer<typeof asideFormSummarySchema>) => {
+	const handleClientSubmit = async (values: FormSummaryValues) => {
 		summaryStore.updateSummary({ title: values.title, summary: values.summary });
 
 		return right('');

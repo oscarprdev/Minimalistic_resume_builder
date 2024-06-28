@@ -1,14 +1,14 @@
 'use server';
 
 import { postCallback, getCallback } from '@/services';
-import AsideFormSummary, { asideFormSummarySchema } from './AsideFormSummary';
-import { z } from 'zod';
+import AsideFormSummary from './AsideFormSummary';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { updateResumeSummaryAction } from './actions/update-resume-summary';
 import { describeResumeSummaryAction } from './actions/describe-resume-summary';
 import { ResumeSummaryDefaultValues } from '@/store/useResumeSummaryStore';
+import { FormSummaryValues } from './schema-validations';
 
 interface AsideFormSummaryServerProps {
 	userId: string;
@@ -21,7 +21,7 @@ const DEFAULT_SUMMARY_VALUES: ResumeSummaryDefaultValues = {
 };
 
 const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServerProps) => {
-	const handleServerSubmit = async (values: z.infer<typeof asideFormSummarySchema>): Promise<Either<string, string>> => {
+	const handleServerSubmit = async (values: FormSummaryValues): Promise<Either<string, string>> => {
 		'use server';
 		return await updateResumeSummaryAction({
 			userId,
@@ -63,6 +63,8 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 		<AsideFormSummary
 			defaultValues={response.right}
 			handleSubmit={handleServerSubmit}
+			userId={userId}
+			resumeId={resumeId}
 		/>
 	);
 };
