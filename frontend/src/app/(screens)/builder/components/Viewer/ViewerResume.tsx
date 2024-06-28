@@ -17,7 +17,7 @@ const ViewerResume = async ({ resumeId, user }: ViewerResumeProps) => {
 	return (
 		<article
 			id='resume-viewer'
-			className='w-[650px] bg-white shadow-sm h-fit mb-[100px] p-5'>
+			className='w-[650px] min-h-[1000px] bg-white shadow-sm h-fit mb-[100px] p-5'>
 			<ViewerHeaderController
 				resumeId={resumeId}
 				user={user}
