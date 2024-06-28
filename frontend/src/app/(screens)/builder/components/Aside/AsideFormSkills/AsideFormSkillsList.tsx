@@ -9,7 +9,6 @@ import { OptionalSkill } from '@/store/useResumeSkillsStore';
 import { useMemo } from 'react';
 import { useFieldArrayAnimations } from '@/hooks/useFieldArrayAnimations';
 import RemoveListItemCta from '../shared/components/RemoveListItemCta';
-import { IconPlus } from '@tabler/icons-react';
 
 interface AsideFormSkillsListProps {
 	form: UseFormReturn<SkillsFormState, any, undefined>;

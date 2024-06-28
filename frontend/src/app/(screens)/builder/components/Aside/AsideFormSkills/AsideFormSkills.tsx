@@ -1,63 +1,55 @@
 'use client';
 
-import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import AsideFormSkillsList from './AsideFormSkillsList';
 import { ResumeSkillsDefaultValues } from '@/store/useResumeSkillsStore';
 import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { asideFormSkillsSchema } from './schema-validations';
-import SectionActions from '../shared/components/SectionActions';
-import { useDynamicForm } from '@/hooks/useDynamicForm';
+import { FormSkillsValues } from './schema-validations';
+import AsideFormSkillsPresentation from './AsideFormSkillsPresentation';
+import { useDeleteFormCta } from '@/hooks/useDeleteFormCta';
+import { API_URL } from '@/constants';
+import { revalidatePath } from '@/app/actions/revalidate';
+import { deleteCallback } from '@/services';
 
 interface AsideFormSkillsProps {
-	handleSubmit: (values: z.infer<typeof asideFormSkillsSchema>) => Promise<Either<string, string>>;
 	defaultValues?: ResumeSkillsDefaultValues;
+	userId?: string;
+	resumeId?: string;
+	handleSubmit: (values: FormSkillsValues) => Promise<Either<string, string>>;
 }
 
 export type SkillsFormState = ResumeSkillsDefaultValues;
 
-const AsideFormSkills = ({ defaultValues, handleSubmit }: AsideFormSkillsProps) => {
+const AsideFormSkills = ({ defaultValues, userId, resumeId, handleSubmit }: AsideFormSkillsProps) => {
 	const router = useRouter();
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const form = useDynamicForm<SkillsFormState>({ schema: asideFormSkillsSchema, defaultValues });
-
-	const onSubmit = async (values: z.infer<typeof asideFormSkillsSchema>) => {
+	const onSubmit = async (values: FormSkillsValues) => {
 		const response = await handleSubmit(values);
 
 		routerAfterSubmit(response);
 	};
 
+	const { deleteInfo, isDeleteCtaPending } = useDeleteFormCta({
+		path: userId && resumeId ? `${API_URL}/resume/${userId}/${resumeId}/skills` : null,
+		deleteCallback,
+		afterDeleteCallback: () => {
+			const nextPath = resumeId ? `/builder?resume=${resumeId}&selected=skills` : '/builder?selected=skills';
+			revalidatePath(nextPath);
+		},
+	});
+
+	const onDestructiveClick = () => deleteInfo && deleteInfo();
+
 	return (
-		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-6 animate-fade-up'>
-				<FormField
-					control={form.control}
-					name='title'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Skills title</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Title'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<AsideFormSkillsList form={form} />
-				<SectionActions loading={form.formState.isSubmitting} />
-			</form>
-		</Form>
+		<AsideFormSkillsPresentation
+			defaultValues={defaultValues}
+			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
+			isDeleteCtaPending={isDeleteCtaPending}
+			onSubmit={onSubmit}
+			onDestructiveClick={onDestructiveClick}
+		/>
 	);
 };
 

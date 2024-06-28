@@ -64,6 +64,8 @@ const AsideFormSkillsServer = async ({ userId, resumeId }: AsideFormSkillsServer
 		<AsideFormSkills
 			defaultValues={response.right}
 			handleSubmit={handleServerSubmit}
+			userId={userId}
+			resumeId={resumeId}
 		/>
 	);
 };

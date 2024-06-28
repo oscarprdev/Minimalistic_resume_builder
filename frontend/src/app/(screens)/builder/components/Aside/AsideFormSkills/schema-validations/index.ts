@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export type FormSkillsValues = z.infer<typeof asideFormSkillsSchema>;
+
 const skillFormSchema = z.object({
 	id: z.string().optional(),
 	name: z.string(),
