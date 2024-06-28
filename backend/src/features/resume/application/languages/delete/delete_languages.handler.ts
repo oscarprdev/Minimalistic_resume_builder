@@ -19,7 +19,9 @@ export class DefaultDeleteLanguagesHandler implements DeleteLanguagesHandler {
 
 			const response = { status: 201, message: 'Languages deleted successfully' } satisfies CommonDeleteResponse;
 
-			return new Response(response.message, response);
+			return new Response(JSON.stringify(response.message), {
+				status: response.status,
+			});
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().handleError(error);
 		}
