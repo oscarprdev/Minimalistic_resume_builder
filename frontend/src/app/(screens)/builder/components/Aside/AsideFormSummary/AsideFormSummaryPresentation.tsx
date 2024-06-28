@@ -67,7 +67,6 @@ const AsideFormSummaryPresentation = ({
 				/>
 				<SectionActions
 					loading={form.formState.isSubmitting}
-					destructiveLabel='Clear summary'
 					onDestructiveClick={onDestructiveClick}
 					isDeleteCtaPending={isDeleteCtaPending}
 					isDestructiveCtaDisabled={isDestructiveCtaDisabled}

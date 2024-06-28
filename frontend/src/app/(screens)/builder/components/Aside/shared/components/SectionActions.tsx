@@ -11,7 +11,7 @@ interface SectionActionsProps {
 
 const SectionActions = ({
 	loading,
-	destructiveLabel = 'Remove section',
+	destructiveLabel = 'Clear section',
 	isDestructiveCtaDisabled,
 	isDeleteCtaPending,
 	onDestructiveClick,
