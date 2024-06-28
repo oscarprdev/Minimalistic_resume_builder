@@ -36,6 +36,7 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
             SELECT 
                 Languages.id AS "id", 
                 Languages.title AS "title",
+                Languages.isHidden AS "isHidden",
                 Language.id AS "LanguageId", 
                 Language.name AS "LanguageName", 
                 Language.level AS "LanguageLevel", 
@@ -51,7 +52,7 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 				[languagesResumeId]
 			);
 
-			const { id, title } = result[0];
+			const { id, title, isHidden } = result[0];
 
 			const languageList: LanguageDb[] = result.map((r) => {
 				return {
@@ -65,6 +66,7 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 			const Languages: LanguagesDb = {
 				id,
 				title,
+				isHidden,
 				languageList,
 			};
 
@@ -156,14 +158,14 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 
 	async createLanguages({ languagesResumeId, data }: CreateLanguagesInfrastructureInput): Promise<void> {
 		try {
-			const { title, languageList } = data;
+			const { title, languageList, isHidden } = data;
 
 			await this.database.query(
 				`INSERT INTO Languages 
-					(id, title) 
-					VALUES ($1, $2)
+					(id, title, isHidden) 
+					VALUES ($1, $2, $3)
 				;`,
-				[languagesResumeId, title]
+				[languagesResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { name, level, certificateLink } of languageList) {
@@ -215,13 +217,14 @@ export class DefaultLanguagesResumeDatabase implements LanguagesResumeDatabase {
 
 	async updateLanguages({ languagesResumeId, data, newLanguages }: UpdateLanguagesInfrastructureInput): Promise<void> {
 		try {
-			const { title, languageList } = data;
+			const { title, languageList, isHidden } = data;
 			await this.database.query(
 				`UPDATE Languages
-					SET title = $2
+					SET title = $2,
+					isHidden = $3
                     WHERE id = $1
 				;`,
-				[languagesResumeId, title]
+				[languagesResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { id, name, level, certificateLink } of languageList) {

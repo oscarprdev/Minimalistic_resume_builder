@@ -23,6 +23,7 @@ export class DescribeLanguagesAdapter implements DescribeLanguagesPorts {
 		return {
 			id: languagesDb.id,
 			title: languagesDb.title,
+			isHidden: languagesDb.isHidden,
 			languageList: languagesDb.languageList.every((lang) => !lang.id) ? [] : this.mapLanguageList(languagesDb.languageList),
 		};
 	}
