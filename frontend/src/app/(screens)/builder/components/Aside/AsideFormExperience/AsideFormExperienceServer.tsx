@@ -5,7 +5,7 @@ import AsideFormExperience from './AsideFormExperience';
 import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
-import { asideFormExperienceSchema } from './schema-validations';
+import { FormExperienceValues, asideFormExperienceSchema } from './schema-validations';
 import { updateResumeExperienceAction } from './actions/update-resume-experience';
 import { describeResumeExperienceAction } from './actions/describe-resume-experience';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
@@ -22,7 +22,7 @@ const DEFAULT_EXPERIENCE_VALUES: ResumeExperienceDefaultValues = {
 };
 
 const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperienceServerProps) => {
-	const handleServerSubmit = async (values: z.infer<typeof asideFormExperienceSchema>): Promise<Either<string, string>> => {
+	const handleServerSubmit = async (values: FormExperienceValues): Promise<Either<string, string>> => {
 		'use server';
 		return await updateResumeExperienceAction({
 			userId,
@@ -64,6 +64,8 @@ const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperien
 		<AsideFormExperience
 			defaultValues={response.right}
 			handleSubmit={handleServerSubmit}
+			userId={userId}
+			resumeId={resumeId}
 		/>
 	);
 };

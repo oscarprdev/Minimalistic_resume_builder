@@ -1,11 +1,10 @@
 'use client';
 
-import { z } from 'zod';
 import { ResumeExperienceDefaultValues } from '@/store/useResumeExperienceStore';
 import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { asideFormExperienceSchema } from './schema-validations';
+import { FormExperienceValues } from './schema-validations';
 import AsideFormExperiencePresentation from './AsideFormExperiencePresentation';
 import { deleteCallback } from '@/services';
 import { useDeleteFormCta } from '@/hooks/useDeleteFormCta';
@@ -16,7 +15,7 @@ interface AsideFormExperienceProps {
 	defaultValues?: ResumeExperienceDefaultValues;
 	userId?: string;
 	resumeId?: string;
-	handleSubmit: (values: z.infer<typeof asideFormExperienceSchema>) => Promise<Either<string, string>>;
+	handleSubmit: (values: FormExperienceValues) => Promise<Either<string, string>>;
 }
 
 export type ExperienceFormState = ResumeExperienceDefaultValues;
@@ -26,7 +25,7 @@ const AsideFormExperience = ({ defaultValues, userId, resumeId, handleSubmit }: 
 	const params = useSearchParams();
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
-	const onSubmit = async (values: z.infer<typeof asideFormExperienceSchema>) => {
+	const onSubmit = async (values: FormExperienceValues) => {
 		const response = await handleSubmit(values);
 		routerAfterSubmit(response);
 	};
