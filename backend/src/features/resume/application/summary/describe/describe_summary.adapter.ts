@@ -13,6 +13,7 @@ export class DescribeSummaryAdapter implements DescribeSummaryPorts {
 		return {
 			id: summaryDb.id,
 			title: summaryDb.title,
+			isHidden: summaryDb.isHidden,
 			summary: summaryDb.summary,
 		};
 	}

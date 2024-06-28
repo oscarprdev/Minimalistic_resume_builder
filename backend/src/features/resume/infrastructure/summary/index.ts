@@ -41,14 +41,14 @@ export class DefaultSummaryResumeDatabase implements SummaryResumeDatabase {
 
 	async createSummary({ summaryResumeId, data }: CreateSummaryInfrastructureInput): Promise<void> {
 		try {
-			const { title, summary } = data;
+			const { title, summary, isHidden } = data;
 
 			await this.database.query(
 				`INSERT INTO summary 
-					(id, title, summary) 
-					VALUES ($1, $2, $3)
+					(id, title, summary, isHidden,) 
+					VALUES ($1, $2, $3, $4)
 				;`,
-				[summaryResumeId, title, summary]
+				[summaryResumeId, title, summary, isHidden ? 'true' : 'false']
 			);
 		} catch (error: unknown) {
 			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'createSummary');
@@ -70,13 +70,15 @@ export class DefaultSummaryResumeDatabase implements SummaryResumeDatabase {
 
 	async updateSummary({ summaryResumeId, data }: UpdateSummaryInfrastructureInput): Promise<void> {
 		try {
-			const { title, summary } = data;
+			const { title, summary, isHidden } = data;
 
 			await this.database.query(
 				`UPDATE summary
-				 SET title = $2, summary = $3
+					SET title = $2, 
+					summary = $3, 
+					isHidden = $4
 				 WHERE id = $1;`,
-				[summaryResumeId, title, summary]
+				[summaryResumeId, title, summary, isHidden ? 'true' : 'false']
 			);
 		} catch (error: unknown) {
 			new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'updateSummary');
