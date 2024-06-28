@@ -249,8 +249,6 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			for (const { title, company, startDate, endDate, description, formatTime, descriptionDisabled } of newJobs) {
 				const jobId = crypto.randomUUID().toString();
 
-				console.log('descriptionDisabled', descriptionDisabled);
-
 				await this.database.query(
 					`INSERT INTO Job 
                         (id, title, company, startDate, endDate, description, formatTime, descriptionDisabled) 
