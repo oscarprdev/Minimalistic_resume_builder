@@ -18,6 +18,7 @@ export class DescribeHeaderAdapter implements DescribeHeaderPorts {
 			email: headerDb.email,
 			phone: headerDb.phone,
 			links: headerDb.links,
+			isHidden: headerDb.isHidden,
 			...(headerDb.image ? { image: headerDb.image } : {}),
 		};
 	}

@@ -41,23 +41,23 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 
 	async createHeader({ headerResumeId, data }: CreateHeaderInfrastructureInput): Promise<void> {
 		try {
-			const { name, job, location, email, phone, links, image } = data;
+			const { name, job, location, email, phone, links, image, isHidden } = data;
 
 			if (image) {
 				await this.database.query(
 					`INSERT INTO header 
-						(id, name, job, location, email, phone, links, image) 
-						VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+						(id, name, job, location, email, phone, links, image, isHidden) 
+						VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 					;`,
-					[headerResumeId, name, job, location, email, phone, links, image]
+					[headerResumeId, name, job, location, email, phone, links, image, isHidden ? 'true' : 'false']
 				);
 			} else {
 				await this.database.query(
 					`INSERT INTO header 
-						(id, name, job, location, email, phone, links) 
-						VALUES ($1, $2, $3, $4, $5, $6, $7)
+						(id, name, job, location, email, phone, links, isHidden) 
+						VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 					;`,
-					[headerResumeId, name, job, location, email, phone, links]
+					[headerResumeId, name, job, location, email, phone, links, isHidden ? 'true' : 'false']
 				);
 			}
 		} catch (error: unknown) {
@@ -80,7 +80,7 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 
 	async updateHeader({ headerResumeId, data }: UpdateHeaderInfrastructureInput): Promise<void> {
 		try {
-			const { name, job, location, email, phone, links, image } = data;
+			const { name, job, location, email, phone, links, image, isHidden } = data;
 
 			if (image) {
 				await this.database.query(
@@ -91,9 +91,10 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 						email = $5, 
 						phone = $6, 
 						links = $7, 
-						image = $8
+						image = $8,
+						isHidden = $9
 					 WHERE id = $1;`,
-					[headerResumeId, name, job, location, email, phone, links, image]
+					[headerResumeId, name, job, location, email, phone, links, image, isHidden ? 'true' : 'false']
 				);
 			} else {
 				await this.database.query(
@@ -103,9 +104,10 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 						location = $4, 
 						email = $5, 
 						phone = $6, 
-						links = $7
+						links = $7,
+						isHidden = $8
 					 WHERE id = $1;`,
-					[headerResumeId, name, job, location, email, phone, links]
+					[headerResumeId, name, job, location, email, phone, links, isHidden ? 'true' : 'false']
 				);
 			}
 		} catch (error: unknown) {
