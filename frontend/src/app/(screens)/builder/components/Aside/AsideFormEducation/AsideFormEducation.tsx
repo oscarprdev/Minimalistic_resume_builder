@@ -33,7 +33,7 @@ const AsideFormEducation = ({ defaultValues, userId, resumeId, handleSubmit }: A
 
 	const { deleteInfo, isDeleteCtaPending } = useDeleteFormCta({
 		path: userId && resumeId ? `${API_URL}/resume/${userId}/${resumeId}/education` : null,
-		deleteServerCallback: deleteCallback,
+		deleteCallback,
 		afterDeleteCallback: () => {
 			const nextPath = resumeId ? `/builder?resume=${resumeId}&selected=education` : '/builder?selected=education';
 			revalidatePath(nextPath);

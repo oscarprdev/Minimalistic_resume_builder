@@ -1,6 +1,8 @@
 import { OptionalJob } from '@/store/useResumeExperienceStore';
 import { z } from 'zod';
 
+export type FormExperienceValues = z.infer<typeof asideFormExperienceSchema>;
+
 const isEndDateGreaterThanStartDate = (item: OptionalJob) => {
 	return new Date(item.startDate) < new Date(item.endDate);
 };
