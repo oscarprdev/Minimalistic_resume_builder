@@ -5,6 +5,7 @@ export type OptionalSkill = Skill | Omit<Skill, 'id'>;
 
 export interface ResumeSkillsDefaultValues {
 	title: string;
+	isHidden: boolean;
 	skillList: OptionalSkill[];
 }
 
@@ -15,6 +16,7 @@ export interface ResumeSkillsStore {
 
 export const DEFAULT_SKILLS_VALUES: ResumeSkillsDefaultValues = {
 	title: 'Skills',
+	isHidden: false,
 	skillList: [],
 };
 

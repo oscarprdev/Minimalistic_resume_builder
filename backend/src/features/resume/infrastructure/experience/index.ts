@@ -59,7 +59,6 @@ export class DefaultExperienceResumeDatabase implements ExperienceResumeDatabase
 			const { id, title, isHidden } = result[0];
 
 			const jobList: JobDb[] = result.map((r) => {
-				console.log('descriptionDisabled get:', r.descriptionDisabled);
 				return {
 					id: r.jobId,
 					title: r.jobTitle,

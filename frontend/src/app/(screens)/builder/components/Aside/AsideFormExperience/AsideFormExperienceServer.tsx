@@ -18,6 +18,7 @@ interface AsideFormExperienceServerProps {
 
 const DEFAULT_EXPERIENCE_VALUES: ResumeExperienceDefaultValues = {
 	title: '',
+	isHidden: false,
 	jobList: [],
 };
 
@@ -27,7 +28,7 @@ const AsideFormExperienceServer = async ({ userId, resumeId }: AsideFormExperien
 		return await updateResumeExperienceAction({
 			userId,
 			resumeId: resumeId || crypto.randomUUID().toString(),
-			payload: { title: values.title, jobList: values.jobList },
+			payload: { title: values.title, isHidden: values.isHidden, jobList: values.jobList },
 			postCallback,
 		});
 	};

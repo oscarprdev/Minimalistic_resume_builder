@@ -17,6 +17,7 @@ interface AsideFormLanguagesServerProps {
 
 const DEFAULT_LANGUAGES_VALUES: ResumeLanguagesDefaultValues = {
 	title: '',
+	isHidden: false,
 	languageList: [],
 };
 
@@ -26,7 +27,7 @@ const AsideFormLanguagesServer = async ({ userId, resumeId }: AsideFormLanguages
 		return await updateResumeLanguagesAction({
 			userId,
 			resumeId: resumeId || crypto.randomUUID().toString(),
-			payload: { title: values.title, languageList: values.languageList },
+			payload: { title: values.title, isHidden: values.isHidden, languageList: values.languageList },
 			postCallback,
 		});
 	};

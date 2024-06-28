@@ -20,6 +20,7 @@ const LangSchema = z.object({
 
 const LanguagesSectionSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean(),
 	languageList: z.array(LangSchema),
 });
 

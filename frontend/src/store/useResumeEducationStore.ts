@@ -5,6 +5,7 @@ export type OptionalSchool = School | Omit<School, 'id'>;
 
 export interface ResumeEducationDefaultValues {
 	title: string;
+	isHidden: boolean;
 	educationList: OptionalSchool[];
 }
 
@@ -15,6 +16,7 @@ export interface ResumeEducationStore {
 
 export const DEFAULT_EDUCATION_VALUES: ResumeEducationDefaultValues = {
 	title: 'Education',
+	isHidden: false,
 	educationList: [],
 };
 

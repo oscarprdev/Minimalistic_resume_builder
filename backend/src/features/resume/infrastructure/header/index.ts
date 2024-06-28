@@ -27,7 +27,14 @@ export class DefaultHeaderResumeDatabase implements HeaderResumeDatabase {
 
 	async getHeader({ headerResumeId }: GetHeaderInfrastructureInput): Promise<HeaderDb | null> {
 		try {
-			const result = await this.database.query(`SELECT * FROM header WHERE id = $1;`, [headerResumeId]);
+			const result = await this.database.query(
+				`
+				SELECT 		
+					*,
+					header.isHidden AS "isHidden"
+				FROM header WHERE id = $1;`,
+				[headerResumeId]
+			);
 
 			if (result.length === 0) {
 				return null;

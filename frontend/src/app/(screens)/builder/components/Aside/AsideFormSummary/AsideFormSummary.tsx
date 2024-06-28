@@ -24,6 +24,7 @@ const AsideFormSummary = ({ defaultValues, userId, resumeId, handleSubmit }: Asi
 	const routerAfterSubmit = useRouterAfterSubmit(router, params);
 
 	const onSubmit = async (values: FormSummaryValues) => {
+		console.log('onSubmit', values);
 		const response = await handleSubmit(values);
 
 		routerAfterSubmit(response);

@@ -5,6 +5,7 @@ export type OptionalJob = Job | Omit<Job, 'id'>;
 
 export interface ResumeExperienceDefaultValues {
 	title: string;
+	isHidden: boolean;
 	jobList: OptionalJob[];
 }
 
@@ -15,6 +16,7 @@ export interface ResumeExperienceStore {
 
 export const DEFAULT_EXPERIENCE_VALUES: ResumeExperienceDefaultValues = {
 	title: 'Professional Experience',
+	isHidden: false,
 	jobList: [],
 };
 

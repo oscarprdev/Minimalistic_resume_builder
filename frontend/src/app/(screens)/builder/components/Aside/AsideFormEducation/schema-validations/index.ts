@@ -21,5 +21,6 @@ const schoolFormSchema = z.object({
 
 export const asideFormEducationSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean().default(false),
 	educationList: z.array(schoolFormSchema).default([]),
 });

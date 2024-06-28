@@ -27,7 +27,14 @@ export class DefaultSummaryResumeDatabase implements SummaryResumeDatabase {
 
 	async getSummary({ summaryResumeId }: GetSummaryInfrastructureInput): Promise<SummaryDb | null> {
 		try {
-			const result = await this.database.query(`SELECT * FROM summary WHERE id = $1;`, [summaryResumeId]);
+			const result = await this.database.query(
+				`
+				SELECT 
+					*,
+					summary.isHidden AS "isHidden"
+				FROM summary WHERE id = $1;`,
+				[summaryResumeId]
+			);
 
 			if (result.length === 0) {
 				return null;
@@ -45,7 +52,7 @@ export class DefaultSummaryResumeDatabase implements SummaryResumeDatabase {
 
 			await this.database.query(
 				`INSERT INTO summary 
-					(id, title, summary, isHidden,) 
+					(id, title, summary, isHidden) 
 					VALUES ($1, $2, $3, $4)
 				;`,
 				[summaryResumeId, title, summary, isHidden ? 'true' : 'false']
@@ -71,6 +78,8 @@ export class DefaultSummaryResumeDatabase implements SummaryResumeDatabase {
 	async updateSummary({ summaryResumeId, data }: UpdateSummaryInfrastructureInput): Promise<void> {
 		try {
 			const { title, summary, isHidden } = data;
+
+			console.log('updateSummary', data);
 
 			await this.database.query(
 				`UPDATE summary

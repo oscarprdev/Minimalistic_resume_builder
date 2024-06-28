@@ -11,6 +11,7 @@ export interface CreateSummaryHandler {
 const SummarySectionSchema = z.object({
 	title: z.string(),
 	summary: z.string(),
+	isHidden: z.boolean(),
 });
 
 type CreateSummaryHandlerActions = 'extractPayload';

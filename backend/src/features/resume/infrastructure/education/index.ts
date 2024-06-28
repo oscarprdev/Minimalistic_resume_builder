@@ -84,7 +84,6 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 
 			return Education;
 		} catch (error: unknown) {
-			console.log(error);
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'getEducation');
 		}
 	}

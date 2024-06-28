@@ -19,6 +19,7 @@ const SchoolSchema = z.object({
 
 const EducationSectionSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean(),
 	educationList: z.array(SchoolSchema),
 });
 

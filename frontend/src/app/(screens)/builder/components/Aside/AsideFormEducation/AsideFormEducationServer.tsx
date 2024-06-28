@@ -17,6 +17,7 @@ interface AsideFormEducationServerProps {
 
 const DEFAULT_EDUCATION_VALUES: ResumeEducationDefaultValues = {
 	title: '',
+	isHidden: false,
 	educationList: [],
 };
 
@@ -26,7 +27,7 @@ const AsideFormEducationServer = async ({ userId, resumeId }: AsideFormEducation
 		return await updateResumeEducationAction({
 			userId,
 			resumeId: resumeId || crypto.randomUUID().toString(),
-			payload: { title: values.title, educationList: values.educationList },
+			payload: { title: values.title, isHidden: values.isHidden, educationList: values.educationList },
 			postCallback,
 		});
 	};

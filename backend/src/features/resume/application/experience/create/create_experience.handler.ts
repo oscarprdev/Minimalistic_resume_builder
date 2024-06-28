@@ -19,6 +19,7 @@ const JobSchema = z.object({
 
 const ExperienceSectionSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean(),
 	jobList: z.array(JobSchema),
 });
 

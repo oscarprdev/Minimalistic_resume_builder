@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 
 interface UpdateResumeLanguagesActionPayload {
 	title: string;
+	isHidden: boolean;
 	languageList: OptionalLanguage[];
 }
 

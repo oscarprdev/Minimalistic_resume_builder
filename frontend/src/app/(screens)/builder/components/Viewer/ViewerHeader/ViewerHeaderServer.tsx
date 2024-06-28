@@ -72,6 +72,7 @@ const ViewerHeaderServer = async ({ userId, resumeId }: ViewerHeaderServerProps)
 			phone={response.right.phone}
 			links={response.right.links}
 			image={response.right.image}
+			isSectionHidden={response.right.isHidden}
 		/>
 	);
 };

@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 
 interface UpdateResumeExperienceActionPayload {
 	title: string;
+	isHidden: boolean;
 	jobList: OptionalJob[];
 }
 

@@ -52,6 +52,7 @@ const ViewerSummaryServer = async ({ userId, resumeId }: ViewerSummaryServerProp
 		<ViewerSummary
 			title={response.right.title}
 			summary={response.right.summary}
+			isSectionHidden={response.right.isHidden}
 		/>
 	);
 };

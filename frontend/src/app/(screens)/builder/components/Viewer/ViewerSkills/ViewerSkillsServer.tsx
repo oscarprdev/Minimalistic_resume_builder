@@ -52,6 +52,7 @@ const ViewerSkillsServer = async ({ userId, resumeId }: ViewerSkillsServerProps)
 		<ViewerSkills
 			title={response.right.title}
 			skillList={response.right.skillList}
+			isSectionHidden={response.right.isHidden}
 		/>
 	);
 };

@@ -25,6 +25,7 @@ const DEFAULT_HEADER_VALUES: ResumeHeaderDefaultValues = {
 	email: '',
 	phone: '',
 	links: [],
+	isHidden: false,
 };
 
 const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServerProps) => {

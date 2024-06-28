@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
@@ -12,6 +12,7 @@ import { useDynamicForm } from '@/hooks/useDynamicForm';
 import { FormHeaderValues, asideFormHeaderSchema } from './schema-validations';
 import { toast } from '@/components/ui/use-toast';
 import { Either, isLeft } from '@/lib/either';
+import FormContainer from '../shared/components/FormContainer';
 
 interface AsideFormHeaderPresentationProps {
 	defaultValues?: ResumeHeaderDefaultValues;
@@ -75,110 +76,108 @@ const AsideFormHeaderPresentation = ({
 	};
 
 	return (
-		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className='space-y-6 animate-fade-up'>
-				<AsideFormHeaderImage
-					form={form}
-					updateFormImageValue={updateFormImageValue}
-					removeFormImageValue={removeFormImageValue}
-				/>
-				<FormField
-					control={form.control}
-					name='name'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Name</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Name'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='job'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Current Job</FormLabel>
-							<FormControl>
-								<Textarea
-									placeholder='Job'
-									className='min-h-[80px]'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='location'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Location</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Location'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='phone'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Phone</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Phone'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='email'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-sm text-gray-500'>Email</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Email'
-									required
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<AsideFormHeaderLinks form={form} />
-				<SectionActions
-					loading={form.formState.isSubmitting}
-					isDestructiveCtaDisabled={isDestructiveCtaDisabled}
-					isDeleteCtaPending={isDeleteCtaPending}
-					onDestructiveClick={onDestructiveClick}
-				/>
-			</form>
-		</Form>
+		<FormContainer
+			form={form}
+			onSubmit={onSubmit}>
+			<AsideFormHeaderImage
+				form={form}
+				updateFormImageValue={updateFormImageValue}
+				removeFormImageValue={removeFormImageValue}
+			/>
+			<FormField
+				control={form.control}
+				name='name'
+				render={({ field }) => (
+					<FormItem>
+						<FormLabel className='text-sm text-gray-500'>Name</FormLabel>
+						<FormControl>
+							<Input
+								placeholder='Name'
+								required
+								{...field}
+							/>
+						</FormControl>
+						<FormMessage />
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={form.control}
+				name='job'
+				render={({ field }) => (
+					<FormItem>
+						<FormLabel className='text-sm text-gray-500'>Current Job</FormLabel>
+						<FormControl>
+							<Textarea
+								placeholder='Job'
+								className='min-h-[80px]'
+								required
+								{...field}
+							/>
+						</FormControl>
+						<FormMessage />
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={form.control}
+				name='location'
+				render={({ field }) => (
+					<FormItem>
+						<FormLabel className='text-sm text-gray-500'>Location</FormLabel>
+						<FormControl>
+							<Input
+								placeholder='Location'
+								required
+								{...field}
+							/>
+						</FormControl>
+						<FormMessage />
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={form.control}
+				name='phone'
+				render={({ field }) => (
+					<FormItem>
+						<FormLabel className='text-sm text-gray-500'>Phone</FormLabel>
+						<FormControl>
+							<Input
+								placeholder='Phone'
+								required
+								{...field}
+							/>
+						</FormControl>
+						<FormMessage />
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={form.control}
+				name='email'
+				render={({ field }) => (
+					<FormItem>
+						<FormLabel className='text-sm text-gray-500'>Email</FormLabel>
+						<FormControl>
+							<Input
+								placeholder='Email'
+								required
+								{...field}
+							/>
+						</FormControl>
+						<FormMessage />
+					</FormItem>
+				)}
+			/>
+			<AsideFormHeaderLinks form={form} />
+			<SectionActions
+				loading={form.formState.isSubmitting}
+				isDestructiveCtaDisabled={isDestructiveCtaDisabled}
+				isDeleteCtaPending={isDeleteCtaPending}
+				onDestructiveClick={onDestructiveClick}
+			/>
+		</FormContainer>
 	);
 };
 

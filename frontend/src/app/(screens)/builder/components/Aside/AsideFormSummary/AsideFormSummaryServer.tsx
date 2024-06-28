@@ -18,6 +18,7 @@ interface AsideFormSummaryServerProps {
 const DEFAULT_SUMMARY_VALUES: ResumeSummaryDefaultValues = {
 	title: '',
 	summary: '',
+	isHidden: false,
 };
 
 const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServerProps) => {
@@ -26,7 +27,7 @@ const AsideFormSummaryServer = async ({ userId, resumeId }: AsideFormSummaryServ
 		return await updateResumeSummaryAction({
 			userId,
 			resumeId: resumeId || crypto.randomUUID().toString(),
-			payload: { title: values.title, summary: values.summary },
+			payload: { title: values.title, isHidden: values.isHidden, summary: values.summary },
 			postCallback,
 		});
 	};

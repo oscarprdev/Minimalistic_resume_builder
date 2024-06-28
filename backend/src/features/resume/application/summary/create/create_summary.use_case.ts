@@ -15,7 +15,10 @@ export interface CreateSummaryUsecase {
 }
 
 export class DefaultCreateSummaryUsecase extends DefaultCommonResumeUsecase implements CreateSummaryUsecase {
-	constructor(private readonly ports: CreateSummaryPorts, protected readonly commonPorts: CommonResumePorts) {
+	constructor(
+		private readonly ports: CreateSummaryPorts,
+		protected readonly commonPorts: CommonResumePorts
+	) {
 		super(commonPorts);
 	}
 

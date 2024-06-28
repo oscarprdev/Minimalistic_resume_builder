@@ -10,5 +10,6 @@ const skillFormSchema = z.object({
 
 export const asideFormSkillsSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean().default(false),
 	skillList: z.array(skillFormSchema).default([]),
 });

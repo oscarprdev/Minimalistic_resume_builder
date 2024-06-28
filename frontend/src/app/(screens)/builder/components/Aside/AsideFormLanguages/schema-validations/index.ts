@@ -16,5 +16,6 @@ const languageFormSchema = z.object({
 
 export const asideFormLanguagesSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean().default(false),
 	languageList: z.array(languageFormSchema).default([]),
 });

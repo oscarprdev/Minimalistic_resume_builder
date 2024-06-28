@@ -20,4 +20,5 @@ export const asideFormHeaderSchema = z.object({
 		)
 		.default([]),
 	image: z.string().optional(),
+	isHidden: z.boolean().default(false),
 });

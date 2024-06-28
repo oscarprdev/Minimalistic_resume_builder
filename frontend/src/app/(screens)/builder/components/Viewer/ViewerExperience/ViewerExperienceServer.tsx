@@ -52,6 +52,7 @@ const ViewerExperienceServer = async ({ userId, resumeId }: ViewerExperienceServ
 		<ViewerExperience
 			title={response.right.title}
 			jobList={response.right.jobList}
+			isSectionHidden={response.right.isHidden}
 		/>
 	);
 };

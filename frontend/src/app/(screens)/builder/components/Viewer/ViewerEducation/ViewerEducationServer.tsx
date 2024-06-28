@@ -52,6 +52,7 @@ const ViewerEducationServer = async ({ userId, resumeId }: ViewerEducationServer
 		<ViewerEducation
 			title={response.right.title}
 			educationList={response.right.educationList}
+			isSectionHidden={response.right.isHidden}
 		/>
 	);
 };

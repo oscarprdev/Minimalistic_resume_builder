@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 interface UpdateResumeSummaryActionPayload {
 	title: string;
 	summary: string;
+	isHidden: boolean;
 }
 
 export interface UpdateResumeSummaryAction {
@@ -23,6 +24,8 @@ export const updateResumeSummaryAction = async ({
 	postCallback,
 }: UpdateResumeSummaryAction): Promise<Either<string, string>> => {
 	const path = `${API_URL}/resume/${userId}/${resumeId}/summary`;
+
+	console.log('updateResumeSummaryAction', payload);
 
 	const response = await postCallback(path, payload);
 

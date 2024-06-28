@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 
 interface UpdateResumeSkillsActionPayload {
 	title: string;
+	isHidden: boolean;
 	skillList: OptionalSkill[];
 }
 

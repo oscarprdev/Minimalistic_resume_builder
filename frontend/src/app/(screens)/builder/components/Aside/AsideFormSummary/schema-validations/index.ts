@@ -9,4 +9,5 @@ export const asideFormSummarySchema = z.object({
 	summary: z.string().max(300, {
 		message: 'Summary must be less than 300 characters.',
 	}),
+	isHidden: z.boolean().default(false),
 });

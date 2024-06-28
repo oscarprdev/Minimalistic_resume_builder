@@ -52,6 +52,7 @@ const ViewerLanguagesServer = async ({ userId, resumeId }: ViewerLanguagesServer
 		<ViewerLanguages
 			title={response.right.title}
 			languageList={response.right.languageList}
+			isSectionHidden={response.right.isHidden}
 		/>
 	);
 };

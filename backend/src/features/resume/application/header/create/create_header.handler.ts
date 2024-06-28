@@ -16,6 +16,7 @@ const HeaderSectionSchema = z.object({
 	phone: z.string(),
 	links: z.array(z.string().url()),
 	image: z.string().optional(),
+	isHidden: z.boolean(),
 });
 
 type CreateHeaderHandlerActions = 'extractPayload';

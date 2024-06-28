@@ -57,6 +57,7 @@ const jobFormSchema = z
 
 export const asideFormExperienceSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean().default(false),
 	jobList: z
 		.array(jobFormSchema)
 		.default([])

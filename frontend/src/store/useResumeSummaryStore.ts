@@ -10,6 +10,7 @@ export interface ResumeSummaryStore {
 
 export const DEFAULT_SUMMARY_VALUES: ResumeSummaryDefaultValues = {
 	title: 'About me',
+	isHidden: false,
 	summary: 'Your professional summary',
 };
 

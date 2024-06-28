@@ -16,6 +16,7 @@ const SkillSchema = z.object({
 
 const SkillsSectionSchema = z.object({
 	title: z.string(),
+	isHidden: z.boolean(),
 	skillList: z.array(SkillSchema),
 });
 

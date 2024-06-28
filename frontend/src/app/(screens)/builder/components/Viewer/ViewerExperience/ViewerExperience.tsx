@@ -11,44 +11,49 @@ interface ViewerExperienceProps {
 	title: string;
 	jobList: OptionalJob[];
 	error?: string;
+	isSectionHidden?: boolean;
 }
 
-const ViewerExperience = ({ title, jobList, error }: ViewerExperienceProps) => {
+const ViewerExperience = ({ title, jobList, error, isSectionHidden = false }: ViewerExperienceProps) => {
 	useToastError(error);
 
 	return (
-		<ViewerResumeContainer title={title}>
-			{jobList.length > 0 ? (
-				<div className='flex flex-col gap-4 mt-2'>
-					{jobList.map((job) => (
-						<div
-							key={job.title}
-							className='flex flex-col relative'>
-							<LabelWithIcon
-								label={job.title}
-								icon={
-									<IconChevronRight
-										id='svg'
-										size={16}
-										stroke={1}
+		<>
+			{!isSectionHidden && (
+				<ViewerResumeContainer title={title}>
+					{jobList.length > 0 ? (
+						<div className='flex flex-col gap-4 mt-2'>
+							{jobList.map((job) => (
+								<div
+									key={job.title}
+									className='flex flex-col relative'>
+									<LabelWithIcon
+										label={job.title}
+										icon={
+											<IconChevronRight
+												id='svg'
+												size={16}
+												stroke={1}
+											/>
+										}
 									/>
-								}
-							/>
-							<LabelWithDates
-								label={job.company}
-								startDate={job.startDate}
-								endDate={job.endDate}
-								formatTime={job.formatTime}
-							/>
+									<LabelWithDates
+										label={job.company}
+										startDate={job.startDate}
+										endDate={job.endDate}
+										formatTime={job.formatTime}
+									/>
 
-							{!job.descriptionDisabled && <p className='text-xs text-gray-600 pl-6 mt-1'>{job.description}</p>}
+									{!job.descriptionDisabled && <p className='text-xs text-gray-600 pl-6 mt-1'>{job.description}</p>}
+								</div>
+							))}
 						</div>
-					))}
-				</div>
-			) : (
-				<p className='text-xs text-gray-500'>No jobs</p>
+					) : (
+						<p className='text-xs text-gray-500'>No jobs</p>
+					)}
+				</ViewerResumeContainer>
 			)}
-		</ViewerResumeContainer>
+		</>
 	);
 };
 

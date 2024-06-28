@@ -5,6 +5,7 @@ export type OptionalLanguage = Language | Omit<Language, 'id'>;
 
 export interface ResumeLanguagesDefaultValues {
 	title: string;
+	isHidden: boolean;
 	languageList: OptionalLanguage[];
 }
 
@@ -15,6 +16,7 @@ export interface ResumeLanguagesStore {
 
 export const DEFAULT_LANGUAGES_VALUES: ResumeLanguagesDefaultValues = {
 	title: 'Languages',
+	isHidden: false,
 	languageList: [],
 };
 

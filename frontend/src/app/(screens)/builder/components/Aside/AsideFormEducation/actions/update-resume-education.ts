@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 
 interface UpdateResumeEducationActionPayload {
 	title: string;
+	isHidden: boolean;
 	educationList: OptionalSchool[];
 }
 

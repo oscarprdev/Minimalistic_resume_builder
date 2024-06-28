@@ -15,6 +15,7 @@ export const DEFAULT_HEADER_VALUES: ResumeHeaderDefaultValues = {
 	email: 'you@email.com',
 	phone: 'xxx-xxx-xxx',
 	links: [],
+	isHidden: false,
 };
 
 export const useResumeHeaderStore = create<ResumeHeaderStore>((set) => ({
