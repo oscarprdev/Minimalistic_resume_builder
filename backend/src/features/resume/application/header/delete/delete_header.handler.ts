@@ -19,7 +19,9 @@ export class DefaultDeleteHeaderHandler implements DeleteHeaderHandler {
 
 			const response = { status: 201, message: 'Header deleted successfully' } satisfies CommonDeleteResponse;
 
-			return new Response(response.message, response);
+			return new Response(JSON.stringify(response.message), {
+				status: response.status,
+			});
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().handleError(error);
 		}
