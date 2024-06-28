@@ -1,8 +1,7 @@
 'use server';
 
 import { postCallback, getCallback } from '@/services';
-import AsideFormHeader, { asideFormHeaderSchema } from './AsideFormHeader';
-import { z } from 'zod';
+import AsideFormHeader from './AsideFormHeader';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
 import { useCallback } from 'react';
@@ -12,6 +11,7 @@ import { removeImageAction } from './actions/remove-image';
 import { describeResumeHeaderAction } from './actions/describe-resume-header';
 import { describeResumeAction } from '@/app/actions/resume/describe-resume.action';
 import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
+import { FormHeaderValues } from './schema-validations';
 
 interface AsideFormHeaderServerProps {
 	userId: string;
@@ -31,7 +31,7 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 	const defaultResumeId = crypto.randomUUID().toString();
 
 	const handleServerSubmit = useCallback(
-		async (values: z.infer<typeof asideFormHeaderSchema>): Promise<Either<string, string>> => {
+		async (values: FormHeaderValues): Promise<Either<string, string>> => {
 			'use server';
 			return await updateResumeHeaderAction({
 				userId,
@@ -91,6 +91,8 @@ const AsideFormHeaderServer = async ({ userId, resumeId }: AsideFormHeaderServer
 	return (
 		<AsideFormHeader
 			defaultValues={response.right}
+			userId={userId}
+			resumeId={resumeId}
 			handleSubmit={handleServerSubmit}
 			updateImage={updateImage}
 			removeImage={removeImage}

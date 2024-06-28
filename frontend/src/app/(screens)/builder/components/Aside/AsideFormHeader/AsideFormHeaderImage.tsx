@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
 import { IconLoader2 } from '@tabler/icons-react';
 import Image from 'next/image';
-import { ChangeEvent, startTransition, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, startTransition, useRef, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
 interface AsideFormHeaderImageProps {
