@@ -2,6 +2,7 @@ type: object
 required:
   - id
   - title
+  - isHidden
   - educationList
 properties:
   id:
@@ -12,6 +13,10 @@ properties:
     type: string
     description: Education section title.
     example: Education
+  isHidden:
+    type: boolean
+    description: Education section is hidden flag.
+    example: false
   educationList:
     type: array
     description: An array of formal education schools.

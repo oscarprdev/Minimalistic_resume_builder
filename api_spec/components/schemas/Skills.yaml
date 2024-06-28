@@ -2,6 +2,7 @@ type: object
 required:
   - id
   - title
+  - isHidden
   - skillList
 properties:
   id:
@@ -12,6 +13,10 @@ properties:
     type: string
     description: Skills section title.
     example: Skills
+  isHidden:
+    type: boolean
+    description: Skills section is hidden flag.
+    example: false
   skillList:
     type: array
     description: An array of skills.

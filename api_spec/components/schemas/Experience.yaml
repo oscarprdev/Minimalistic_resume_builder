@@ -2,6 +2,7 @@ type: object
 required:
   - id
   - title
+  - isHidden
   - jobList
 properties:
   id:
@@ -12,6 +13,10 @@ properties:
     type: string
     description: Experience section title.
     example: Work Experience
+  isHidden:
+    type: boolean
+    description: Experience section is hidden flag.
+    example: false
   jobList:
     type: array
     description: An array of jobs.

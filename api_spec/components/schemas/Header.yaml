@@ -7,6 +7,7 @@ required:
   - email
   - phone
   - links
+  - isHidden
 properties:
   id:
     type: string
@@ -45,3 +46,7 @@ properties:
     type: string
     description: The image url of the person associated with the resume.
     example: https://www.bucket.com/image
+  isHidden:
+    type: boolean
+    description: Header section is hidden flag.
+    example: false

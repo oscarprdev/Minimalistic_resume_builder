@@ -2,6 +2,7 @@ type: object
 required:
   - id
   - title
+  - isHidden
   - languageList
 properties:
   id:
@@ -12,6 +13,10 @@ properties:
     type: string
     description: Languages section title.
     example: Languages
+  isHidden:
+    type: boolean
+    description: Languages section is hidden flag.
+    example: false
   languageList:
     type: array
     description: An array of languages.

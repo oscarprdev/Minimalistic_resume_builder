@@ -2,6 +2,7 @@ type: object
 required:
   - id
   - title
+  - isHidden
   - summary
 properties:
   id:
@@ -12,6 +13,10 @@ properties:
     type: string
     description: Summary section title.
     example: About me
+  isHidden:
+    type: boolean
+    description: Summary section is hidden flag.
+    example: false
   summary:
     type: string
     description: A brief summary of the owner's professional background and skills.
