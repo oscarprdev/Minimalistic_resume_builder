@@ -36,6 +36,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
             SELECT 
                 Education.id AS "id", 
                 Education.title AS "title",
+                Education.isHidden AS "isHidden",
                 School.id AS "schoolId", 
                 School.title AS "schoolTitle", 
                 School.career AS "schoolCareer", 
@@ -59,7 +60,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				return null;
 			}
 
-			const { id, title } = result[0];
+			const { id, title, isHidden } = result[0];
 
 			const educationList: SchoolDb[] = result.map((r) => {
 				return {
@@ -77,6 +78,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 			const Education: EducationDb = {
 				id,
 				title,
+				isHidden,
 				educationList,
 			};
 
@@ -173,14 +175,14 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 
 	async createEducation({ educationResumeId, data }: CreateEducationInfrastructureInput): Promise<void> {
 		try {
-			const { title, educationList } = data;
+			const { title, educationList, isHidden } = data;
 
 			await this.database.query(
 				`INSERT INTO Education 
-					(id, title) 
-					VALUES ($1, $2)
+					(id, title, isHidden) 
+					VALUES ($1, $2, $3)
 				;`,
-				[educationResumeId, title]
+				[educationResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { title, career, startDate, endDate, description, formatTime, descriptionDisabled } of educationList) {
@@ -222,13 +224,14 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 
 	async updateEducation({ educationResumeId, data, newSchools }: UpdateEducationInfrastructureInput): Promise<void> {
 		try {
-			const { title, educationList } = data;
+			const { title, educationList, isHidden } = data;
 			await this.database.query(
 				`UPDATE Education
-					SET title = $2
+					SET title = $2,
+					isHidden = $3
                     WHERE id = $1
 				;`,
-				[educationResumeId, title]
+				[educationResumeId, title, isHidden ? 'true' : 'false']
 			);
 
 			for (const { id, title, career, startDate, endDate, description, formatTime, descriptionDisabled } of educationList) {

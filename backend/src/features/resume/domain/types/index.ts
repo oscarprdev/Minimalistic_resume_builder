@@ -19,11 +19,13 @@ export interface HeaderDb {
 	phone: string;
 	links: Array<string>;
 	image: string | null;
+	isHidden: boolean;
 }
 
 export interface SummaryDb {
 	id: string;
 	title: string;
+	isHidden: boolean;
 	summary: string;
 }
 
@@ -45,6 +47,7 @@ export interface JobDb {
 export interface ExperienceDb {
 	id: string;
 	title: string;
+	isHidden: boolean;
 	jobList: JobDb[];
 }
 
@@ -62,6 +65,7 @@ export interface SchoolDb {
 export interface EducationDb {
 	id: string;
 	title: string;
+	isHidden: boolean;
 	educationList: SchoolDb[];
 }
 
@@ -75,6 +79,7 @@ export interface LanguageDb {
 export interface LanguagesDb {
 	id: string;
 	title: string;
+	isHidden: boolean;
 	languageList: LanguageDb[];
 }
 
@@ -87,5 +92,6 @@ export interface SkillDb {
 export interface SkillsDb {
 	id: string;
 	title: string;
+	isHidden: boolean;
 	skillList: SkillDb[];
 }
