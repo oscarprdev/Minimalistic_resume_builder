@@ -4,7 +4,6 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ResumeHeaderDefaultValues } from '@/store/useResumeHeaderStore';
-import AsideFormHeaderImage, { DEFAULT_IMAGE, MAX_FILE_SIZE_MB } from './AsideFormHeaderImage';
 import { ChangeEvent } from 'react';
 import SectionActions from '../shared/components/SectionActions';
 import AsideFormHeaderLinks from './AsideFormHeaderLinks';
@@ -12,12 +11,14 @@ import { useDynamicForm } from '@/hooks/useDynamicForm';
 import { FormHeaderValues, asideFormHeaderSchema } from './schema-validations';
 import { toast } from '@/components/ui/use-toast';
 import { Either, isLeft } from '@/lib/either';
+import AsideFormHeaderImage, { DEFAULT_IMAGE, MAX_FILE_SIZE_MB } from './AsideFormHeaderImage';
 import FormContainer from '../shared/components/FormContainer';
 
 interface AsideFormHeaderPresentationProps {
 	defaultValues?: ResumeHeaderDefaultValues;
 	isDestructiveCtaDisabled: boolean;
 	isDeleteCtaPending: boolean;
+	isUserLogged?: boolean;
 	onSubmit: (values: FormHeaderValues) => Promise<void>;
 	onDestructiveClick: () => void;
 	updateImage: (formData: FormData) => Promise<Either<string, string>>;
@@ -28,6 +29,7 @@ const AsideFormHeaderPresentation = ({
 	defaultValues,
 	isDestructiveCtaDisabled,
 	isDeleteCtaPending,
+	isUserLogged,
 	onSubmit,
 	onDestructiveClick,
 	updateImage,
@@ -78,6 +80,7 @@ const AsideFormHeaderPresentation = ({
 	return (
 		<FormContainer
 			form={form}
+			isUserLogged={isUserLogged}
 			onSubmit={onSubmit}>
 			<AsideFormHeaderImage
 				form={form}

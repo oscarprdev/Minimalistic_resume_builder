@@ -13,6 +13,7 @@ interface AsideFormSummaryPresentationProps {
 	defaultValues?: ResumeSummaryDefaultValues;
 	isDestructiveCtaDisabled: boolean;
 	isDeleteCtaPending: boolean;
+	isUserLogged?: boolean;
 	onSubmit: (values: FormSummaryValues) => Promise<void>;
 	onDestructiveClick: () => void;
 }
@@ -21,6 +22,7 @@ const AsideFormSummaryPresentation = ({
 	defaultValues,
 	isDeleteCtaPending,
 	isDestructiveCtaDisabled,
+	isUserLogged,
 	onSubmit,
 	onDestructiveClick,
 }: AsideFormSummaryPresentationProps) => {
@@ -29,6 +31,7 @@ const AsideFormSummaryPresentation = ({
 	return (
 		<FormContainer
 			form={form}
+			isUserLogged={isUserLogged}
 			onSubmit={onSubmit}>
 			<FormField
 				control={form.control}

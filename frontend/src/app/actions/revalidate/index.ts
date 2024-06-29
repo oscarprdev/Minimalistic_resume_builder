@@ -2,6 +2,6 @@
 
 import { revalidatePath as revalidate } from 'next/cache';
 
-export const revalidatePath = (path: string) => {
-	revalidate(path);
+export const revalidatePath = (path?: string) => {
+	revalidate(path || '/builder');
 };

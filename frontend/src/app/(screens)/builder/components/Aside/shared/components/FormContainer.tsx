@@ -5,17 +5,18 @@ import { ReactNode } from 'react';
 
 interface FormContainerProps<T> {
 	form: UseFormReturn<any, any, undefined>;
+	isUserLogged?: boolean;
 	onSubmit: (values: T) => Promise<void>;
 	children: ReactNode;
 }
 
-const FormContainer = ({ form, onSubmit, children }: FormContainerProps<any>) => {
+const FormContainer = ({ form, isUserLogged = false, onSubmit, children }: FormContainerProps<any>) => {
 	return (
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='relative space-y-6 animate-fade-up'>
-				<FormSectionHiddenSwitch form={form} />
+				{isUserLogged && <FormSectionHiddenSwitch form={form} />}
 				{children}
 			</form>
 		</Form>

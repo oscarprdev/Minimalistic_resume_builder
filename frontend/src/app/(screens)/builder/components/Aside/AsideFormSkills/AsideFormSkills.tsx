@@ -34,10 +34,7 @@ const AsideFormSkills = ({ defaultValues, userId, resumeId, handleSubmit }: Asid
 	const { deleteInfo, isDeleteCtaPending } = useDeleteFormCta({
 		path: userId && resumeId ? `${API_URL}/resume/${userId}/${resumeId}/skills` : null,
 		deleteCallback,
-		afterDeleteCallback: () => {
-			const nextPath = resumeId ? `/builder?resume=${resumeId}&selected=skills` : '/builder?selected=skills';
-			revalidatePath(nextPath);
-		},
+		afterDeleteCallback: () => revalidatePath(),
 	});
 
 	const onDestructiveClick = () => deleteInfo && deleteInfo();
@@ -47,6 +44,7 @@ const AsideFormSkills = ({ defaultValues, userId, resumeId, handleSubmit }: Asid
 			defaultValues={defaultValues}
 			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
 			isDeleteCtaPending={isDeleteCtaPending}
+			isUserLogged={Boolean(userId)}
 			onSubmit={onSubmit}
 			onDestructiveClick={onDestructiveClick}
 		/>

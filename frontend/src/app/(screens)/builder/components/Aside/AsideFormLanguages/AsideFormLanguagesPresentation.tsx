@@ -9,26 +9,29 @@ import SectionActions from '../shared/components/SectionActions';
 import { useDynamicForm } from '@/hooks/useDynamicForm';
 import FormContainer from '../shared/components/FormContainer';
 
-interface AsideFormLanguagesPresenationProps {
+interface AsideFormLanguagesPresentationProps {
 	defaultValues?: ResumeLanguagesDefaultValues;
 	isDestructiveCtaDisabled: boolean;
 	isDeleteCtaPending: boolean;
+	isUserLogged?: boolean;
 	onSubmit: (values: FormLanguagesValues) => Promise<void>;
 	onDestructiveClick: () => void;
 }
 
-const AsideFormLanguagesPresenation = ({
+const AsideFormLanguagesPresentation = ({
 	defaultValues,
 	isDestructiveCtaDisabled,
 	isDeleteCtaPending,
+	isUserLogged,
 	onSubmit,
 	onDestructiveClick,
-}: AsideFormLanguagesPresenationProps) => {
+}: AsideFormLanguagesPresentationProps) => {
 	const form = useDynamicForm<ResumeLanguagesDefaultValues>({ schema: asideFormLanguagesSchema, defaultValues });
 
 	return (
 		<FormContainer
 			form={form}
+			isUserLogged={isUserLogged}
 			onSubmit={onSubmit}>
 			<FormField
 				control={form.control}
@@ -58,4 +61,4 @@ const AsideFormLanguagesPresenation = ({
 	);
 };
 
-export default AsideFormLanguagesPresenation;
+export default AsideFormLanguagesPresentation;

@@ -5,7 +5,7 @@ import { Either } from '@/lib/either';
 import { useRouterAfterSubmit } from '@/hooks/useRouterAfterSubmit';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { FormLanguagesValues } from './schema-validations';
-import AsideFormLanguagesPresenation from './AsideFormLanguagesPresentation';
+import AsideFormLanguagesPresentation from './AsideFormLanguagesPresentation';
 import { useDeleteFormCta } from '@/hooks/useDeleteFormCta';
 import { revalidatePath } from '@/app/actions/revalidate';
 import { API_URL } from '@/constants';
@@ -34,20 +34,18 @@ const AsideFormLanguages = ({ defaultValues, userId, resumeId, handleSubmit }: A
 	const { deleteInfo, isDeleteCtaPending } = useDeleteFormCta({
 		path: userId && resumeId ? `${API_URL}/resume/${userId}/${resumeId}/languages` : null,
 		deleteCallback,
-		afterDeleteCallback: () => {
-			const nextPath = resumeId ? `/builder?resume=${resumeId}&selected=languages` : '/builder?selected=languages';
-			revalidatePath(nextPath);
-		},
+		afterDeleteCallback: () => revalidatePath(),
 	});
 
 	const onDestructiveClick = () => deleteInfo && deleteInfo();
 
 	return (
-		<AsideFormLanguagesPresenation
+		<AsideFormLanguagesPresentation
 			defaultValues={defaultValues}
 			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
 			isDeleteCtaPending={isDeleteCtaPending}
 			onSubmit={onSubmit}
+			isUserLogged={Boolean(userId)}
 			onDestructiveClick={onDestructiveClick}
 		/>
 	);

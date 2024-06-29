@@ -13,6 +13,7 @@ interface AsideFormSkillsPresentationProps {
 	defaultValues?: ResumeSkillsDefaultValues;
 	isDestructiveCtaDisabled: boolean;
 	isDeleteCtaPending: boolean;
+	isUserLogged?: boolean;
 	onSubmit: (values: FormSkillsValues) => Promise<void>;
 	onDestructiveClick: () => void;
 }
@@ -21,6 +22,7 @@ const AsideFormSkillsPresentation = ({
 	defaultValues,
 	isDestructiveCtaDisabled,
 	isDeleteCtaPending,
+	isUserLogged,
 	onSubmit,
 	onDestructiveClick,
 }: AsideFormSkillsPresentationProps) => {
@@ -29,6 +31,7 @@ const AsideFormSkillsPresentation = ({
 	return (
 		<FormContainer
 			form={form}
+			isUserLogged={isUserLogged}
 			onSubmit={onSubmit}>
 			<FormField
 				control={form.control}
