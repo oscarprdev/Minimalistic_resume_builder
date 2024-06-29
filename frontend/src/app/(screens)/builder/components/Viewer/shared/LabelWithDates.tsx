@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { FORMAT_TIME_VALUES } from '../../Aside/shared/components/FormDates';
-import { getTimeDifference } from '@/lib/utils';
+import { getTimeDifference } from '@/lib/dates';
 
 interface LabelWithDatesProps {
 	label: string;

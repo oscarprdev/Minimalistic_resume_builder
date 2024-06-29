@@ -1,8 +1,9 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
+import { formatDateToValidFormat } from '@/lib/dates';
 import { useCallback } from 'react';
 import { UseFormReturn } from 'react-hook-form';
+import DatePicker from './DatePicker';
 
 interface FormDatesProps {
 	form: UseFormReturn<any, any, undefined>;
@@ -22,21 +23,19 @@ const FormDates = ({ form, index, label }: FormDatesProps) => {
 
 	return (
 		<div className='flex gap-1 items-start w-full'>
-			<div className='flex flex-col items-start gap-2'>
+			<div className='flex flex-col items-start gap-2 w-full'>
 				<FormField
 					control={form.control}
 					name={`${label}.${index}.startDate`}
 					render={({ field }) => (
-						<FormItem>
+						<FormItem className='w-full'>
 							<FormLabel className='text-sm text-gray-500'>Start date</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='Start date'
-									required
-									{...field}
-									{...form.register(`${label}.${index}.startDate`)}
-								/>
-							</FormControl>
+							<DatePicker
+								form={form}
+								field={field}
+								label={label}
+								index={index}
+							/>
 							<FormMessage className='text-xs' />
 						</FormItem>
 					)}
@@ -84,21 +83,19 @@ const FormDates = ({ form, index, label }: FormDatesProps) => {
 					)}
 				/>
 			</div>
-			<div className='flex flex-col items-start gap-2'>
+			<div className='flex flex-col items-start gap-2 w-full'>
 				<FormField
 					control={form.control}
 					name={`${label}.${index}.endDate`}
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel className='text-sm text-gray-500'>End date</FormLabel>
-							<FormControl>
-								<Input
-									placeholder='End date'
-									required
-									{...field}
-									{...form.register(`${label}.${index}.endDate`)}
-								/>
-							</FormControl>
+							<DatePicker
+								form={form}
+								field={field}
+								label={label}
+								index={index}
+							/>
 							<FormMessage className='text-xs' />
 						</FormItem>
 					)}
@@ -115,6 +112,7 @@ const FormDates = ({ form, index, label }: FormDatesProps) => {
 										checked={field.value.includes(FORMAT_TIME_VALUES.CURRENTLY)}
 										onCheckedChange={(checked) => {
 											field.onChange(generateValue(checked, field.value, FORMAT_TIME_VALUES.CURRENTLY));
+											form.setValue(`${label}.${index}.endDate`, formatDateToValidFormat(new Date()));
 										}}
 										aria-readonly
 									/>
