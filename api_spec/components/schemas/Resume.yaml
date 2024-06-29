@@ -2,6 +2,7 @@ type: object
 required:
   - id
   - title
+  - theme
   - header
   - summary
   - experience
@@ -17,6 +18,13 @@ properties:
     type: string
     description: The title of the resume.
     example: 'Resume Title'
+  theme:
+    type: string
+    enum:
+      - default
+      - vertical
+    description: The theme of the resume.
+    example: 'default'
   header:
     type: boolean
     description: Header flag to know if header already created.

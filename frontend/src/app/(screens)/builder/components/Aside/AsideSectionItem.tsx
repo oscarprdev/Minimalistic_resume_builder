@@ -33,7 +33,8 @@ const AsideSectionItem = async ({ label, control, sectionSelected, resumeId, use
 		return controlSelected ? resumePath : `${resumePath}&selected=${control}`;
 	};
 
-	const isItemDisabled = user && user.id && !resumeId && control !== SECTION_CONTROL.INFO;
+	const isItemDisabled =
+		(user && user.id && !resumeId && control !== SECTION_CONTROL.INFO) || (control === SECTION_CONTROL.THEMES && !user);
 
 	return (
 		<li

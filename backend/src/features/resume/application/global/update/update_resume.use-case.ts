@@ -10,7 +10,7 @@ interface UpdateResumeUsecaseExecuteInput {
 	data: UpdateResumeUsecaseExecuteDataInput;
 }
 
-export type UpdateResumeUsecaseExecuteDataInput = Pick<Resume, 'title'>;
+export type UpdateResumeUsecaseExecuteDataInput = Pick<Resume, 'title' | 'theme'>;
 
 export interface UpdateResumeUsecase {
 	execute(input: UpdateResumeUsecaseExecuteInput): Promise<string>;
@@ -29,12 +29,21 @@ export class DefaultUpdateResumeUsecase extends DefaultCommonResumeUsecase imple
 		const currentResume = await this.validateResume({ resumeId, userId: currentUser.id });
 
 		if (!currentResume) {
+			const payloadData = {
+				title: data.title || '',
+				theme: data.theme || 'default',
+			};
 			const newResumeId = generateUUID();
 			await this.createResume({ resumeId: newResumeId, ownerId: currentUser.id });
 
-			return await this.ports.updateResume({ resumeId: newResumeId, data });
+			return await this.ports.updateResume({ resumeId: newResumeId, data: payloadData });
 		}
 
-		return await this.ports.updateResume({ resumeId, data });
+		const payloadData = {
+			title: data.title || currentResume.title,
+			theme: data.theme || currentResume.theme,
+		};
+
+		return await this.ports.updateResume({ resumeId, data: payloadData });
 	}
 }

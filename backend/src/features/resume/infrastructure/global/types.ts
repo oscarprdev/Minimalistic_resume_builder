@@ -1,3 +1,5 @@
+import { Resume } from '../../../core/domain/types';
+
 export type ErrorActions = 'listResumeByUser' | 'updateResume' | 'deleteResume' | 'describeResumeById';
 
 export interface ListResumeByUserInfrastructureInput {
@@ -11,6 +13,7 @@ export interface UpdateResumeInfrastructureInput {
 
 export interface UpdateResumeDataInput {
 	title: string;
+	theme: Resume.theme;
 }
 
 export interface DeleteResumeInfrastructureInput {

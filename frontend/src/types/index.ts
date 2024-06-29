@@ -12,7 +12,7 @@ export type { Header } from './models/Header';
 export type { Job } from './models/Job';
 export type { Language } from './models/Language';
 export type { Languages } from './models/Languages';
-export type { Resume } from './models/Resume';
+export { Resume } from './models/Resume';
 export type { ResumeId } from './models/ResumeId';
 export type { School } from './models/School';
 export type { Skill } from './models/Skill';

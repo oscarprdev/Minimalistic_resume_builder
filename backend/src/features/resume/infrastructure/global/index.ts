@@ -27,15 +27,16 @@ export class DefaultGlobalResumeDatabase implements GlobalResumeDatabase {
 		}
 	}
 
-	async updateResume({ resumeId, data: { title } }: UpdateResumeInfrastructureInput): Promise<void> {
+	async updateResume({ resumeId, data: { title, theme } }: UpdateResumeInfrastructureInput): Promise<void> {
 		try {
 			await this.database.query(
 				`
 				UPDATE resume 
-					SET title = $2 
+					SET title = $2,
+						theme = $3
 					WHERE id = $1;
 				`,
-				[resumeId, title]
+				[resumeId, title, theme]
 			);
 		} catch (error: unknown) {
 			return new DefaultErrorEntity().sendError<ErrorActions>(error, 500, 'updateResume');

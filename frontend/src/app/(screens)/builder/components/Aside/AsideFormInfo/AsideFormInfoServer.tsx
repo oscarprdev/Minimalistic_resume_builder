@@ -1,6 +1,6 @@
 'use server';
 
-import { Either, isLeft, right } from '@/lib/either';
+import { Either, isLeft } from '@/lib/either';
 import AsideFormInfo from './AsideFormInfo';
 import { postCallback, getCallback } from '@/services';
 import ErrorMessage from '../../ErrorMessage';

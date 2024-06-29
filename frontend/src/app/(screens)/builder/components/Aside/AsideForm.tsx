@@ -18,6 +18,8 @@ import AsideFormLanguagesSkeleton from './AsideFormLanguages/AsideFormLanguagesS
 import AsideFormSkillsSkeleton from './AsideFormSkills/AsideFormSkillsSkeleton';
 import AsideFormEducationSkeleton from './AsideFormEducation/AsideFormEducationSkeleton';
 import AsideFormEducationController from './AsideFormEducation/AsideFormEducationController';
+import AsideFormThemes from './AsideFormThemes/AsideFormThemes';
+import AsideFormThemesServer from './AsideFormThemes/AsideFormThemesServer';
 
 interface AsideFormProps {
 	sectionSelected: SectionControl | null;
@@ -88,6 +90,16 @@ const AsideForm = async ({ sectionSelected, resumeId, user }: AsideFormProps) =>
 						<AsideFormSkillsController
 							resumeId={resumeId}
 							user={user}
+						/>
+					</Suspense>
+				);
+
+			case SECTION_CONTROL.THEMES:
+				return (
+					<Suspense fallback={<AsideFormSkillsSkeleton />}>
+						<AsideFormThemesServer
+							resumeId={resumeId}
+							userId={user?.id}
 						/>
 					</Suspense>
 				);

@@ -1,3 +1,5 @@
+import { Resume } from '../../../core/domain/types';
+
 export interface ResumeDb {
 	id: string;
 	owner: string;
@@ -8,6 +10,7 @@ export interface ResumeDb {
 	languages: string | null;
 	skills: string | null;
 	title: string;
+	theme: Resume.theme;
 }
 
 export interface HeaderDb {

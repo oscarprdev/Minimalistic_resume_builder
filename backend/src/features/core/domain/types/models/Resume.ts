@@ -12,6 +12,10 @@ export type Resume = {
      */
     title: string;
     /**
+     * The theme of the resume.
+     */
+    theme: Resume.theme;
+    /**
      * Header flag to know if header already created.
      */
     header: boolean;
@@ -36,4 +40,13 @@ export type Resume = {
      */
     skills: boolean;
 };
+export namespace Resume {
+    /**
+     * The theme of the resume.
+     */
+    export enum theme {
+        DEFAULT = 'default',
+        VERTICAL = 'vertical',
+    }
+}
 

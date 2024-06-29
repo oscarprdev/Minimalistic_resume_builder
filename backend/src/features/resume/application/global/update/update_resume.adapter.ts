@@ -5,7 +5,7 @@ export class UpdateResumeAdapter implements UpdateResumePorts {
 	constructor(private readonly database: GlobalResumeDatabase) {}
 
 	async updateResume({ resumeId, data }: UpdateResumePortsInput): Promise<string> {
-		await this.database.updateResume({ resumeId, data: { title: data.title } });
+		await this.database.updateResume({ resumeId, data: { title: data.title, theme: data.theme } });
 
 		return resumeId;
 	}

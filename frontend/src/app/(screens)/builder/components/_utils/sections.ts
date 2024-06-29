@@ -3,7 +3,7 @@ export interface Section {
 	control: SectionControl;
 }
 
-export type SectionControl = 'info' | 'header' | 'summary' | 'experience' | 'education' | 'languages' | 'skills';
+export type SectionControl = 'info' | 'header' | 'summary' | 'experience' | 'education' | 'languages' | 'skills' | 'themes';
 export const SECTION_CONTROL: Record<string, SectionControl> = {
 	INFO: 'info',
 	HEADER: 'header',
@@ -12,6 +12,7 @@ export const SECTION_CONTROL: Record<string, SectionControl> = {
 	EDUCATION: 'education',
 	LANGUAGES: 'languages',
 	SKILLS: 'skills',
+	THEMES: 'themes',
 };
 
 export const SECTIONS: Section[] = [
@@ -42,5 +43,9 @@ export const SECTIONS: Section[] = [
 	{
 		label: 'Skills',
 		control: SECTION_CONTROL.SKILLS,
+	},
+	{
+		label: 'Themes',
+		control: SECTION_CONTROL.THEMES,
 	},
 ];
