@@ -28,8 +28,8 @@ const config = {
 					to: { opacity: '1', transform: 'translateY(0)' },
 				},
 				'fade-down': {
-					from: { opacity: '1', transform: 'translateY(0px)' },
-					to: { opacity: '0', transform: 'translateY(15px)' },
+					from: { opacity: '0', transform: 'translateY(-15px)' },
+					to: { opacity: '1', transform: 'translateY(0px)' },
 				},
 				'fade-right': {
 					from: { opacity: '0', transform: 'translateX(-15px)' },
