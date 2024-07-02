@@ -46,7 +46,7 @@ const ViewerTitlePagination = ({ children, allResumesData, index }: ViewerTitleP
 
 	return (
 		<div className='w-[650px] flex items-center justify-center gap-4'>
-			{previousIndex >= 0 && (
+			{allResumesData.length > 1 && previousIndex >= 0 && (
 				<Link href={`/builder?resume=${allResumesData[previousIndex].id}&theme=${allResumesData[previousIndex].theme}${commonHref}`}>
 					<IconArrowLeft
 						stroke={1}
@@ -56,7 +56,7 @@ const ViewerTitlePagination = ({ children, allResumesData, index }: ViewerTitleP
 				</Link>
 			)}
 			{children}
-			{nextIndex >= 0 && (
+			{allResumesData.length > 1 && nextIndex >= 0 && (
 				<Link href={`/builder?resume=${allResumesData[nextIndex]}&theme=${allResumesData[previousIndex].theme}${commonHref}`}>
 					<IconArrowRight
 						stroke={1}
