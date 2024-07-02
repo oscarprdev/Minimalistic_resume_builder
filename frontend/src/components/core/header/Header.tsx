@@ -1,7 +1,6 @@
 'use server';
 
 import Link from 'next/link';
-import AuthButton from '../buttons/AuthButton';
 import DownloadResumeButton from '../buttons/DownloadResumeButton';
 import { useUserLogged } from '@/hooks/useUserLogged';
 import AuthSection from './AuthSection';
