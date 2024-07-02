@@ -4,6 +4,7 @@ import Link from 'next/link';
 import AuthButton from '../buttons/AuthButton';
 import DownloadResumeButton from '../buttons/DownloadResumeButton';
 import { useUserLogged } from '@/hooks/useUserLogged';
+import AuthSection from './AuthSection';
 
 const Header = async () => {
 	const user = await useUserLogged();
@@ -13,7 +14,7 @@ const Header = async () => {
 			<Link href={'/'}>Resume builder</Link>
 			<div className='flex items-center gap-2'>
 				<DownloadResumeButton user={user} />
-				<AuthButton user={user} />
+				<AuthSection user={user} />
 			</div>
 		</header>
 	);

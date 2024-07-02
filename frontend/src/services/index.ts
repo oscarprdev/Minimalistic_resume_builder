@@ -36,7 +36,6 @@ export const postCallback = async <P, R>(path: string, payload: P): Promise<Eith
 
 		return right(jsonResponse);
 	} catch (error) {
-		console.log(error);
 		return left(error instanceof Error ? error.message : 'Error updating data');
 	}
 };

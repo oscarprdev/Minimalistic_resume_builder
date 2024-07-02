@@ -23,7 +23,7 @@ export class DefaultRegisterUsecase extends DefaultAuthUsecases implements Regis
 	private async verifyUniqueUser(username: string) {
 		const userDb = await this.ports.describeUserByUsername({ username });
 
-		if (userDb.id) {
+		if (userDb && userDb.id) {
 			new DefaultErrorEntity().sendError('Bad request: user already exist', 400, 'validateUserAuthCredentials');
 		}
 	}
