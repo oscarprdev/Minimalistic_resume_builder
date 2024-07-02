@@ -18,7 +18,9 @@ const AuthModal = () => {
 	return (
 		<div>
 			<Dialog>
-				<DialogTrigger>Sign in</DialogTrigger>
+				<DialogTrigger className='bg-white shadow-sm border border-purple_200 text-purple_200 hover:bg-gray-100 duration-300 inline-flex gap-1 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 h-9 px-10 py-4'>
+					Sign in
+				</DialogTrigger>
 				<DialogContent className='w-[90%] md:lg-[50%] lg:w-[45%] max-w-[500px] min-w-[350px]'>
 					<DialogHeader>
 						<DialogTitle>{isUserRegistered ? 'Log in' : 'Sign up'}</DialogTitle>
