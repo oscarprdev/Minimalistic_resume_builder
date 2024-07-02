@@ -28,7 +28,7 @@ const ResumeList = async () => {
 				response.right.map((resume) => (
 					<Link
 						key={resume.id}
-						href={`/builder?resume=${resume.id}`}
+						href={`/builder?resume=${resume.id}&theme=${resume.theme}`}
 						className='hover:bg-gray-100 duration-200 w-full min-w-[500px] text-center first-of-type:border-t-transparent p-4 capitalize border border-transparent border-t-gray-100'>
 						{resume.title}
 					</Link>

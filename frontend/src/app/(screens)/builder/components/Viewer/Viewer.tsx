@@ -1,5 +1,6 @@
 'use server';
 
+import { Resume } from '@/types';
 import ViewerResume from './ViewerResume';
 import ViewerTitleController from './ViewerTitle/ViewerTitleController';
 import { User } from 'next-auth';
@@ -7,9 +8,11 @@ import { User } from 'next-auth';
 interface ViewerProps {
 	resumeId: string | null;
 	user?: User;
+	theme: Resume.theme;
+	isSelected: boolean;
 }
 
-const Viewer = async ({ resumeId, user }: ViewerProps) => {
+const Viewer = async ({ resumeId, user, theme, isSelected }: ViewerProps) => {
 	return (
 		<section
 			aria-label='viewer'
@@ -21,6 +24,8 @@ const Viewer = async ({ resumeId, user }: ViewerProps) => {
 			<ViewerResume
 				resumeId={resumeId}
 				user={user}
+				theme={theme}
+				isSelected={isSelected}
 			/>
 		</section>
 	);

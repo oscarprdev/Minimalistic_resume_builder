@@ -20,7 +20,7 @@ export const THEMES_CONTROLLER = [
 	},
 	{
 		label: 'Vertical',
-		image: 'https://pub-0e9cd559fbf645019c4e68f378549dc6.r2.dev/Theme-default.png',
+		image: 'https://pub-0e9cd559fbf645019c4e68f378549dc6.r2.dev/Theme-vertical.png',
 		kind: THEMES.VERTICAL,
 	},
 ];

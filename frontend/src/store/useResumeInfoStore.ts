@@ -1,3 +1,4 @@
+import { Resume } from '@/types';
 import { create } from 'zustand';
 
 export interface ResumeInfoDefaultValues {

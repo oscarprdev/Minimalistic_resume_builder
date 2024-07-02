@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { Resume } from '@/types';
 import { IconLoader2 } from '@tabler/icons-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -11,6 +12,96 @@ import { startTransition, useState } from 'react';
 interface DownloadResumeButtonProps {
 	user?: User;
 }
+
+const fixDefaultResumeThemeStylesBeforePrint = (doc: Document) => {
+	const resume = doc.getElementById('resume-viewer-default') as HTMLElement;
+
+	if (!resume) return;
+
+	resume.style.width = '800px';
+
+	const svgElements = doc.querySelectorAll('#svg') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < svgElements.length; i++) {
+		svgElements[i].style.position = 'absolute';
+		svgElements[i].style.top = '6px';
+	}
+
+	const liTextElements = doc.querySelectorAll('#li-text') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < liTextElements.length; i++) {
+		liTextElements[i].style.paddingLeft = '15px';
+	}
+
+	const liTitleElements = doc.querySelectorAll('#li-title') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < liTitleElements.length; i++) {
+		liTitleElements[i].style.paddingLeft = '15px';
+		liTitleElements[i].style.marginTop = '-3px';
+	}
+
+	const spanElements = doc.querySelectorAll('span') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < spanElements.length; i++) {
+		spanElements[i].style.marginTop = '14px';
+	}
+
+	const datesElements = doc.querySelectorAll('#dates') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < datesElements.length; i++) {
+		datesElements[i].style.marginTop = '3px';
+	}
+};
+
+const fixVerticalResumeThemeStylesBeforePrint = (doc: Document) => {
+	const resume = doc.getElementById('resume-viewer-vertical') as HTMLElement;
+
+	if (!resume) return;
+
+	resume.style.width = '800px';
+
+	const svgElements = doc.querySelectorAll('#svg') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < svgElements.length; i++) {
+		svgElements[i].style.position = 'absolute';
+		svgElements[i].style.top = '6px';
+	}
+
+	const liTextElements = doc.querySelectorAll('#li-text') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < liTextElements.length; i++) {
+		liTextElements[i].style.paddingLeft = '15px';
+	}
+
+	const liTitleElements = doc.querySelectorAll('#li-title') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < liTitleElements.length; i++) {
+		liTitleElements[i].style.paddingLeft = '15px';
+		liTitleElements[i].style.marginTop = '-3px';
+	}
+
+	const spanElements = doc.querySelectorAll('span') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < spanElements.length; i++) {
+		spanElements[i].style.marginTop = '28px';
+	}
+
+	const lineExperienceElements = doc.querySelectorAll('#line-experience') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < lineExperienceElements.length; i++) {
+		lineExperienceElements[i].style.marginTop = '5px';
+	}
+
+	const spanDatesElements = doc.querySelectorAll('#span-dates') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < spanDatesElements.length; i++) {
+		spanDatesElements[i].style.marginTop = '14px';
+	}
+
+	const spanSummarylements = doc.querySelectorAll('#span-summary') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < spanSummarylements.length; i++) {
+		spanSummarylements[i].style.marginTop = '7px';
+	}
+
+	const textSummaryElements = doc.querySelectorAll('#text-summary') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < textSummaryElements.length; i++) {
+		textSummaryElements[i].style.paddingTop = '-25px';
+	}
+
+	const datesElements = doc.querySelectorAll('#dates') as NodeListOf<HTMLElement>;
+	for (let i = 0; i < datesElements.length; i++) {
+		datesElements[i].style.marginTop = '3px';
+	}
+};
 
 const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
 	const [loading, setLoading] = useState(false);
@@ -23,7 +114,10 @@ const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
 		setLoading(true);
 
 		startTransition(() => {
-			const domElement = document.getElementById('resume-viewer');
+			const theme = params.get('theme') || Resume.theme.DEFAULT;
+			const domElement = document.getElementById(`resume-viewer-${theme}`);
+
+			if (!domElement) return;
 
 			if (domElement) {
 				html2canvas(domElement, {
@@ -32,35 +126,8 @@ const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
 					allowTaint: true,
 					useCORS: true,
 					onclone: (doc) => {
-						const resume = doc.getElementById('resume-viewer') as HTMLElement;
-						resume.style.width = '800px';
-
-						const svgElements = doc.querySelectorAll('#svg') as NodeListOf<HTMLElement>;
-						for (let i = 0; i < svgElements.length; i++) {
-							svgElements[i].style.position = 'absolute';
-							svgElements[i].style.top = '6px';
-						}
-
-						const liTextElements = doc.querySelectorAll('#li-text') as NodeListOf<HTMLElement>;
-						for (let i = 0; i < liTextElements.length; i++) {
-							liTextElements[i].style.paddingLeft = '15px';
-						}
-
-						const liTitleElements = doc.querySelectorAll('#li-title') as NodeListOf<HTMLElement>;
-						for (let i = 0; i < liTitleElements.length; i++) {
-							liTitleElements[i].style.paddingLeft = '15px';
-							liTitleElements[i].style.marginTop = '-3px';
-						}
-
-						const spanElements = doc.querySelectorAll('span') as NodeListOf<HTMLElement>;
-						for (let i = 0; i < spanElements.length; i++) {
-							spanElements[i].style.marginTop = '14px';
-						}
-
-						const datesElements = doc.querySelectorAll('#dates') as NodeListOf<HTMLElement>;
-						for (let i = 0; i < datesElements.length; i++) {
-							datesElements[i].style.marginTop = '3px';
-						}
+						fixDefaultResumeThemeStylesBeforePrint(doc);
+						fixVerticalResumeThemeStylesBeforePrint(doc);
 					},
 				})
 					.then((canvas) => {
@@ -72,7 +139,7 @@ const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
 						const imgHeight = canvas.height;
 						const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
 						const imgX = (pdfWidth - imgWidth * ratio) / 2;
-						const imgY = 0;
+						const imgY = -5;
 						pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
 						pdf.save('resume.pdf');
 					})

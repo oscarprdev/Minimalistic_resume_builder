@@ -5,35 +5,36 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ReactNode, useMemo } from 'react';
 import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
+import { Resume } from '@/types';
 
 interface ViewerTitlePaginationProps {
 	children: ReactNode;
-	allResumesIds?: string[];
+	allResumesData?: { id: string; theme: Resume.theme }[];
 	index?: number;
 }
 
-const ViewerTitlePagination = ({ children, allResumesIds, index }: ViewerTitlePaginationProps) => {
-	const allResumesIdsIsValid = Array.isArray(allResumesIds) && allResumesIds.some((id) => Boolean(id));
+const ViewerTitlePagination = ({ children, allResumesData, index }: ViewerTitlePaginationProps) => {
+	const allResumesIdsIsValid = Array.isArray(allResumesData) && allResumesData.some((data) => Boolean(data.id));
 	const indexIsValid = typeof index !== 'undefined' && isTruthyNumber(index);
 	const queryParams = useSearchParams();
 
 	const previousIndex = useMemo(() => {
-		if ((!index && index !== 0) || !allResumesIds) {
+		if ((!index && index !== 0) || !allResumesData) {
 			return -1;
 		}
 
 		const i = index - 1;
-		return i < 0 ? allResumesIds.length - 1 : i;
-	}, [index, allResumesIds]);
+		return i < 0 ? allResumesData.length - 1 : i;
+	}, [index, allResumesData]);
 
 	const nextIndex = useMemo(() => {
-		if ((!index && index !== 0) || !allResumesIds) {
+		if ((!index && index !== 0) || !allResumesData) {
 			return -1;
 		}
 
 		const i = index + 1;
-		return i > allResumesIds.length - 1 ? 0 : i;
-	}, [index, allResumesIds]);
+		return i > allResumesData.length - 1 ? 0 : i;
+	}, [index, allResumesData]);
 
 	if (!allResumesIdsIsValid || !indexIsValid) {
 		return <div className='w-fit flex items-center gap-4'>{children}</div>;
@@ -46,7 +47,7 @@ const ViewerTitlePagination = ({ children, allResumesIds, index }: ViewerTitlePa
 	return (
 		<div className='w-[650px] flex items-center justify-center gap-4'>
 			{previousIndex >= 0 && (
-				<Link href={`/builder?resume=${allResumesIds[previousIndex]}${commonHref}`}>
+				<Link href={`/builder?resume=${allResumesData[previousIndex].id}&theme=${allResumesData[previousIndex].theme}${commonHref}`}>
 					<IconArrowLeft
 						stroke={1}
 						size={20}
@@ -56,7 +57,7 @@ const ViewerTitlePagination = ({ children, allResumesIds, index }: ViewerTitlePa
 			)}
 			{children}
 			{nextIndex >= 0 && (
-				<Link href={`/builder?resume=${allResumesIds[nextIndex]}${commonHref}`}>
+				<Link href={`/builder?resume=${allResumesData[nextIndex]}&theme=${allResumesData[previousIndex].theme}${commonHref}`}>
 					<IconArrowRight
 						stroke={1}
 						size={20}

@@ -4,6 +4,10 @@ import { useToastError } from '@/hooks/useRouterError';
 import { OptionalLanguage } from '@/store/useResumeLanguagesStore';
 import Link from 'next/link';
 import ViewerResumeContainer from '../ViewerResumeContainer';
+import { Resume } from '@/types';
+import { useSearchParams } from 'next/navigation';
+import { useMemo } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ViewerLanguagesProps {
 	title: string;
@@ -15,12 +19,17 @@ interface ViewerLanguagesProps {
 const ViewerLanguages = ({ title, languageList, error, isSectionHidden = false }: ViewerLanguagesProps) => {
 	useToastError(error);
 
+	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
+	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
+
 	return (
 		<>
 			{!isSectionHidden && (
-				<ViewerResumeContainer title={title}>
+				<ViewerResumeContainer
+					title={title}
+					isAside={isVerticalTheme}>
 					{languageList.length > 0 ? (
-						<ul className='flex items-center gap-4 flex-wrap -mt-1'>
+						<ul className={cn('flex items-center gap-4 flex-wrap -mt-1', isVerticalTheme && 'flex-col')}>
 							{languageList.map((lang) => (
 								<li
 									key={lang.name}

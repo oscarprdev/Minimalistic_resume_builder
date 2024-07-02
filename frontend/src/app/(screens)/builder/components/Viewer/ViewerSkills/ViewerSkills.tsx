@@ -4,6 +4,10 @@ import { useToastError } from '@/hooks/useRouterError';
 import { OptionalSkill } from '@/store/useResumeSkillsStore';
 import ViewerSkillIcon from './ViewerSkillIcon';
 import ViewerResumeContainer from '../ViewerResumeContainer';
+import { useSearchParams } from 'next/navigation';
+import { Resume } from '@/types';
+import { useMemo } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ViewerSkillsProps {
 	title: string;
@@ -15,16 +19,21 @@ interface ViewerSkillsProps {
 const ViewerSkills = ({ title, skillList, error, isSectionHidden = false }: ViewerSkillsProps) => {
 	useToastError(error);
 
+	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
+	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
+
 	return (
 		<>
 			{!isSectionHidden && (
-				<ViewerResumeContainer title={title}>
+				<ViewerResumeContainer
+					title={title}
+					isAside={isVerticalTheme}>
 					{skillList.length > 0 ? (
-						<ul className='flex gap-2 items-center flex-wrap'>
+						<ul className={cn('flex gap-2 items-center flex-wrap', isVerticalTheme && 'justify-center w-[80%]')}>
 							{skillList.map((skill) => (
 								<li
 									key={skill.name}
-									className='flex space-x-1 items-center relative'>
+									className='flex space-x-1 items-center relative w-fit'>
 									<ViewerSkillIcon value={skill.name} />
 									<p
 										id='li-text'

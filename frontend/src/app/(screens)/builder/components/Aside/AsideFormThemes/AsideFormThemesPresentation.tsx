@@ -30,8 +30,13 @@ const AsideFormThemesPresentation = ({ defaultValues, onSubmit }: AsideFormTheme
 						{THEMES_CONTROLLER.map((theme) => (
 							<FormItem
 								key={theme.label}
-								className='relative flex flex-col w-[170px] items-start gap-2 p-2'>
-								<picture className='h-fit w-full border shadow'>
+								className='relative flex flex-col w-[170px] h-fit items-start gap-2 p-2 hover:bg-gray_light duration-150 cursor-pointer'>
+								<picture
+									onClick={() => {
+										field.onChange(theme.kind);
+										console.log(theme.label);
+									}}
+									className='w-full border shadow h-[200px]'>
 									<Image
 										src={theme.image}
 										alt='Theme image'

@@ -22,14 +22,14 @@ const ViewerTitleServer = async ({ userId, resumeId }: ViewerTitleServerProps) =
 		return <ErrorMessage />;
 	}
 
-	const allResumesIds = listResumeActionResponse.right.map((resume) => resume.id);
-	const currentResumeIndex = allResumesIds.findIndex((id) => id === resumeId);
+	const allResumesData = listResumeActionResponse.right.map((resume) => ({ id: resume.id, theme: resume.theme }));
+	const currentResumeIndex = allResumesData.findIndex((data) => data.id === resumeId);
 
 	if (!resumeId) {
 		return (
 			<ViewerTitle
 				resumeTitle={DEFAULT_INFO_VALUES.title}
-				allResumesIds={allResumesIds}
+				allResumesData={allResumesData}
 				index={currentResumeIndex}
 			/>
 		);
@@ -41,7 +41,7 @@ const ViewerTitleServer = async ({ userId, resumeId }: ViewerTitleServerProps) =
 			<ViewerTitle
 				resumeTitle={DEFAULT_INFO_VALUES.title}
 				error={response.left}
-				allResumesIds={allResumesIds}
+				allResumesData={allResumesData}
 				index={currentResumeIndex}
 			/>
 		);
@@ -50,7 +50,7 @@ const ViewerTitleServer = async ({ userId, resumeId }: ViewerTitleServerProps) =
 	return (
 		<ViewerTitle
 			resumeTitle={response.right.title}
-			allResumesIds={allResumesIds}
+			allResumesData={allResumesData}
 			index={currentResumeIndex}
 		/>
 	);

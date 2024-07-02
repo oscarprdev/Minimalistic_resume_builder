@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SECTION_CONTROL, SectionControl } from '../_utils/sections';
 import { cn } from '@/lib/utils';
 import { User } from 'next-auth';
+import { Resume } from '@/types';
 
 interface AsideSectionItemProps {
 	label: string;
@@ -12,9 +13,10 @@ interface AsideSectionItemProps {
 	sectionSelected: SectionControl | null;
 	resumeId: string | null;
 	user?: User;
+	theme: Resume.theme;
 }
 
-const AsideSectionItem = async ({ label, control, sectionSelected, resumeId, user }: AsideSectionItemProps) => {
+const AsideSectionItem = async ({ label, control, sectionSelected, resumeId, user, theme }: AsideSectionItemProps) => {
 	const isSectionSelected = (control: SectionControl, sectionSelected: SectionControl | null) => {
 		if (control === SECTION_CONTROL.HEADER && !!sectionSelected) true;
 
@@ -29,7 +31,7 @@ const AsideSectionItem = async ({ label, control, sectionSelected, resumeId, use
 			return controlSelected ? basePath : `${basePath}?selected=${control}`;
 		}
 
-		const resumePath = `${basePath}?resume=${resumeId}`;
+		const resumePath = `${basePath}?resume=${resumeId}&theme=${theme}`;
 		return controlSelected ? resumePath : `${resumePath}&selected=${control}`;
 	};
 

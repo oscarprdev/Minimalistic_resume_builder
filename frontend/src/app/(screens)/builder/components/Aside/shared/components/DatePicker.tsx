@@ -48,7 +48,10 @@ const DatePicker = ({ label, index, form, field }: DatePickerProps) => {
 				<FormControl>
 					<Button
 						variant={'outline'}
-						className={cn('w-full flex justify-between gap-5 font-normal px-8', !field.value && 'text-muted-foreground text-gray-500')}>
+						className={cn(
+							'w-full flex justify-between gap-5 font-normal px-8 border border-input bg-transparent text-gray-600',
+							!field.value && 'text-muted-foreground text-gray-500'
+						)}>
 						{field.value || <span>Select date</span>}
 						<CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
 					</Button>

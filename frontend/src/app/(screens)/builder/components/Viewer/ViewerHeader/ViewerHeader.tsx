@@ -8,6 +8,8 @@ import { DEFAULT_IMAGE } from '../../Aside/AsideFormHeader/AsideFormHeaderImage'
 import ViewerResumeContainer from '../ViewerResumeContainer';
 import { cn } from '@/lib/utils';
 import { useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Resume } from '@/types';
 
 interface ViewerHeaderProps {
 	name: string;
@@ -24,16 +26,32 @@ interface ViewerHeaderProps {
 const ViewerHeader = ({ name, job, location, phone, links, email, image, error, isSectionHidden = false }: ViewerHeaderProps) => {
 	useToastError(error);
 
+	const params = useSearchParams();
+	const isSelected = params.get('selected');
+	const theme = params.get('theme') || Resume.theme.DEFAULT;
+	const isDefaultTheme = useMemo(() => theme === Resume.theme.DEFAULT, [theme]);
+	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
+
 	const imageUrl = useMemo(() => image, [image]);
 
 	return (
 		<>
 			{!isSectionHidden && (
 				<ViewerResumeContainer>
+					{isVerticalTheme && (
+						<span
+							aria-hidden
+							className='block w-[60%] h-[1px] bg-gray-300 my-3'
+						/>
+					)}
 					<h3 className='text-2xl font-light uppercase'>{name}</h3>
-					<p className='text-md font-light uppercase'>{job}</p>
+					<p className={cn('text-md font-light uppercase', isVerticalTheme && 'max-w-[65%]')}>{job}</p>
 					{image && image !== DEFAULT_IMAGE && (
-						<picture className={cn('w-[100px] h-[100px] absolute top-8 right-8')}>
+						<picture
+							className={cn(
+								'w-[100px] h-[100px] absolute top-8 right-8',
+								isVerticalTheme && isSelected ? 'top-16 right-[55px]' : isVerticalTheme && 'top-16 right-[80px]'
+							)}>
 							<img
 								id='image'
 								src={imageUrl}
@@ -43,10 +61,12 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error, 
 							/>
 						</picture>
 					)}
-					<span
-						aria-hidden
-						className='block w-16 h-[1px] bg-gray-800 my-3'
-					/>
+					{isDefaultTheme && (
+						<span
+							aria-hidden
+							className='block w-16 h-[1px] bg-gray-800 my-3'
+						/>
+					)}
 					<div className='flex flex-col space-y-2'>
 						<ul
 							className={cn(
@@ -99,7 +119,7 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error, 
 					</div>
 					<span
 						aria-hidden
-						className='block w-full h-[1px] bg-gray-300 mt-3'
+						className={cn('block h-[1px] bg-gray-300 mt-3', isDefaultTheme && 'w-full', isVerticalTheme && 'w-[60%]')}
 					/>
 				</ViewerResumeContainer>
 			)}

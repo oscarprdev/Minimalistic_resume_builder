@@ -6,6 +6,10 @@ import ViewerResumeContainer from '../ViewerResumeContainer';
 import LabelWithDates from '../shared/LabelWithDates';
 import LabelWithIcon from '../shared/LabelWithIcon';
 import { IconChevronRight } from '@tabler/icons-react';
+import { useSearchParams } from 'next/navigation';
+import { Resume } from '@/types';
+import { useMemo } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ViewerEducationProps {
 	title: string;
@@ -17,24 +21,33 @@ interface ViewerEducationProps {
 const ViewerEducation = ({ title, educationList, isSectionHidden = false, error }: ViewerEducationProps) => {
 	useToastError(error);
 
+	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
+	const isDefaultTheme = useMemo(() => theme === Resume.theme.DEFAULT, [theme]);
+	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
+
 	return (
 		<>
 			{!isSectionHidden && (
-				<ViewerResumeContainer title={title}>
+				<ViewerResumeContainer
+					title={title}
+					isAside={isVerticalTheme}>
 					{educationList.length > 0 ? (
-						<div className='flex flex-col gap-4 mt-2'>
+						<ul className='flex flex-col gap-4 mt-2'>
 							{educationList.map((school) => (
-								<div
+								<li
 									key={school.title}
-									className='flex flex-col relative'>
+									className={cn('flex flex-col relative', isVerticalTheme && 'items-center text-center')}>
 									<LabelWithIcon
 										label={school.career}
+										isAside={isVerticalTheme}
 										icon={
-											<IconChevronRight
-												id='svg'
-												size={16}
-												stroke={1}
-											/>
+											isDefaultTheme && (
+												<IconChevronRight
+													id='svg'
+													size={16}
+													stroke={1}
+												/>
+											)
 										}
 									/>
 									<LabelWithDates
@@ -42,11 +55,12 @@ const ViewerEducation = ({ title, educationList, isSectionHidden = false, error 
 										startDate={school.startDate}
 										endDate={school.endDate}
 										formatTime={school.formatTime}
+										isAside={isVerticalTheme}
 									/>
 									{!school.descriptionDisabled && <p className='text-xs text-gray-600 pl-6 mt-1'>{school.description}</p>}
-								</div>
+								</li>
 							))}
-						</div>
+						</ul>
 					) : (
 						<p className='text-xs text-gray-500'>No education</p>
 					)}
