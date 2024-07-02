@@ -42,7 +42,7 @@ const AsideSectionItem = async ({ label, control, sectionSelected, resumeId, use
 		<li
 			className={cn(
 				'cursor-pointer group w-full p-0 border border-transparent border-b-gray-200',
-				isItemDisabled && 'bg-gray-100 cursor-not-allowed'
+				isItemDisabled && 'bg-gray_light cursor-not-allowed'
 			)}>
 			<Link
 				href={pathToRedirect(resumeId, sectionSelected)}
