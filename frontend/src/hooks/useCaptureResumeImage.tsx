@@ -27,10 +27,10 @@ export const useCaptureResumeImage = ({ theme, onCanvasGeneratedCallback }: UseC
 				switch (true) {
 					case theme === Resume.theme.VERTICAL:
 						fixVerticalResumeThemeStylesBeforePrint(doc);
-						break;
+						return;
 					default:
 						fixDefaultResumeThemeStylesBeforePrint(doc);
-						break;
+						return;
 				}
 			},
 		})
@@ -144,5 +144,10 @@ const fixVerticalResumeThemeStylesBeforePrint = (doc: Document) => {
 	const datesElements = doc.querySelectorAll('#dates') as NodeListOf<HTMLElement>;
 	for (let i = 0; i < datesElements.length; i++) {
 		datesElements[i].style.marginTop = '3px';
+	}
+
+	const headerImage = doc.getElementById('image-container');
+	if (headerImage) {
+		headerImage.style.right = '80px';
 	}
 };
