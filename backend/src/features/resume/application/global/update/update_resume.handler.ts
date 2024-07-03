@@ -11,6 +11,7 @@ export interface UpdateResumeHandler {
 const ResumeSectionSchema = z.object({
 	title: z.string().optional(),
 	theme: z.string().optional(),
+	image: z.string().optional(),
 });
 
 type UpdateResumeHandlerActions = 'extractPayload';

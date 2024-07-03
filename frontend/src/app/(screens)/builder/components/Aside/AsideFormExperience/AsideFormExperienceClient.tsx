@@ -8,8 +8,8 @@ import { FormExperienceValues } from './schema-validations';
 const AsideFormExperienceClient = () => {
 	const experienceStore = useResumeExperienceStore();
 
-	const handleClientSubmit = async ({ title, jobList }: FormExperienceValues) => {
-		experienceStore.updateExperience({ title, jobList });
+	const handleClientSubmit = async ({ title, jobList, isHidden }: FormExperienceValues) => {
+		experienceStore.updateExperience({ title, jobList, isHidden });
 
 		return right('');
 	};

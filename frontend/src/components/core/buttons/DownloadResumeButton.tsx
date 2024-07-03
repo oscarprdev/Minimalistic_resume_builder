@@ -1,159 +1,44 @@
 'use client';
 
+import { updateResumeImageAction } from '@/app/actions/resume/update-resume-image.action';
 import { Button } from '@/components/ui/button';
 import { Resume } from '@/types';
 import { IconLoader2 } from '@tabler/icons-react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { User } from 'next-auth';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { startTransition, useState } from 'react';
+import { postCallback } from '@/services';
+import { useCaptureResumeImage } from '@/hooks/useCaptureResumeImage';
+import { generatePDF } from '@/lib/utils';
 
 interface DownloadResumeButtonProps {
 	user?: User;
 }
 
-const fixDefaultResumeThemeStylesBeforePrint = (doc: Document) => {
-	const resume = doc.getElementById('resume-viewer-default') as HTMLElement;
-
-	if (!resume) return;
-
-	resume.style.width = '800px';
-
-	const svgElements = doc.querySelectorAll('#svg') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < svgElements.length; i++) {
-		svgElements[i].style.position = 'absolute';
-		svgElements[i].style.top = '6px';
-	}
-
-	const liTextElements = doc.querySelectorAll('#li-text') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < liTextElements.length; i++) {
-		liTextElements[i].style.paddingLeft = '15px';
-	}
-
-	const liTitleElements = doc.querySelectorAll('#li-title') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < liTitleElements.length; i++) {
-		liTitleElements[i].style.paddingLeft = '15px';
-		liTitleElements[i].style.marginTop = '-3px';
-	}
-
-	const spanElements = doc.querySelectorAll('span') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < spanElements.length; i++) {
-		spanElements[i].style.marginTop = '14px';
-	}
-
-	const datesElements = doc.querySelectorAll('#dates') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < datesElements.length; i++) {
-		datesElements[i].style.marginTop = '3px';
-	}
-};
-
-const fixVerticalResumeThemeStylesBeforePrint = (doc: Document) => {
-	const resume = doc.getElementById('resume-viewer-vertical') as HTMLElement;
-
-	if (!resume) return;
-
-	resume.style.width = '800px';
-
-	const svgElements = doc.querySelectorAll('#svg') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < svgElements.length; i++) {
-		svgElements[i].style.position = 'absolute';
-		svgElements[i].style.top = '6px';
-	}
-
-	const liTextElements = doc.querySelectorAll('#li-text') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < liTextElements.length; i++) {
-		liTextElements[i].style.paddingLeft = '15px';
-	}
-
-	const liTitleElements = doc.querySelectorAll('#li-title') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < liTitleElements.length; i++) {
-		liTitleElements[i].style.paddingLeft = '15px';
-		liTitleElements[i].style.marginTop = '-3px';
-	}
-
-	const spanElements = doc.querySelectorAll('span') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < spanElements.length; i++) {
-		spanElements[i].style.marginTop = '28px';
-	}
-
-	const lineExperienceElements = doc.querySelectorAll('#line-experience') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < lineExperienceElements.length; i++) {
-		lineExperienceElements[i].style.marginTop = '5px';
-	}
-
-	const spanDatesElements = doc.querySelectorAll('#span-dates') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < spanDatesElements.length; i++) {
-		spanDatesElements[i].style.marginTop = '14px';
-	}
-
-	const spanSummarylements = doc.querySelectorAll('#span-summary') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < spanSummarylements.length; i++) {
-		spanSummarylements[i].style.marginTop = '7px';
-	}
-
-	const textSummaryElements = doc.querySelectorAll('#text-summary') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < textSummaryElements.length; i++) {
-		textSummaryElements[i].style.paddingTop = '-25px';
-	}
-
-	const datesElements = doc.querySelectorAll('#dates') as NodeListOf<HTMLElement>;
-	for (let i = 0; i < datesElements.length; i++) {
-		datesElements[i].style.marginTop = '3px';
-	}
-};
-
 const DownloadResumeButton = ({ user }: DownloadResumeButtonProps) => {
-	const [loading, setLoading] = useState(false);
 	const pathname = usePathname();
 	const params = useSearchParams();
 
 	const buttonIsVisible = user ? params.get('resume') : true && pathname.includes('builder');
 
-	const handleDownloadResumeClick = async () => {
-		setLoading(true);
+	const { captureResumeImage, loading } = useCaptureResumeImage({
+		theme: (params.get('theme') as Resume.theme) || Resume.theme.DEFAULT,
+		onCanvasGeneratedCallback: async (canvas: HTMLCanvasElement, imgData: string) => {
+			const resumeId = params.get('resume');
+			const userId = user?.id;
 
-		startTransition(() => {
-			const theme = params.get('theme') || Resume.theme.DEFAULT;
-			const domElement = document.getElementById(`resume-viewer-${theme}`);
-
-			if (!domElement) return;
-
-			if (domElement) {
-				html2canvas(domElement, {
-					scale: 2,
-					logging: true,
-					allowTaint: true,
-					useCORS: true,
-					onclone: (doc) => {
-						fixDefaultResumeThemeStylesBeforePrint(doc);
-						fixVerticalResumeThemeStylesBeforePrint(doc);
-					},
-				})
-					.then((canvas) => {
-						const imgData = canvas.toDataURL('image/png', 1.0);
-						const pdf = new jsPDF('p', 'mm', 'a4', true);
-						const pdfWidth = pdf.internal.pageSize.getWidth();
-						const pdfHeight = pdf.internal.pageSize.getHeight();
-						const imgWidth = canvas.width;
-						const imgHeight = canvas.height;
-						const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-						const imgX = (pdfWidth - imgWidth * ratio) / 2;
-						const imgY = -5;
-						pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-						pdf.save('resume.pdf');
-					})
-					.catch((e) => console.log(e))
-					.finally(() => setLoading(false));
+			if (resumeId && userId) {
+				await updateResumeImageAction({ resumeId, userId, payload: { image: imgData }, postCallback });
 			}
-		});
-	};
+
+			generatePDF(canvas, imgData);
+		},
+	});
 
 	return (
 		<>
 			{buttonIsVisible && (
 				<Button
-					onClick={handleDownloadResumeClick}
+					onClick={captureResumeImage}
 					disabled={loading}
 					className='flex gap-2'>
 					{loading ? <IconLoader2 className='animate-spin text-white' /> : 'Download'}

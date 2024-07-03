@@ -8,8 +8,8 @@ import { FormSkillsValues } from './schema-validations';
 const AsideFormSkillsClient = () => {
 	const skillsStore = useResumeSkillsStore();
 
-	const handleClientSubmit = async ({ title, skillList }: FormSkillsValues) => {
-		skillsStore.updateSkills({ title, skillList });
+	const handleClientSubmit = async ({ title, skillList, isHidden }: FormSkillsValues) => {
+		skillsStore.updateSkills({ title, skillList, isHidden });
 
 		return right('');
 	};

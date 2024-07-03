@@ -11,6 +11,7 @@ export interface ResumeDb {
 	skills: string | null;
 	title: string;
 	theme: Resume.theme;
+	image: string;
 }
 
 export interface HeaderDb {

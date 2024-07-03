@@ -2,7 +2,6 @@
 
 import { postCallback, getCallback } from '@/services';
 import AsideFormExperience from './AsideFormExperience';
-import { z } from 'zod';
 import { Either, isLeft } from '@/lib/either';
 import ErrorMessage from '../../ErrorMessage';
 import { FormExperienceValues, asideFormExperienceSchema } from './schema-validations';

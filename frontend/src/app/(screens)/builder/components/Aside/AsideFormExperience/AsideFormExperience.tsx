@@ -44,7 +44,7 @@ const AsideFormExperience = ({ defaultValues, userId, resumeId, handleSubmit }: 
 			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
 			isDeleteCtaPending={isDeleteCtaPending}
 			onSubmit={onSubmit}
-			isUserLogged={Boolean(userId)}
+			userId={userId}
 			onDestructiveClick={onDestructiveClick}
 		/>
 	);

@@ -9,6 +9,7 @@ required:
   - education
   - languages
   - skills
+  - image
 properties:
   id:
     type: string
@@ -49,3 +50,7 @@ properties:
     type: boolean
     description: Skills flag to know if skills already created.
     example: true
+  image:
+    type: string
+    description: The resume image url.
+    example: https://www.bucket.com/theme-image

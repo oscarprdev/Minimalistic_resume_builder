@@ -7,16 +7,14 @@ import { removeImageAction } from './remove-image';
 
 export interface UploadImageInput {
 	formData: FormData;
-	userId: string;
 	resumeId: string;
+	fileId: string;
 }
 
-export const uploadImageAction = async ({ formData, userId, resumeId }: UploadImageInput): Promise<Either<string, string>> => {
+export const uploadImageAction = async ({ formData, resumeId, fileId }: UploadImageInput): Promise<Either<string, string>> => {
 	try {
 		const imageFile = formData.get('image') as File;
 		const buffer = (await imageFile.arrayBuffer()) as Buffer;
-
-		const id = `${userId}/${crypto.randomUUID().toString()}`;
 
 		const bucket = new Bucket({
 			endpoint: BUCKET_URL,
@@ -25,20 +23,16 @@ export const uploadImageAction = async ({ formData, userId, resumeId }: UploadIm
 			bucketName: 'resume',
 		});
 
-		const response = await removeImageAction({ resumeId });
-		if (isLeft(response)) {
-			throw new Error(response.left);
-		}
-
 		const uploadedImage = await bucket.uploadFile({
 			file: buffer,
-			id,
+			id: fileId,
 			contentType: imageFile.type,
 			project: resumeId,
 		});
 
 		return right(`${BUCKET_BASE_URL}/${uploadedImage}`);
 	} catch (error) {
+		console.log(error);
 		return left(error instanceof Error ? error.message : 'Error uploading image');
 	}
 };

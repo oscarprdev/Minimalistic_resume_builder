@@ -44,7 +44,7 @@ const AsideFormEducation = ({ defaultValues, userId, resumeId, handleSubmit }: A
 			defaultValues={defaultValues}
 			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
 			isDeleteCtaPending={isDeleteCtaPending}
-			isUserLogged={Boolean(userId)}
+			userId={userId}
 			onSubmit={onSubmit}
 			onDestructiveClick={onDestructiveClick}
 		/>

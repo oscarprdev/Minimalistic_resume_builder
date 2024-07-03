@@ -18,6 +18,7 @@ export class ListResumeAdapter implements ListResumePorts {
 			languages: Boolean(res.languages),
 			skills: Boolean(res.skills),
 			theme: res.theme,
+			image: res.image,
 		}));
 	}
 }

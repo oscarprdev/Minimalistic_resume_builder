@@ -39,6 +39,10 @@ export type Resume = {
      * Skills flag to know if skills already created.
      */
     skills: boolean;
+    /**
+     * The resume image url.
+     */
+    image: string;
 };
 export namespace Resume {
     /**

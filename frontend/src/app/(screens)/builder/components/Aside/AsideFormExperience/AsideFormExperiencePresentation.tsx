@@ -13,7 +13,7 @@ interface AsideFormExperiencePresentationProps {
 	defaultValues?: ResumeExperienceDefaultValues;
 	isDestructiveCtaDisabled: boolean;
 	isDeleteCtaPending: boolean;
-	isUserLogged?: boolean;
+	userId?: string;
 	onSubmit: (values: FormExperienceValues) => Promise<void>;
 	onDestructiveClick: () => void;
 }
@@ -24,7 +24,7 @@ const AsideFormExperiencePresentation = ({
 	defaultValues,
 	isDestructiveCtaDisabled,
 	isDeleteCtaPending,
-	isUserLogged,
+	userId,
 	onSubmit,
 	onDestructiveClick,
 }: AsideFormExperiencePresentationProps) => {
@@ -33,7 +33,7 @@ const AsideFormExperiencePresentation = ({
 	return (
 		<FormContainer
 			form={form}
-			isUserLogged={isUserLogged}
+			userId={userId}
 			onSubmit={onSubmit}>
 			<FormField
 				control={form.control}

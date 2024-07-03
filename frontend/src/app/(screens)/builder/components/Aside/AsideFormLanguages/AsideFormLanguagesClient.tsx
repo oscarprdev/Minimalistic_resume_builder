@@ -8,8 +8,8 @@ import { FormLanguagesValues } from './schema-validations';
 const AsideFormLanguagesClient = () => {
 	const languagesStore = useResumeLanguagesStore();
 
-	const handleClientSubmit = async ({ title, languageList }: FormLanguagesValues) => {
-		languagesStore.updateLanguages({ title, languageList });
+	const handleClientSubmit = async ({ title, languageList, isHidden }: FormLanguagesValues) => {
+		languagesStore.updateLanguages({ title, languageList, isHidden });
 
 		return right('');
 	};

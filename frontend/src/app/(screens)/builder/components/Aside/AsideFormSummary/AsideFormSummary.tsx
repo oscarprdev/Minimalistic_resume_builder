@@ -42,7 +42,7 @@ const AsideFormSummary = ({ defaultValues, userId, resumeId, handleSubmit }: Asi
 			defaultValues={defaultValues}
 			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
 			isDeleteCtaPending={isDeleteCtaPending}
-			isUserLogged={Boolean(userId)}
+			userId={userId}
 			onSubmit={onSubmit}
 			onDestructiveClick={onDestructiveClick}
 		/>

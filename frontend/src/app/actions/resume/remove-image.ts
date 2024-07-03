@@ -6,9 +6,10 @@ import { Bucket } from '@oprdev/cloudflare-r2-storage';
 
 export interface RemoveImageInput {
 	resumeId: string;
+	keyword: 'header' | 'resume';
 }
 
-export const removeImageAction = async ({ resumeId }: RemoveImageInput): Promise<Either<string, string>> => {
+export const removeImageAction = async ({ resumeId, keyword }: RemoveImageInput): Promise<Either<string, string>> => {
 	try {
 		const bucket = new Bucket({
 			endpoint: BUCKET_URL,
@@ -19,7 +20,11 @@ export const removeImageAction = async ({ resumeId }: RemoveImageInput): Promise
 
 		const images = await bucket.getKeysByEntity({ entity: resumeId });
 		if (Array.isArray(images) && images.length > 0) {
-			await Promise.all([images.map((img) => bucket.deleteItemByKey({ key: img }))]);
+			const filteredImages = images.filter((img) => img.includes(keyword));
+
+			if (filteredImages.length > 0) {
+				await Promise.all([filteredImages.map((img) => bucket.deleteItemByKey({ key: img }))]);
+			}
 		}
 
 		return right('');

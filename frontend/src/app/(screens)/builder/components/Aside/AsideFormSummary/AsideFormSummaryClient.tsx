@@ -9,7 +9,7 @@ const AsideFormSummaryClient = () => {
 	const summaryStore = useResumeSummaryStore();
 
 	const handleClientSubmit = async (values: FormSummaryValues) => {
-		summaryStore.updateSummary({ title: values.title, summary: values.summary });
+		summaryStore.updateSummary({ title: values.title, summary: values.summary, isHidden: values.isHidden });
 
 		return right('');
 	};

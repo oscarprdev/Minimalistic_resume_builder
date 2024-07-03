@@ -14,6 +14,7 @@ export interface UpdateResumeInfrastructureInput {
 export interface UpdateResumeDataInput {
 	title: string;
 	theme: Resume.theme;
+	image: string;
 }
 
 export interface DeleteResumeInfrastructureInput {

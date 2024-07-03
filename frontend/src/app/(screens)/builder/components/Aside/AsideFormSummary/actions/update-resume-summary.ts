@@ -25,8 +25,6 @@ export const updateResumeSummaryAction = async ({
 }: UpdateResumeSummaryAction): Promise<Either<string, string>> => {
 	const path = `${API_URL}/resume/${userId}/${resumeId}/summary`;
 
-	console.log('updateResumeSummaryAction', payload);
-
 	const response = await postCallback(path, payload);
 
 	revalidatePath('/builder');

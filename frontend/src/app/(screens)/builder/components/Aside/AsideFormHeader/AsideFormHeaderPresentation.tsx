@@ -18,7 +18,7 @@ interface AsideFormHeaderPresentationProps {
 	defaultValues?: ResumeHeaderDefaultValues;
 	isDestructiveCtaDisabled: boolean;
 	isDeleteCtaPending: boolean;
-	isUserLogged?: boolean;
+	userId?: string;
 	onSubmit: (values: FormHeaderValues) => Promise<void>;
 	onDestructiveClick: () => void;
 	updateImage: (formData: FormData) => Promise<Either<string, string>>;
@@ -29,7 +29,7 @@ const AsideFormHeaderPresentation = ({
 	defaultValues,
 	isDestructiveCtaDisabled,
 	isDeleteCtaPending,
-	isUserLogged,
+	userId,
 	onSubmit,
 	onDestructiveClick,
 	updateImage,
@@ -80,7 +80,7 @@ const AsideFormHeaderPresentation = ({
 	return (
 		<FormContainer
 			form={form}
-			isUserLogged={isUserLogged}
+			userId={userId}
 			onSubmit={onSubmit}>
 			<AsideFormHeaderImage
 				form={form}

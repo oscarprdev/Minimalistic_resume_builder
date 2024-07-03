@@ -35,6 +35,7 @@ export class DefaultDescribeResumeUsecase extends DefaultCommonResumeUsecase imp
 			languages: Boolean(dbResume.languages),
 			skills: Boolean(dbResume.skills),
 			theme: dbResume.theme,
+			image: dbResume.image,
 		};
 	}
 }

@@ -13,7 +13,7 @@ interface AsideFormLanguagesPresentationProps {
 	defaultValues?: ResumeLanguagesDefaultValues;
 	isDestructiveCtaDisabled: boolean;
 	isDeleteCtaPending: boolean;
-	isUserLogged?: boolean;
+	userId?: string;
 	onSubmit: (values: FormLanguagesValues) => Promise<void>;
 	onDestructiveClick: () => void;
 }
@@ -22,7 +22,7 @@ const AsideFormLanguagesPresentation = ({
 	defaultValues,
 	isDestructiveCtaDisabled,
 	isDeleteCtaPending,
-	isUserLogged,
+	userId,
 	onSubmit,
 	onDestructiveClick,
 }: AsideFormLanguagesPresentationProps) => {
@@ -31,7 +31,7 @@ const AsideFormLanguagesPresentation = ({
 	return (
 		<FormContainer
 			form={form}
-			isUserLogged={isUserLogged}
+			userId={userId}
 			onSubmit={onSubmit}>
 			<FormField
 				control={form.control}

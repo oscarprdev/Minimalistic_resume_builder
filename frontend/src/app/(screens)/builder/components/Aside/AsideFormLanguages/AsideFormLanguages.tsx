@@ -45,7 +45,7 @@ const AsideFormLanguages = ({ defaultValues, userId, resumeId, handleSubmit }: A
 			isDestructiveCtaDisabled={isDeleteCtaPending || !userId || !resumeId}
 			isDeleteCtaPending={isDeleteCtaPending}
 			onSubmit={onSubmit}
-			isUserLogged={Boolean(userId)}
+			userId={userId}
 			onDestructiveClick={onDestructiveClick}
 		/>
 	);
