@@ -4,9 +4,10 @@ import { useToastError } from '@/hooks/useRouterError';
 import ViewerResumeContainer from '../ViewerResumeContainer';
 import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { SECTION_CONTROL } from '../../_utils/sections';
+import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerSummaryProps {
 	title: string;
@@ -19,7 +20,8 @@ interface ViewerSummaryProps {
 const ViewerSummary = ({ title, summary, error, isSectionHidden, userId }: ViewerSummaryProps) => {
 	useToastError(error);
 
-	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
+	const { theme } = useContext(paramsContext);
+
 	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
 
 	return (

@@ -4,11 +4,11 @@ import { useToastError } from '@/hooks/useRouterError';
 import { OptionalSkill } from '@/store/useResumeSkillsStore';
 import ViewerSkillIcon from './ViewerSkillIcon';
 import ViewerResumeContainer from '../ViewerResumeContainer';
-import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { SECTION_CONTROL } from '../../_utils/sections';
+import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerSkillsProps {
 	title: string;
@@ -20,8 +20,8 @@ interface ViewerSkillsProps {
 
 const ViewerSkills = ({ title, skillList, error, isSectionHidden = false, userId }: ViewerSkillsProps) => {
 	useToastError(error);
+	const { theme } = useContext(paramsContext);
 
-	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
 	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
 
 	return (

@@ -7,10 +7,10 @@ import { DEFAULT_IMAGE } from '../../Aside/AsideFormHeader/AsideFormHeaderImage'
 import ViewerResumeContainer from '../ViewerResumeContainer';
 import ViewerHeaderLinksIcons from './ViewerHeaderLinksIcons';
 import { cn } from '@/lib/utils';
-import { useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useContext, useMemo } from 'react';
 import { Resume } from '@/types';
 import { SECTION_CONTROL } from '../../_utils/sections';
+import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerHeaderProps {
 	name: string;
@@ -27,10 +27,8 @@ interface ViewerHeaderProps {
 
 const ViewerHeader = ({ name, job, location, phone, links, email, image, error, isSectionHidden = false, userId }: ViewerHeaderProps) => {
 	useToastError(error);
+	const { theme, selected: isSelected } = useContext(paramsContext);
 
-	const params = useSearchParams();
-	const isSelected = params.get('selected');
-	const theme = params.get('theme') || Resume.theme.DEFAULT;
 	const isDefaultTheme = useMemo(() => theme === Resume.theme.DEFAULT, [theme]);
 	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
 

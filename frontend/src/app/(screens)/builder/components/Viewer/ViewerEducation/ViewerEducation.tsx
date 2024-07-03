@@ -6,11 +6,11 @@ import ViewerResumeContainer from '../ViewerResumeContainer';
 import LabelWithDates from '../shared/LabelWithDates';
 import LabelWithIcon from '../shared/LabelWithIcon';
 import { IconChevronRight } from '@tabler/icons-react';
-import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { SECTION_CONTROL } from '../../_utils/sections';
+import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerEducationProps {
 	title: string;
@@ -22,8 +22,8 @@ interface ViewerEducationProps {
 
 const ViewerEducation = ({ title, educationList, isSectionHidden = false, error, userId }: ViewerEducationProps) => {
 	useToastError(error);
+	const { theme } = useContext(paramsContext);
 
-	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
 	const isDefaultTheme = useMemo(() => theme === Resume.theme.DEFAULT, [theme]);
 	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
 

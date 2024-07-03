@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/core/header/Header';
 import QueryProvider from '@/providers/QueryProvider';
 import { Toaster } from '@/components/ui/toaster';
+import { ParamsProvider } from '@/providers/ParamsProvider';
 
 const inter = Lato({ weight: ['100', '300', '400', '700'], subsets: ['latin'] });
 
@@ -22,9 +23,11 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={cn(inter.className, 'bg-gray-100')}>
 				<QueryProvider>
-					<Header />
-					{children}
-					<Toaster />
+					<ParamsProvider>
+						<Header />
+						{children}
+						<Toaster />
+					</ParamsProvider>
 				</QueryProvider>
 			</body>
 		</html>

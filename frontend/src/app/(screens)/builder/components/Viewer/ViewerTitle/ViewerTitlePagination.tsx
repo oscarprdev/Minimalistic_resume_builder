@@ -2,10 +2,10 @@
 
 import { isTruthyNumber } from '@/lib/utils';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useContext, useMemo } from 'react';
 import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 import { Resume } from '@/types';
+import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerTitlePaginationProps {
 	children: ReactNode;
@@ -14,9 +14,11 @@ interface ViewerTitlePaginationProps {
 }
 
 const ViewerTitlePagination = ({ children, allResumesData, index }: ViewerTitlePaginationProps) => {
+	const { selected } = useContext(paramsContext);
+
+	const commonHref = selected ? `&selected=${selected}` : '';
 	const allResumesIdsIsValid = Array.isArray(allResumesData) && allResumesData.some((data) => Boolean(data.id));
 	const indexIsValid = typeof index !== 'undefined' && isTruthyNumber(index);
-	const queryParams = useSearchParams();
 
 	const previousIndex = useMemo(() => {
 		if ((!index && index !== 0) || !allResumesData) {
@@ -39,10 +41,6 @@ const ViewerTitlePagination = ({ children, allResumesData, index }: ViewerTitleP
 	if (!allResumesIdsIsValid || !indexIsValid) {
 		return <div className='w-fit flex items-center gap-4'>{children}</div>;
 	}
-
-	const sectionSelected = queryParams.get('selected');
-
-	const commonHref = sectionSelected ? `&selected=${sectionSelected}` : '';
 
 	return (
 		<div className='w-[650px] flex items-center justify-center gap-4'>
