@@ -52,6 +52,7 @@ const LoginForm = () => {
 	return (
 		<Form {...form}>
 			<form
+				data-testid='login-form'
 				className='flex flex-col items-start gap-4 w-full'
 				onSubmit={form.handleSubmit(onSubmitLoginForm)}>
 				<FormField

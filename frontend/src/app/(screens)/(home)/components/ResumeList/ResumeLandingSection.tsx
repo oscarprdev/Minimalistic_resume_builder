@@ -29,7 +29,11 @@ const ResumeLandingSection = () => {
 				height={500}
 				className='object-contain h-[230px]'
 			/>
-			<p className='uppercase text-2xl'>Relax & start building your minimalistic resume now!</p>
+			<p
+				data-testid='landing-text'
+				className='uppercase text-2xl'>
+				Relax & start building your minimalistic resume now!
+			</p>
 		</div>
 	);
 };

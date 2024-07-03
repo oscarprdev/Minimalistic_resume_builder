@@ -57,6 +57,7 @@ const RegisterForm = ({ onRegisterSuccessful }: RegisterFormProps) => {
 	return (
 		<Form {...form}>
 			<form
+				data-testid='register-form'
 				className='flex flex-col items-start gap-4 w-full'
 				onSubmit={form.handleSubmit(onSubmitRegisterForm)}>
 				<FormField
@@ -99,7 +100,7 @@ const RegisterForm = ({ onRegisterSuccessful }: RegisterFormProps) => {
 				<Button
 					disabled={form.formState.isSubmitting || !form.formState.isValid}
 					type='submit'>
-					{form.formState.isSubmitting ? <IconLoader2 className='text-white animate-spin' /> : 'Sign up'}
+					{form.formState.isSubmitting ? <IconLoader2 className='text-white animate-spin' /> : 'Sign Up'}
 				</Button>
 			</form>
 		</Form>
