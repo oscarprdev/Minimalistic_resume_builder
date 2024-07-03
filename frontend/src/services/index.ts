@@ -4,7 +4,7 @@ import { Either, left, right } from '../lib/either';
 
 export const getCallback = async <R>(path: string): Promise<Either<string, R>> => {
 	try {
-		const response = await fetch(path, { next: { revalidate: 3600 } });
+		const response = await fetch(path);
 
 		if (response.status === 404 || !response.ok) {
 			throw new Error(`Error: ${response.status} - ${response.url}`);

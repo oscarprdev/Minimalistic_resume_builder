@@ -26,6 +26,7 @@ export const updateResumeInfoAction = async ({
 	const response = await postCallback(path, payload);
 
 	revalidatePath('/builder');
+	revalidatePath('/');
 
 	return response;
 };

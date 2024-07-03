@@ -7,6 +7,8 @@ import { useUserLogged } from '@/hooks/useUserLogged';
 import ResumeListError from './ResumeListError';
 import ResumeListContainer from './ResumeListContainer';
 import { listResumeAction } from '@/app/actions/resume/list-resume.action';
+import Image from 'next/image';
+import { IconCircleTriangle } from '@tabler/icons-react';
 
 const ResumeList = async () => {
 	const user = await useUserLogged();
@@ -24,15 +26,42 @@ const ResumeList = async () => {
 
 	return (
 		<ResumeListContainer>
-			{!isLeft(response) &&
-				response.right.map((resume) => (
-					<Link
-						key={resume.id}
-						href={`/builder?resume=${resume.id}&theme=${resume.theme}`}
-						className='hover:bg-gray-100 duration-200 w-full min-w-[500px] text-center first-of-type:border-t-transparent p-4 capitalize border border-transparent border-t-gray-100'>
-						{resume.title}
-					</Link>
-				))}
+			{!isLeft(response) && (
+				<ul className='w-full flex flex-wrap'>
+					{response.right.map((resume) => (
+						<li key={resume.id}>
+							<Link
+								key={resume.id}
+								href={`/builder?resume=${resume.id}&theme=${resume.theme}`}
+								className='hover:bg-gray-100 duration-200 flex flex-col gap-2 items-center w-[300px] text-center first-of-type:border-t-transparent p-4 capitalize border border-transparent border-t-gray-100'>
+								{resume.image ? (
+									<picture className='w-full h-[350px] border border-1 border-gray-100 shadow-md'>
+										<Image
+											src={resume.image}
+											alt='Resume image'
+											width={500}
+											height={500}
+										/>
+									</picture>
+								) : (
+									<div className='w-full h-[350px] grid place-items-center'>
+										<div className='flex flex-col items-center gap-2'>
+											<IconCircleTriangle
+												size={30}
+												stroke={1}
+												className='text-gray-500'
+											/>
+											<p className='text-sm'>Resume image not generated yet.</p>
+										</div>
+									</div>
+								)}
+
+								<p className='text-sm text-purple_200'>{resume.title}</p>
+							</Link>
+						</li>
+					))}
+				</ul>
+			)}
 		</ResumeListContainer>
 	);
 };

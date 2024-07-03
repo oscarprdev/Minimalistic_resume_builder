@@ -25,6 +25,7 @@ export const updateResumeHeaderAction = async ({
 	const response = await postCallback(path, payload);
 
 	revalidatePath('/builder');
+	revalidatePath('/');
 
 	return response;
 };

@@ -29,6 +29,7 @@ export const updateResumeExperienceAction = async ({
 	const response = await postCallback(path, payload);
 
 	revalidatePath('/builder');
+	revalidatePath('/');
 
 	return response;
 };

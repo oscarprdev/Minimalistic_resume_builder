@@ -48,12 +48,12 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error, 
 					<p className={cn('text-md font-light uppercase', isVerticalTheme && 'max-w-[65%]')}>{job}</p>
 					{image && image !== DEFAULT_IMAGE && (
 						<picture
+							id='image-container'
 							className={cn(
 								'w-[100px] h-[100px] absolute top-8 right-8',
 								isVerticalTheme && isSelected ? 'top-16 right-[55px]' : isVerticalTheme && 'top-16 right-[80px]'
 							)}>
 							<img
-								id='image'
 								src={imageUrl}
 								alt='Viewer resume image'
 								className='rounded-md'
