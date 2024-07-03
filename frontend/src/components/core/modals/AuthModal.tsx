@@ -7,7 +7,7 @@ import RegisterForm from '../forms/RegisterForm';
 import LoginForm from '../forms/LoginForm';
 
 const AuthModal = () => {
-	const [isUserRegistered, setIsUserRegistered] = useState(false);
+	const [isUserRegistered, setIsUserRegistered] = useState(true);
 
 	const onIsUserAlreadyRegisteredClick = () => {
 		setIsUserRegistered(!isUserRegistered);

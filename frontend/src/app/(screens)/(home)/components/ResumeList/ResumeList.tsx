@@ -27,13 +27,15 @@ const ResumeList = async () => {
 	return (
 		<ResumeListContainer>
 			{!isLeft(response) && (
-				<ul className='w-full flex flex-wrap'>
+				<ul
+					aria-label='resumes'
+					className='w-full grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] h-full gap-3'>
 					{response.right.map((resume) => (
 						<li key={resume.id}>
 							<Link
 								key={resume.id}
 								href={`/builder?resume=${resume.id}&theme=${resume.theme}`}
-								className='hover:bg-gray-100 duration-200 flex flex-col gap-2 items-center w-[300px] text-center first-of-type:border-t-transparent p-4 capitalize border border-transparent border-t-gray-100'>
+								className='flex-1 hover:bg-gray-100 duration-200 flex flex-col gap-2 items-center w-[300px] text-center first-of-type:border-t-transparent p-4 capitalize border border-transparent border-t-gray-100'>
 								{resume.image ? (
 									<picture className='w-full h-[350px] border border-1 border-gray-100 shadow-md'>
 										<Image
@@ -55,7 +57,6 @@ const ResumeList = async () => {
 										</div>
 									</div>
 								)}
-
 								<p className='text-sm text-purple_200'>{resume.title}</p>
 							</Link>
 						</li>

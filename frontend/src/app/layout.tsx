@@ -9,8 +9,8 @@ import { Toaster } from '@/components/ui/toaster';
 const inter = Lato({ weight: ['100', '300', '400', '700'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Resume builder',
-	description: 'Resume builder app',
+	title: 'Resummie',
+	description: 'Minimalistic Resume builder app',
 };
 
 export default function RootLayout({
