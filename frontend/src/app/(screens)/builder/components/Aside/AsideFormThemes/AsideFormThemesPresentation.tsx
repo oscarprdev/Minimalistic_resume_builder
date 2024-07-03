@@ -12,15 +12,16 @@ import Image from 'next/image';
 interface AsideFormThemesPresentationProps {
 	defaultValues: FormThemesDefaultValues;
 	onSubmit: (values: FormThemesValues) => Promise<void>;
+	userId: string;
 }
 
-const AsideFormThemesPresentation = ({ defaultValues, onSubmit }: AsideFormThemesPresentationProps) => {
+const AsideFormThemesPresentation = ({ defaultValues, onSubmit, userId }: AsideFormThemesPresentationProps) => {
 	const form = useDynamicForm<FormThemesDefaultValues>({ schema: asideFormThemesSchema, defaultValues });
 
 	return (
 		<FormContainer
 			form={form}
-			isUserLogged={true}
+			userId={userId}
 			onSubmit={onSubmit}>
 			<FormField
 				control={form.control}

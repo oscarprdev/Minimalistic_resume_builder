@@ -51,6 +51,7 @@ const AsideFormThemes = ({ userId, defaultValues, handleSubmit }: AsideFormProps
 		<AsideFormThemesPresentation
 			onSubmit={onSubmit}
 			defaultValues={defaultValues}
+			userId={userId}
 		/>
 	);
 };
