@@ -8,15 +8,17 @@ import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
+import { SECTION_CONTROL } from '../../_utils/sections';
 
 interface ViewerSkillsProps {
 	title: string;
 	skillList: OptionalSkill[];
 	error?: string;
 	isSectionHidden?: boolean;
+	userId?: string;
 }
 
-const ViewerSkills = ({ title, skillList, error, isSectionHidden = false }: ViewerSkillsProps) => {
+const ViewerSkills = ({ title, skillList, error, isSectionHidden = false, userId }: ViewerSkillsProps) => {
 	useToastError(error);
 
 	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
@@ -27,7 +29,9 @@ const ViewerSkills = ({ title, skillList, error, isSectionHidden = false }: View
 			{!isSectionHidden && (
 				<ViewerResumeContainer
 					title={title}
-					isAside={isVerticalTheme}>
+					isAside={isVerticalTheme}
+					kind={SECTION_CONTROL.SKILLS}
+					userId={userId}>
 					{skillList.length > 0 ? (
 						<ul className={cn('flex gap-2 items-center flex-wrap', isVerticalTheme && 'justify-center w-[80%]')}>
 							{skillList.map((skill) => (

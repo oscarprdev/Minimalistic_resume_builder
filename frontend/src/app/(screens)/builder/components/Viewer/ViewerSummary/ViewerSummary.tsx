@@ -6,15 +6,17 @@ import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
+import { SECTION_CONTROL } from '../../_utils/sections';
 
 interface ViewerSummaryProps {
 	title: string;
 	summary: string;
 	error?: string;
 	isSectionHidden?: boolean;
+	userId?: string;
 }
 
-const ViewerSummary = ({ title, summary, error, isSectionHidden }: ViewerSummaryProps) => {
+const ViewerSummary = ({ title, summary, error, isSectionHidden, userId }: ViewerSummaryProps) => {
 	useToastError(error);
 
 	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
@@ -23,7 +25,10 @@ const ViewerSummary = ({ title, summary, error, isSectionHidden }: ViewerSummary
 	return (
 		<>
 			{!isSectionHidden && (
-				<ViewerResumeContainer title={title}>
+				<ViewerResumeContainer
+					title={title}
+					kind={SECTION_CONTROL.SUMMARY}
+					userId={userId}>
 					<div
 						id='text-summary'
 						className={cn('relative', isVerticalTheme && 'pl-5 ml-[0.65rem]')}>

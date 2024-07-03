@@ -8,15 +8,17 @@ import { Resume } from '@/types';
 import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
+import { SECTION_CONTROL } from '../../_utils/sections';
 
 interface ViewerLanguagesProps {
 	title: string;
 	languageList: OptionalLanguage[];
 	error?: string;
 	isSectionHidden?: boolean;
+	userId?: string;
 }
 
-const ViewerLanguages = ({ title, languageList, error, isSectionHidden = false }: ViewerLanguagesProps) => {
+const ViewerLanguages = ({ title, languageList, error, isSectionHidden = false, userId }: ViewerLanguagesProps) => {
 	useToastError(error);
 
 	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
@@ -27,7 +29,9 @@ const ViewerLanguages = ({ title, languageList, error, isSectionHidden = false }
 			{!isSectionHidden && (
 				<ViewerResumeContainer
 					title={title}
-					isAside={isVerticalTheme}>
+					isAside={isVerticalTheme}
+					kind={SECTION_CONTROL.LANGUAGES}
+					userId={userId}>
 					{languageList.length > 0 ? (
 						<ul className={cn('flex items-center gap-4 flex-wrap -mt-1', isVerticalTheme && 'flex-col')}>
 							{languageList.map((lang) => (

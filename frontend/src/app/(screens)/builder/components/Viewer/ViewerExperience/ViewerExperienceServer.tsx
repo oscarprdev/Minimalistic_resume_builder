@@ -19,6 +19,7 @@ const ViewerExperienceServer = async ({ userId, resumeId }: ViewerExperienceServ
 			<ViewerExperience
 				title={DEFAULT_EXPERIENCE_VALUES.title}
 				jobList={DEFAULT_EXPERIENCE_VALUES.jobList}
+				userId={userId}
 			/>
 		);
 	}
@@ -33,6 +34,7 @@ const ViewerExperienceServer = async ({ userId, resumeId }: ViewerExperienceServ
 			<ViewerExperience
 				title={DEFAULT_EXPERIENCE_VALUES.title}
 				jobList={DEFAULT_EXPERIENCE_VALUES.jobList}
+				userId={userId}
 			/>
 		);
 	}
@@ -44,6 +46,7 @@ const ViewerExperienceServer = async ({ userId, resumeId }: ViewerExperienceServ
 				title={DEFAULT_EXPERIENCE_VALUES.title}
 				jobList={DEFAULT_EXPERIENCE_VALUES.jobList}
 				error={response.left}
+				userId={userId}
 			/>
 		);
 	}
@@ -53,6 +56,7 @@ const ViewerExperienceServer = async ({ userId, resumeId }: ViewerExperienceServ
 			title={response.right.title}
 			jobList={response.right.jobList}
 			isSectionHidden={response.right.isHidden}
+			userId={userId}
 		/>
 	);
 };

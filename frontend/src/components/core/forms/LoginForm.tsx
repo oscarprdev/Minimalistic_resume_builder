@@ -41,6 +41,7 @@ const LoginForm = () => {
 		const response = await loginUser({ username, password });
 
 		if (!response) {
+			router.push('/');
 			router.refresh();
 			return;
 		}

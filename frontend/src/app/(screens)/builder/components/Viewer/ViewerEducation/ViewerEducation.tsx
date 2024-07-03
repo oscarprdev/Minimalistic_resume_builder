@@ -10,15 +10,17 @@ import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
+import { SECTION_CONTROL } from '../../_utils/sections';
 
 interface ViewerEducationProps {
 	title: string;
 	educationList: OptionalSchool[];
 	isSectionHidden?: boolean;
 	error?: string;
+	userId?: string;
 }
 
-const ViewerEducation = ({ title, educationList, isSectionHidden = false, error }: ViewerEducationProps) => {
+const ViewerEducation = ({ title, educationList, isSectionHidden = false, error, userId }: ViewerEducationProps) => {
 	useToastError(error);
 
 	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
@@ -30,7 +32,9 @@ const ViewerEducation = ({ title, educationList, isSectionHidden = false, error 
 			{!isSectionHidden && (
 				<ViewerResumeContainer
 					title={title}
-					isAside={isVerticalTheme}>
+					isAside={isVerticalTheme}
+					kind={SECTION_CONTROL.EDUCATION}
+					userId={userId}>
 					{educationList.length > 0 ? (
 						<ul className='flex flex-col gap-4 mt-2'>
 							{educationList.map((school) => (

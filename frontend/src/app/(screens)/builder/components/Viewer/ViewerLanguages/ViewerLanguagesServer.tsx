@@ -19,6 +19,7 @@ const ViewerLanguagesServer = async ({ userId, resumeId }: ViewerLanguagesServer
 			<ViewerLanguages
 				title={DEFAULT_LANGUAGES_VALUES.title}
 				languageList={DEFAULT_LANGUAGES_VALUES.languageList}
+				userId={userId}
 			/>
 		);
 	}
@@ -33,6 +34,7 @@ const ViewerLanguagesServer = async ({ userId, resumeId }: ViewerLanguagesServer
 			<ViewerLanguages
 				title={DEFAULT_LANGUAGES_VALUES.title}
 				languageList={DEFAULT_LANGUAGES_VALUES.languageList}
+				userId={userId}
 			/>
 		);
 	}
@@ -44,6 +46,7 @@ const ViewerLanguagesServer = async ({ userId, resumeId }: ViewerLanguagesServer
 				title={DEFAULT_LANGUAGES_VALUES.title}
 				languageList={DEFAULT_LANGUAGES_VALUES.languageList}
 				error={response.left}
+				userId={userId}
 			/>
 		);
 	}
@@ -53,6 +56,7 @@ const ViewerLanguagesServer = async ({ userId, resumeId }: ViewerLanguagesServer
 			title={response.right.title}
 			languageList={response.right.languageList}
 			isSectionHidden={response.right.isHidden}
+			userId={userId}
 		/>
 	);
 };

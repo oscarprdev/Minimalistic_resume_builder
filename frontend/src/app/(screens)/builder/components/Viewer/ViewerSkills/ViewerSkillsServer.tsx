@@ -19,6 +19,7 @@ const ViewerSkillsServer = async ({ userId, resumeId }: ViewerSkillsServerProps)
 			<ViewerSkills
 				title={DEFAULT_SKILLS_VALUES.title}
 				skillList={DEFAULT_SKILLS_VALUES.skillList}
+				userId={userId}
 			/>
 		);
 	}
@@ -33,6 +34,7 @@ const ViewerSkillsServer = async ({ userId, resumeId }: ViewerSkillsServerProps)
 			<ViewerSkills
 				title={DEFAULT_SKILLS_VALUES.title}
 				skillList={DEFAULT_SKILLS_VALUES.skillList}
+				userId={userId}
 			/>
 		);
 	}
@@ -44,6 +46,7 @@ const ViewerSkillsServer = async ({ userId, resumeId }: ViewerSkillsServerProps)
 				title={DEFAULT_SKILLS_VALUES.title}
 				skillList={DEFAULT_SKILLS_VALUES.skillList}
 				error={response.left}
+				userId={userId}
 			/>
 		);
 	}
@@ -53,6 +56,7 @@ const ViewerSkillsServer = async ({ userId, resumeId }: ViewerSkillsServerProps)
 			title={response.right.title}
 			skillList={response.right.skillList}
 			isSectionHidden={response.right.isHidden}
+			userId={userId}
 		/>
 	);
 };

@@ -1,15 +1,16 @@
 'use client';
 
-import ViewerHeaderLinksIcons from './ViewerHeaderLinksIcons';
 import { useToastError } from '@/hooks/useRouterError';
 import Link from 'next/link';
 import ViewerHeaderIcons from './ViewerHeaderIcons';
 import { DEFAULT_IMAGE } from '../../Aside/AsideFormHeader/AsideFormHeaderImage';
 import ViewerResumeContainer from '../ViewerResumeContainer';
+import ViewerHeaderLinksIcons from './ViewerHeaderLinksIcons';
 import { cn } from '@/lib/utils';
 import { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
+import { SECTION_CONTROL } from '../../_utils/sections';
 
 interface ViewerHeaderProps {
 	name: string;
@@ -21,9 +22,10 @@ interface ViewerHeaderProps {
 	image?: string;
 	error?: string;
 	isSectionHidden?: boolean;
+	userId?: string;
 }
 
-const ViewerHeader = ({ name, job, location, phone, links, email, image, error, isSectionHidden = false }: ViewerHeaderProps) => {
+const ViewerHeader = ({ name, job, location, phone, links, email, image, error, isSectionHidden = false, userId }: ViewerHeaderProps) => {
 	useToastError(error);
 
 	const params = useSearchParams();
@@ -37,7 +39,9 @@ const ViewerHeader = ({ name, job, location, phone, links, email, image, error, 
 	return (
 		<>
 			{!isSectionHidden && (
-				<ViewerResumeContainer>
+				<ViewerResumeContainer
+					kind={SECTION_CONTROL.HEADER}
+					userId={userId}>
 					{isVerticalTheme && (
 						<span
 							aria-hidden

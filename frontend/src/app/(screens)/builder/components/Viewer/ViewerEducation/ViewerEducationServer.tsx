@@ -19,6 +19,7 @@ const ViewerEducationServer = async ({ userId, resumeId }: ViewerEducationServer
 			<ViewerEducation
 				title={DEFAULT_EDUCATION_VALUES.title}
 				educationList={DEFAULT_EDUCATION_VALUES.educationList}
+				userId={userId}
 			/>
 		);
 	}
@@ -33,6 +34,7 @@ const ViewerEducationServer = async ({ userId, resumeId }: ViewerEducationServer
 			<ViewerEducation
 				title={DEFAULT_EDUCATION_VALUES.title}
 				educationList={DEFAULT_EDUCATION_VALUES.educationList}
+				userId={userId}
 			/>
 		);
 	}
@@ -44,6 +46,7 @@ const ViewerEducationServer = async ({ userId, resumeId }: ViewerEducationServer
 				title={DEFAULT_EDUCATION_VALUES.title}
 				educationList={DEFAULT_EDUCATION_VALUES.educationList}
 				error={response.left}
+				userId={userId}
 			/>
 		);
 	}
@@ -53,6 +56,7 @@ const ViewerEducationServer = async ({ userId, resumeId }: ViewerEducationServer
 			title={response.right.title}
 			educationList={response.right.educationList}
 			isSectionHidden={response.right.isHidden}
+			userId={userId}
 		/>
 	);
 };

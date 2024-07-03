@@ -24,6 +24,7 @@ const ViewerHeaderServer = async ({ userId, resumeId }: ViewerHeaderServerProps)
 				phone={DEFAULT_HEADER_VALUES.phone}
 				links={DEFAULT_HEADER_VALUES.links}
 				image={DEFAULT_HEADER_VALUES.image}
+				userId={userId}
 			/>
 		);
 	}
@@ -43,6 +44,7 @@ const ViewerHeaderServer = async ({ userId, resumeId }: ViewerHeaderServerProps)
 				phone={DEFAULT_HEADER_VALUES.phone}
 				links={DEFAULT_HEADER_VALUES.links}
 				image={DEFAULT_HEADER_VALUES.image}
+				userId={userId}
 			/>
 		);
 	}
@@ -59,6 +61,7 @@ const ViewerHeaderServer = async ({ userId, resumeId }: ViewerHeaderServerProps)
 				links={DEFAULT_HEADER_VALUES.links}
 				image={DEFAULT_HEADER_VALUES.image}
 				error={response.left}
+				userId={userId}
 			/>
 		);
 	}
@@ -73,6 +76,7 @@ const ViewerHeaderServer = async ({ userId, resumeId }: ViewerHeaderServerProps)
 			links={response.right.links}
 			image={response.right.image}
 			isSectionHidden={response.right.isHidden}
+			userId={userId}
 		/>
 	);
 };

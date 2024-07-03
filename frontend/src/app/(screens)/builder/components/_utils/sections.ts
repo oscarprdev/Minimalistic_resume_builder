@@ -4,15 +4,15 @@ export interface Section {
 }
 
 export type SectionControl = 'info' | 'header' | 'summary' | 'experience' | 'education' | 'languages' | 'skills' | 'themes';
-export const SECTION_CONTROL: Record<string, SectionControl> = {
-	INFO: 'info',
-	HEADER: 'header',
-	SUMMARY: 'summary',
-	EXPERIENCE: 'experience',
-	EDUCATION: 'education',
-	LANGUAGES: 'languages',
-	SKILLS: 'skills',
-	THEMES: 'themes',
+export const SECTION_CONTROL = {
+	INFO: 'info' as SectionControl,
+	HEADER: 'header' as SectionControl,
+	SUMMARY: 'summary' as SectionControl,
+	EXPERIENCE: 'experience' as SectionControl,
+	EDUCATION: 'education' as SectionControl,
+	LANGUAGES: 'languages' as SectionControl,
+	SKILLS: 'skills' as SectionControl,
+	THEMES: 'themes' as SectionControl,
 };
 
 export const SECTIONS: Section[] = [

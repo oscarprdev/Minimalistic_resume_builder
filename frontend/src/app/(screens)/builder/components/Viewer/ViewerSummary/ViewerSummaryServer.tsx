@@ -19,6 +19,7 @@ const ViewerSummaryServer = async ({ userId, resumeId }: ViewerSummaryServerProp
 			<ViewerSummary
 				title={DEFAULT_SUMMARY_VALUES.title}
 				summary={DEFAULT_SUMMARY_VALUES.summary}
+				userId={userId}
 			/>
 		);
 	}
@@ -33,6 +34,7 @@ const ViewerSummaryServer = async ({ userId, resumeId }: ViewerSummaryServerProp
 			<ViewerSummary
 				title={DEFAULT_SUMMARY_VALUES.title}
 				summary={DEFAULT_SUMMARY_VALUES.summary}
+				userId={userId}
 			/>
 		);
 	}
@@ -44,6 +46,7 @@ const ViewerSummaryServer = async ({ userId, resumeId }: ViewerSummaryServerProp
 				title={DEFAULT_SUMMARY_VALUES.title}
 				summary={DEFAULT_SUMMARY_VALUES.summary}
 				error={response.left}
+				userId={userId}
 			/>
 		);
 	}
@@ -53,6 +56,7 @@ const ViewerSummaryServer = async ({ userId, resumeId }: ViewerSummaryServerProp
 			title={response.right.title}
 			summary={response.right.summary}
 			isSectionHidden={response.right.isHidden}
+			userId={userId}
 		/>
 	);
 };

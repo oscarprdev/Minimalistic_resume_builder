@@ -10,15 +10,17 @@ import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
+import { SECTION_CONTROL } from '../../_utils/sections';
 
 interface ViewerExperienceProps {
 	title: string;
 	jobList: OptionalJob[];
 	error?: string;
 	isSectionHidden?: boolean;
+	userId?: string;
 }
 
-const ViewerExperience = ({ title, jobList, error, isSectionHidden = false }: ViewerExperienceProps) => {
+const ViewerExperience = ({ title, jobList, error, isSectionHidden = false, userId }: ViewerExperienceProps) => {
 	useToastError(error);
 
 	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
@@ -28,7 +30,10 @@ const ViewerExperience = ({ title, jobList, error, isSectionHidden = false }: Vi
 	return (
 		<>
 			{!isSectionHidden && (
-				<ViewerResumeContainer title={title}>
+				<ViewerResumeContainer
+					title={title}
+					kind={SECTION_CONTROL.EXPERIENCE}
+					userId={userId}>
 					{jobList.length > 0 ? (
 						<ul className={cn('flex flex-col pt-2', isDefaultTheme && 'gap-4', isVerticalTheme && 'pt-0')}>
 							{jobList.map((job) => (
