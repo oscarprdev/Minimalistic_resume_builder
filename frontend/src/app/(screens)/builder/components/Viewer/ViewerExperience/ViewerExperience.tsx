@@ -6,11 +6,11 @@ import ViewerResumeContainer from '../ViewerResumeContainer';
 import { IconChevronRight, IconPointFilled } from '@tabler/icons-react';
 import LabelWithDates from '../shared/LabelWithDates';
 import LabelWithIcon from '../shared/LabelWithIcon';
+import { useSearchParams } from 'next/navigation';
 import { Resume } from '@/types';
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { SECTION_CONTROL } from '../../_utils/sections';
-import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerExperienceProps {
 	title: string;
@@ -23,8 +23,7 @@ interface ViewerExperienceProps {
 const ViewerExperience = ({ title, jobList, error, isSectionHidden = false, userId }: ViewerExperienceProps) => {
 	useToastError(error);
 
-	const { theme } = useContext(paramsContext);
-
+	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
 	const isDefaultTheme = useMemo(() => theme === Resume.theme.DEFAULT, [theme]);
 	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
 

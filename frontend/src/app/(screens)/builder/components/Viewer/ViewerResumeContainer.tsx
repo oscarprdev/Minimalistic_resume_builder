@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { Resume } from '@/types';
 import Link from 'next/link';
-import { useContext, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useMemo } from 'react';
 import { SectionControl } from '../_utils/sections';
-import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerResumeContainerProps {
 	title?: string;
@@ -14,18 +14,19 @@ interface ViewerResumeContainerProps {
 }
 
 const ViewerResumeContainer = ({ children, title, isAside, kind, userId }: ViewerResumeContainerProps) => {
-	const { theme, resumeId } = useContext(paramsContext);
-
+	const params = useSearchParams();
+	const resume = params.get('resume');
+	const theme = params.get('theme') || Resume.theme.DEFAULT;
 	const isDefaultTheme = useMemo(() => theme === Resume.theme.DEFAULT, [theme]);
 
 	const link = useMemo(
 		() =>
-			userId && resumeId
-				? `/builder?resume=${resumeId}&theme=${theme}&selected=${kind}`
-				: userId && !resumeId
+			userId && resume
+				? `/builder?resume=${resume}&theme=${theme}&selected=${kind}`
+				: userId && !resume
 					? `/builder?theme=${theme}&selected=info`
 					: `/builder?theme=${theme}&selected=${kind}`,
-		[userId, resumeId, theme, kind]
+		[userId, resume, theme, kind]
 	);
 
 	return (

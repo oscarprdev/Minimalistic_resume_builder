@@ -1,5 +1,6 @@
 import { Either, isLeft } from '@/lib/either';
 import { addParamToPath } from '@/lib/utils';
+import { Resume } from '@/types';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 

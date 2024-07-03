@@ -2,11 +2,11 @@ import { postCallback } from '@/services';
 import { Form } from '@/components/ui/form';
 import FormSectionHiddenSwitch from './FormSectionHiddenSwitch';
 import { UseFormReturn } from 'react-hook-form';
-import { FormEvent, ReactNode, useContext } from 'react';
+import { FormEvent, ReactNode } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useCaptureResumeImage } from '@/hooks/useCaptureResumeImage';
 import { Resume } from '@/types';
 import { updateResumeImageAction } from '@/app/actions/resume/update-resume-image.action';
-import { paramsContext } from '@/providers/ParamsProvider';
 
 interface FormContainerProps<T> {
 	form: UseFormReturn<any, any, undefined>;
@@ -16,7 +16,9 @@ interface FormContainerProps<T> {
 }
 
 const FormContainer = ({ form, userId, onSubmit, children }: FormContainerProps<any>) => {
-	const { theme, resumeId } = useContext(paramsContext);
+	const params = useSearchParams();
+	const resumeId = params.get('resume');
+	const theme = params.get('theme') as Resume.theme;
 
 	const { captureResumeImage } = useCaptureResumeImage({
 		theme: theme || Resume.theme.DEFAULT,

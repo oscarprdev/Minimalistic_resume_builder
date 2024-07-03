@@ -5,10 +5,10 @@ import { OptionalLanguage } from '@/store/useResumeLanguagesStore';
 import Link from 'next/link';
 import ViewerResumeContainer from '../ViewerResumeContainer';
 import { Resume } from '@/types';
-import { useContext, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { SECTION_CONTROL } from '../../_utils/sections';
-import { paramsContext } from '@/providers/ParamsProvider';
 
 interface ViewerLanguagesProps {
 	title: string;
@@ -20,8 +20,8 @@ interface ViewerLanguagesProps {
 
 const ViewerLanguages = ({ title, languageList, error, isSectionHidden = false, userId }: ViewerLanguagesProps) => {
 	useToastError(error);
-	const { theme } = useContext(paramsContext);
 
+	const theme = useSearchParams().get('theme') || Resume.theme.DEFAULT;
 	const isVerticalTheme = useMemo(() => theme === Resume.theme.VERTICAL, [theme]);
 
 	return (
