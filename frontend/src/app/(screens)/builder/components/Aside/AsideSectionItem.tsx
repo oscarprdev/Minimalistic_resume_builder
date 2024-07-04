@@ -40,6 +40,7 @@ const AsideSectionItem = async ({ label, control, sectionSelected, resumeId, use
 
 	return (
 		<li
+			data-testid={`aside-item-${control}`}
 			className={cn(
 				'cursor-pointer group w-full p-0 border border-transparent border-b-gray-200',
 				isItemDisabled && 'bg-gray_light cursor-not-allowed'

@@ -27,16 +27,18 @@ const AsideFormInfoPresentation = ({
 	return (
 		<Form {...form}>
 			<form
+				data-testid='aside-form'
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='space-y-6 animate-fade-up'>
 				<FormField
 					control={form.control}
 					name='title'
 					render={({ field }) => (
-						<FormItem>
+						<FormItem data-testid='info-form-title-field'>
 							<FormLabel className='text-sm text-gray-500'>Resume title</FormLabel>
 							<FormControl>
 								<Input
+									data-testid='info-title-input'
 									required
 									placeholder='Title'
 									{...field}

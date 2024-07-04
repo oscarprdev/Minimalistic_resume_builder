@@ -38,6 +38,7 @@ const FormContainer = ({ form, userId, onSubmit, children }: FormContainerProps<
 	return (
 		<Form {...form}>
 			<form
+				data-testid='aside-form'
 				onSubmit={handleSubmit}
 				className='relative space-y-6 animate-fade-up'>
 				{userId && !theme && <FormSectionHiddenSwitch form={form} />}

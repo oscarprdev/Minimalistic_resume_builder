@@ -22,7 +22,11 @@ const ViewerTitle = ({ resumeTitle, error, allResumesData, index, isSectionHidde
 				<ViewerTitlePagination
 					allResumesData={allResumesData}
 					index={index}>
-					<p className='w-full text-center text-sm text-purple_200'>{strToCapitalized(resumeTitle)}</p>
+					<p
+						data-testid='viewer-resume-title'
+						className='w-full text-center text-sm text-purple_200'>
+						{strToCapitalized(resumeTitle)}
+					</p>
 				</ViewerTitlePagination>
 			)}
 		</>
