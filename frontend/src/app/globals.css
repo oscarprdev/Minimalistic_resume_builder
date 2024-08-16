@@ -3,11 +3,9 @@
 @tailwind utilities;
 
 body {
-	margin: 0 auto;
+	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	display: flex;
-	flex-direction: column;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -29,4 +27,7 @@ img {
 	object-fit: cover;
 }
 
-
+section {
+	max-width: 750px;
+	margin: 0 auto 48px;
+}

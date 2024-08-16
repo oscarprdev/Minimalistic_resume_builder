@@ -8,6 +8,7 @@ export type DefaultResumeSkills = Omit<Skills, 'id'>;
 export type DefaultResumeLanguages = Omit<Languages, 'id'>;
 
 export type DefaultResume = {
+	id: string;
 	title: string;
 	header: DefaultResumeHeader;
 	summary: DefaultResumeSummary;

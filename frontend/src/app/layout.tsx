@@ -1,7 +1,10 @@
 import Header from './components/Header/Header';
+import { Toaster } from './components/ui/toaster';
 import './globals.css';
 import QueryProvider from './providers/QueryProvider';
 import type { Metadata } from 'next';
+import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 
@@ -12,14 +15,17 @@ export const metadata: Metadata = {
 	description: 'Resume builder app',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children, session }: { children: ReactNode; session: Session }) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<QueryProvider>
-					<Header />
-					{children}
-				</QueryProvider>
+				<SessionProvider session={session}>
+					<QueryProvider>
+						<Header />
+						{children}
+						<Toaster />
+					</QueryProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);

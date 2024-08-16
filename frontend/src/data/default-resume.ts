@@ -2,6 +2,7 @@ import { DefaultResume } from './default-resume.types';
 import { Job, Language, School, Skill } from '@/types';
 
 export const defaultResume: DefaultResume = {
+	id: '',
 	title: '',
 	header: {
 		isHidden: false,

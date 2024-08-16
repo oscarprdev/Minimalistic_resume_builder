@@ -1,14 +1,20 @@
 import { API_URL } from '@/constants';
-import { errorResponse, successResponse } from '@/lib/types';
+import { Either, errorResponse, successResponse } from '@/lib/types';
+import { handleErrorResponse } from '@/lib/utils';
 import { UserCredentials } from '@/types';
 import { z } from 'zod';
+
+interface IAuthService {
+	login(input: UserCredentials): Promise<Either<string, { username: string; id: string }>>;
+	register(input: UserCredentials): Promise<Either<string, string>>;
+}
 
 const userCredentialsSchema = z.object({
 	username: z.string().min(4),
 	password: z.string().min(4),
 });
 
-class AuthService {
+class AuthService implements IAuthService {
 	constructor() {}
 
 	private validateUserCredentials(input: UserCredentials) {
@@ -29,7 +35,7 @@ class AuthService {
 
 			return successResponse({ username: jsonResponse.username, id: jsonResponse.id });
 		} catch (error) {
-			return errorResponse(error instanceof Error ? error.message : 'Error loggin user');
+			return handleErrorResponse(error, 'Error loginning user');
 		}
 	}
 
@@ -45,11 +51,9 @@ class AuthService {
 
 			const jsonResponse = await response.json();
 
-			console.log(jsonResponse);
-
 			return successResponse('User registered successfully');
 		} catch (error) {
-			return errorResponse(error instanceof Error ? error.message : 'Error registering user');
+			return handleErrorResponse(error, 'Error registerring user');
 		}
 	}
 }
