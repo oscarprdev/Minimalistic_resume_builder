@@ -24,7 +24,6 @@ export class ResumeHeaderService implements IResumeHeaderService {
 
 	async update(values: Header, resumeId: string) {
 		try {
-			console.log(values);
 			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/header`, {
 				method: 'POST',
 				body: JSON.stringify(values),

@@ -78,6 +78,7 @@ const ResumeHeaderForm = ({
 				afterResumeHeaderFormSubmit();
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [submitResponse]);
 
 	const imageValue = useWatch({
@@ -89,7 +90,7 @@ const ResumeHeaderForm = ({
 		if (imageValue) {
 			debounced();
 		}
-	}, [imageValue, debounced]);
+	}, [imageValue, debounced, fields]);
 
 	return (
 		<Form {...form}>
@@ -97,8 +98,8 @@ const ResumeHeaderForm = ({
 				onChange={debounced}
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
-				className="relative flex flex-col w-full hover:bg-zinc-100 duration-200 pl-5">
-				<div className="flex flex-col gap-2 w-[110px] absolute top-5 right-5">
+				className="relative flex flex-col w-full hover:bg-zinc-100 duration-200 pl-5 pb-2">
+				<div className="flex flex-col gap-2 w-[100px] absolute top-5 right-5">
 					<picture className="relative rounded-md w-full max-h-[110px]">
 						{imageLoading && (
 							<div className={cn('absolute size-[110px] opacity-60 bg-black grid place-items-center')}>
@@ -146,7 +147,7 @@ const ResumeHeaderForm = ({
 								<Input
 									kind="title"
 									variant={'resume'}
-									className={cn(theme === RESUME_THEME.DEFAULT && 'text-3xl')}
+									className={cn(theme === RESUME_THEME.DEFAULT && 'text-3xl font-bold')}
 									required
 									{...field}
 								/>
@@ -162,6 +163,8 @@ const ResumeHeaderForm = ({
 						<FormItem>
 							<FormControl>
 								<Textarea
+									maxLength={120}
+									kind="header"
 									className={cn(
 										theme === RESUME_THEME.DEFAULT &&
 											'text-lg text-zinc-700 resize-none mt-1 h-fit max-w-[550px]'
@@ -244,7 +247,7 @@ const ResumeHeaderForm = ({
 						)}
 					/>
 				</div>
-				<div className="flex flex-col gap-0">
+				<div className="relative flex flex-col gap-0">
 					{fields.map((field, index) => (
 						<article key={field.id} className="relative w-fit flex items-center -mt-2 last-of-type:-mt-3">
 							{isFocused && (
@@ -285,7 +288,7 @@ const ResumeHeaderForm = ({
 						<Button
 							type="button"
 							size={'sm'}
-							className="w-fit"
+							className="w-fit absolute -bottom-6"
 							onClick={() => append('http://www.your-url.com')}>
 							Add link
 						</Button>

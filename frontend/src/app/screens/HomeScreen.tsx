@@ -2,6 +2,7 @@
 
 import { createResumeAction } from '../actions/resume/create-resume';
 import ResumeHeader from '../components/Resume/ResumeHeader/ResumeHeader';
+import ResumeSummary from '../components/Resume/ResumeSummary/ResumeSummary';
 import { auth } from '@/auth';
 import { defaultResume } from '@/data/default-resume';
 import { isError } from '@/lib/types';
@@ -35,19 +36,28 @@ export default async function HomeScreen() {
 					</MainHome>
 				);
 			}
-			return <MainHome>{<ResumeHeader userLogged={user} resumeId={response.success} />}</MainHome>;
+			return (
+				<MainHome>
+					<ResumeHeader userLogged={user} resumeId={response.success} />
+					<ResumeSummary userLogged={user} resumeId={response.success} />
+				</MainHome>
+			);
 		}
 
 		const firstResume = response.success[0];
 
 		return (
-			<MainHome>{firstResume.header && <ResumeHeader userLogged={user} resumeId={firstResume.id} />}</MainHome>
+			<MainHome>
+				{firstResume.header && <ResumeHeader userLogged={user} resumeId={firstResume.id} />}
+				{firstResume.summary && <ResumeSummary userLogged={user} resumeId={firstResume.id} />}
+			</MainHome>
 		);
 	}
 
 	return (
 		<MainHome>
 			<ResumeHeader userLogged={user} resumeId={defaultResume.id} />
+			<ResumeSummary userLogged={user} resumeId={defaultResume.id} />
 		</MainHome>
 	);
 }
