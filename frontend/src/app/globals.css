@@ -2,25 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--foreground-rgb: 0, 0, 0;
-	--background-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--foreground-rgb: 255, 255, 255;
-		--background-rgb: 0, 0, 0;
-	}
-}
-
 body {
-	color: rgb(var(--foreground-rgb));
-	background: rgb(var(--background-rgb));
+	margin: 0 auto;
+	padding: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	-webkit-font-smoothing: antialiased;
 }
 
-@layer utilities {
-	.text-balance {
-		text-wrap: balance;
-	}
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
+
+picture {
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+
