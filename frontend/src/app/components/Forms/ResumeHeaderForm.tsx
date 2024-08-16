@@ -3,13 +3,23 @@ import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
 import { DEFAULT_IMAGE, useHeaderFormImage } from '@/app/hooks/useHeaderFormImage';
 import { DefaultResumeHeader } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { IconLoader2, IconMail, IconMapPin, IconPhone, IconX } from '@tabler/icons-react';
+import {
+	IconFileX,
+	IconLinkPlus,
+	IconLoader2,
+	IconMail,
+	IconMapPin,
+	IconPhone,
+	IconUpload,
+	IconX,
+} from '@tabler/icons-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
@@ -98,7 +108,7 @@ const ResumeHeaderForm = ({
 				onChange={debounced}
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
-				className="relative flex flex-col w-full hover:bg-zinc-100 duration-200 pl-5 pb-2">
+				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5 pb-2">
 				<div className="flex flex-col gap-2 w-[100px] absolute top-5 right-5">
 					<picture className="relative rounded-md w-full max-h-[110px]">
 						{imageLoading && (
@@ -124,18 +134,40 @@ const ResumeHeaderForm = ({
 						onChange={handleInputFileChange}
 					/>
 					{isFocused && (
-						<>
-							<Button type="button" size={'sm'} onClick={() => handleBrowseImageClick()}>
-								Browse image
-							</Button>
-							<Button
-								type="button"
-								size={'sm'}
-								variant={'outline'}
-								onClick={() => handleRemoveImageClick()}>
-								Remove image
-							</Button>
-						</>
+						<div className="flex items-center gap-2 w-full justify-center">
+							<TooltipProvider>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<Button
+											type="button"
+											className="bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
+											size={'sm'}
+											onClick={() => handleBrowseImageClick()}>
+											<IconUpload size={16} className="text-zinc-400" />
+										</Button>
+									</TooltipTrigger>
+									<TooltipContent side="bottom">
+										<p className="text-xs">Browse image</p>
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+							<TooltipProvider>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<Button
+											type="button"
+											size={'sm'}
+											className="bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
+											onClick={() => handleRemoveImageClick()}>
+											<IconFileX size={16} className="text-zinc-400" />
+										</Button>
+									</TooltipTrigger>
+									<TooltipContent side="bottom">
+										<p className="text-xs">Remove image</p>
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+						</div>
 					)}
 				</div>
 				<FormField
@@ -166,8 +198,9 @@ const ResumeHeaderForm = ({
 									maxLength={120}
 									kind="header"
 									className={cn(
+										!isFocused && 'resize-none',
 										theme === RESUME_THEME.DEFAULT &&
-											'text-lg text-zinc-700 resize-none mt-1 h-fit max-w-[550px]'
+											'text-lg text-zinc-700 mt-1 h-fit max-w-[550px]'
 									)}
 									variant={'resume'}
 									required
@@ -247,7 +280,7 @@ const ResumeHeaderForm = ({
 						)}
 					/>
 				</div>
-				<div className="relative flex flex-col gap-0">
+				<div className="relative flex flex-col gap-0 w-fit">
 					{fields.map((field, index) => (
 						<article key={field.id} className="relative w-fit flex items-center -mt-2 last-of-type:-mt-3">
 							{isFocused && (
@@ -285,13 +318,22 @@ const ResumeHeaderForm = ({
 						</article>
 					))}
 					{isFocused && (
-						<Button
-							type="button"
-							size={'sm'}
-							className="w-fit absolute -bottom-6"
-							onClick={() => append('http://www.your-url.com')}>
-							Add link
-						</Button>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button
+										type="button"
+										size={'sm'}
+										className="absolute -bottom-7 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
+										onClick={() => append('http://www.your-url.com')}>
+										<IconLinkPlus size={16} className="text-zinc-400" />
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent side="left">
+									<p className="text-xs">Add link</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					)}
 				</div>
 				<div className="relative flex flex-col items-center w-full gap-2 mt-6">
