@@ -97,78 +97,76 @@ const ResumeLanguagesForm = ({
 					)}
 				/>
 				<div className="flex items-center justify-start flex-wrap gap-0 w-full">
+					{isFocused && (
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button
+										type="button"
+										size={'sm'}
+										className="absolute top-2 right-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
+										onClick={() => append(defaultLanguage)}>
+										<IconTextPlus size={16} className="text-zinc-400" />
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent side="right">
+									<p className="text-xs">Add language</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+					)}
 					{fields.map((field, index) => (
-						<>
+						<article key={field.id} className="relative flex flex-col gap-0">
 							{isFocused && (
-								<TooltipProvider>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button
-												type="button"
-												size={'sm'}
-												className="absolute top-2 right-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
-												onClick={() => append(defaultLanguage)}>
-												<IconTextPlus size={16} className="text-zinc-400" />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent side="right">
-											<p className="text-xs">Add language</p>
-										</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
+								<IconX
+									onClick={() => remove(index)}
+									size={14}
+									className="text-zinc-400 hover:text-zinc-900 absolute -left-4 top-[0.8rem] cursor-pointer duration-200"
+								/>
 							)}
-							<article key={field.id} className="relative flex flex-col gap-0">
-								{isFocused && (
-									<IconX
-										onClick={() => remove(index)}
-										size={14}
-										className="text-zinc-400 hover:text-zinc-900 absolute -left-4 top-[0.8rem] cursor-pointer duration-200"
-									/>
+							<FormField
+								control={form.control}
+								name={`languageList.${index}.name`}
+								render={({ field }) => (
+									<FormItem>
+										<FormControl>
+											<Input
+												{...field}
+												{...form.register(`languageList.${index}.name`)}
+												className={cn(
+													theme === RESUME_THEME.DEFAULT &&
+														'text-zinc-700 text-sm font-bold w-[80px]'
+												)}
+												variant={'resume'}
+												required
+											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
 								)}
-								<FormField
-									control={form.control}
-									name={`languageList.${index}.name`}
-									render={({ field }) => (
-										<FormItem>
-											<FormControl>
-												<Input
-													{...field}
-													{...form.register(`languageList.${index}.name`)}
-													className={cn(
-														theme === RESUME_THEME.DEFAULT &&
-															'text-zinc-700 text-sm font-bold w-[80px]'
-													)}
-													variant={'resume'}
-													required
-												/>
-											</FormControl>
-											<FormMessage className="text-xs" />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name={`languageList.${index}.level`}
-									render={({ field }) => (
-										<FormItem>
-											<FormControl>
-												<Input
-													{...field}
-													{...form.register(`languageList.${index}.level`)}
-													className={cn(
-														theme === RESUME_THEME.DEFAULT &&
-															'text-zinc-700 text-xs w-fit max-w-[40px] -mt-5'
-													)}
-													variant={'resume'}
-													required
-												/>
-											</FormControl>
-											<FormMessage className="text-xs" />
-										</FormItem>
-									)}
-								/>
-							</article>
-						</>
+							/>
+							<FormField
+								control={form.control}
+								name={`languageList.${index}.level`}
+								render={({ field }) => (
+									<FormItem>
+										<FormControl>
+											<Input
+												{...field}
+												{...form.register(`languageList.${index}.level`)}
+												className={cn(
+													theme === RESUME_THEME.DEFAULT &&
+														'text-zinc-700 text-xs w-fit max-w-[40px] -mt-5'
+												)}
+												variant={'resume'}
+												required
+											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+						</article>
 					))}
 				</div>
 				<div className="relative flex flex-col items-center w-full gap-2 mt-6">
