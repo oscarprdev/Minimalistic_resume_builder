@@ -40,8 +40,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
                 School.id AS "schoolId", 
                 School.title AS "schoolTitle", 
                 School.career AS "schoolCareer", 
-                School.dates AS "schoolDates", 
-                School.description AS "schoolDescription"
+                School.dates AS "schoolDates"
             FROM 
                 Education
             LEFT JOIN 
@@ -65,7 +64,6 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 					title: r.schoolTitle,
 					career: r.schoolCareer,
 					dates: r.schoolDates,
-					description: r.schoolDescription,
 				};
 			});
 
@@ -90,8 +88,7 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				School.id, 
 				School.title, 
 				School.career, 
-				School.dates, 
-				School.description
+				School.dates
             FROM 
                 Education
             LEFT JOIN 
@@ -175,15 +172,15 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title, isHidden ? 'true' : 'false']
 			);
 
-			for (const { title, career, dates, description } of educationList) {
+			for (const { title, career, dates } of educationList) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, dates, description) 
-                        VALUES ($1, $2, $3, $4, $5)
+                        (id, title, career, dates) 
+                        VALUES ($1, $2, $3, $4)
                     ;`,
-					[schoolId, title, career, dates, description]
+					[schoolId, title, career, dates]
 				);
 
 				await this.database.query(
@@ -224,28 +221,27 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title, isHidden ? 'true' : 'false']
 			);
 
-			for (const { id, title, career, dates, description } of educationList) {
+			for (const { id, title, career, dates } of educationList) {
 				await this.database.query(
 					`UPDATE School
                         SET title = $2, 
                         career = $3, 
-                        dates = $4, 
-                        description = $5
+                        dates = $4
                     WHERE id = $1
 				    ;`,
-					[id, title, career, dates, description]
+					[id, title, career, dates]
 				);
 			}
 
-			for (const { title, career,dates, description} of newSchools) {
+			for (const { title, career,dates} of newSchools) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, dates, description) 
-                        VALUES ($1, $2, $3, $4, $5)
+                        (id, title, career, dates) 
+                        VALUES ($1, $2, $3, $4)
                     ;`,
-					[schoolId, title, career,dates, description]
+					[schoolId, title, career,dates]
 				);
 
 				await this.database.query(

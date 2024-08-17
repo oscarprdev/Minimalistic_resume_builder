@@ -57,7 +57,6 @@ export interface SchoolDb {
 	title: string;
 	career: string;
 	dates: string;
-	description: string;
 }
 
 export interface EducationDb {

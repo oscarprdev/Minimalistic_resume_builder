@@ -13,7 +13,6 @@ const SchoolSchema = z.object({
 	title: z.string(),
 	career: z.string(),
 	dates: z.string(),
-	description: z.string(),
 });
 
 const EducationSectionSchema = z.object({
