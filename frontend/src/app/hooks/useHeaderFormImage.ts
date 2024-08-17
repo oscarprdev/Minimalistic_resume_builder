@@ -2,13 +2,11 @@ import { deleteImageAction } from '../actions/resume/delete-header-image';
 import { updateHeaderImageAction } from '../actions/resume/update-header-image';
 import { DELETE_IMAGE_INPUT_KEYWORD } from '../actions/shared/types';
 import { toast } from '../components/ui/use-toast';
+import { DEFAULT_IMAGE, MAX_FILE_SIZE_MB } from '@/constants';
 import { isError } from '@/lib/types';
 import { useResumeHeaderStore } from '@/store/useResumeHeaderStore';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, startTransition, useRef, useState } from 'react';
-
-export const DEFAULT_IMAGE = 'https://pub-0e9cd559fbf645019c4e68f378549dc6.r2.dev/default-image.jpeg';
-export const MAX_FILE_SIZE_MB = 2;
 
 export const useHeaderFormImage = (resumeId: string, cb: (imgUrl: string) => void) => {
 	const { resumeHeader, updateHeader } = useResumeHeaderStore();

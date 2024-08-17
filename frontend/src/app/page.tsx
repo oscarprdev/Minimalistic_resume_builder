@@ -1,4 +1,4 @@
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from './screens/HomeScreen/HomeScreen';
 import { Suspense } from 'react';
 
 export default async function Home() {

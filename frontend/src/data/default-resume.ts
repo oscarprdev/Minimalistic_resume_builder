@@ -1,17 +1,21 @@
 import { DefaultResume } from './default-resume.types';
+import { DEFAULT_IMAGE } from '@/constants';
 import { Job, Language, School, Skill } from '@/types';
+
+export const defaultLink = 'http://www.your-url.com';
 
 export const defaultResume: DefaultResume = {
 	id: '',
 	title: '',
 	header: {
 		isHidden: false,
-		name: '',
-		job: '',
-		location: '',
-		email: '',
-		phone: '',
-		links: [],
+		name: 'Your name',
+		job: 'Your description',
+		location: 'Location',
+		email: 'Email',
+		phone: '000',
+		image: DEFAULT_IMAGE,
+		links: [defaultLink],
 	},
 	summary: {
 		isHidden: true,
@@ -47,7 +51,7 @@ export const defaultJob: Omit<Job, 'id'> = {
 	dates: '2011 - 2022',
 };
 
-export const defaultEducation: Omit<School, 'id'> = {
+export const defaultSchool: Omit<School, 'id'> = {
 	title: 'Title education',
 	career: 'Institution',
 	dates: '3 years',

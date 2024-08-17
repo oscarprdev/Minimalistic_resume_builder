@@ -46,7 +46,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ classNa
 	return (
 		<textarea
 			onInput={handleInput}
-			style={{ height: `${height}px` }}
+			style={{ height: `${kind ? `${height}px` : 'auto'}` }}
 			className={cn(textareaVariants({ variant }), className)}
 			ref={ref}
 			{...props}

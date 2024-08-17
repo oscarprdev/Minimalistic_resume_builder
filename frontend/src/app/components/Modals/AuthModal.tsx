@@ -4,8 +4,14 @@ import AuthForm, { AuthFormValues } from '../Forms/AuthForm';
 import { Button } from '../ui/button';
 import { logInUser } from '@/app/actions/auth/login';
 import { registerUser } from '@/app/actions/auth/register';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog';
-import { DialogDescription } from '@radix-ui/react-dialog';
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/app/components/ui/dialog';
 import { IconLoader2 } from '@tabler/icons-react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
