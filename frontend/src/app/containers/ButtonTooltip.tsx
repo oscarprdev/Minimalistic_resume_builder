@@ -7,7 +7,7 @@ type ButtonTooltipProps = {
 	onClick: () => void;
 
 	label: string;
-	side: 'right' | 'bottom';
+	side: 'right' | 'bottom' | 'left';
 	children: ReactNode;
 	className?: string;
 };

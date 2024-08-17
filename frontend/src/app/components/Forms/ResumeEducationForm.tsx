@@ -1,7 +1,6 @@
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
 import ButtonTooltip from '@/app/containers/ButtonTooltip';
 import { defaultSchool } from '@/data/default-resume';
 import { DefaultResumeEducation } from '@/data/default-resume.types';
@@ -9,7 +8,7 @@ import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { IconTextPlus, IconX } from '@tabler/icons-react';
+import { IconTextPlus, IconTrashX, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useDebouncedCallback } from 'use-debounce';
@@ -19,6 +18,7 @@ export type ResumeEducationFormValues = z.infer<typeof resumeEducationFormSchema
 type ResumeEducationFormProps = {
 	handleSubmit(values: ResumeEducationFormValues): Promise<void>;
 	afterResumeEducationFormSubmit(): void;
+	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeEducation;
 };
@@ -42,6 +42,7 @@ const resumeEducationFormSchema = z.object({
 const ResumeEducationForm = ({
 	handleSubmit,
 	afterResumeEducationFormSubmit,
+	handleDeleteSection,
 	submitResponse,
 	defaultValues,
 }: ResumeEducationFormProps) => {
@@ -81,6 +82,15 @@ const ResumeEducationForm = ({
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
 				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
+				{isFocused && (
+					<ButtonTooltip
+						className="absolute top-2 right-12"
+						side="left"
+						label="Remove section"
+						onClick={handleDeleteSection}>
+						<IconTrashX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+					</ButtonTooltip>
+				)}
 				<FormField
 					control={form.control}
 					name="title"

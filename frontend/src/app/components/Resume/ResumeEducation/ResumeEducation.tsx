@@ -2,8 +2,10 @@
 
 import ResumeEducationForm, { ResumeEducationFormValues } from '../../Forms/ResumeEducationForm';
 import { toast } from '../../ui/use-toast';
+import { deleteEducationAction } from '@/app/actions/resume/delete-education';
 import { describeEducationAction } from '@/app/actions/resume/describe-education';
 import { updateEducationAction } from '@/app/actions/resume/update-education';
+import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeEducationStore } from '@/store/useResumeEducationStore';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -56,6 +58,19 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 		router.refresh();
 	};
 
+	const handleDeleteSection = async () => {
+		if (!userLogged) {
+			return updateEducation(defaultResume.education);
+		}
+
+		const response = await deleteEducationAction(resumeId);
+
+		toast({
+			variant: isError(response) ? 'destructive' : 'default',
+			description: isError(response) ? response.error : response.success,
+		});
+	};
+
 	return (
 		<section>
 			{!queryResumeEducation.isPending && queryResumeEducation.data && !isError(queryResumeEducation.data) && (
@@ -64,6 +79,7 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 					afterResumeEducationFormSubmit={afterResumeEducationFormSubmit}
 					submitResponse={data}
 					defaultValues={queryResumeEducation.data.success}
+					handleDeleteSection={handleDeleteSection}
 				/>
 			)}
 		</section>
