@@ -7,6 +7,7 @@ import { DefaultResumeEducation } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
+import { School } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IconTextPlus, IconTrashX, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
@@ -75,13 +76,23 @@ const ResumeEducationForm = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [submitResponse]);
 
+	const handleAppendEducation = (value: Omit<School, 'id'>) => {
+		append(value);
+		debounced();
+	};
+
+	const handleRemoveEducation = (index: number) => {
+		remove(index);
+		debounced();
+	};
+
 	return (
 		<Form {...form}>
 			<form
 				onChange={debounced}
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
-				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
+				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5 pb-1">
 				{isFocused && (
 					<ButtonTooltip
 						className="absolute top-2 right-12"
@@ -111,7 +122,7 @@ const ResumeEducationForm = ({
 				<div className="flex flex-col gap-0 w-full">
 					{isFocused && (
 						<ButtonTooltip
-							onClick={() => append(defaultSchool)}
+							onClick={() => handleAppendEducation(defaultSchool)}
 							side="right"
 							label="Add education"
 							className="absolute right-2 top-2">
@@ -122,7 +133,7 @@ const ResumeEducationForm = ({
 						<article key={field.id} className="relative w-full flex flex-col gap-0">
 							{isFocused && (
 								<Button
-									onClick={() => remove(index)}
+									onClick={() => handleRemoveEducation(index)}
 									className="group absolute -left-5 top-[0.65rem] rounded-full bg-transparent grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
 								</Button>

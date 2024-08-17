@@ -9,6 +9,7 @@ import { DefaultResumeSkills } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
+import { Skill } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IconTextPlus, IconTrashX, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
@@ -74,13 +75,23 @@ const ResumeSkillsForm = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [submitResponse]);
 
+	const handleAppendSkill = (value: Omit<Skill, 'id'>) => {
+		append(value);
+		debounced();
+	};
+
+	const handleRemoveSkill = (index: number) => {
+		remove(index);
+		debounced();
+	};
+
 	return (
 		<Form {...form}>
 			<form
 				onChange={debounced}
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
-				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
+				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5 pb-1">
 				{isFocused && (
 					<ButtonTooltip
 						className="absolute top-2 right-12"
@@ -110,7 +121,7 @@ const ResumeSkillsForm = ({
 				<div className="flex items-center justify-start flex-wrap gap-2 w-full">
 					{isFocused && (
 						<ButtonTooltip
-							onClick={() => append(defaultSkill)}
+							onClick={() => handleAppendSkill(defaultSkill)}
 							side="right"
 							label="Add skill"
 							className="absolute top-2 right-2">
@@ -121,7 +132,7 @@ const ResumeSkillsForm = ({
 						<article key={field.id} className="relative flex flex-col gap-0">
 							{isFocused && (
 								<Button
-									onClick={() => remove(index)}
+									onClick={() => handleRemoveSkill(index)}
 									className="group absolute -top-1 -left-1 rounded-full bg-zinc-200/50 border grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
 								</Button>

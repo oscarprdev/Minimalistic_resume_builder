@@ -9,6 +9,7 @@ import { DefaultResumeExperience } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
+import { Job } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IconTextPlus, IconTrashX, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
@@ -77,6 +78,16 @@ const ResumeExperienceForm = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [submitResponse]);
 
+	const handleAppendExperience = (value: Omit<Job, 'id'>) => {
+		append(value);
+		debounced();
+	};
+
+	const handleRemoveExperience = (index: number) => {
+		remove(index);
+		debounced();
+	};
+
 	return (
 		<Form {...form}>
 			<form
@@ -110,10 +121,10 @@ const ResumeExperienceForm = ({
 						</FormItem>
 					)}
 				/>
-				<div className="flex flex-col gap-0 w-full">
+				<div className="flex flex-col gap-2 w-full">
 					{isFocused && (
 						<ButtonTooltip
-							onClick={() => append(defaultJob)}
+							onClick={() => handleAppendExperience(defaultJob)}
 							side="right"
 							label="Add experience"
 							className="absolute right-2 top-2">
@@ -124,7 +135,7 @@ const ResumeExperienceForm = ({
 						<article key={field.id} className="relative w-full flex flex-col gap-0">
 							{isFocused && (
 								<Button
-									onClick={() => remove(index)}
+									onClick={() => handleRemoveExperience(index)}
 									className="group absolute -left-5 top-[0.65rem] rounded-full bg-transparent grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
 								</Button>
@@ -199,12 +210,13 @@ const ResumeExperienceForm = ({
 									<FormItem>
 										<FormControl>
 											<Textarea
+												rows={Math.floor(field.value.length / 60)}
 												{...field}
 												{...form.register(`jobList.${index}.description`)}
 												className={cn(
 													!isFocused && 'resize-none ',
 													theme === RESUME_THEME.DEFAULT &&
-														'text-sm text-zinc-500 min-h-[60px] text-pretty'
+														'text-sm text-zinc-500 h-full text-pretty -mt-1'
 												)}
 												variant={'resume'}
 												required

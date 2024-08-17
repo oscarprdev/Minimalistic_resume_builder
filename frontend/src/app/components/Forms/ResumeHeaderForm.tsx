@@ -105,13 +105,23 @@ const ResumeHeaderForm = ({
 		}
 	}, [imageValue, debounced, fields]);
 
+	const handleAppendLink = (value: string) => {
+		append(value);
+		debounced();
+	};
+
+	const handleRemoveLink = (index: number) => {
+		remove(index);
+		debounced();
+	};
+
 	return (
 		<Form {...form}>
 			<form
 				onChange={debounced}
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
-				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5 pb-2">
+				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5 pb-1">
 				<div className="flex flex-col gap-2 w-[100px] absolute top-5 right-5">
 					<picture className="relative rounded-md w-full max-h-[110px]">
 						{imageLoading && (
@@ -187,7 +197,7 @@ const ResumeHeaderForm = ({
 						</FormItem>
 					)}
 				/>
-				<div className="flex items-center gap-2 justify-start">
+				<div className="flex items-center gap-2 justify-start -mt-2 -mb-1">
 					<FormField
 						control={form.control}
 						name="location"
@@ -264,7 +274,7 @@ const ResumeHeaderForm = ({
 						<article key={field.id} className="relative w-fit flex items-center -mt-2 last-of-type:-mt-3">
 							{isFocused && (
 								<Button
-									onClick={() => remove(index)}
+									onClick={() => handleRemoveLink(index)}
 									className="group absolute -left-4 top-[0.7rem] rounded-full bg-transparent grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
 								</Button>
@@ -302,8 +312,8 @@ const ResumeHeaderForm = ({
 									<Button
 										type="button"
 										size={'sm'}
-										className="group absolute -bottom-7 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
-										onClick={() => append(defaultLink)}>
+										className="group absolute -bottom-6 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
+										onClick={() => handleAppendLink(defaultLink)}>
 										<IconLinkPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
 									</Button>
 								</TooltipTrigger>
