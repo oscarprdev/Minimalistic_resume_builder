@@ -55,7 +55,7 @@ textarea::-webkit-scrollbar {
 }
 
 textarea::-webkit-scrollbar-corner {
-	background-color: transparent;
+	background-color: black;
 }
 
 textarea:hover::-webkit-scrollbar-thumb {

@@ -19,9 +19,5 @@ export type School = {
      * Duration dates of current education.
      */
     dates: string;
-    /**
-     * A brief description of the education, coursework, or achievements.
-     */
-    description: string;
 };
 

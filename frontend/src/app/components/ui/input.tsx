@@ -3,7 +3,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import * as React from 'react';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
-	kind?: 'num' | 'title';
+	kind?: 'dynamic' | 'numDynamic';
 }
 
 const inputVariants = cva(
@@ -26,7 +26,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, varia
 	const [width, setWidth] = React.useState((props.value as string).length - (kind ? 0 : 3));
 
 	const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
-		if (variant === 'resume' && kind !== 'title') {
+		if (variant === 'resume' && kind === 'dynamic') {
 			const target = e.target;
 
 			if (target instanceof HTMLInputElement) {
@@ -38,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, varia
 	};
 	return (
 		<input
-			style={{ width: `${width ? `${width}ch` : 'fit-content'}` }}
+			style={{ width: `${kind === 'dynamic' && width && `${width}ch`}` }}
 			onInput={handleInput}
 			type={type}
 			className={cn(inputVariants({ variant }), className)}

@@ -15,57 +15,49 @@ export const defaultResume: DefaultResume = {
 	},
 	summary: {
 		isHidden: true,
-		title: '',
-		summary: '',
+		title: 'About me',
+		summary: 'Something interesting about me',
 	},
 	experience: {
 		isHidden: true,
-		title: '',
+		title: 'Professional Experience',
 		jobList: [],
 	},
 	education: {
 		isHidden: true,
-		title: '',
+		title: 'Education',
 		educationList: [],
 	},
 	languages: {
 		isHidden: true,
-		title: '',
+		title: 'Languages',
 		languageList: [],
 	},
 	skills: {
 		isHidden: true,
-		title: '',
+		title: 'Skills',
 		skillList: [],
 	},
 };
 
 export const defaultJob: Omit<Job, 'id'> = {
-	title: '',
-	company: '',
-	description: '',
-	descriptionDisabled: false,
-	formatTime: '',
-	startDate: '',
-	endDate: '',
+	title: 'Title job',
+	company: 'Company',
+	description: 'Job description',
+	dates: '2011 - 2022',
 };
 
 export const defaultEducation: Omit<School, 'id'> = {
-	title: '',
-	description: '',
-	career: '',
-	descriptionDisabled: false,
-	formatTime: '',
-	startDate: '',
-	endDate: '',
+	title: 'Title education',
+	career: 'Institution',
+	dates: '3 years',
 };
 
 export const defaultLanguage: Omit<Language, 'id'> = {
-	name: '',
-	level: '',
+	name: 'Spanish',
+	level: 'Native',
 };
 
 export const defaultSkill: Omit<Skill, 'id'> = {
-	name: '',
-	svgUrl: '',
+	name: 'Job hopper',
 };

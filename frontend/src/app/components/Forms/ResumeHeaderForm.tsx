@@ -177,7 +177,6 @@ const ResumeHeaderForm = ({
 						<FormItem>
 							<FormControl>
 								<Input
-									kind="title"
 									variant={'resume'}
 									className={cn(theme === RESUME_THEME.DEFAULT && 'text-3xl font-bold')}
 									required
@@ -221,8 +220,10 @@ const ResumeHeaderForm = ({
 									<div className="flex items-center gap-1 w-fit">
 										<IconMapPin size={14} className="text-zinc-700" />
 										<Input
+											kind="dynamic"
 											className={cn(
-												theme === RESUME_THEME.DEFAULT && 'text-md text-zinc-700 w-fit text-sm'
+												theme === RESUME_THEME.DEFAULT &&
+													'text-md text-zinc-700 w-fit text-sm -mr-7'
 											)}
 											variant={'resume'}
 											required
@@ -243,7 +244,7 @@ const ResumeHeaderForm = ({
 									<div className="flex items-center gap-1 w-fit">
 										<IconPhone size={14} className="text-zinc-700" />
 										<Input
-											kind="num"
+											kind="dynamic"
 											className={cn(
 												theme === RESUME_THEME.DEFAULT && 'text-md text-zinc-700 w-fit text-sm'
 											)}
@@ -266,6 +267,7 @@ const ResumeHeaderForm = ({
 									<div className="flex items-center gap-1 w-fit">
 										<IconMail size={14} className="text-zinc-700" />
 										<Input
+											kind="dynamic"
 											className={cn(
 												theme === RESUME_THEME.DEFAULT && 'text-md text-zinc-700 w-fit text-sm'
 											)}
@@ -301,10 +303,9 @@ const ResumeHeaderForm = ({
 												<Input
 													{...field}
 													{...form.register(`links.${index}`)}
-													kind="title"
 													className={cn(
 														theme === RESUME_THEME.DEFAULT &&
-															'text-md text-zinc-700 w-fit text-sm '
+															'text-md text-zinc-700 w-[350px] text-sm '
 													)}
 													variant={'resume'}
 													required
