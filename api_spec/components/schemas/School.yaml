@@ -4,7 +4,6 @@ required:
   - title
   - career
   - dates
-  - description
 properties:
   id:
     type: string
@@ -22,12 +21,7 @@ properties:
     type: string
     description: Duration dates of current education.
     example: 2018-09-01 - currently
-  description:
-    type: string
-    description: A brief description of the education, coursework, or achievements.
-    example: Graduated with a Bachelor's degree in Computer Science.
 example:
   title: University of Example
   career: Software engineering
   dates: 2018-09-01 - currently
-  description: Graduated with a Bachelor's degree in Computer Science.
