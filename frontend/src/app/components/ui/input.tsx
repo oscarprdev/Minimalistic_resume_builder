@@ -3,7 +3,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import * as React from 'react';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
-	kind?: 'dynamic' | 'numDynamic';
+	kind?: 'dynamic';
 }
 
 const inputVariants = cva(

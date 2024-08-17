@@ -1,0 +1,157 @@
+import {
+	IconBrandAdobe,
+	IconBrandAngular,
+	IconBrandAstro,
+	IconBrandAws,
+	IconBrandAzure,
+	IconBrandBootstrap,
+	IconBrandCSharp,
+	IconBrandCloudflare,
+	IconBrandCpp,
+	IconBrandCss3,
+	IconBrandDeno,
+	IconBrandDjango,
+	IconBrandDocker,
+	IconBrandFigma,
+	IconBrandFirebase,
+	IconBrandGit,
+	IconBrandGithub,
+	IconBrandGolang,
+	IconBrandGraphql,
+	IconBrandHtml5,
+	IconBrandJavascript,
+	IconBrandKotlin,
+	IconBrandLaravel,
+	IconBrandMysql,
+	IconBrandNextjs,
+	IconBrandNodejs,
+	IconBrandNpm,
+	IconBrandPhp,
+	IconBrandPrisma,
+	IconBrandReact,
+	IconBrandRust,
+	IconBrandSass,
+	IconBrandSupabase,
+	IconBrandSvelte,
+	IconBrandSwift,
+	IconBrandTailwind,
+	IconBrandThreejs,
+	IconBrandTypescript,
+	IconBrandUnity,
+	IconBrandVite,
+	IconBrandVue,
+	IconBrandWordpress,
+	IconPointFilled,
+} from '@tabler/icons-react';
+
+interface ViewerSkillIconProps {
+	value: string;
+}
+
+type IconsKeys = keyof typeof SKILLS_ICONS;
+
+const SIZE = 16;
+
+const SKILLS_ICONS = {
+	javascript: <IconBrandJavascript id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	typescript: <IconBrandTypescript id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	html: <IconBrandHtml5 id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	css: <IconBrandCss3 id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	node: <IconBrandNodejs id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	github: <IconBrandGithub id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	git: <IconBrandGit id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	sass: <IconBrandSass id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	tailwind: <IconBrandTailwind id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	react: <IconBrandReact id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	angular: <IconBrandAngular id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	vue: <IconBrandVue id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	next: <IconBrandNextjs id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	vite: <IconBrandVite id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	aws: <IconBrandAws id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	cpp: <IconBrandCpp id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	npm: <IconBrandNpm id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	php: <IconBrandPhp id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	three: <IconBrandThreejs id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	deno: <IconBrandDeno id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	rust: <IconBrandRust id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	adobe: <IconBrandAdobe id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	astro: <IconBrandAstro id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	azure: <IconBrandAzure id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	figma: <IconBrandFigma id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	mysql: <IconBrandMysql id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	swift: <IconBrandSwift id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	unity: <IconBrandUnity id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	docker: <IconBrandDocker id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	go: <IconBrandGolang id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	kotlin: <IconBrandKotlin id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	django: <IconBrandDjango id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	prisma: <IconBrandPrisma id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	graphql: <IconBrandGraphql id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	svelte: <IconBrandSvelte id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	laravel: <IconBrandLaravel id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	firebase: <IconBrandFirebase id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	supabase: <IconBrandSupabase id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	bootstrap: <IconBrandBootstrap id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	wordpress: <IconBrandWordpress id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	cloudflare: <IconBrandCloudflare id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+	csharp: <IconBrandCSharp id="svg" stroke={2} size={SIZE} className="text-zinc-600" />,
+};
+
+const AVAILABLE_ICONS: Record<IconsKeys, string[]> = {
+	javascript: ['javascript', 'js'],
+	typescript: ['typescript', 'ts'],
+	html: ['html'],
+	css: ['css'],
+	node: ['node', 'nodejs'],
+	github: ['github'],
+	git: ['git'],
+	sass: ['sass'],
+	tailwind: ['tailwind'],
+	react: ['react'],
+	angular: ['angular'],
+	vue: ['vue'],
+	svelte: ['svelte'],
+	next: ['next', 'next.js', 'nextjs'],
+	vite: ['vite'],
+	aws: ['aws'],
+	cpp: ['c++'],
+	npm: ['npm'],
+	php: ['php'],
+	laravel: ['laravel'],
+	three: ['three', 'three.js', 'threejs'],
+	deno: ['deno'],
+	rust: ['rust'],
+	astro: ['astro', 'astro.js'],
+	azure: ['azure'],
+	figma: ['figma'],
+	mysql: ['mysql'],
+	swift: ['swift'],
+	unity: ['unity'],
+	docker: ['docker'],
+	go: ['go', 'golang'],
+	kotlin: ['kotlin'],
+	django: ['django'],
+	prisma: ['prisma'],
+	graphql: ['graphql'],
+	firebase: ['firebase'],
+	supabase: ['supabase'],
+	bootstrap: ['bootstrap'],
+	wordpress: ['wordpress'],
+	cloudflare: ['cloudflare'],
+	csharp: ['c#'],
+	adobe: ['word', 'excel', 'powerpoint', 'power point', 'power-point'],
+};
+
+const DEFAULT_ICON = <IconPointFilled id="svg" stroke={2} size={10} className="text-zinc-600 mt-1" />;
+
+const ViewerSkillIcon = ({ value }: ViewerSkillIconProps) => {
+	const iconMatchWithValue = Object.entries(AVAILABLE_ICONS).find(val => val[1].includes(value.toLowerCase()));
+
+	if (!iconMatchWithValue) {
+		return DEFAULT_ICON;
+	}
+
+	return SKILLS_ICONS[iconMatchWithValue[0] as IconsKeys];
+};
+
+export default ViewerSkillIcon;

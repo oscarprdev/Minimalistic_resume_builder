@@ -71,7 +71,6 @@ const ResumeSummaryForm = ({
 						<FormItem>
 							<FormControl>
 								<Input
-									kind="title"
 									variant={'resume'}
 									className={cn(theme === RESUME_THEME.DEFAULT && 'text-2xl font-bold')}
 									required
