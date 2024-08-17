@@ -3,6 +3,7 @@ import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
+import ButtonTooltip from '@/app/containers/ButtonTooltip';
 import { defaultLanguage, defaultSkill } from '@/data/default-resume';
 import { DefaultResumeSkills } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
@@ -97,22 +98,13 @@ const ResumeSkillsForm = ({
 				/>
 				<div className="flex items-center justify-start flex-wrap gap-2 w-full">
 					{isFocused && (
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<Button
-										type="button"
-										size={'sm'}
-										className="group absolute top-2 right-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
-										onClick={() => append(defaultSkill)}>
-										<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
-									</Button>
-								</TooltipTrigger>
-								<TooltipContent side="right">
-									<p className="text-xs">Add skill</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<ButtonTooltip
+							onClick={() => append(defaultSkill)}
+							side="right"
+							label="Add skill"
+							className="absolute top-2 right-2">
+							<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+						</ButtonTooltip>
 					)}
 					{fields.map((field, index) => (
 						<article key={field.id} className="relative flex flex-col gap-0">
@@ -123,7 +115,6 @@ const ResumeSkillsForm = ({
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
 								</Button>
 							)}
-
 							<FormField
 								control={form.control}
 								name={`skillList.${index}.name`}

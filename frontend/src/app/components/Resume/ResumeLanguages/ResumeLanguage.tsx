@@ -19,7 +19,7 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 	const router = useRouter();
 	const { resumeLanguage, updateLanguage } = useResumeLanguageStore();
 	const queryResumeLanguage = useQuery({
-		queryKey: ['resumeLanguage'],
+		queryKey: ['resumeLanguage', resumeId],
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeLanguage);

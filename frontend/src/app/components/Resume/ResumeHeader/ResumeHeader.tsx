@@ -19,7 +19,7 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 	const router = useRouter();
 	const { resumeHeader, updateHeader } = useResumeHeaderStore();
 	const queryResumeHeader = useQuery({
-		queryKey: ['resumeHeader'],
+		queryKey: ['resumeHeader', resumeId],
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeHeader);

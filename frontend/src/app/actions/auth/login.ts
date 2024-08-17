@@ -25,8 +25,9 @@ export const logInUser = async (values: UserCredentials) => {
 			}
 		}
 
-		if (error instanceof Error && error.message === 'NEXT_REDIRECT')
+		if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
 			return successResponse('User logged successfully');
+		}
 
 		return errorResponse(error instanceof Error ? error.message : DEFAULT_LOGGING_ERROR);
 	}

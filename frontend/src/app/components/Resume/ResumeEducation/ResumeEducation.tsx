@@ -19,7 +19,7 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 	const router = useRouter();
 	const { resumeEducation, updateEducation } = useResumeEducationStore();
 	const queryResumeEducation = useQuery({
-		queryKey: ['resumeEducation'],
+		queryKey: ['resumeEducation', resumeId],
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeEducation);

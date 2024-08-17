@@ -19,7 +19,7 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 	const router = useRouter();
 	const { resumeExperience, updateExperience } = useResumeExperienceStore();
 	const queryResumeExperience = useQuery({
-		queryKey: ['resumeExperience'],
+		queryKey: ['resumeExperience', resumeId],
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeExperience);

@@ -19,7 +19,7 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 	const router = useRouter();
 	const { resumeSkills, updateSkills } = useResumeSkillsStore();
 	const queryResumeSkills = useQuery({
-		queryKey: ['resumeSkills'],
+		queryKey: ['resumeSkills', resumeId],
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeSkills);

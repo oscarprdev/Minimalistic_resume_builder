@@ -1,9 +1,9 @@
 import { Button } from '../ui/button';
-import { Textarea } from '../ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
-import { defaultResume, defaultSchool } from '@/data/default-resume';
+import ButtonTooltip from '@/app/containers/ButtonTooltip';
+import { defaultSchool } from '@/data/default-resume';
 import { DefaultResumeEducation } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -100,22 +100,13 @@ const ResumeEducationForm = ({
 				/>
 				<div className="flex flex-col gap-0 w-full">
 					{isFocused && (
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<Button
-										type="button"
-										size={'sm'}
-										className="group absolute right-2 top-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
-										onClick={() => append(defaultSchool)}>
-										<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
-									</Button>
-								</TooltipTrigger>
-								<TooltipContent side="right">
-									<p className="text-xs">Add education</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<ButtonTooltip
+							onClick={() => append(defaultSchool)}
+							side="right"
+							label="Add education"
+							className="absolute right-2 top-2">
+							<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+						</ButtonTooltip>
 					)}
 					{fields.map((field, index) => (
 						<article key={field.id} className="relative w-full flex flex-col gap-0">

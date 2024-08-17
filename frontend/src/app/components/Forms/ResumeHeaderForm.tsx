@@ -4,6 +4,7 @@ import { Textarea } from '../ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
+import ButtonTooltip from '@/app/containers/ButtonTooltip';
 import { useHeaderFormImage } from '@/app/hooks/useHeaderFormImage';
 import { DEFAULT_IMAGE } from '@/constants';
 import { defaultLink } from '@/data/default-resume';
@@ -137,38 +138,12 @@ const ResumeHeaderForm = ({
 					/>
 					{isFocused && (
 						<div className="flex items-center gap-2 w-full justify-center">
-							<TooltipProvider>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											type="button"
-											className="group bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
-											size={'sm'}
-											onClick={() => handleBrowseImageClick()}>
-											<IconUpload size={16} className="text-zinc-400 group-hover:text-zinc-600" />
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent side="bottom">
-										<p className="text-xs">Browse image</p>
-									</TooltipContent>
-								</Tooltip>
-							</TooltipProvider>
-							<TooltipProvider>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											type="button"
-											size={'sm'}
-											className="group bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
-											onClick={() => handleRemoveImageClick()}>
-											<IconFileX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent side="bottom">
-										<p className="text-xs">Remove image</p>
-									</TooltipContent>
-								</Tooltip>
-							</TooltipProvider>
+							<ButtonTooltip onClick={() => handleBrowseImageClick()} side="bottom" label="Browse image">
+								<IconUpload size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+							</ButtonTooltip>
+							<ButtonTooltip onClick={() => handleRemoveImageClick()} side="bottom" label="Remove image">
+								<IconFileX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+							</ButtonTooltip>
 						</div>
 					)}
 				</div>

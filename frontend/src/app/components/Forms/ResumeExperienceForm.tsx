@@ -3,6 +3,7 @@ import { Textarea } from '../ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
+import ButtonTooltip from '@/app/containers/ButtonTooltip';
 import { defaultJob, defaultResume } from '@/data/default-resume';
 import { DefaultResumeExperience } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
@@ -100,22 +101,13 @@ const ResumeExperienceForm = ({
 				/>
 				<div className="flex flex-col gap-0 w-full">
 					{isFocused && (
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<Button
-										type="button"
-										size={'sm'}
-										className="group absolute top-2 right-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
-										onClick={() => append(defaultJob)}>
-										<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
-									</Button>
-								</TooltipTrigger>
-								<TooltipContent side="right">
-									<p className="text-xs">Add experience</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<ButtonTooltip
+							onClick={() => append(defaultJob)}
+							side="right"
+							label="Add experience"
+							className="absolute right-2 top-2">
+							<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+						</ButtonTooltip>
 					)}
 					{fields.map((field, index) => (
 						<article key={field.id} className="relative w-full flex flex-col gap-0">
