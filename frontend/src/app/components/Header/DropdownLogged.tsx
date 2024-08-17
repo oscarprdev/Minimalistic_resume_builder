@@ -1,6 +1,7 @@
 'use client';
 
 import AuthModal from '../Modals/AuthModal';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import DownloadPDFButton, { DownloadPDFButtonRef } from './DownloadPDFButton';
 import LogoutButton from './LogoutButton';
 import {
@@ -23,13 +24,21 @@ const DropdownLogged = ({ username }: DropdownLoggedProps) => {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<span className="text-zinc-500 text-sm font-bold flex items-center gap-1 hover:text-zinc-800 duration-200 py-2 px-4 hover:bg-zinc-200/50 rounded-lg cursor-pointer">
-					<IconLocation className="" size={18} />
-					Actions
-				</span>
+			<DropdownMenuTrigger className="outline-none">
+				<TooltipProvider>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<span className="text-zinc-500 text-sm font-bold flex items-center gap-1 h-fit hover:text-zinc-800 -mt-2 duration-200 py-2 px-4 hover:bg-zinc-200/50 rounded-lg cursor-pointer">
+								<IconLocation size={18} />
+							</span>
+						</TooltipTrigger>
+						<TooltipContent side="bottom">
+							<p className="text-xs">Actions</p>
+						</TooltipContent>
+					</Tooltip>
+				</TooltipProvider>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="w-32 text-zinc-700">
+			<DropdownMenuContent className="w-20 text-zinc-700">
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
 				<DropdownMenuItem onClick={() => downloadPDFButtonRef.current?.handleDownloadPdf()}>
 					<DownloadPDFButton ref={downloadPDFButtonRef} />
