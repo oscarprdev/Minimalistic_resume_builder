@@ -40,11 +40,8 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
                 School.id AS "schoolId", 
                 School.title AS "schoolTitle", 
                 School.career AS "schoolCareer", 
-                School.startDate AS "schoolStartDate", 
-                School.endDate AS "schoolEndDate", 
-                School.description AS "schoolDescription",
-                School.formatTime AS "schoolFormatTime",
-                School.descriptionDisabled AS "descriptionDisabled"
+                School.dates AS "schoolDates", 
+                School.description AS "schoolDescription"
             FROM 
                 Education
             LEFT JOIN 
@@ -67,11 +64,8 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 					id: r.schoolId,
 					title: r.schoolTitle,
 					career: r.schoolCareer,
-					startDate: r.schoolStartDate,
-					endDate: r.schoolEndDate,
+					dates: r.schoolDates,
 					description: r.schoolDescription,
-					formatTime: r.schoolFormatTime,
-					descriptionDisabled: r.descriptionDisabled,
 				};
 			});
 
@@ -96,11 +90,8 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				School.id, 
 				School.title, 
 				School.career, 
-				School.startDate, 
-				School.endDate, 
-				School.description,
-				School.formatTime,
-				School.descriptionDisabled
+				School.dates, 
+				School.description
             FROM 
                 Education
             LEFT JOIN 
@@ -184,15 +175,15 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title, isHidden ? 'true' : 'false']
 			);
 
-			for (const { title, career, startDate, endDate, description, formatTime, descriptionDisabled } of educationList) {
+			for (const { title, career, dates, description } of educationList) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, startDate, endDate, description, formatTime, descriptionDisabled) 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                        (id, title, career, dates, description) 
+                        VALUES ($1, $2, $3, $4, $5)
                     ;`,
-					[schoolId, title, career, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
+					[schoolId, title, career, dates, description]
 				);
 
 				await this.database.query(
@@ -233,31 +224,28 @@ export class DefaultEducationResumeDatabase implements EducationResumeDatabase {
 				[educationResumeId, title, isHidden ? 'true' : 'false']
 			);
 
-			for (const { id, title, career, startDate, endDate, description, formatTime, descriptionDisabled } of educationList) {
+			for (const { id, title, career, dates, description } of educationList) {
 				await this.database.query(
 					`UPDATE School
                         SET title = $2, 
                         career = $3, 
-                        startDate = $4, 
-                        endDate = $5, 
-                        description = $6,
-                        formatTime = $7,
-                        descriptionDisabled = $8
+                        dates = $4, 
+                        description = $5
                     WHERE id = $1
 				    ;`,
-					[id, title, career, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
+					[id, title, career, dates, description]
 				);
 			}
 
-			for (const { title, career, startDate, endDate, description, formatTime, descriptionDisabled } of newSchools) {
+			for (const { title, career,dates, description} of newSchools) {
 				const schoolId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO School 
-                        (id, title, career, startDate, endDate, description, formatTime, descriptionDisabled) 
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                        (id, title, career, dates, description) 
+                        VALUES ($1, $2, $3, $4, $5)
                     ;`,
-					[schoolId, title, career, startDate, endDate, description, formatTime, descriptionDisabled ? 'true' : 'false']
+					[schoolId, title, career,dates, description]
 				);
 
 				await this.database.query(

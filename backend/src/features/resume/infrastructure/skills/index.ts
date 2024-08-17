@@ -38,8 +38,7 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
                 Skills.title AS "title",
                 Skills.isHidden AS "isHidden",
                 Skill.id AS "SkillId", 
-                Skill.name AS "SkillName", 
-                Skill.svgUrl AS "SkillSvgUrl"
+                Skill.name AS "SkillName"
             FROM 
                 Skills
             LEFT JOIN 
@@ -57,7 +56,6 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 				return {
 					id: r.SkillId,
 					name: r.SkillName,
-					svgUrl: r.SkillSvgUrl,
 				};
 			});
 
@@ -80,8 +78,7 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 				`
             SELECT 
 				Skill.id, 
-				Skill.name, 
-				Skill.svgUrl
+				Skill.name
             FROM 
                 Skills
             LEFT JOIN 
@@ -165,15 +162,15 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 				[skillsResumeId, title, isHidden ? 'true' : 'false']
 			);
 
-			for (const { name, svgUrl } of skillList) {
+			for (const { name } of skillList) {
 				const skillId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO Skill 
-                        (id, name, svgUrl) 
-                        VALUES ($1, $2, $3)
+                        (id, name) 
+                        VALUES ($1, $2)
                     ;`,
-					[skillId, name, svgUrl]
+					[skillId, name]
 				);
 
 				await this.database.query(
@@ -214,26 +211,25 @@ export class DefaultSkillsResumeDatabase implements SkillsResumeDatabase {
 				[skillsResumeId, title, isHidden ? 'true' : 'false']
 			);
 
-			for (const { id, name, svgUrl } of skillList) {
+			for (const { id, name } of skillList) {
 				await this.database.query(
 					`UPDATE Skill
-                        SET name = $2, 
-                        svgUrl = $3
+                        SET name = $2
                     WHERE id = $1
                     ;`,
-					[id, name, svgUrl]
+					[id, name]
 				);
 			}
 
-			for (const { name, svgUrl } of newSkills) {
+			for (const { name } of newSkills) {
 				const skillId = crypto.randomUUID().toString();
 
 				await this.database.query(
 					`INSERT INTO Skill 
-                        (id, name, svgUrl) 
-                        VALUES ($1, $2, $3)
+                        (id, name) 
+                        VALUES ($1, $2)
                     ;`,
-					[skillId, name, svgUrl]
+					[skillId, name]
 				);
 
 				await this.database.query(
