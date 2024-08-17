@@ -1,11 +1,10 @@
 'use server';
 
-import AuthModal from '../Modals/AuthModal';
 import DropdownLogged from './DropdownLogged';
 import { auth } from '@/auth';
 import Link from 'next/link';
 
-const Header = async () => {
+const Header = async ({ resumeId }: { resumeId: string }) => {
 	const session = await auth();
 
 	return (
@@ -22,7 +21,7 @@ const Header = async () => {
 					</Link>
 				</span>
 			</div>
-			<DropdownLogged username={session?.user?.name || null} />
+			<DropdownLogged username={session?.user?.name || null} resumeId={resumeId} />
 		</header>
 	);
 };

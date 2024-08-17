@@ -21,7 +21,6 @@ export default function RootLayout({ children, session }: { children: ReactNode;
 			<body className={inter.className}>
 				<SessionProvider session={session}>
 					<QueryProvider>
-						<Header />
 						{children}
 						<Toaster />
 					</QueryProvider>

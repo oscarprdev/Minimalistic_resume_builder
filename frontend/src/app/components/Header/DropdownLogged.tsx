@@ -17,9 +17,10 @@ import { useRef } from 'react';
 
 type DropdownLoggedProps = {
 	username: string | null;
+	resumeId?: string;
 };
 
-const DropdownLogged = ({ username }: DropdownLoggedProps) => {
+const DropdownLogged = ({ username, resumeId }: DropdownLoggedProps) => {
 	const downloadPDFButtonRef = useRef<DownloadPDFButtonRef>(null);
 
 	return (
@@ -41,7 +42,7 @@ const DropdownLogged = ({ username }: DropdownLoggedProps) => {
 			<DropdownMenuContent className="w-20 text-zinc-700">
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
 				<DropdownMenuItem onClick={() => downloadPDFButtonRef.current?.handleDownloadPdf()}>
-					<DownloadPDFButton ref={downloadPDFButtonRef} />
+					<DownloadPDFButton ref={downloadPDFButtonRef} resumeId={resumeId} />
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				{username ? <LogoutButton /> : <AuthModal />}

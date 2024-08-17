@@ -1,12 +1,13 @@
 'use client';
 
-import AddResumeSectionModal, { SectionSelected } from '@/app/components/Modals/AddResumeSectionModal';
+import AddResumeSectionModal from '@/app/components/Modals/AddResumeSectionModal';
 import ResumeEducation from '@/app/components/Resume/ResumeEducation/ResumeEducation';
 import ResumeExperience from '@/app/components/Resume/ResumeExperience/ResumeExperience';
 import ResumeHeader from '@/app/components/Resume/ResumeHeader/ResumeHeader';
 import ResumeLanguage from '@/app/components/Resume/ResumeLanguages/ResumeLanguage';
 import ResumeSkills from '@/app/components/Resume/ResumeSkills/ResumeSkills';
 import ResumeSummary from '@/app/components/Resume/ResumeSummary/ResumeSummary';
+import { SectionSelected } from '@/app/components/types/types';
 import MainHome from '@/app/containers/MainHome';
 import { defaultResume } from '@/data/default-resume';
 import { useResumeEducationStore } from '@/store/useResumeEducationStore';
