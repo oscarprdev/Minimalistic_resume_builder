@@ -19,7 +19,7 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 	const router = useRouter();
 	const { resumeSummary, updateSummary } = useResumeSummaryStore();
 	const queryResumeSummary = useQuery({
-		queryKey: ['resumeSummary'],
+		queryKey: ['resumeSummary', resumeId],
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeSummary);

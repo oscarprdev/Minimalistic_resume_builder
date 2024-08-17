@@ -3,13 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type Skill = {
-    /**
-     * Resource Id.
-     */
-    id: string;
-    /**
-     * The skill name.
-     */
-    name: string;
+	/**
+	 * Resource Id.
+	 */
+	id: string;
+	/**
+	 * The skill name.
+	 */
+	name: string;
 };
-

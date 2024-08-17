@@ -3,13 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type UserCredentials = {
-    /**
-     * The username to register an user.
-     */
-    username: string;
-    /**
-     * The password.
-     */
-    password: string;
+	/**
+	 * The username to register an user.
+	 */
+	username: string;
+	/**
+	 * The password.
+	 */
+	password: string;
 };
-
