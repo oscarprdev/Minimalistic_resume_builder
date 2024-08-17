@@ -4,6 +4,7 @@ import { createResumeAction } from '../actions/resume/create-resume';
 import ResumeEducation from '../components/Resume/ResumeEducation/ResumeEducation';
 import ResumeExperience from '../components/Resume/ResumeExperience/ResumeExperience';
 import ResumeHeader from '../components/Resume/ResumeHeader/ResumeHeader';
+import ResumeLanguage from '../components/Resume/ResumeLanguages/ResumeLanguage';
 import ResumeSummary from '../components/Resume/ResumeSummary/ResumeSummary';
 import { auth } from '@/auth';
 import { defaultResume } from '@/data/default-resume';
@@ -44,6 +45,7 @@ export default async function HomeScreen() {
 					<ResumeSummary userLogged={user} resumeId={response.success} />
 					<ResumeExperience userLogged={user} resumeId={response.success} />
 					<ResumeEducation userLogged={user} resumeId={response.success} />
+					<ResumeLanguage userLogged={user} resumeId={response.success} />
 				</MainHome>
 			);
 		}
@@ -56,6 +58,7 @@ export default async function HomeScreen() {
 				{firstResume.summary && <ResumeSummary userLogged={user} resumeId={firstResume.id} />}
 				{firstResume.experience && <ResumeExperience userLogged={user} resumeId={firstResume.id} />}
 				{firstResume.education && <ResumeEducation userLogged={user} resumeId={firstResume.id} />}
+				{firstResume.languages && <ResumeLanguage userLogged={user} resumeId={firstResume.id} />}
 			</MainHome>
 		);
 	}
@@ -66,6 +69,7 @@ export default async function HomeScreen() {
 			<ResumeSummary userLogged={user} resumeId={defaultResume.id} />
 			<ResumeExperience userLogged={user} resumeId={defaultResume.id} />
 			<ResumeEducation userLogged={user} resumeId={defaultResume.id} />
+			<ResumeLanguage userLogged={user} resumeId={defaultResume.id} />
 		</MainHome>
 	);
 }
