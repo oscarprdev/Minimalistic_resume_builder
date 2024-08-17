@@ -3,11 +3,8 @@ required:
   - id
   - title
   - career
-  - startDate
-  - endDate
+  - dates
   - description
-  - formatTime
-  - descriptionDisabled
 properties:
   id:
     type: string
@@ -21,32 +18,16 @@ properties:
     type: string
     description: The name of the career.
     example: Software engineering
-  startDate:
+  dates:
     type: string
-    format: date
-    description: The start date of the education (YYYY-MM-DD).
-    example: 2018-09-01
-  endDate:
-    type: string
-    format: date
-    description: The end date of the education (YYYY-MM-DD).
-    example: 2022-06-30
+    description: Duration dates of current education.
+    example: 2018-09-01 - currently
   description:
     type: string
     description: A brief description of the education, coursework, or achievements.
     example: Graduated with a Bachelor's degree in Computer Science.
-  formatTime:
-    type: string
-    description: Format time config.
-    example: year,currently.
-  descriptionDisabled:
-    type: boolean
-    description: Is description field disabled on resume viewwe?.
-    default: false
-    example: false
 example:
   title: University of Example
   career: Software engineering
-  startDate: 2018-09-01
-  endDate: 2022-06-30
+  dates: 2018-09-01 - currently
   description: Graduated with a Bachelor's degree in Computer Science.

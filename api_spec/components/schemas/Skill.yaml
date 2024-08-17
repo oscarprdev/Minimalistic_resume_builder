@@ -12,10 +12,5 @@ properties:
     type: string
     description: The skill name.
     example: CSS
-  svgUrl:
-    type: string
-    description: The skill svg bucket url.
-    example: http://bucket.com/svg_url
 example:
   name: CSS
-  svgUrl: http://bucket.com/svg_url
