@@ -1,6 +1,7 @@
 'use server';
 
 import { createResumeAction } from '../actions/resume/create-resume';
+import ResumeExperience from '../components/Resume/ResumeExperience/ResumeExperience';
 import ResumeHeader from '../components/Resume/ResumeHeader/ResumeHeader';
 import ResumeSummary from '../components/Resume/ResumeSummary/ResumeSummary';
 import { auth } from '@/auth';
@@ -40,6 +41,7 @@ export default async function HomeScreen() {
 				<MainHome>
 					<ResumeHeader userLogged={user} resumeId={response.success} />
 					<ResumeSummary userLogged={user} resumeId={response.success} />
+					<ResumeExperience userLogged={user} resumeId={response.success} />
 				</MainHome>
 			);
 		}
@@ -50,6 +52,7 @@ export default async function HomeScreen() {
 			<MainHome>
 				{firstResume.header && <ResumeHeader userLogged={user} resumeId={firstResume.id} />}
 				{firstResume.summary && <ResumeSummary userLogged={user} resumeId={firstResume.id} />}
+				{firstResume.experience && <ResumeExperience userLogged={user} resumeId={firstResume.id} />}
 			</MainHome>
 		);
 	}
@@ -58,6 +61,7 @@ export default async function HomeScreen() {
 		<MainHome>
 			<ResumeHeader userLogged={user} resumeId={defaultResume.id} />
 			<ResumeSummary userLogged={user} resumeId={defaultResume.id} />
+			<ResumeExperience userLogged={user} resumeId={defaultResume.id} />
 		</MainHome>
 	);
 }

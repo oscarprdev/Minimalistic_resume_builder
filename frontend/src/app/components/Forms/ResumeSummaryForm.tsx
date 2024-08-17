@@ -63,7 +63,7 @@ const ResumeSummaryForm = ({
 				onChange={debounced}
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
-				className="relative flex flex-col w-full hover:bg-zinc-100 duration-200 pl-5">
+				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
 				<FormField
 					control={form.control}
 					name="title"

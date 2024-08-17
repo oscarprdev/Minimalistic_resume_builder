@@ -11,9 +11,5 @@ export type Skill = {
      * The skill name.
      */
     name: string;
-    /**
-     * The skill svg bucket url.
-     */
-    svgUrl: string;
 };
 
