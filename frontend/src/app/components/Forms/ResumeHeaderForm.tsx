@@ -4,7 +4,9 @@ import { Textarea } from '../ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
-import { DEFAULT_IMAGE, useHeaderFormImage } from '@/app/hooks/useHeaderFormImage';
+import { useHeaderFormImage } from '@/app/hooks/useHeaderFormImage';
+import { DEFAULT_IMAGE } from '@/constants';
+import { defaultLink } from '@/data/default-resume';
 import { DefaultResumeHeader } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -140,10 +142,10 @@ const ResumeHeaderForm = ({
 									<TooltipTrigger asChild>
 										<Button
 											type="button"
-											className="bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
+											className="group bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
 											size={'sm'}
 											onClick={() => handleBrowseImageClick()}>
-											<IconUpload size={16} className="text-zinc-400" />
+											<IconUpload size={16} className="text-zinc-400 group-hover:text-zinc-600" />
 										</Button>
 									</TooltipTrigger>
 									<TooltipContent side="bottom">
@@ -157,9 +159,9 @@ const ResumeHeaderForm = ({
 										<Button
 											type="button"
 											size={'sm'}
-											className="bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
+											className="group bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm"
 											onClick={() => handleRemoveImageClick()}>
-											<IconFileX size={16} className="text-zinc-400" />
+											<IconFileX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
 										</Button>
 									</TooltipTrigger>
 									<TooltipContent side="bottom">
@@ -222,8 +224,8 @@ const ResumeHeaderForm = ({
 										<Input
 											kind="dynamic"
 											className={cn(
-												theme === RESUME_THEME.DEFAULT &&
-													'text-md text-zinc-700 w-fit text-sm -mr-7'
+												field.value.length > 8 ? '-mr-7' : '-mr-3',
+												theme === RESUME_THEME.DEFAULT && 'text-md text-zinc-700 w-fit text-sm'
 											)}
 											variant={'resume'}
 											required
@@ -286,11 +288,11 @@ const ResumeHeaderForm = ({
 					{fields.map((field, index) => (
 						<article key={field.id} className="relative w-fit flex items-center -mt-2 last-of-type:-mt-3">
 							{isFocused && (
-								<IconX
+								<Button
 									onClick={() => remove(index)}
-									size={14}
-									className="text-zinc-400 hover:text-zinc-900 absolute -left-4 cursor-pointer duration-200"
-								/>
+									className="group absolute -left-4 top-[0.7rem] rounded-full bg-transparent grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
+									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
+								</Button>
 							)}
 							<FormField
 								control={form.control}
@@ -325,9 +327,9 @@ const ResumeHeaderForm = ({
 									<Button
 										type="button"
 										size={'sm'}
-										className="absolute -bottom-7 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
-										onClick={() => append('http://www.your-url.com')}>
-										<IconLinkPlus size={16} className="text-zinc-400" />
+										className="group absolute -bottom-7 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
+										onClick={() => append(defaultLink)}>
+										<IconLinkPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
 									</Button>
 								</TooltipTrigger>
 								<TooltipContent side="left">

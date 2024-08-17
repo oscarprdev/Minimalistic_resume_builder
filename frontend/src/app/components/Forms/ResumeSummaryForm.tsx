@@ -88,10 +88,11 @@ const ResumeSummaryForm = ({
 						<FormItem>
 							<FormControl>
 								<Textarea
+									rows={Math.floor(field.value.length / 50)}
 									className={cn(
 										!isFocused && 'resize-none ',
 										theme === RESUME_THEME.DEFAULT &&
-											'text-sm text-zinc-700 mt-1 h-full min-h-[100px] text-pretty'
+											'text-sm text-zinc-700 mt-1 h-full text-pretty'
 									)}
 									variant={'resume'}
 									required

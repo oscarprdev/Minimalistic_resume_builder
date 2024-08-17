@@ -103,9 +103,9 @@ const ResumeSkillsForm = ({
 									<Button
 										type="button"
 										size={'sm'}
-										className="absolute top-2 right-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
+										className="group absolute top-2 right-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
 										onClick={() => append(defaultSkill)}>
-										<IconTextPlus size={16} className="text-zinc-400" />
+										<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
 									</Button>
 								</TooltipTrigger>
 								<TooltipContent side="right">
@@ -117,11 +117,11 @@ const ResumeSkillsForm = ({
 					{fields.map((field, index) => (
 						<article key={field.id} className="relative flex flex-col gap-0">
 							{isFocused && (
-								<IconX
+								<Button
 									onClick={() => remove(index)}
-									size={14}
-									className="text-zinc-400 hover:text-zinc-900 absolute -left-4 top-[0.8rem] cursor-pointer duration-200"
-								/>
+									className="group absolute -top-1 -left-1 rounded-full bg-zinc-200/50 border grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
+									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
+								</Button>
 							)}
 
 							<FormField

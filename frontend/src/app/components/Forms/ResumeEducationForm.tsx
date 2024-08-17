@@ -3,7 +3,7 @@ import { Textarea } from '../ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
-import { defaultEducation, defaultResume } from '@/data/default-resume';
+import { defaultResume, defaultSchool } from '@/data/default-resume';
 import { DefaultResumeEducation } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -99,99 +99,97 @@ const ResumeEducationForm = ({
 					)}
 				/>
 				<div className="flex flex-col gap-0 w-full">
+					{isFocused && (
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button
+										type="button"
+										size={'sm'}
+										className="group absolute right-2 top-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
+										onClick={() => append(defaultSchool)}>
+										<IconTextPlus size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent side="right">
+									<p className="text-xs">Add education</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+					)}
 					{fields.map((field, index) => (
-						<>
+						<article key={field.id} className="relative w-full flex flex-col gap-0">
 							{isFocused && (
-								<TooltipProvider>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button
-												type="button"
-												size={'sm'}
-												className="absolute right-2 top-2 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"
-												onClick={() => append(defaultEducation)}>
-												<IconTextPlus size={16} className="text-zinc-400" />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent side="right">
-											<p className="text-xs">Add education</p>
-										</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
+								<Button
+									onClick={() => remove(index)}
+									className="group absolute -left-5 top-[0.65rem] rounded-full bg-transparent grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
+									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
+								</Button>
 							)}
-							<article key={field.id} className="relative w-full flex flex-col gap-0">
-								{isFocused && (
-									<IconX
-										onClick={() => remove(index)}
-										size={14}
-										className="text-zinc-400 hover:text-zinc-900 absolute -left-4 top-[0.8rem] cursor-pointer duration-200"
-									/>
+							<FormField
+								control={form.control}
+								name={`educationList.${index}.title`}
+								render={({ field }) => (
+									<FormItem>
+										<FormControl>
+											<Input
+												{...field}
+												{...form.register(`educationList.${index}.title`)}
+												className={cn(
+													theme === RESUME_THEME.DEFAULT &&
+														'text-md text-zinc-700 w-full text-sm font-bold'
+												)}
+												variant={'resume'}
+												required
+											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
 								)}
-								<FormField
-									control={form.control}
-									name={`educationList.${index}.title`}
-									render={({ field }) => (
-										<FormItem>
-											<FormControl>
-												<Input
-													{...field}
-													{...form.register(`educationList.${index}.title`)}
-													className={cn(
-														theme === RESUME_THEME.DEFAULT &&
-															'text-md text-zinc-700 w-full text-sm font-bold'
-													)}
-													variant={'resume'}
-													required
-												/>
-											</FormControl>
-											<FormMessage className="text-xs" />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name={`educationList.${index}.dates`}
-									render={({ field }) => (
-										<FormItem>
-											<FormControl>
-												<Input
-													{...field}
-													{...form.register(`educationList.${index}.dates`)}
-													className={cn(
-														theme === RESUME_THEME.DEFAULT &&
-															'text-md w-[350px] text-zinc-700 text-xs text-right absolute top-0 right-5'
-													)}
-													variant={'resume'}
-													required
-												/>
-											</FormControl>
-											<FormMessage className="text-xs" />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name={`educationList.${index}.career`}
-									render={({ field }) => (
-										<FormItem>
-											<FormControl>
-												<Input
-													{...field}
-													{...form.register(`educationList.${index}.career`)}
-													className={cn(
-														theme === RESUME_THEME.DEFAULT &&
-															'text-md text-zinc-800 w-full text-sm -mt-4'
-													)}
-													variant={'resume'}
-													required
-												/>
-											</FormControl>
-											<FormMessage className="text-xs" />
-										</FormItem>
-									)}
-								/>
-							</article>
-						</>
+							/>
+							<FormField
+								control={form.control}
+								name={`educationList.${index}.dates`}
+								render={({ field }) => (
+									<FormItem>
+										<FormControl>
+											<Input
+												{...field}
+												{...form.register(`educationList.${index}.dates`)}
+												className={cn(
+													theme === RESUME_THEME.DEFAULT &&
+														'text-md w-[350px] text-zinc-700 text-xs text-right absolute top-0 right-5'
+												)}
+												variant={'resume'}
+												required
+											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name={`educationList.${index}.career`}
+								render={({ field }) => (
+									<FormItem>
+										<FormControl>
+											<Input
+												{...field}
+												{...form.register(`educationList.${index}.career`)}
+												className={cn(
+													theme === RESUME_THEME.DEFAULT &&
+														'text-md text-zinc-800 w-full text-sm -mt-4'
+												)}
+												variant={'resume'}
+												required
+											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+						</article>
 					))}
 				</div>
 				<div className="relative flex flex-col items-center w-full gap-2 mt-6">
