@@ -2,8 +2,10 @@
 
 import ResumeLanguagesForm, { ResumeLanguagesFormValues } from '../../Forms/ResumeLanguagesForm';
 import { toast } from '../../ui/use-toast';
+import { deleteLanguagesAction } from '@/app/actions/resume/delete-languages';
 import { describeLanguagesAction } from '@/app/actions/resume/describe-languages';
 import { updateLanguagesAction } from '@/app/actions/resume/update-languages';
+import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeLanguageStore } from '@/store/useResumeLanguageStore';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -56,6 +58,19 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 		router.refresh();
 	};
 
+	const handleDeleteSection = async () => {
+		if (!userLogged) {
+			return updateLanguage(defaultResume.languages);
+		}
+
+		const response = await deleteLanguagesAction(resumeId);
+
+		toast({
+			variant: isError(response) ? 'destructive' : 'default',
+			description: isError(response) ? response.error : response.success,
+		});
+	};
+
 	return (
 		<section>
 			{!queryResumeLanguage.isPending && queryResumeLanguage.data && !isError(queryResumeLanguage.data) && (
@@ -64,6 +79,7 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 					afterResumeLanguagesFormSubmit={afterResumeLanguageFormSubmit}
 					submitResponse={data}
 					defaultValues={queryResumeLanguage.data.success}
+					handleDeleteSection={handleDeleteSection}
 				/>
 			)}
 		</section>

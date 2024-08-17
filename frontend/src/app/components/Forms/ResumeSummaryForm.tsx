@@ -1,11 +1,13 @@
 import { Textarea } from '../ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
+import ButtonTooltip from '@/app/containers/ButtonTooltip';
 import { DefaultResumeSummary } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { IconTrashX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDebouncedCallback } from 'use-debounce';
@@ -15,6 +17,7 @@ export type ResumeSummaryFormValues = z.infer<typeof resumeSummaryFormSchema>;
 type ResumeSummaryFormProps = {
 	handleSubmit(values: ResumeSummaryFormValues): Promise<void>;
 	afterResumeSummaryFormSubmit(): void;
+	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeSummary;
 };
@@ -30,6 +33,7 @@ const resumeSummaryFormSchema = z.object({
 const ResumeSummaryForm = ({
 	handleSubmit,
 	afterResumeSummaryFormSubmit,
+	handleDeleteSection,
 	submitResponse,
 	defaultValues,
 }: ResumeSummaryFormProps) => {
@@ -64,6 +68,15 @@ const ResumeSummaryForm = ({
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
 				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
+				{isFocused && (
+					<ButtonTooltip
+						className="absolute top-2 right-2"
+						side="left"
+						label="Remove section"
+						onClick={handleDeleteSection}>
+						<IconTrashX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+					</ButtonTooltip>
+				)}
 				<FormField
 					control={form.control}
 					name="title"

@@ -9,7 +9,7 @@ import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { IconTextPlus, IconX } from '@tabler/icons-react';
+import { IconTextPlus, IconTrashX, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useDebouncedCallback } from 'use-debounce';
@@ -19,6 +19,7 @@ export type ResumeLanguagesFormValues = z.infer<typeof resumeLanguagesFormSchema
 type ResumeLanguagesFormProps = {
 	handleSubmit(values: ResumeLanguagesFormValues): Promise<void>;
 	afterResumeLanguagesFormSubmit(): void;
+	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeLanguages;
 };
@@ -41,6 +42,7 @@ const resumeLanguagesFormSchema = z.object({
 const ResumeLanguagesForm = ({
 	handleSubmit,
 	afterResumeLanguagesFormSubmit,
+	handleDeleteSection,
 	submitResponse,
 	defaultValues,
 }: ResumeLanguagesFormProps) => {
@@ -80,6 +82,15 @@ const ResumeLanguagesForm = ({
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
 				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
+				{isFocused && (
+					<ButtonTooltip
+						className="absolute top-2 right-12"
+						side="left"
+						label="Remove section"
+						onClick={handleDeleteSection}>
+						<IconTrashX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+					</ButtonTooltip>
+				)}
 				<FormField
 					control={form.control}
 					name="title"

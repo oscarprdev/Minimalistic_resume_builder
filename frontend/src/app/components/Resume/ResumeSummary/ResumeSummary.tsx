@@ -2,8 +2,10 @@
 
 import ResumeSummaryForm, { ResumeSummaryFormValues } from '../../Forms/ResumeSummaryForm';
 import { toast } from '../../ui/use-toast';
+import { deleteSummaryAction } from '@/app/actions/resume/delete-summary';
 import { describeSummaryAction } from '@/app/actions/resume/describe-summary';
 import { updateSummaryAction } from '@/app/actions/resume/update-summary';
+import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeSummaryStore } from '@/store/useResumeSummaryStore';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -53,6 +55,19 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 		router.refresh();
 	};
 
+	const handleDeleteSection = async () => {
+		if (!userLogged) {
+			return updateSummary(defaultResume.summary);
+		}
+
+		const response = await deleteSummaryAction(resumeId);
+
+		toast({
+			variant: isError(response) ? 'destructive' : 'default',
+			description: isError(response) ? response.error : response.success,
+		});
+	};
+
 	return (
 		<section>
 			{!queryResumeSummary.isPending && queryResumeSummary.data && !isError(queryResumeSummary.data) && (
@@ -61,6 +76,7 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 					afterResumeSummaryFormSubmit={afterResumeSummaryFormSubmit}
 					submitResponse={data}
 					defaultValues={queryResumeSummary.data.success}
+					handleDeleteSection={handleDeleteSection}
 				/>
 			)}
 		</section>

@@ -2,8 +2,10 @@
 
 import ResumeSkillsForm, { ResumeSkillsFormValues } from '../../Forms/ResumeSkillsForm';
 import { toast } from '../../ui/use-toast';
+import { deleteSkillsAction } from '@/app/actions/resume/delete-skills';
 import { describeSkillsAction } from '@/app/actions/resume/describe-skills';
 import { updateSkillsAction } from '@/app/actions/resume/update-skills';
+import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeSkillsStore } from '@/store/useResumeSkillsStore';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -53,6 +55,19 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 		router.refresh();
 	};
 
+	const handleDeleteSection = async () => {
+		if (!userLogged) {
+			return updateSkills(defaultResume.skills);
+		}
+
+		const response = await deleteSkillsAction(resumeId);
+
+		toast({
+			variant: isError(response) ? 'destructive' : 'default',
+			description: isError(response) ? response.error : response.success,
+		});
+	};
+
 	return (
 		<section>
 			{!queryResumeSkills.isPending && queryResumeSkills.data && !isError(queryResumeSkills.data) && (
@@ -61,6 +76,7 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 					afterResumeSkillsFormSubmit={afterResumeSkillsFormSubmit}
 					submitResponse={data}
 					defaultValues={queryResumeSkills.data.success}
+					handleDeleteSection={handleDeleteSection}
 				/>
 			)}
 		</section>

@@ -1,5 +1,6 @@
 'use client';
 
+import { Section, SectionSelected } from '../types/types';
 import { Button } from '../ui/button';
 import { toast } from '../ui/use-toast';
 import { updateEducationAction } from '@/app/actions/resume/update-education';
@@ -7,7 +8,14 @@ import { updateExperienceAction } from '@/app/actions/resume/update-experience';
 import { updateLanguagesAction } from '@/app/actions/resume/update-languages';
 import { updateSkillsAction } from '@/app/actions/resume/update-skills';
 import { updateSummaryAction } from '@/app/actions/resume/update-summary';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog';
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/app/components/ui/dialog';
 import { defaultJob, defaultLanguage, defaultResume, defaultSchool, defaultSkill } from '@/data/default-resume';
 import { useResumeEducationStore } from '@/store/useResumeEducationStore';
 import { useResumeExperienceStore } from '@/store/useResumeExperienceStore';
@@ -26,39 +34,26 @@ type AddResumeSectionModalProps = {
 	sectionsDisplayed: SectionSelected[];
 };
 
-export enum SectionSelected {
-	summary = 'summary',
-	experience = 'experience',
-	education = 'education',
-	skills = 'skills',
-	languages = 'languages',
-}
-
-type Section = {
-	name: SectionSelected;
-	icon: ReactNode;
-};
-
 const SECTIONS: Section[] = [
 	{
 		name: SectionSelected.summary,
-		icon: <IconMessage size={20} className="text-zinc-500" />,
+		icon: <IconMessage size={18} className="text-zinc-500" />,
 	},
 	{
 		name: SectionSelected.experience,
-		icon: <IconBriefcase size={20} className="text-zinc-500" />,
+		icon: <IconBriefcase size={18} className="text-zinc-500" />,
 	},
 	{
 		name: SectionSelected.education,
-		icon: <IconSchool size={20} className="text-zinc-500" />,
+		icon: <IconSchool size={18} className="text-zinc-500" />,
 	},
 	{
 		name: SectionSelected.skills,
-		icon: <IconTools size={20} className="text-zinc-500" />,
+		icon: <IconTools size={18} className="text-zinc-500" />,
 	},
 	{
 		name: SectionSelected.languages,
-		icon: <IconMessageLanguage size={20} className="text-zinc-500" />,
+		icon: <IconMessageLanguage size={18} className="text-zinc-500" />,
 	},
 ];
 
@@ -77,77 +72,72 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 		mutationFn: async (section: SectionSelected) => {
 			switch (section) {
 				case SectionSelected.summary:
+					const summaryPayload = {
+						...defaultResume.summary,
+						isHidden: false,
+						id: crypto.randomUUID().toString(),
+					};
+
 					if (userLogged) {
-						await updateSummaryAction(
-							{ ...defaultResume.summary, isHidden: false, id: crypto.randomUUID().toString() },
-							resumeId
-						);
+						await updateSummaryAction(summaryPayload, resumeId);
 					} else {
-						updateSummary({ ...defaultResume.summary, isHidden: false });
+						updateSummary(summaryPayload);
 					}
 					break;
 				case SectionSelected.experience:
+					const experiencePayload = {
+						...defaultResume.experience,
+						id: crypto.randomUUID().toString(),
+						isHidden: false,
+						jobList: [{ ...defaultJob, id: crypto.randomUUID().toString() }],
+					};
+
 					if (userLogged) {
-						await updateExperienceAction(
-							{ ...defaultResume.experience, isHidden: false, id: crypto.randomUUID().toString() },
-							resumeId
-						);
+						await updateExperienceAction(experiencePayload, resumeId);
 					} else {
-						updateExperience({
-							...defaultResume.experience,
-							isHidden: false,
-							jobList: [{ ...defaultJob, id: crypto.randomUUID().toString() }],
-						});
+						updateExperience(experiencePayload);
 					}
 					break;
 				case SectionSelected.education:
+					const educationPayload = {
+						...defaultResume.education,
+						id: crypto.randomUUID().toString(),
+						isHidden: false,
+						educationList: [{ ...defaultSchool, id: crypto.randomUUID().toString() }],
+					};
+
 					if (userLogged) {
-						await updateEducationAction(
-							{ ...defaultResume.education, isHidden: false, id: crypto.randomUUID().toString() },
-							resumeId
-						);
+						await updateEducationAction(educationPayload, resumeId);
 					} else {
-						updateEducation({
-							...defaultResume.education,
-							isHidden: false,
-							educationList: [{ ...defaultSchool, id: crypto.randomUUID().toString() }],
-						});
+						updateEducation(educationPayload);
 					}
 					break;
 				case SectionSelected.skills:
+					const skillsPayload = {
+						...defaultResume.skills,
+						id: crypto.randomUUID().toString(),
+						isHidden: false,
+						skillList: [{ ...defaultSkill, id: crypto.randomUUID().toString() }],
+					};
+
 					if (userLogged) {
-						await updateSkillsAction(
-							{
-								...defaultResume.skills,
-								isHidden: false,
-								id: crypto.randomUUID().toString(),
-							},
-							resumeId
-						);
+						await updateSkillsAction(skillsPayload, resumeId);
 					} else {
-						updateSkills({
-							...defaultResume.skills,
-							isHidden: false,
-							skillList: [{ ...defaultSkill, id: crypto.randomUUID().toString() }],
-						});
+						updateSkills(skillsPayload);
 					}
 					break;
 				case SectionSelected.languages:
+					const languagesPayload = {
+						...defaultResume.languages,
+						isHidden: false,
+						id: crypto.randomUUID().toString(),
+						languageList: [{ ...defaultLanguage, id: crypto.randomUUID().toString() }],
+					};
+
 					if (userLogged) {
-						await updateLanguagesAction(
-							{
-								...defaultResume.languages,
-								isHidden: false,
-								id: crypto.randomUUID().toString(),
-							},
-							resumeId
-						);
+						await updateLanguagesAction(languagesPayload, resumeId);
 					} else {
-						updateLanguage({
-							...defaultResume.languages,
-							isHidden: false,
-							languageList: [{ ...defaultLanguage, id: crypto.randomUUID().toString() }],
-						});
+						updateLanguage(languagesPayload);
 					}
 					break;
 				default:
@@ -174,6 +164,9 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>New section</DialogTitle>
+						<DialogDescription className="text-zinc-600">
+							Choose the section to include into your resume.
+						</DialogDescription>
 					</DialogHeader>
 					<div className="flex flex-col items-center justify-center gap-2">
 						{SECTIONS.map(section => (
@@ -183,7 +176,7 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 								onClick={() => mutate(section.name)}
 								className="w-full grid place-items-center rounded-lg bg-zinc-200/50 hover:bg-zinc-200 duration-200 cursor-pointer h-auto">
 								{section.icon}
-								<p className="capitalize text-zinc-500 text-sm">{section.name}</p>
+								<p className="capitalize text-zinc-500 text-xs">{section.name}</p>
 							</Button>
 						))}
 					</div>

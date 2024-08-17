@@ -2,8 +2,10 @@
 
 import ResumeExperienceForm, { ResumeExperienceFormValues } from '../../Forms/ResumeExperienceForm';
 import { toast } from '../../ui/use-toast';
+import { deleteExperienceAction } from '@/app/actions/resume/delete-experience';
 import { describeExperienceAction } from '@/app/actions/resume/describe-experience';
 import { updateExperienceAction } from '@/app/actions/resume/update-experience';
+import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeExperienceStore } from '@/store/useResumeExperienceStore';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -56,6 +58,19 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 		router.refresh();
 	};
 
+	const handleDeleteSection = async () => {
+		if (!userLogged) {
+			return updateExperience(defaultResume.experience);
+		}
+
+		const response = await deleteExperienceAction(resumeId);
+
+		toast({
+			variant: isError(response) ? 'destructive' : 'default',
+			description: isError(response) ? response.error : response.success,
+		});
+	};
+
 	return (
 		<section>
 			{!queryResumeExperience.isPending && queryResumeExperience.data && !isError(queryResumeExperience.data) && (
@@ -64,6 +79,7 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 					afterResumeExperienceFormSubmit={afterResumeExperienceFormSubmit}
 					submitResponse={data}
 					defaultValues={queryResumeExperience.data.success}
+					handleDeleteSection={handleDeleteSection}
 				/>
 			)}
 		</section>

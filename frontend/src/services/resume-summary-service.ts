@@ -6,6 +6,7 @@ import { Summary } from '@/types';
 interface IResumeSummaryService {
 	describe(resumeId: string): Promise<Either<string, Summary>>;
 	update(values: Summary, resumeId: string): Promise<Either<string, string>>;
+	delete(resumeId: string): Promise<Either<string, string>>;
 }
 
 export class ResumeSummaryService implements IResumeSummaryService {
@@ -33,6 +34,19 @@ export class ResumeSummaryService implements IResumeSummaryService {
 			return successResponse('Summary successfully updatted');
 		} catch (error) {
 			return handleErrorResponse(error, 'Error on updatting summary resume');
+		}
+	}
+
+	async delete(resumeId: string) {
+		try {
+			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/summary`, {
+				method: 'DELETE',
+			});
+			const jsonResponse = await response.json();
+
+			return successResponse('Summary successfully deletted');
+		} catch (error) {
+			return handleErrorResponse(error, 'Error on deletting summary resume');
 		}
 	}
 }

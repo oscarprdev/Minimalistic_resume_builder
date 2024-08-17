@@ -10,7 +10,7 @@ import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { RESUME_THEME, useResumeThemeStore } from '@/store/useResumeThemeStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { IconTextPlus, IconX } from '@tabler/icons-react';
+import { IconTextPlus, IconTrashX, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useDebouncedCallback } from 'use-debounce';
@@ -20,6 +20,7 @@ export type ResumeSkillsFormValues = z.infer<typeof resumeSkillsFormSchema>;
 type ResumeSkillsFormProps = {
 	handleSubmit(values: ResumeSkillsFormValues): Promise<void>;
 	afterResumeSkillsFormSubmit(): void;
+	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeSkills;
 };
@@ -40,6 +41,7 @@ const resumeSkillsFormSchema = z.object({
 const ResumeSkillsForm = ({
 	handleSubmit,
 	afterResumeSkillsFormSubmit,
+	handleDeleteSection,
 	submitResponse,
 	defaultValues,
 }: ResumeSkillsFormProps) => {
@@ -79,6 +81,15 @@ const ResumeSkillsForm = ({
 				onMouseEnter={() => setIsFocused(true)}
 				onMouseLeave={() => setIsFocused(false)}
 				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
+				{isFocused && (
+					<ButtonTooltip
+						className="absolute top-2 right-12"
+						side="left"
+						label="Remove section"
+						onClick={handleDeleteSection}>
+						<IconTrashX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+					</ButtonTooltip>
+				)}
 				<FormField
 					control={form.control}
 					name="title"
@@ -121,7 +132,7 @@ const ResumeSkillsForm = ({
 								render={({ field }) => (
 									<FormItem>
 										<FormControl>
-											<div className="flex items-center justify-between gap-2 px-2 -py-1 rounded-md bg-zinc-200/50">
+											<div className="flex items-center justify-between gap-1 px-2 -py-1 rounded-md bg-zinc-200/50">
 												<ViewerSkillIcon value={field.value} />
 												<Input
 													{...field}
@@ -129,7 +140,7 @@ const ResumeSkillsForm = ({
 													className={cn(
 														field.value.length > 6 && '-mr-2',
 														theme === RESUME_THEME.DEFAULT &&
-															'text-zinc-700 text-xs leading-tight h-fit py-2 w-fit'
+															'text-zinc-700 text-xs leading-tight h-fit py-2 w-fit min-w-[25px]'
 													)}
 													kind={'dynamic'}
 													variant={'resume'}

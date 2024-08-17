@@ -1,7 +1,7 @@
 'use server';
 
 import { createResumeAction } from '../../actions/resume/create-resume';
-import AddResumeSectionModal, { SectionSelected } from '../../components/Modals/AddResumeSectionModal';
+import AddResumeSectionModal from '../../components/Modals/AddResumeSectionModal';
 import ResumeEducation from '../../components/Resume/ResumeEducation/ResumeEducation';
 import ResumeExperience from '../../components/Resume/ResumeExperience/ResumeExperience';
 import ResumeHeader from '../../components/Resume/ResumeHeader/ResumeHeader';
@@ -9,6 +9,7 @@ import ResumeLanguage from '../../components/Resume/ResumeLanguages/ResumeLangua
 import ResumeSkills from '../../components/Resume/ResumeSkills/ResumeSkills';
 import ResumeSummary from '../../components/Resume/ResumeSummary/ResumeSummary';
 import HomeScreenClient from './HomeScreenClient';
+import { SectionSelected } from '@/app/components/types/types';
 import MainHome from '@/app/containers/MainHome';
 import { auth } from '@/auth';
 import { isError } from '@/lib/types';
