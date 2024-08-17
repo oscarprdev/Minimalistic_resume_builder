@@ -13,6 +13,7 @@ import {
 	DialogTrigger,
 } from '@/app/components/ui/dialog';
 import { IconLoader2 } from '@tabler/icons-react';
+import { IconLogin } from '@tabler/icons-react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -38,8 +39,11 @@ const AuthModal = () => {
 
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
-				<Button size={'sm'}>Sign in</Button>
+			<DialogTrigger className="text-zinc-600 group w-full">
+				<div className="w-full flex items-center gap-1 relative cursor-default select-none rounded-sm px-2 py-1.5 text-sm outline-none transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-900 ">
+					<IconLogin size={18} />
+					<p className="text-xs">Sign in</p>
+				</div>
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>

@@ -154,7 +154,7 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 	});
 
 	return (
-		<section className="w-full grid place-items-center">
+		<section id="add-section-section" className="w-full grid place-items-center">
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button ref={dialogTrigger} size={'sm'} className="w-1/3">

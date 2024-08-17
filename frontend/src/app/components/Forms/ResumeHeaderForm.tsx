@@ -256,7 +256,8 @@ const ResumeHeaderForm = ({
 										<Input
 											kind="dynamic"
 											className={cn(
-												theme === RESUME_THEME.DEFAULT && 'text-md text-zinc-700 w-fit text-sm'
+												theme === RESUME_THEME.DEFAULT &&
+													'text-md text-zinc-700 w-fit text-sm -mt-[0.1rem]'
 											)}
 											variant={'resume'}
 											required

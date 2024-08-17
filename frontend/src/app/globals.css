@@ -28,7 +28,7 @@ img {
 
 section {
 	position: relative;
-	max-width: 750px;
+	max-width: 800px;
 	margin: 0 auto;
 }
 
@@ -61,4 +61,16 @@ textarea::-webkit-scrollbar-corner {
 
 textarea:hover::-webkit-scrollbar-thumb {
 	background: black;
+}
+
+.hidden {
+	display: none;
+}
+
+.main-printed {
+	padding: 1rem;
+	width: 950px;
+
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
 }
