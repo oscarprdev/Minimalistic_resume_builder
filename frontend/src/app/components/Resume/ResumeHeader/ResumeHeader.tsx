@@ -4,6 +4,7 @@ import ResumeHeaderForm, { ResumeHeaderFormValues } from '../../Forms/ResumeHead
 import { toast } from '../../ui/use-toast';
 import { describeHeaderAction } from '@/app/actions/resume/describe-header';
 import { updateHeaderAction } from '@/app/actions/resume/update-header';
+import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeHeaderStore } from '@/store/useResumeHeaderStore';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -29,13 +30,6 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 		},
 	});
 
-	if (queryResumeHeader.data && isError(queryResumeHeader.data)) {
-		toast({
-			variant: 'destructive',
-			description: queryResumeHeader.data.error,
-		});
-	}
-
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeHeaderFormValues) => {
 			if (!userLogged) {
@@ -55,13 +49,17 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 
 	return (
 		<section>
-			{!queryResumeHeader.isPending && queryResumeHeader.data && !isError(queryResumeHeader.data) && (
+			{!queryResumeHeader.isPending && (
 				<ResumeHeaderForm
 					resumeId={resumeId}
 					handleSubmit={handleSubmit}
 					afterResumeHeaderFormSubmit={afterResumeHeaderFormSubmit}
 					submitResponse={data}
-					defaultValues={queryResumeHeader.data.success}
+					defaultValues={
+						queryResumeHeader.data && !isError(queryResumeHeader.data)
+							? queryResumeHeader.data.success
+							: defaultResume.header
+					}
 				/>
 			)}
 		</section>

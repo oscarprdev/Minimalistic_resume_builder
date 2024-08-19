@@ -4,6 +4,7 @@ import AuthModal from '../Modals/AuthModal';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import DownloadPDFButton, { DownloadPDFButtonRef } from './DownloadPDFButton';
 import LogoutButton from './LogoutButton';
+import NewResumeButton, { NewResumeButtonRef } from './NewResumeButton';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -22,6 +23,7 @@ type DropdownLoggedProps = {
 
 const DropdownLogged = ({ username, resumeId }: DropdownLoggedProps) => {
 	const downloadPDFButtonRef = useRef<DownloadPDFButtonRef>(null);
+	const newResumeButtonRef = useRef<NewResumeButtonRef>(null);
 
 	return (
 		<DropdownMenu>
@@ -41,6 +43,9 @@ const DropdownLogged = ({ username, resumeId }: DropdownLoggedProps) => {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-20 text-zinc-700">
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
+				<DropdownMenuItem onClick={() => newResumeButtonRef.current?.handleNewResume()}>
+					<NewResumeButton ref={newResumeButtonRef} />
+				</DropdownMenuItem>
 				<DropdownMenuItem onClick={() => downloadPDFButtonRef.current?.handleDownloadPdf()}>
 					<DownloadPDFButton ref={downloadPDFButtonRef} resumeId={resumeId} />
 				</DropdownMenuItem>

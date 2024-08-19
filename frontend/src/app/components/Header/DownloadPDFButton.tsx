@@ -3,7 +3,7 @@
 import { toast } from '../ui/use-toast';
 import { updateResumeImageAction } from '@/app/actions/resume/update-resume-image';
 import { isError } from '@/lib/types';
-import { IconFileDownload } from '@tabler/icons-react';
+import { IconDownload } from '@tabler/icons-react';
 import html2canvas from 'html2canvas';
 import React, { Ref, forwardRef, useEffect, useImperativeHandle } from 'react';
 
@@ -63,7 +63,7 @@ const DownloadPDFButton = ({ resumeId }: { resumeId?: string }, ref: Ref<Downloa
 	});
 	return (
 		<div className="flex items-center gap-2 ">
-			<IconFileDownload size={16} />
+			<IconDownload size={16} />
 			<p className="text-xs ">Download</p>
 		</div>
 	);

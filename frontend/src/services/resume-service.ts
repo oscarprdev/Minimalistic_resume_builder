@@ -6,7 +6,7 @@ import { Resume } from '@/types';
 interface IResumeService {
 	describe(): Promise<Either<string, Resume[]>>;
 	describeById(resumeId: string): Promise<Either<string, Resume>>;
-	create(): Promise<Either<string, string>>;
+	create(id: string, title: string): Promise<Either<string, string>>;
 	updateImage(imageUrl: string, resumeId: string): Promise<Either<string, string>>;
 }
 
@@ -37,11 +37,11 @@ export class ResumeService implements IResumeService {
 		}
 	}
 
-	async create() {
+	async create(id: string, title: string) {
 		try {
-			const id = crypto.randomUUID().toString();
 			const response = await fetch(`${this.path}/${this.userConfig.id}/${id}/update`, {
 				method: 'POST',
+				body: JSON.stringify({ id, title }),
 			});
 			const jsonResponse: string = await response.json();
 

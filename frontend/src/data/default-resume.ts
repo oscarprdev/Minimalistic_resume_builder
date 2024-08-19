@@ -12,7 +12,7 @@ export const defaultResume: DefaultResume = {
 		name: 'Your name',
 		job: 'Your description',
 		location: 'Location',
-		email: 'Email',
+		email: 'your-email@email.com',
 		phone: '000',
 		image: DEFAULT_IMAGE,
 		links: [defaultLink],

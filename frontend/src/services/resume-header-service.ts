@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants';
-import { Either, successResponse } from '@/lib/types';
+import { Either, errorResponse, successResponse } from '@/lib/types';
 import { handleErrorResponse } from '@/lib/utils';
 import { Header } from '@/types';
 
@@ -15,7 +15,6 @@ export class ResumeHeaderService implements IResumeHeaderService {
 		try {
 			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/header`);
 			const jsonResponse: Header = await response.json();
-
 			return successResponse(jsonResponse);
 		} catch (error) {
 			return handleErrorResponse(error, 'Error getting resume header');
@@ -32,7 +31,7 @@ export class ResumeHeaderService implements IResumeHeaderService {
 
 			return successResponse('Header successfully updatted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updatting header resume');
+			return errorResponse('Error on updatting header resume');
 		}
 	}
 }
