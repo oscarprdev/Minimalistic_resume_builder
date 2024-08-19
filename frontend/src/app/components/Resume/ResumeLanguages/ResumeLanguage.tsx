@@ -2,6 +2,7 @@
 
 import ResumeLanguagesForm, { ResumeLanguagesFormValues } from '../../Forms/ResumeLanguagesForm';
 import { toast } from '../../ui/use-toast';
+import ResumeLanguagesSkeleton from './ResumeLanguagesSkeleton';
 import { deleteLanguagesAction } from '@/app/actions/resume/delete-languages';
 import { describeLanguagesAction } from '@/app/actions/resume/describe-languages';
 import { updateLanguagesAction } from '@/app/actions/resume/update-languages';
@@ -68,7 +69,7 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 
 	return (
 		<section data-testid="languages">
-			{!response.isPending && response.data && (
+			{!response.isPending && response.data ? (
 				<ResumeLanguagesForm
 					handleSubmit={handleSubmit}
 					afterResumeLanguagesFormSubmit={afterResumeLanguageFormSubmit}
@@ -76,6 +77,8 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
+			) : (
+				<ResumeLanguagesSkeleton />
 			)}
 		</section>
 	);

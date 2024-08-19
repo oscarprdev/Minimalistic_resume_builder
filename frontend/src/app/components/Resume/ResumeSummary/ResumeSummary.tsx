@@ -2,6 +2,7 @@
 
 import ResumeSummaryForm, { ResumeSummaryFormValues } from '../../Forms/ResumeSummaryForm';
 import { toast } from '../../ui/use-toast';
+import ResumeSummarySkeleton from './ResumeSummarySkeleton';
 import { deleteSummaryAction } from '@/app/actions/resume/delete-summary';
 import { describeSummaryAction } from '@/app/actions/resume/describe-summary';
 import { updateSummaryAction } from '@/app/actions/resume/update-summary';
@@ -65,7 +66,7 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 
 	return (
 		<section data-testid="summary">
-			{!response.isPending && response.data && (
+			{!response.isPending && response.data ? (
 				<ResumeSummaryForm
 					handleSubmit={handleSubmit}
 					afterResumeSummaryFormSubmit={afterResumeSummaryFormSubmit}
@@ -73,6 +74,8 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
+			) : (
+				<ResumeSummarySkeleton />
 			)}
 		</section>
 	);

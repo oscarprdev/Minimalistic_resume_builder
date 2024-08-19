@@ -2,6 +2,7 @@
 
 import ResumeEducationForm, { ResumeEducationFormValues } from '../../Forms/ResumeEducationForm';
 import { toast } from '../../ui/use-toast';
+import ResumeEducationSkeleton from './ResumeEducationSkeleton';
 import { deleteEducationAction } from '@/app/actions/resume/delete-education';
 import { describeEducationAction } from '@/app/actions/resume/describe-education';
 import { updateEducationAction } from '@/app/actions/resume/update-education';
@@ -68,7 +69,7 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 
 	return (
 		<section data-testid="education">
-			{!response.isPending && response.data && (
+			{!response.isPending && response.data ? (
 				<ResumeEducationForm
 					handleSubmit={handleSubmit}
 					afterResumeEducationFormSubmit={afterResumeEducationFormSubmit}
@@ -76,6 +77,8 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
+			) : (
+				<ResumeEducationSkeleton />
 			)}
 		</section>
 	);

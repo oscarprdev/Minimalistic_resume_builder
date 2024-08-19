@@ -2,6 +2,7 @@
 
 import ResumeSkillsForm, { ResumeSkillsFormValues } from '../../Forms/ResumeSkillsForm';
 import { toast } from '../../ui/use-toast';
+import ResumeSkillsSkeleton from './ResumeSkillsSkeleton';
 import { deleteSkillsAction } from '@/app/actions/resume/delete-skills';
 import { describeSkillsAction } from '@/app/actions/resume/describe-skills';
 import { updateSkillsAction } from '@/app/actions/resume/update-skills';
@@ -65,7 +66,7 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 
 	return (
 		<section data-testid="skills">
-			{!response.isPending && response.data && (
+			{!response.isPending && response.data ? (
 				<ResumeSkillsForm
 					handleSubmit={handleSubmit}
 					afterResumeSkillsFormSubmit={afterResumeSkillsFormSubmit}
@@ -73,6 +74,8 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
+			) : (
+				<ResumeSkillsSkeleton />
 			)}
 		</section>
 	);
