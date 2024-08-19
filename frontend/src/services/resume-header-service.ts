@@ -19,7 +19,7 @@ export class ResumeHeaderService implements IResumeHeaderService {
 			const jsonResponse: Header = await response.json();
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error getting resume header');
+			return errorResponse('Error getting resume header');
 		}
 	}
 

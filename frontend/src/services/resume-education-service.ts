@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants';
-import { Either, successResponse } from '@/lib/types';
+import { Either, errorResponse, successResponse } from '@/lib/types';
 import { handleErrorResponse } from '@/lib/utils';
 import { Education } from '@/types';
 
@@ -21,7 +21,7 @@ export class ResumeEducationService implements IResumeEducationService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error getting resume education');
+			return errorResponse('Error getting resume education');
 		}
 	}
 
@@ -35,7 +35,7 @@ export class ResumeEducationService implements IResumeEducationService {
 
 			return successResponse('Education successfully updatted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updatting education resume');
+			return errorResponse('Error on updatting education resume');
 		}
 	}
 
@@ -48,7 +48,7 @@ export class ResumeEducationService implements IResumeEducationService {
 
 			return successResponse('Education successfully deletted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on deletting education resume');
+			return errorResponse('Error on deletting education resume');
 		}
 	}
 }

@@ -35,7 +35,7 @@ class AuthService implements IAuthService {
 
 			return successResponse({ username: jsonResponse.username, id: jsonResponse.id });
 		} catch (error) {
-			return handleErrorResponse(error, 'Error loginning user');
+			return errorResponse('Error loginning user');
 		}
 	}
 
@@ -53,7 +53,7 @@ class AuthService implements IAuthService {
 
 			return successResponse('User registered successfully');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error registerring user');
+			return errorResponse('Error registerring user');
 		}
 	}
 }

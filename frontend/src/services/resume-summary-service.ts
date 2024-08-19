@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants';
-import { Either, successResponse } from '@/lib/types';
+import { Either, errorResponse, successResponse } from '@/lib/types';
 import { handleErrorResponse } from '@/lib/utils';
 import { Summary } from '@/types';
 
@@ -21,7 +21,7 @@ export class ResumeSummaryService implements IResumeSummaryService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error getting resume summary');
+			return errorResponse('Error getting resume summary');
 		}
 	}
 
@@ -35,7 +35,7 @@ export class ResumeSummaryService implements IResumeSummaryService {
 
 			return successResponse('Summary successfully updatted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updatting summary resume');
+			return errorResponse('Error on updatting summary resume');
 		}
 	}
 
@@ -48,7 +48,7 @@ export class ResumeSummaryService implements IResumeSummaryService {
 
 			return successResponse('Summary successfully deletted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on deletting summary resume');
+			return errorResponse('Error on deletting summary resume');
 		}
 	}
 }

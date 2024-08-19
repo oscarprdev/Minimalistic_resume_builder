@@ -22,7 +22,7 @@ export class ResumeService implements IResumeService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on describing resume');
+			return errorResponse('Error on describing resume');
 		}
 	}
 
@@ -49,7 +49,7 @@ export class ResumeService implements IResumeService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on creating resume');
+			return errorResponse('Error on creating resume');
 		}
 	}
 
@@ -63,7 +63,7 @@ export class ResumeService implements IResumeService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updating resume image');
+			return errorResponse('Error on updating resume image');
 		}
 	}
 }
