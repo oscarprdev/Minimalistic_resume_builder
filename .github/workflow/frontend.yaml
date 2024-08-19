@@ -1,13 +1,15 @@
 name: Minimalistic resume builder Frontend CI
 
 on:
+    push:
+        branches: [main]
     pull_request:
-        branches:
-            - main
-        paths:
-            - 'frontend/**.js'
-            - 'frontend/**.ts'
-            - 'frontend/**.json'
+        branches: [main]
+        types: [opened, synchronize]
+    paths:
+        - 'frontend/**.js'
+        - 'frontend/**.ts'
+        - 'frontend/**.json'
 
 concurrency:
     group: ${{ github.head_ref }}
