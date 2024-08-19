@@ -12,7 +12,7 @@ const HeaderSectionSchema = z.object({
 	name: z.string(),
 	job: z.string(),
 	location: z.string(),
-	email: z.string().email(),
+	email: z.string(),
 	phone: z.string(),
 	links: z.array(z.string().url()),
 	image: z.string().optional(),
