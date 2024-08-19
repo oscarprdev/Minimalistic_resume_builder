@@ -68,10 +68,10 @@ jobs:
                       ${{ runner.os }}-npm-
             - name: Run lint
               run: |
-                  cd frontend && npm lint
+                  cd frontend && npm run lint
             - name: Run prettier
               run: |
-                  cd frontend && npm format
+                  cd frontend && npm run format
     type-check:
         runs-on: ubuntu-latest
         needs: install-cache
@@ -92,7 +92,7 @@ jobs:
                       ${{ runner.os }}-npm-
             - name: Check types
               run: |
-                  cd frontend && npm type-check
+                  cd frontend && npm run type-check
     build:
         runs-on: ubuntu-latest
         needs: [lint-format, type-check]
