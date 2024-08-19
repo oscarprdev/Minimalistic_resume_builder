@@ -3,11 +3,8 @@ required:
   - id
   - title
   - company
-  - startDate
-  - endDate
+  - dates
   - description
-  - formatTime
-  - descriptionDisabled
 properties:
   id:
     type: string
@@ -21,32 +18,16 @@ properties:
     type: string
     description: The name of the company.
     example: Acme Corporation
-  startDate:
+  dates:
     type: string
-    format: date
-    description: The start date of the job (YYYY-MM-DD).
-    example: 2020-01-01
-  endDate:
-    type: string
-    format: date
-    description: The end date of the job (YYYY-MM-DD).
-    example: 2022-12-31
+    description: Duration dates of current job.
+    example: 2018-09-01 - currently
   description:
     type: string
     description: A brief description of the job responsibilities and achievements.
     example: Developed web applications using React and Node.js.
-  formatTime:
-    type: string
-    description: Format time config.
-    example: year,currently.
-  descriptionDisabled:
-    type: boolean
-    description: Is description field disabled on resume viewwe?.
-    default: false
-    example: false
 example:
   title: Software Engineer
   company: Acme Corporation
-  startDate: 2020-01-01
-  endDate: 2022-12-31
+  dates: 2018-09-01 - currently
   description: Developed web applications using React and Node.js.

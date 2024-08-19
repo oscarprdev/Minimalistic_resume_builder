@@ -1,26 +1,24 @@
-import { Job } from '@/types';
+import { defaultResume } from '@/data/default-resume';
+import { Experience } from '@/types';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export type OptionalJob = Job | Omit<Job, 'id'>;
-
-export interface ResumeExperienceDefaultValues {
-	title: string;
-	isHidden: boolean;
-	jobList: OptionalJob[];
-}
+export type ResumeExperienceDefaultValues = Omit<Experience, 'id'>;
 
 export interface ResumeExperienceStore {
 	resumeExperience: ResumeExperienceDefaultValues;
 	updateExperience: (experience: ResumeExperienceDefaultValues) => void;
 }
 
-export const DEFAULT_EXPERIENCE_VALUES: ResumeExperienceDefaultValues = {
-	title: 'Professional Experience',
-	isHidden: false,
-	jobList: [],
-};
-
-export const useResumeExperienceStore = create<ResumeExperienceStore>((set) => ({
-	resumeExperience: DEFAULT_EXPERIENCE_VALUES,
-	updateExperience: (input: ResumeExperienceDefaultValues) => set((state) => ({ ...state, resumeExperience: { ...input } })),
-}));
+export const useResumeExperienceStore = create<ResumeExperienceStore>()(
+	persist(
+		set => ({
+			resumeExperience: defaultResume.experience,
+			updateExperience: (input: ResumeExperienceDefaultValues) =>
+				set(state => ({ ...state, resumeExperience: { ...input } })),
+		}),
+		{
+			name: 'resume-experience-storage',
+		}
+	)
+);

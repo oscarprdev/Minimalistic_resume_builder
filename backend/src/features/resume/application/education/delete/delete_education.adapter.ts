@@ -31,6 +31,7 @@ export class DeleteEducationAdapter implements DeleteEducationPorts {
 		return {
 			id: educationDb.id,
 			title: educationDb.title,
+			isHidden: educationDb.isHidden,
 			educationList: educationDb.educationList.every((school) => !school.id) ? [] : educationDb.educationList,
 		};
 	}

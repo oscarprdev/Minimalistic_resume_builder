@@ -1,5 +1,7 @@
+import { defaultResume } from '@/data/default-resume';
 import { Header } from '@/types';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export type ResumeHeaderDefaultValues = Omit<Header, 'id'>;
 
@@ -8,17 +10,15 @@ export interface ResumeHeaderStore {
 	updateHeader: (header: ResumeHeaderDefaultValues) => void;
 }
 
-export const DEFAULT_HEADER_VALUES: ResumeHeaderDefaultValues = {
-	name: 'Your name',
-	job: 'Your current job',
-	location: 'Your location',
-	email: 'you@email.com',
-	phone: 'xxx-xxx-xxx',
-	links: [],
-	isHidden: false,
-};
-
-export const useResumeHeaderStore = create<ResumeHeaderStore>((set) => ({
-	resumeHeader: DEFAULT_HEADER_VALUES,
-	updateHeader: (input: ResumeHeaderDefaultValues) => set((state) => ({ ...state, resumeHeader: { ...input } })),
-}));
+export const useResumeHeaderStore = create<ResumeHeaderStore>()(
+	persist(
+		set => ({
+			resumeHeader: defaultResume.header,
+			updateHeader: (input: ResumeHeaderDefaultValues) =>
+				set(state => ({ ...state, resumeHeader: { ...input } })),
+		}),
+		{
+			name: 'resume-header-storage',
+		}
+	)
+);

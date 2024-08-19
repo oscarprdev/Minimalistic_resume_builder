@@ -1,26 +1,24 @@
-import { Skill } from '@/types';
+import { defaultResume } from '@/data/default-resume';
+import { Skills } from '@/types';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export type OptionalSkill = Skill | Omit<Skill, 'id'>;
-
-export interface ResumeSkillsDefaultValues {
-	title: string;
-	isHidden: boolean;
-	skillList: OptionalSkill[];
-}
+export type ResumeSkillsDefaultValues = Omit<Skills, 'id'>;
 
 export interface ResumeSkillsStore {
 	resumeSkills: ResumeSkillsDefaultValues;
 	updateSkills: (skills: ResumeSkillsDefaultValues) => void;
 }
 
-export const DEFAULT_SKILLS_VALUES: ResumeSkillsDefaultValues = {
-	title: 'Skills',
-	isHidden: false,
-	skillList: [],
-};
-
-export const useResumeSkillsStore = create<ResumeSkillsStore>((set) => ({
-	resumeSkills: DEFAULT_SKILLS_VALUES,
-	updateSkills: (input: ResumeSkillsDefaultValues) => set((state) => ({ ...state, resumeSkills: { ...input } })),
-}));
+export const useResumeSkillsStore = create<ResumeSkillsStore>()(
+	persist(
+		set => ({
+			resumeSkills: defaultResume.skills,
+			updateSkills: (input: ResumeSkillsDefaultValues) =>
+				set(state => ({ ...state, resumeSkills: { ...input } })),
+		}),
+		{
+			name: 'resume-skills-storage',
+		}
+	)
+);

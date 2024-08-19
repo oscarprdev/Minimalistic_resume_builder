@@ -12,9 +12,7 @@ const SchoolSchema = z.object({
 	id: z.string().uuid().optional(),
 	title: z.string(),
 	career: z.string(),
-	startDate: z.string(),
-	endDate: z.string(),
-	description: z.string(),
+	dates: z.string(),
 });
 
 const EducationSectionSchema = z.object({

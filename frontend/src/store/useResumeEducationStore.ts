@@ -1,26 +1,24 @@
-import { School } from '@/types';
+import { defaultResume } from '@/data/default-resume';
+import { Education } from '@/types';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export type OptionalSchool = School | Omit<School, 'id'>;
-
-export interface ResumeEducationDefaultValues {
-	title: string;
-	isHidden: boolean;
-	educationList: OptionalSchool[];
-}
+export type ResumeEducationDefaultValues = Omit<Education, 'id'>;
 
 export interface ResumeEducationStore {
 	resumeEducation: ResumeEducationDefaultValues;
 	updateEducation: (education: ResumeEducationDefaultValues) => void;
 }
 
-export const DEFAULT_EDUCATION_VALUES: ResumeEducationDefaultValues = {
-	title: 'Education',
-	isHidden: false,
-	educationList: [],
-};
-
-export const useResumeEducationStore = create<ResumeEducationStore>((set) => ({
-	resumeEducation: DEFAULT_EDUCATION_VALUES,
-	updateEducation: (input: ResumeEducationDefaultValues) => set((state) => ({ ...state, resumeEducation: { ...input } })),
-}));
+export const useResumeEducationStore = create<ResumeEducationStore>()(
+	persist(
+		set => ({
+			resumeEducation: defaultResume.education,
+			updateEducation: (input: ResumeEducationDefaultValues) =>
+				set(state => ({ ...state, resumeEducation: { ...input } })),
+		}),
+		{
+			name: 'resume-education-storage',
+		}
+	)
+);

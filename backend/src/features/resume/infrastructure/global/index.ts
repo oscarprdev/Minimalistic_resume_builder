@@ -19,7 +19,10 @@ export class DefaultGlobalResumeDatabase implements GlobalResumeDatabase {
 
 	async listResumeByUser({ ownerId }: ListResumeByUserInfrastructureInput): Promise<ResumeDb[]> {
 		try {
-			const result = await this.database.query(`SELECT * FROM resume WHERE owner = $1;`, [ownerId]);
+			const result = await this.database.query(
+				`SELECT * FROM resume WHERE owner = $1 ORDER BY created_at DESC;`,
+				[ownerId]
+			);
 
 			return result as ResumeDb[];
 		} catch (error: unknown) {

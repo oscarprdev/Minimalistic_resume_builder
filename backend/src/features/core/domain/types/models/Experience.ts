@@ -32,25 +32,13 @@ export type Experience = {
          */
         company: string;
         /**
-         * The start date of the job (YYYY-MM-DD).
+         * Duration dates of current job.
          */
-        startDate: string;
-        /**
-         * The end date of the job (YYYY-MM-DD).
-         */
-        endDate: string;
+        dates: string;
         /**
          * A brief description of the job responsibilities and achievements.
          */
         description: string;
-        /**
-         * Format time config.
-         */
-        formatTime: string;
-        /**
-         * Is description field disabled on resume viewwe?.
-         */
-        descriptionDisabled: boolean;
     }>;
 };
 

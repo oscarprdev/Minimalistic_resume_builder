@@ -1,8 +1,8 @@
-import { z } from 'zod';
 import { DefaultErrorEntity } from '../../../../core/domain/entities/Error';
 import { RequestParams } from '../../../../core/domain/interfaces';
 import { CommonPostResponse, Header } from '../../../../core/domain/types';
 import { CreateHeaderUsecase } from './create_header.use_case';
+import { z } from 'zod';
 
 export interface CreateHeaderHandler {
 	handleRequest(request: RequestParams): Promise<Response>;
@@ -12,7 +12,7 @@ const HeaderSectionSchema = z.object({
 	name: z.string(),
 	job: z.string(),
 	location: z.string(),
-	email: z.string().email(),
+	email: z.string(),
 	phone: z.string(),
 	links: z.array(z.string().url()),
 	image: z.string().optional(),
@@ -31,7 +31,11 @@ export class DefaultCreateHeaderHandler implements CreateHeaderHandler {
 		const { error } = HeaderSectionSchema.safeParse(bodyParsed);
 
 		if (error) {
-			throw new DefaultErrorEntity().sendError<CreateHeaderHandlerActions>('Request payload not correct', 400, 'extractPayload');
+			throw new DefaultErrorEntity().sendError<CreateHeaderHandlerActions>(
+				'Request payload not correct',
+				400,
+				'extractPayload'
+			);
 		}
 
 		return { data: bodyParsed };

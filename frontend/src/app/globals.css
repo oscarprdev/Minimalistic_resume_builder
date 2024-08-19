@@ -3,19 +3,12 @@
 @tailwind utilities;
 
 :root {
-	--purple-light-100: #ecdfff;
-	--purple-100: #a673ef;
-	--purple-200: #8247e5;
-	--gray-light: #f9f9f9;
+	--max-width: 800px;
 }
 
 body {
-	margin: 0 auto;
+	margin: 0;
 	padding: 0;
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -37,6 +30,12 @@ img {
 	object-fit: cover;
 }
 
+section {
+	position: relative;
+	max-width: var(--max-width);
+	margin: 0 auto;
+}
+
 ::-webkit-scrollbar {
 	width: 3px;
 	height: 5px;
@@ -55,49 +54,27 @@ img {
 	background: transparent;
 }
 
-section[aria-label='viewer']::-webkit-scrollbar-thumb,
-ul[aria-label='resumes']::-webkit-scrollbar-thumb {
-	width: 3px;
-	border-radius: 10px;
-	background: transparent;
-	margin-right: 2px;
-}
-
-section[aria-label='viewer']:hover::-webkit-scrollbar-thumb,
-ul[aria-label='resumes']::-webkit-scrollbar-thumb {
-	background: var(--purple-200);
-}
-
-section:hover::-webkit-scrollbar-thumb {
-	background: var(--purple-200);
-}
-
 textarea::-webkit-scrollbar {
 	width: 3px;
 	background-color: transparent;
 }
 
-textarea::-webkit-resizer {
-	background-repeat: no-repeat;
-	background-position: -3px -3px;
-	background-size: 14px;
-}
-
 textarea::-webkit-scrollbar-corner {
-	background-color: transparent;
+	background-color: black;
 }
 
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+textarea:hover::-webkit-scrollbar-thumb {
+	background: black;
 }
 
-@layer utilities {
-	.fade-in {
-		animation: fadeIn 1s ease-in-out forwards;
-	}
+.hidden {
+	display: none;
+}
+
+.main-printed {
+	padding: 1rem;
+	width: 950px;
+
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
 }

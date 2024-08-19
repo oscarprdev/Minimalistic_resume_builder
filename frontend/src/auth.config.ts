@@ -1,29 +1,25 @@
-import Credentials from 'next-auth/providers/credentials';
-import zod from 'zod';
+import { isError } from './lib/types';
+import { authService } from './services/auth-service';
 import { NextAuthConfig } from 'next-auth';
-import { loginUserService } from './services/auth/login-user';
-import { postCallback } from './services';
-
-export const loginSchema = zod.object({
-	username: zod.string(),
-	password: zod.string(),
-});
+import Credentials from 'next-auth/providers/credentials';
 
 export default {
 	providers: [
 		Credentials({
 			async authorize(credentials) {
-				const validateFields = loginSchema.safeParse(credentials);
-				if (validateFields.success) {
-					const response = await loginUserService({ payload: validateFields.data, postCallback });
-					if (response._tag === 'Left') {
-						return null;
-					}
+				const response = await authService.login({
+					username: credentials.username as string,
+					password: credentials.password as string,
+				});
 
-					return response.right;
+				if (isError(response)) {
+					throw new Error(response.error);
 				}
 
-				return null;
+				return {
+					name: response.success.username,
+					id: response.success.id,
+				};
 			},
 		}),
 	],

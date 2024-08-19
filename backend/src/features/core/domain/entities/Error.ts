@@ -24,7 +24,8 @@ export class DefaultErrorEntity implements ErrorEntity {
 	}
 
 	sendError<A>(error: unknown, status: number, action: A): never {
-		const message = error instanceof Error ? `Error in ${action}: ${error.message}` : `Error in ${action}: ${error}`;
+		const message =
+			error instanceof Error ? `Error in ${action}: ${error.message}` : `Error in ${action}: ${error}`;
 		const errorBody = {
 			message,
 			status,

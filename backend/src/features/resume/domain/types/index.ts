@@ -41,11 +41,8 @@ export interface JobDb {
 	id: string;
 	title: string;
 	company: string;
-	startDate: string;
-	endDate: string;
+	dates: string;
 	description: string;
-	formatTime: string;
-	descriptionDisabled: boolean;
 }
 
 export interface ExperienceDb {
@@ -59,11 +56,7 @@ export interface SchoolDb {
 	id: string;
 	title: string;
 	career: string;
-	startDate: string;
-	endDate: string;
-	description: string;
-	formatTime: string;
-	descriptionDisabled: boolean;
+	dates: string;
 }
 
 export interface EducationDb {
@@ -90,7 +83,6 @@ export interface LanguagesDb {
 export interface SkillDb {
 	id: string;
 	name: string;
-	svgUrl: string;
 }
 
 export interface SkillsDb {

@@ -11,7 +11,6 @@ export interface CreateSkillsHandler {
 const SkillSchema = z.object({
 	id: z.string().uuid().optional(),
 	name: z.string(),
-	svgUrl: z.string().optional(),
 });
 
 const SkillsSectionSchema = z.object({

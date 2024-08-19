@@ -7,14 +7,12 @@ const config = {
 	theme: {
 		container: {
 			center: true,
+			padding: '2rem',
+			screens: {
+				'2xl': '1400px',
+			},
 		},
 		extend: {
-			colors: {
-				purple_100: 'var(--purple-100)',
-				purple_200: 'var(--purple-200)',
-				purple_light_200: 'var(--purple-light-100)',
-				gray_light: 'var(--gray-light)',
-			},
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0' },
@@ -24,30 +22,10 @@ const config = {
 					from: { height: 'var(--radix-accordion-content-height)' },
 					to: { height: '0' },
 				},
-				'fade-up': {
-					from: { opacity: '0', transform: 'translateY(15px)' },
-					to: { opacity: '1', transform: 'translateY(0)' },
-				},
-				'fade-down': {
-					from: { opacity: '0', transform: 'translateY(-15px)' },
-					to: { opacity: '1', transform: 'translateY(0px)' },
-				},
-				'fade-right': {
-					from: { opacity: '0', transform: 'translateX(-15px)' },
-					to: { opacity: '1', transform: 'translateX(0px)', display: 'block' },
-				},
-				'fade-left': {
-					from: { opacity: '1', transform: 'translateX(0px)' },
-					to: { opacity: '0', transform: 'translateX(-15px)', display: 'none' },
-				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-up': 'fade-up 0.3s ease-in-out forwards',
-				'fade-down': 'fade-down 0.3s ease-in-out',
-				'fade-right': 'fade-right 0.3s ease-in-out',
-				'fade-left': 'fade-left 0.3s ease-in-out forwards',
 			},
 		},
 	},

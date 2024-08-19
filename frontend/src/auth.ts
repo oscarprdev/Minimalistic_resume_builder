@@ -1,5 +1,5 @@
-import NextAuth, { User } from 'next-auth';
 import authConfig from './auth.config';
+import NextAuth from 'next-auth';
 
 export const {
 	handlers: { GET, POST },
@@ -8,13 +8,16 @@ export const {
 	signOut,
 } = NextAuth({
 	callbacks: {
-		async session({ session, token }) {
-			if (token && token.sub) {
-				const user = {
-					id: token.sub,
-				};
+		async jwt({ token, user }) {
+			if (user) {
+				token.id = user.id;
+			}
 
-				return { ...session, user };
+			return token;
+		},
+		session({ session, token }) {
+			if (token && session.user) {
+				session.user.id = token.id as string;
 			}
 
 			return session;

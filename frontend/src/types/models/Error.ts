@@ -3,13 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type Error = {
-    /**
-     * Response code
-     */
-    status: number;
-    /**
-     * Error message
-     */
-    message: string;
+	/**
+	 * Response code
+	 */
+	status: number;
+	/**
+	 * Error message
+	 */
+	message: string;
 };
-

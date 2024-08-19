@@ -3,13 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type CommonDeleteResponse = {
-    /**
-     * Response code
-     */
-    status: number;
-    /**
-     * Delete description
-     */
-    message: string;
+	/**
+	 * Response code
+	 */
+	status: number;
+	/**
+	 * Delete description
+	 */
+	message: string;
 };
-

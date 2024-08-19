@@ -1,31 +1,36 @@
-import type { Metadata } from 'next';
-import { Lato } from 'next/font/google';
+import Header from './components/Header/Header';
+import { Toaster } from './components/ui/toaster';
 import './globals.css';
-import { cn } from '@/lib/utils';
-import Header from '@/components/core/header/Header';
-import QueryProvider from '@/providers/QueryProvider';
-import { Toaster } from '@/components/ui/toaster';
+import QueryProvider from './providers/QueryProvider';
+import type { Metadata } from 'next';
+import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import { Inter } from 'next/font/google';
+import { ReactNode } from 'react';
 
-const inter = Lato({ weight: ['100', '300', '400', '700'], subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Resummie',
-	description: 'Minimalistic Resume builder app',
+	title: 'Resume builder',
+	description: 'Resume builder app',
 };
 
 export default function RootLayout({
 	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+	params: { session },
+}: {
+	children: ReactNode;
+	params: { session: Session };
+}) {
 	return (
-		<html lang='en'>
-			<body className={cn(inter.className, 'bg-gray-100')}>
-				<QueryProvider>
-					<Header />
-					{children}
-					<Toaster />
-				</QueryProvider>
+		<html lang="en">
+			<body className={inter.className}>
+				<SessionProvider session={session}>
+					<QueryProvider>
+						{children}
+						<Toaster />
+					</QueryProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);

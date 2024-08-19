@@ -12,8 +12,7 @@ const JobSchema = z.object({
 	id: z.string().uuid().optional(),
 	title: z.string(),
 	company: z.string(),
-	startDate: z.string(),
-	endDate: z.string(),
+	dates: z.string(),
 	description: z.string(),
 });
 
