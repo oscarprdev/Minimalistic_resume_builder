@@ -6,10 +6,10 @@ on:
     pull_request:
         branches: [main]
         types: [opened, synchronize]
-    paths:
-        - 'frontend/**.js'
-        - 'frontend/**.ts'
-        - 'frontend/**.json'
+        paths:
+            - 'frontend/**.js'
+            - 'frontend/**.ts'
+            - 'frontend/**.json'
 
 concurrency:
     group: ${{ github.head_ref }}
