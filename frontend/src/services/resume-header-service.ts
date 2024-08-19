@@ -12,9 +12,7 @@ export class ResumeHeaderService implements IResumeHeaderService {
 
 	async describe(resumeId: string) {
 		try {
-			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/header`, {
-				cache: 'no-store',
-			});
+			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/header`);
 			const jsonResponse: Header = await response.json();
 			return successResponse(jsonResponse);
 		} catch (error) {
