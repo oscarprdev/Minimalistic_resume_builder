@@ -1,6 +1,5 @@
 import { API_URL } from '@/constants';
 import { Either, errorResponse, successResponse } from '@/lib/types';
-import { handleErrorResponse } from '@/lib/utils';
 import { Education } from '@/types';
 
 interface IResumeEducationService {
