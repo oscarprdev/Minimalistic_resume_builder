@@ -69,9 +69,6 @@ jobs:
             - name: Run lint
               run: |
                   cd frontend && npm run lint
-            - name: Run prettier
-              run: |
-                  cd frontend && npm run format
     type-check:
         runs-on: ubuntu-latest
         needs: install-cache
