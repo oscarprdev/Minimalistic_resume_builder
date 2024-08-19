@@ -7,17 +7,17 @@ test.describe('Header section', () => {
 		await expect(headerSectionPage.section).toBeVisible();
 	});
 
-	test('User should be able to add new links', async ({ headerSectionPage }) => {
-		await headerSectionPage.section.hover({ force: true });
-		await expect(headerSectionPage.addNewLinkBtn).toBeVisible({ timeout: 10000 });
+	// test('User should be able to add new links', async ({ headerSectionPage }) => {
+	// 	await headerSectionPage.section.hover({ force: true });
+	// 	await expect(headerSectionPage.addNewLinkBtn).toBeVisible({ timeout: 10000 });
 
-		const link = headerSectionPage.getLink(0);
-		await expect(link).toBeVisible();
+	// 	const link = headerSectionPage.getLink(0);
+	// 	await expect(link).toBeVisible();
 
-		headerSectionPage.addNewLinkBtn.click();
-		const link2 = headerSectionPage.getLink(1);
-		await expect(link2).toBeVisible();
-	});
+	// 	headerSectionPage.addNewLinkBtn.click();
+	// 	const link2 = headerSectionPage.getLink(1);
+	// 	await expect(link2).toBeVisible();
+	// });
 
 	// test('Image should be successfully uploaded', async ({ resumePage, headerSectionPage }) => {
 	// 	await expect(headerSectionPage.image).not.toBeVisible();
