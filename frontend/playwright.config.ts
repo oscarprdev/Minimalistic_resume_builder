@@ -1,4 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config({ override: true });
+const frontendEnv = { ...process.env } as { [key: string]: string };
 
 export default defineConfig({
 	testDir: './tests/e2e',
@@ -25,6 +29,7 @@ export default defineConfig({
 		url: 'http://localhost:3000',
 		timeout: 120 * 1000 * 5,
 		reuseExistingServer: false,
+		env: frontendEnv,
 	},
 
 	/* Configure projects for major browsers */
