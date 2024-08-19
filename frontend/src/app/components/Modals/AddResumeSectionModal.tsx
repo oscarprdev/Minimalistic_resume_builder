@@ -26,7 +26,7 @@ import { IconBriefcase, IconMessage, IconMessageLanguage, IconSchool, IconTools 
 import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useRef } from 'react';
+import { useRef } from 'react';
 
 type AddResumeSectionModalProps = {
 	userLogged?: User;
@@ -157,11 +157,11 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 		<section id="add-section-section" className="w-full grid place-items-center">
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button ref={dialogTrigger} size={'sm'} className="w-1/3">
+					<Button ref={dialogTrigger} size={'sm'} className="w-1/3" data-testid="add-section-button">
 						Add section
 					</Button>
 				</DialogTrigger>
-				<DialogContent>
+				<DialogContent data-testid="add-section-modal-content">
 					<DialogHeader>
 						<DialogTitle>New section</DialogTitle>
 						<DialogDescription className="text-zinc-600">
@@ -172,6 +172,7 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 						{SECTIONS.map(section => (
 							<Button
 								key={section.name}
+								data-testid={`section-${section.name}-button`}
 								disabled={sectionsDisplayed.includes(section.name)}
 								onClick={() => mutate(section.name)}
 								className="w-full grid place-items-center rounded-lg bg-zinc-200/50 hover:bg-zinc-200 duration-200 cursor-pointer h-auto">

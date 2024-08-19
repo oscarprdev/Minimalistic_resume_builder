@@ -39,13 +39,13 @@ const AuthModal = () => {
 
 	return (
 		<Dialog>
-			<DialogTrigger className="text-zinc-600 group w-full">
+			<DialogTrigger className="text-zinc-600 group w-full" data-testid="open-auth-modal-button">
 				<div className="w-full flex items-center gap-1 relative cursor-default select-none rounded-sm px-2 py-1.5 text-sm outline-none transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-900 ">
 					<IconLogin size={18} />
 					<p className="text-xs">Sign in</p>
 				</div>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent data-testid="auth-modal-content">
 				<DialogHeader>
 					<DialogTitle>{isLogin ? 'Sign in' : 'Get started'}</DialogTitle>
 					<DialogDescription className="text-zinc-600">

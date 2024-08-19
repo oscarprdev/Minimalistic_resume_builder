@@ -32,7 +32,7 @@ const DropdownLogged = ({ user, resumeId }: DropdownLoggedProps) => {
 			<DropdownMenuTrigger className="outline-none">
 				<TooltipProvider>
 					<Tooltip>
-						<TooltipTrigger asChild>
+						<TooltipTrigger asChild data-testid="dropdown-menu-button">
 							<span className="text-zinc-500 text-sm font-bold flex items-center gap-1 h-fit hover:text-zinc-800 -mt-2 duration-200 py-2 px-4 hover:bg-zinc-200/50 rounded-lg cursor-pointer">
 								<IconLocation size={18} />
 							</span>

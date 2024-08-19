@@ -7,11 +7,13 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"format": "prettier --write . --config ./.prettierrc"
+		"format": "prettier --write . --config ./.prettierrc",
+		"test:e2e": "npx playwright test"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
 		"@oprdev/cloudflare-r2-storage": "^1.0.3",
+		"@playwright/test": "^1.46.1",
 		"@radix-ui/react-dialog": "^1.1.1",
 		"@radix-ui/react-dropdown-menu": "^2.1.1",
 		"@radix-ui/react-label": "^2.1.0",

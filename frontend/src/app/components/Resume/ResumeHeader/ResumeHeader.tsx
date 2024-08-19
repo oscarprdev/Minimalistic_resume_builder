@@ -51,7 +51,7 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 	};
 
 	return (
-		<section>
+		<section data-testid="header">
 			{!response.isPending && (
 				<ResumeHeaderForm
 					resumeId={resumeId}

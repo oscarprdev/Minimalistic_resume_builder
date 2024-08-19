@@ -5,19 +5,20 @@ import { ReactNode } from 'react';
 
 type ButtonTooltipProps = {
 	onClick: () => void;
-
+	id: string;
 	label: string;
 	side: 'right' | 'bottom' | 'left';
 	children: ReactNode;
 	className?: string;
 };
 
-const ButtonTooltip = ({ onClick, label, side, children, className }: ButtonTooltipProps) => {
+const ButtonTooltip = ({ onClick, label, side, children, className, id }: ButtonTooltipProps) => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
 				<TooltipTrigger asChild>
 					<Button
+						data-testid={id}
 						type="button"
 						size={'sm'}
 						className={cn(

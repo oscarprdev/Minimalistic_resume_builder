@@ -97,6 +97,7 @@ const ResumeExperienceForm = ({
 				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
 				{isFocused && (
 					<ButtonTooltip
+						id="remove-experience"
 						className="absolute top-2 right-12"
 						side="left"
 						label="Remove section"
@@ -124,6 +125,7 @@ const ResumeExperienceForm = ({
 				<div className="flex flex-col gap-2 w-full">
 					{isFocused && (
 						<ButtonTooltip
+							id="add-experience"
 							onClick={() => handleAppendExperience(defaultJob)}
 							side="right"
 							label="Add experience"
@@ -132,9 +134,13 @@ const ResumeExperienceForm = ({
 						</ButtonTooltip>
 					)}
 					{fields.map((field, index) => (
-						<article key={field.id} className="relative w-full flex flex-col gap-0">
+						<article
+							data-testid={`experience-${index}`}
+							key={field.id}
+							className="relative w-full flex flex-col gap-0">
 							{isFocused && (
 								<Button
+									data-testid={`remove-experience-${index}`}
 									onClick={() => handleRemoveExperience(index)}
 									className="group absolute -left-5 top-[0.65rem] rounded-full bg-transparent grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />

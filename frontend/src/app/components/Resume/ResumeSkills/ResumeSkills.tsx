@@ -64,7 +64,7 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 	};
 
 	return (
-		<section>
+		<section data-testid="skills">
 			{!response.isPending && response.data && (
 				<ResumeSkillsForm
 					handleSubmit={handleSubmit}

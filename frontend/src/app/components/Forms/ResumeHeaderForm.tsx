@@ -132,10 +132,24 @@ const ResumeHeaderForm = ({
 							</div>
 						)}
 						{imageValue === DEFAULT_IMAGE && isFocused ? (
-							<Image src={DEFAULT_IMAGE} alt="Resume image" width={600} height={600} />
+							<Image
+								data-testid="header-image"
+								src={DEFAULT_IMAGE}
+								alt="Resume image"
+								width={600}
+								height={600}
+							/>
 						) : (
 							imageValue !== DEFAULT_IMAGE &&
-							imageValue && <Image src={imageValue} alt="Resume image" width={600} height={600} />
+							imageValue && (
+								<Image
+									data-testid="header-image"
+									src={imageValue}
+									alt="Resume image"
+									width={600}
+									height={600}
+								/>
+							)
 						)}
 					</picture>
 
@@ -148,10 +162,18 @@ const ResumeHeaderForm = ({
 					/>
 					{isFocused && (
 						<div className="flex items-center gap-2 w-full justify-center">
-							<ButtonTooltip onClick={() => handleBrowseImageClick()} side="bottom" label="Browse image">
+							<ButtonTooltip
+								id="upload-image"
+								onClick={() => handleBrowseImageClick()}
+								side="bottom"
+								label="Browse image">
 								<IconUpload size={16} className="text-zinc-400 group-hover:text-zinc-600" />
 							</ButtonTooltip>
-							<ButtonTooltip onClick={() => handleRemoveImageClick()} side="bottom" label="Remove image">
+							<ButtonTooltip
+								id="remove-image"
+								onClick={() => handleRemoveImageClick()}
+								side="bottom"
+								label="Remove image">
 								<IconFileX size={16} className="text-zinc-400 group-hover:text-zinc-600" />
 							</ButtonTooltip>
 						</div>
@@ -272,9 +294,13 @@ const ResumeHeaderForm = ({
 				</div>
 				<div className="relative flex flex-col gap-0 w-fit">
 					{fields.map((field, index) => (
-						<article key={field.id} className="relative w-fit flex items-center -mt-2 last-of-type:-mt-3">
+						<article
+							data-testid={`link-${index}`}
+							key={field.id}
+							className="relative w-fit flex items-center -mt-2 last-of-type:-mt-3">
 							{isFocused && (
 								<Button
+									data-testid={`remove-link-${index}`}
 									onClick={() => handleRemoveLink(index)}
 									className="group absolute -left-4 top-[0.7rem] rounded-full bg-transparent grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />
@@ -311,6 +337,7 @@ const ResumeHeaderForm = ({
 							<Tooltip>
 								<TooltipTrigger asChild>
 									<Button
+										data-testid={`add-link`}
 										type="button"
 										size={'sm'}
 										className="group absolute -bottom-6 bg-zinc-100/50 hover:bg-zinc-200/50 p-2 border shadow-sm w-fit"

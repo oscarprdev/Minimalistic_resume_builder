@@ -94,6 +94,7 @@ const ResumeSkillsForm = ({
 				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5 pb-1">
 				{isFocused && (
 					<ButtonTooltip
+						id="remove-skills"
 						className="absolute top-2 right-12"
 						side="left"
 						label="Remove section"
@@ -121,6 +122,7 @@ const ResumeSkillsForm = ({
 				<div className="flex items-center justify-start flex-wrap gap-2 w-full">
 					{isFocused && (
 						<ButtonTooltip
+							id="add-skill"
 							onClick={() => handleAppendSkill(defaultSkill)}
 							side="right"
 							label="Add skill"
@@ -129,9 +131,10 @@ const ResumeSkillsForm = ({
 						</ButtonTooltip>
 					)}
 					{fields.map((field, index) => (
-						<article key={field.id} className="relative flex flex-col gap-0">
+						<article data-testid={`skill-${index}`} key={field.id} className="relative flex flex-col gap-0">
 							{isFocused && (
 								<Button
+									data-testid={`remove-skill-${index}`}
 									onClick={() => handleRemoveSkill(index)}
 									className="group absolute -top-1 -left-1 rounded-full bg-zinc-200/50 border grid place-items-center p-[0.1rem] w-fit h-fit hover:bg-zinc-200">
 									<IconX size={14} className="text-zinc-400 group-hover:text-zinc-900 duration-200" />

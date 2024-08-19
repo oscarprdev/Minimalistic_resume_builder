@@ -70,6 +70,7 @@ const ResumeSummaryForm = ({
 				className="relative flex flex-col w-full hover:bg-zinc-100/50 duration-200 pl-5">
 				{isFocused && (
 					<ButtonTooltip
+						id="remove-summary"
 						className="absolute top-2 right-2"
 						side="left"
 						label="Remove section"

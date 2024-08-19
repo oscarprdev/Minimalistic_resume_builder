@@ -67,7 +67,7 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 	};
 
 	return (
-		<section>
+		<section data-testid="education">
 			{!response.isPending && response.data && (
 				<ResumeEducationForm
 					handleSubmit={handleSubmit}
