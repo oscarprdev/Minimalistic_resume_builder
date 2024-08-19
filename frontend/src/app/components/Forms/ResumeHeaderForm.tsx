@@ -51,6 +51,8 @@ const resumeHeaderFormSchema = z.object({
 	error: z.union([z.string(), z.null()]),
 });
 
+let firstRendered = false;
+
 const ResumeHeaderForm = ({
 	handleSubmit,
 	afterResumeHeaderFormSubmit,
@@ -100,9 +102,11 @@ const ResumeHeaderForm = ({
 	});
 
 	useEffect(() => {
-		if (imageValue) {
+		if (firstRendered && imageValue) {
 			debounced();
 		}
+
+		firstRendered = true;
 	}, [imageValue, debounced, fields]);
 
 	const handleAppendLink = (value: string) => {
