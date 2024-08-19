@@ -14,7 +14,9 @@ export class ResumeEducationService implements IResumeEducationService {
 
 	async describe(resumeId: string) {
 		try {
-			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/education`);
+			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/education`, {
+				cache: 'no-store',
+			});
 			const jsonResponse: Education = await response.json();
 
 			return successResponse(jsonResponse);

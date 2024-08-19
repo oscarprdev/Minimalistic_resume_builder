@@ -49,7 +49,7 @@ export default async function HomeScreen({ resumeId }: HomeScreenProps) {
 					</MainHome>
 				);
 			}
-			
+
 			const createDefaultHeaderResponse = await updateHeaderAction(
 				{ ...defaultResume.header, id: crypto.randomUUID().toString() },
 				id

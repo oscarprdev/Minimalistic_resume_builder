@@ -5,10 +5,11 @@ import { toast } from '../../ui/use-toast';
 import { deleteSkillsAction } from '@/app/actions/resume/delete-skills';
 import { describeSkillsAction } from '@/app/actions/resume/describe-skills';
 import { updateSkillsAction } from '@/app/actions/resume/update-skills';
+import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeSkillsStore } from '@/store/useResumeSkillsStore';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
 
@@ -20,8 +21,9 @@ type ResumeSkillsProps = {
 const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 	const router = useRouter();
 	const { resumeSkills, updateSkills } = useResumeSkillsStore();
-	const queryResumeSkills = useQuery({
-		queryKey: ['resumeSkills', resumeId],
+
+	const response = useDescribeSection({
+		resumeId,
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeSkills);
@@ -30,13 +32,6 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 			return await describeSkillsAction(resumeId);
 		},
 	});
-
-	if (queryResumeSkills.data && isError(queryResumeSkills.data)) {
-		toast({
-			variant: 'destructive',
-			description: queryResumeSkills.data.error,
-		});
-	}
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeSkillsFormValues) => {
@@ -70,12 +65,12 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 
 	return (
 		<section>
-			{!queryResumeSkills.isPending && queryResumeSkills.data && !isError(queryResumeSkills.data) && (
+			{!response.isPending && response.data && (
 				<ResumeSkillsForm
 					handleSubmit={handleSubmit}
 					afterResumeSkillsFormSubmit={afterResumeSkillsFormSubmit}
 					submitResponse={data}
-					defaultValues={queryResumeSkills.data.success}
+					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
 			)}

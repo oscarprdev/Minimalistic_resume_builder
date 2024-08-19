@@ -14,7 +14,9 @@ export class ResumeSummaryService implements IResumeSummaryService {
 
 	async describe(resumeId: string) {
 		try {
-			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/summary`);
+			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/summary`, {
+				cache: 'no-store',
+			});
 			const jsonResponse: Summary = await response.json();
 
 			return successResponse(jsonResponse);

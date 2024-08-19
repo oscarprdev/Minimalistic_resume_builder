@@ -23,7 +23,7 @@ const Header = async ({ resumeId }: { resumeId: string }) => {
 				</span>
 			</div>
 
-			<DropdownLogged username={session?.user?.name || null} resumeId={resumeId} />
+			<DropdownLogged user={session?.user} resumeId={resumeId} />
 		</header>
 	);
 };

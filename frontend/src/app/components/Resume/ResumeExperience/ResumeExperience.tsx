@@ -5,10 +5,11 @@ import { toast } from '../../ui/use-toast';
 import { deleteExperienceAction } from '@/app/actions/resume/delete-experience';
 import { describeExperienceAction } from '@/app/actions/resume/describe-experience';
 import { updateExperienceAction } from '@/app/actions/resume/update-experience';
+import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeExperienceStore } from '@/store/useResumeExperienceStore';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
 
@@ -20,8 +21,9 @@ type ResumeExperienceProps = {
 const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 	const router = useRouter();
 	const { resumeExperience, updateExperience } = useResumeExperienceStore();
-	const queryResumeExperience = useQuery({
-		queryKey: ['resumeExperience', resumeId],
+
+	const response = useDescribeSection({
+		resumeId,
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeExperience);
@@ -30,13 +32,6 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 			return await describeExperienceAction(resumeId);
 		},
 	});
-
-	if (queryResumeExperience.data && isError(queryResumeExperience.data)) {
-		toast({
-			variant: 'destructive',
-			description: queryResumeExperience.data.error,
-		});
-	}
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeExperienceFormValues) => {
@@ -73,12 +68,12 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 
 	return (
 		<section>
-			{!queryResumeExperience.isPending && queryResumeExperience.data && !isError(queryResumeExperience.data) && (
+			{!response.isPending && response.data && (
 				<ResumeExperienceForm
 					handleSubmit={handleSubmit}
 					afterResumeExperienceFormSubmit={afterResumeExperienceFormSubmit}
 					submitResponse={data}
-					defaultValues={queryResumeExperience.data.success}
+					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
 			)}

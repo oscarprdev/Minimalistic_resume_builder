@@ -5,6 +5,7 @@ import { toast } from '../../ui/use-toast';
 import { deleteEducationAction } from '@/app/actions/resume/delete-education';
 import { describeEducationAction } from '@/app/actions/resume/describe-education';
 import { updateEducationAction } from '@/app/actions/resume/update-education';
+import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeEducationStore } from '@/store/useResumeEducationStore';
@@ -20,8 +21,9 @@ type ResumeEducationProps = {
 const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 	const router = useRouter();
 	const { resumeEducation, updateEducation } = useResumeEducationStore();
-	const queryResumeEducation = useQuery({
-		queryKey: ['resumeEducation', resumeId],
+
+	const response = useDescribeSection({
+		resumeId,
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeEducation);
@@ -30,13 +32,6 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 			return await describeEducationAction(resumeId);
 		},
 	});
-
-	if (queryResumeEducation.data && isError(queryResumeEducation.data)) {
-		toast({
-			variant: 'destructive',
-			description: queryResumeEducation.data.error,
-		});
-	}
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeEducationFormValues) => {
@@ -73,12 +68,12 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 
 	return (
 		<section>
-			{!queryResumeEducation.isPending && queryResumeEducation.data && !isError(queryResumeEducation.data) && (
+			{!response.isPending && response.data && (
 				<ResumeEducationForm
 					handleSubmit={handleSubmit}
 					afterResumeEducationFormSubmit={afterResumeEducationFormSubmit}
 					submitResponse={data}
-					defaultValues={queryResumeEducation.data.success}
+					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
 			)}

@@ -1,6 +1,7 @@
 'use client';
 
 import AuthModal from '../Modals/AuthModal';
+import SelectResumeModal from '../Modals/SelectResumeModal';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import DownloadPDFButton, { DownloadPDFButtonRef } from './DownloadPDFButton';
 import LogoutButton from './LogoutButton';
@@ -14,14 +15,15 @@ import {
 	DropdownMenuTrigger,
 } from '@/app/components/ui/dropdown-menu';
 import { IconLocation } from '@tabler/icons-react';
+import { User } from 'next-auth';
 import { useRef } from 'react';
 
 type DropdownLoggedProps = {
-	username: string | null;
+	user?: User;
 	resumeId?: string;
 };
 
-const DropdownLogged = ({ username, resumeId }: DropdownLoggedProps) => {
+const DropdownLogged = ({ user, resumeId }: DropdownLoggedProps) => {
 	const downloadPDFButtonRef = useRef<DownloadPDFButtonRef>(null);
 	const newResumeButtonRef = useRef<NewResumeButtonRef>(null);
 
@@ -46,11 +48,12 @@ const DropdownLogged = ({ username, resumeId }: DropdownLoggedProps) => {
 				<DropdownMenuItem onClick={() => newResumeButtonRef.current?.handleNewResume()}>
 					<NewResumeButton ref={newResumeButtonRef} />
 				</DropdownMenuItem>
+				<SelectResumeModal userLogged={user} />
 				<DropdownMenuItem onClick={() => downloadPDFButtonRef.current?.handleDownloadPdf()}>
 					<DownloadPDFButton ref={downloadPDFButtonRef} resumeId={resumeId} />
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				{username ? <LogoutButton /> : <AuthModal />}
+				{user ? <LogoutButton /> : <AuthModal />}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

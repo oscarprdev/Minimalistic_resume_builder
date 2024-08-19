@@ -5,6 +5,7 @@ import { toast } from '../../ui/use-toast';
 import { deleteLanguagesAction } from '@/app/actions/resume/delete-languages';
 import { describeLanguagesAction } from '@/app/actions/resume/describe-languages';
 import { updateLanguagesAction } from '@/app/actions/resume/update-languages';
+import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeLanguageStore } from '@/store/useResumeLanguageStore';
@@ -20,8 +21,9 @@ type ResumeLanguageProps = {
 const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 	const router = useRouter();
 	const { resumeLanguage, updateLanguage } = useResumeLanguageStore();
-	const queryResumeLanguage = useQuery({
-		queryKey: ['resumeLanguage', resumeId],
+
+	const response = useDescribeSection({
+		resumeId,
 		queryFn: async () => {
 			if (!userLogged) {
 				return successResponse(resumeLanguage);
@@ -30,13 +32,6 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 			return await describeLanguagesAction(resumeId);
 		},
 	});
-
-	if (queryResumeLanguage.data && isError(queryResumeLanguage.data)) {
-		toast({
-			variant: 'destructive',
-			description: queryResumeLanguage.data.error,
-		});
-	}
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeLanguagesFormValues) => {
@@ -73,12 +68,12 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 
 	return (
 		<section>
-			{!queryResumeLanguage.isPending && queryResumeLanguage.data && !isError(queryResumeLanguage.data) && (
+			{!response.isPending && response.data && (
 				<ResumeLanguagesForm
 					handleSubmit={handleSubmit}
 					afterResumeLanguagesFormSubmit={afterResumeLanguageFormSubmit}
 					submitResponse={data}
-					defaultValues={queryResumeLanguage.data.success}
+					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
 			)}
