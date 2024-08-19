@@ -15,7 +15,13 @@ export const metadata: Metadata = {
 	description: 'Resume builder app',
 };
 
-export default function RootLayout({ children, session }: { children: ReactNode; session: Session }) {
+export default function RootLayout({
+	children,
+	params: { session },
+}: {
+	children: ReactNode;
+	params: { session: Session };
+}) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>

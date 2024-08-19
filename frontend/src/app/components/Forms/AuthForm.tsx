@@ -44,6 +44,7 @@ const AuthForm = ({ handleSubmit, afterAuthFormSubmit, submitResponse, children 
 				afterAuthFormSubmit();
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [submitResponse]);
 
 	return (

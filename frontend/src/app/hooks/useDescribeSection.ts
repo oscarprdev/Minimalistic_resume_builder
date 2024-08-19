@@ -28,6 +28,7 @@ export const useDescribeSection = <T>({ resumeId, queryFn }: useDescribeSectionI
 		};
 
 		handleQuery();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [resumeId]);
 
 	return {
