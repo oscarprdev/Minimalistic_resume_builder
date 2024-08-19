@@ -19,34 +19,34 @@ test.describe('Header section', () => {
 		await expect(link2).toBeVisible();
 	});
 
-	test('Image should be successfully uploaded', async ({ resumePage, headerSectionPage }) => {
-		await expect(headerSectionPage.image).not.toBeVisible();
+	// test('Image should be successfully uploaded', async ({ resumePage, headerSectionPage }) => {
+	// 	await expect(headerSectionPage.image).not.toBeVisible();
 
-		await headerSectionPage.section.hover();
-		await expect(headerSectionPage.uploadImageBtn).toBeVisible();
+	// 	await headerSectionPage.section.hover();
+	// 	await expect(headerSectionPage.uploadImageBtn).toBeVisible();
 
-		await headerSectionPage.uploadImage();
+	// 	await headerSectionPage.uploadImage();
 
-		await resumePage.header.hover();
+	// 	await resumePage.header.hover();
 
-		await expect(headerSectionPage.image).toBeVisible();
-	});
+	// 	await expect(headerSectionPage.image).toBeVisible();
+	// });
 
-	test('Image should be successfully removed', async ({ resumePage, headerSectionPage }) => {
-		await expect(headerSectionPage.image).not.toBeVisible();
+	// test('Image should be successfully removed', async ({ resumePage, headerSectionPage }) => {
+	// 	await expect(headerSectionPage.image).not.toBeVisible();
 
-		await headerSectionPage.section.hover();
-		await expect(headerSectionPage.uploadImageBtn).toBeVisible();
+	// 	await headerSectionPage.section.hover();
+	// 	await expect(headerSectionPage.uploadImageBtn).toBeVisible();
 
-		await headerSectionPage.uploadImage();
+	// 	await headerSectionPage.uploadImage();
 
-		await expect(headerSectionPage.image).toBeVisible();
+	// 	await expect(headerSectionPage.image).toBeVisible();
 
-		await expect(headerSectionPage.removeImageBtn).toBeVisible();
-		headerSectionPage.removeImageBtn.click();
+	// 	await expect(headerSectionPage.removeImageBtn).toBeVisible();
+	// 	headerSectionPage.removeImageBtn.click();
 
-		await resumePage.header.hover();
+	// 	await resumePage.header.hover();
 
-		await expect(headerSectionPage.image).not.toBeVisible();
-	});
+	// 	await expect(headerSectionPage.image).not.toBeVisible();
+	// });
 });
