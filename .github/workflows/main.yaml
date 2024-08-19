@@ -6,7 +6,8 @@ on:
     pull_request:
         branches: [main]
         types: [opened, synchronize]
-
+env:
+    CI: true
 jobs:
     avoid_redundancy:
         runs-on: ubuntu-22.04
@@ -141,4 +142,4 @@ jobs:
               run: cd frontend && npx playwright install --with-deps
             - name: Run Tests
               shell: bash
-              run: cd frontend && npm run test:e2e
+              run: cd frontend && npx dotenv -e .env -- npm run test:e2e
