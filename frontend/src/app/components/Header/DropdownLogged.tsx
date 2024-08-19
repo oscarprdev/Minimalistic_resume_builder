@@ -45,10 +45,14 @@ const DropdownLogged = ({ user, resumeId }: DropdownLoggedProps) => {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-20 text-zinc-700">
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
-				<DropdownMenuItem onClick={() => newResumeButtonRef.current?.handleNewResume()}>
-					<NewResumeButton ref={newResumeButtonRef} />
-				</DropdownMenuItem>
-				<SelectResumeModal userLogged={user} />
+				{user && (
+					<>
+						<DropdownMenuItem onClick={() => newResumeButtonRef.current?.handleNewResume()}>
+							<NewResumeButton ref={newResumeButtonRef} />
+						</DropdownMenuItem>
+						<SelectResumeModal userLogged={user} />
+					</>
+				)}
 				<DropdownMenuItem onClick={() => downloadPDFButtonRef.current?.handleDownloadPdf()}>
 					<DownloadPDFButton ref={downloadPDFButtonRef} resumeId={resumeId} />
 				</DropdownMenuItem>

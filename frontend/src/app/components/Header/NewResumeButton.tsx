@@ -29,6 +29,7 @@ const NewResumeButton = ({}, ref: Ref<NewResumeButtonRef>) => {
 	useImperativeHandle(ref, () => ({
 		handleNewResume,
 	}));
+	
 	return (
 		<div className="flex items-center gap-2 ">
 			<IconPencilPlus size={16} />
