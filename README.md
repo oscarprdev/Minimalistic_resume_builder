@@ -1,13 +1,15 @@
-# Resummie
+
+## Minimalistic resume builder
 
 ![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![image](https://img.shields.io/badge/Nextjs-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
+<img width="1469" alt="Captura de pantalla 2024-08-19 a las 23 10 07" src="https://github.com/user-attachments/assets/6ac43286-fcf3-4973-ba1b-9bd8aed47bcd">
 
 ## Description
 
-Minimalistic resume builder app. Create, edit, store and download your own resume in a simple way
+Minimalistic resume builder app. Create, edit, store and download your own resume in a simple way.
 
 ## Stack
 
@@ -24,17 +26,17 @@ Minimalistic resume builder app. Create, edit, store and download your own resum
 ## Features
   - Download Resume PDF
   - Edit and store resumes
-  - Choose between themes
 
-## Work in progress
-  - Responsive layout
+## Next features
   - New themes
   - Download resume in JSON
-  - Increase test coverage
-  - Github actions
+  - Text generated with AI
+
  
 ## Screenshots
 
-![image](https://github.com/oscarprdev/resume_builder/assets/94851836/82ba6903-df9e-4889-a24b-fd272b6bafb6)
-![473_1x_shots_so](https://github.com/oscarprdev/Resume_builder/assets/94851836/ffab85e9-7753-495b-89d1-50ab575c0b97)
+<img width="1469" alt="Captura de pantalla 2024-08-19 a las 23 09 30" src="https://github.com/user-attachments/assets/83501479-a10c-4dc0-ad25-d43bdc1e7ff4">
 
+<img width="1469" alt="Captura de pantalla 2024-08-19 a las 23 09 08" src="https://github.com/user-attachments/assets/92978eb1-f3c6-47f9-866f-bdc82582ce2e">
+
+<img width="1469" alt="Captura de pantalla 2024-08-19 a las 23 09 54" src="https://github.com/user-attachments/assets/b7e113ad-b150-4a26-bd8f-bd929e642f21">
