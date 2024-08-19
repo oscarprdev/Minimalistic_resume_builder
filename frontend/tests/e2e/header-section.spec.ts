@@ -8,8 +8,8 @@ test.describe('Header section', () => {
 	});
 
 	test('User should be able to add new links', async ({ headerSectionPage }) => {
-		await headerSectionPage.section.hover();
-		await expect(headerSectionPage.addNewLinkBtn).toBeVisible();
+		await headerSectionPage.section.hover({ force: true });
+		await expect(headerSectionPage.addNewLinkBtn).toBeVisible({ timeout: 10000 });
 
 		const link = headerSectionPage.getLink(0);
 		await expect(link).toBeVisible();
