@@ -5,7 +5,7 @@ const corsHeaders = {
 	'Access-Control-Allow-Methods': 'GET, OPTIONS, POST, PUT, DELETE',
 	'Access-Control-Allow-Headers': '*',
 };
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:3000', 'https://minimalistic-resume-builder.vercel.app'];
 
 const corsMiddleware = (handler: (request: RequestParams) => Promise<Response>) => {
 	return async (request: RequestParams): Promise<Response> => {
