@@ -4,7 +4,7 @@ import DropdownLogged from './DropdownLogged';
 import { auth } from '@/auth';
 import Link from 'next/link';
 
-const Header = async ({ resumeId }: { resumeId: string }) => {
+const Header = async ({ resumeId }: { resumeId?: string }) => {
 	const session = await auth();
 
 	return (

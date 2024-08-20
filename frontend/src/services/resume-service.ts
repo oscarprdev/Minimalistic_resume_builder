@@ -17,7 +17,7 @@ export class ResumeService implements IResumeService {
 	async describe() {
 		try {
 			const response = await fetch(`${this.path}/${this.userConfig.id}/list`, {
-				cache: 'no-store',
+				cache: 'no-cache',
 			});
 			const jsonResponse: Resume[] = await response.json();
 
@@ -30,7 +30,7 @@ export class ResumeService implements IResumeService {
 	async describeById(resumeId: string) {
 		try {
 			const response = await fetch(`${this.path}/${this.userConfig.id}/${resumeId}/describe`, {
-				cache: 'no-store',
+				cache: 'no-cache',
 			});
 			const jsonResponse: ResumeCompleted = await response.json();
 

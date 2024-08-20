@@ -102,6 +102,10 @@ const ResumeHeaderForm = ({
 	});
 
 	useEffect(() => {
+		form.reset({ ...defaultValues, error: null });
+	}, [defaultValues, form]);
+
+	useEffect(() => {
 		if (firstRendered && imageValue) {
 			debounced();
 		}

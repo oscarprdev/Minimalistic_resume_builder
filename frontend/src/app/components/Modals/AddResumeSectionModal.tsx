@@ -22,7 +22,14 @@ import { useResumeExperienceStore } from '@/store/useResumeExperienceStore';
 import { useResumeLanguageStore } from '@/store/useResumeLanguageStore';
 import { useResumeSkillsStore } from '@/store/useResumeSkillsStore';
 import { useResumeSummaryStore } from '@/store/useResumeSummaryStore';
-import { IconBriefcase, IconMessage, IconMessageLanguage, IconSchool, IconTools } from '@tabler/icons-react';
+import {
+	IconBriefcase,
+	IconLoader2,
+	IconMessage,
+	IconMessageLanguage,
+	IconSchool,
+	IconTools,
+} from '@tabler/icons-react';
 import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
@@ -68,7 +75,7 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 	const { updateSkills } = useResumeSkillsStore();
 	const { updateLanguage } = useResumeLanguageStore();
 
-	const { mutate } = useMutation({
+	const { mutate, isPending } = useMutation({
 		mutationFn: async (section: SectionSelected) => {
 			switch (section) {
 				case SectionSelected.summary:
@@ -161,27 +168,40 @@ const AddResumeSectionModal = ({ userLogged, resumeId, sectionsDisplayed }: AddR
 						Add section
 					</Button>
 				</DialogTrigger>
-				<DialogContent data-testid="add-section-modal-content">
-					<DialogHeader>
-						<DialogTitle>New section</DialogTitle>
-						<DialogDescription className="text-zinc-600">
-							Choose the section to include into your resume.
-						</DialogDescription>
-					</DialogHeader>
-					<div className="flex flex-col items-center justify-center gap-2">
-						{SECTIONS.map(section => (
-							<Button
-								key={section.name}
-								data-testid={`section-${section.name}-button`}
-								disabled={sectionsDisplayed.includes(section.name)}
-								onClick={() => mutate(section.name)}
-								className="w-full grid place-items-center rounded-lg bg-zinc-200/50 hover:bg-zinc-200 duration-200 cursor-pointer h-auto">
-								{section.icon}
-								<p className="capitalize text-zinc-500 text-xs">{section.name}</p>
-							</Button>
-						))}
-					</div>
-				</DialogContent>
+				{isPending ? (
+					<DialogContent data-testid="add-section-modal-content" className="grid place-items-center w-56">
+						<DialogHeader>
+							<DialogTitle className="text-sm">Creating new section...</DialogTitle>
+						</DialogHeader>
+						<IconLoader2 size={20} className="text-zinc-500 animate-spin" />
+					</DialogContent>
+				) : (
+					<DialogContent data-testid="add-section-modal-content">
+						<DialogHeader>
+							<DialogTitle>New section</DialogTitle>
+							<DialogDescription className="text-zinc-600">
+								Choose the section to include into your resume.
+							</DialogDescription>
+						</DialogHeader>
+						<div className="flex flex-col items-center justify-center gap-2">
+							{SECTIONS.map(section => (
+								<Button
+									key={section.name}
+									data-testid={`section-${section.name}-button`}
+									disabled={sectionsDisplayed.includes(section.name)}
+									onClick={() => mutate(section.name)}
+									className="w-full grid place-items-center rounded-lg bg-zinc-200/50 hover:bg-zinc-200 duration-200 cursor-pointer h-auto">
+									{section.icon}
+									{isPending ? (
+										<IconLoader2 size={20} className="text-zinc-500 animate-spin" />
+									) : (
+										<p className="capitalize text-zinc-500 text-xs">{section.name}</p>
+									)}
+								</Button>
+							))}
+						</div>
+					</DialogContent>
+				)}
 			</Dialog>
 		</section>
 	);
