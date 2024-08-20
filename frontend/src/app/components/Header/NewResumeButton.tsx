@@ -2,8 +2,10 @@
 
 import { toast } from '../ui/use-toast';
 import { createResumeAction } from '@/app/actions/resume/create-resume';
+import { setResumeId } from '@/app/actions/resume/set-resume-id';
 import { isError } from '@/lib/types';
 import { IconPencilPlus } from '@tabler/icons-react';
+import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
 import React, { Ref, forwardRef, useImperativeHandle } from 'react';
 
@@ -23,13 +25,13 @@ const NewResumeButton = ({}, ref: Ref<NewResumeButtonRef>) => {
 					variant: 'destructive',
 					description: response.error,
 				})
-			: router.refresh();
+			: setResumeId(resumeId);
 	};
 
 	useImperativeHandle(ref, () => ({
 		handleNewResume,
 	}));
-	
+
 	return (
 		<div className="flex items-center gap-2 ">
 			<IconPencilPlus size={16} />
