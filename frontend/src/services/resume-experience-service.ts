@@ -13,7 +13,9 @@ export class ResumeExperienceService implements IResumeExperienceService {
 
 	async describe(resumeId: string) {
 		try {
-			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/experience`);
+			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/experience`, {
+				cache: 'no-store',
+			});
 			const jsonResponse: Experience = await response.json();
 
 			return successResponse(jsonResponse);

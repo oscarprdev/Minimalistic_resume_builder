@@ -69,7 +69,9 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 
 	return (
 		<section data-testid="languages">
-			{!response.isPending && response.data ? (
+			{response.isPending ? (
+				<ResumeLanguagesSkeleton />
+			) : response.data ? (
 				<ResumeLanguagesForm
 					handleSubmit={handleSubmit}
 					afterResumeLanguagesFormSubmit={afterResumeLanguageFormSubmit}
@@ -78,7 +80,7 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 					handleDeleteSection={handleDeleteSection}
 				/>
 			) : (
-				<ResumeLanguagesSkeleton />
+				<p>error</p>
 			)}
 		</section>
 	);

@@ -16,7 +16,9 @@ export class ResumeService implements IResumeService {
 
 	async describe() {
 		try {
-			const response = await fetch(`${this.path}/${this.userConfig.id}/list`);
+			const response = await fetch(`${this.path}/${this.userConfig.id}/list`, {
+				cache: 'no-store',
+			});
 			const jsonResponse: Resume[] = await response.json();
 
 			return successResponse(jsonResponse);

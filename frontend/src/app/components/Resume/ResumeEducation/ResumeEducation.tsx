@@ -69,7 +69,9 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 
 	return (
 		<section data-testid="education">
-			{!response.isPending && response.data ? (
+			{response.isPending ? (
+				<ResumeEducationSkeleton />
+			) : response.data ? (
 				<ResumeEducationForm
 					handleSubmit={handleSubmit}
 					afterResumeEducationFormSubmit={afterResumeEducationFormSubmit}
@@ -78,7 +80,7 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 					handleDeleteSection={handleDeleteSection}
 				/>
 			) : (
-				<ResumeEducationSkeleton />
+				<p>error</p>
 			)}
 		</section>
 	);

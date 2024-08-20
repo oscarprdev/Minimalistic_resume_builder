@@ -53,7 +53,9 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 
 	return (
 		<section data-testid="header">
-			{!response.isPending && response.data ? (
+			{response.isPending ? (
+				<ResumeHeaderSkeleton />
+			) : response.data ? (
 				<ResumeHeaderForm
 					resumeId={resumeId}
 					handleSubmit={handleSubmit}
@@ -62,7 +64,7 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 					defaultValues={response.data}
 				/>
 			) : (
-				<ResumeHeaderSkeleton />
+				<p>error</p>
 			)}
 		</section>
 	);

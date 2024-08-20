@@ -13,7 +13,9 @@ export class ResumeLanguagesService implements IResumeLanguagesService {
 
 	async describe(resumeId: string) {
 		try {
-			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/languages`);
+			const response = await fetch(`${API_URL}/resume/${this.userInfo.userId}/${resumeId}/languages`, {
+				cache: 'no-store',
+			});
 			const jsonResponse: Languages = await response.json();
 
 			return successResponse(jsonResponse);

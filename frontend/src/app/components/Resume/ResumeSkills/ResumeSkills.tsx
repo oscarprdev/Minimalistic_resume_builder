@@ -66,7 +66,9 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 
 	return (
 		<section data-testid="skills">
-			{!response.isPending && response.data ? (
+			{response.isPending ? (
+				<ResumeSkillsSkeleton />
+			) : response.data ? (
 				<ResumeSkillsForm
 					handleSubmit={handleSubmit}
 					afterResumeSkillsFormSubmit={afterResumeSkillsFormSubmit}
@@ -75,7 +77,7 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 					handleDeleteSection={handleDeleteSection}
 				/>
 			) : (
-				<ResumeSkillsSkeleton />
+				<p>error</p>
 			)}
 		</section>
 	);

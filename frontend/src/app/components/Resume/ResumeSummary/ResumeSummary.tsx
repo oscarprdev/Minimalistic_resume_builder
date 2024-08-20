@@ -66,7 +66,9 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 
 	return (
 		<section data-testid="summary">
-			{!response.isPending && response.data ? (
+			{response.isPending ? (
+				<ResumeSummarySkeleton />
+			) : response.data ? (
 				<ResumeSummaryForm
 					handleSubmit={handleSubmit}
 					afterResumeSummaryFormSubmit={afterResumeSummaryFormSubmit}
@@ -75,7 +77,7 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 					handleDeleteSection={handleDeleteSection}
 				/>
 			) : (
-				<ResumeSummarySkeleton />
+				<p>error</p>
 			)}
 		</section>
 	);
