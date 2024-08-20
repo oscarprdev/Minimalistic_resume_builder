@@ -2,12 +2,10 @@
 
 import ResumeExperienceForm, { ResumeExperienceFormValues } from '../../Forms/ResumeExperienceForm';
 import { toast } from '../../ui/use-toast';
-import ResumeExperienceSkeleton from './ResumeExperienceSkeleton';
 import { deleteExperienceAction } from '@/app/actions/resume/delete-experience';
-import { describeExperienceAction } from '@/app/actions/resume/describe-experience';
 import { updateExperienceAction } from '@/app/actions/resume/update-experience';
-import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
+import { DefaultResumeExperience } from '@/data/default-resume.types';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeExperienceStore } from '@/store/useResumeExperienceStore';
 import { useMutation } from '@tanstack/react-query';
@@ -17,22 +15,12 @@ import { useRouter } from 'next/navigation';
 type ResumeExperienceProps = {
 	resumeId: string;
 	userLogged?: User;
+	resumeExperience: DefaultResumeExperience;
 };
 
-const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
+const ResumeExperience = ({ resumeId, userLogged, resumeExperience }: ResumeExperienceProps) => {
 	const router = useRouter();
-	const { resumeExperience, updateExperience } = useResumeExperienceStore();
-
-	const response = useDescribeSection({
-		resumeId,
-		queryFn: async () => {
-			if (!userLogged) {
-				return successResponse(resumeExperience);
-			}
-
-			return await describeExperienceAction(resumeId);
-		},
-	});
+	const { updateExperience } = useResumeExperienceStore();
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeExperienceFormValues) => {
@@ -69,19 +57,13 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 
 	return (
 		<section data-testid="experience">
-			{response.isPending || (!response.error && !response.data) ? (
-				<ResumeExperienceSkeleton />
-			) : response.data ? (
-				<ResumeExperienceForm
-					handleSubmit={handleSubmit}
-					afterResumeExperienceFormSubmit={afterResumeExperienceFormSubmit}
-					submitResponse={data}
-					defaultValues={response.data}
-					handleDeleteSection={handleDeleteSection}
-				/>
-			) : (
-				<p>error</p>
-			)}
+			<ResumeExperienceForm
+				handleSubmit={handleSubmit}
+				afterResumeExperienceFormSubmit={afterResumeExperienceFormSubmit}
+				submitResponse={data}
+				defaultValues={resumeExperience}
+				handleDeleteSection={handleDeleteSection}
+			/>
 		</section>
 	);
 };

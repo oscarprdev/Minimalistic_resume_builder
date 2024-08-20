@@ -1,38 +1,23 @@
 'use client';
 
 import ResumeHeaderForm, { ResumeHeaderFormValues } from '../../Forms/ResumeHeaderForm';
-import { toast } from '../../ui/use-toast';
-import ResumeHeaderSkeleton from './ResumeHeaderSkeleton';
-import { describeHeaderAction } from '@/app/actions/resume/describe-header';
 import { updateHeaderAction } from '@/app/actions/resume/update-header';
-import { useDescribeSection } from '@/app/hooks/useDescribeSection';
-import { defaultResume } from '@/data/default-resume';
-import { isError, successResponse } from '@/lib/types';
+import { DefaultResumeHeader } from '@/data/default-resume.types';
+import { successResponse } from '@/lib/types';
 import { useResumeHeaderStore } from '@/store/useResumeHeaderStore';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 type ResumeHeaderProps = {
 	resumeId: string;
 	userLogged?: User;
+	resumeHeader: DefaultResumeHeader;
 };
 
-const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
+const ResumeHeader = ({ resumeId, userLogged, resumeHeader }: ResumeHeaderProps) => {
 	const router = useRouter();
-	const { resumeHeader, updateHeader } = useResumeHeaderStore();
-
-	const response = useDescribeSection({
-		resumeId,
-		queryFn: async () => {
-			if (!userLogged) {
-				return successResponse(resumeHeader);
-			}
-
-			return await describeHeaderAction(resumeId);
-		},
-	});
+	const { updateHeader } = useResumeHeaderStore();
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeHeaderFormValues) => {
@@ -53,19 +38,13 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 
 	return (
 		<section data-testid="header">
-			{response.isPending || (!response.error && !response.data) ? (
-				<ResumeHeaderSkeleton />
-			) : response.data ? (
-				<ResumeHeaderForm
-					resumeId={resumeId}
-					handleSubmit={handleSubmit}
-					afterResumeHeaderFormSubmit={afterResumeHeaderFormSubmit}
-					submitResponse={data}
-					defaultValues={response.data}
-				/>
-			) : (
-				<p>error</p>
-			)}
+			<ResumeHeaderForm
+				resumeId={resumeId}
+				handleSubmit={handleSubmit}
+				afterResumeHeaderFormSubmit={afterResumeHeaderFormSubmit}
+				submitResponse={data}
+				defaultValues={resumeHeader}
+			/>
 		</section>
 	);
 };

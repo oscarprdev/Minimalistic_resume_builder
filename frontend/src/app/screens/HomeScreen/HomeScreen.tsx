@@ -9,15 +9,15 @@ import ResumeLanguage from '../../components/Resume/ResumeLanguages/ResumeLangua
 import ResumeSkills from '../../components/Resume/ResumeSkills/ResumeSkills';
 import ResumeSummary from '../../components/Resume/ResumeSummary/ResumeSummary';
 import HomeScreenClient from './HomeScreenClient';
+import { filterSections } from './utils/utils';
 import { updateHeaderAction } from '@/app/actions/resume/update-header';
-import { SectionSelected } from '@/app/components/types/types';
 import ErrorMessage from '@/app/containers/ErrorMessage';
 import MainHome from '@/app/containers/MainHome';
 import { auth } from '@/auth';
 import { defaultResume } from '@/data/default-resume';
 import { isError } from '@/lib/types';
 import { ResumeService } from '@/services/resume-service';
-import { Resume } from '@/types';
+import { User } from 'next-auth';
 
 type HomeScreenProps = {
 	resumeId?: string;
@@ -38,91 +38,34 @@ export default async function HomeScreen({ resumeId }: HomeScreenProps) {
 				</MainHome>
 			);
 		}
-
 		if (allResumesResponse.success.length === 0) {
-			const id = crypto.randomUUID().toString();
-			const createResumeResponse = await createResumeAction(id);
-			if (isError(createResumeResponse)) {
-				return (
-					<MainHome>
-						<ErrorMessage text={createResumeResponse.error} />
-					</MainHome>
-				);
-			}
+			return <NewResumeScreen user={user} resumeService={resumeService} />;
+		}
 
-			const createDefaultHeaderResponse = await updateHeaderAction(
-				{ ...defaultResume.header, id: crypto.randomUUID().toString() },
-				id
-			);
-			if (isError(createDefaultHeaderResponse)) {
-				return (
-					<MainHome>
-						<ErrorMessage text={createDefaultHeaderResponse.error} />
-					</MainHome>
-				);
-			}
+		const id = resumeId || allResumesResponse.success[0].id;
 
+		const resumeResponseCompleted = await resumeService.describeById(id);
+		if (isError(resumeResponseCompleted)) {
 			return (
 				<MainHome>
-					<ResumeHeader userLogged={user} resumeId={createResumeResponse.success} />
-					<AddResumeSectionModal
-						userLogged={user}
-						resumeId={createResumeResponse.success}
-						sectionsDisplayed={[]}
-					/>
+					<ErrorMessage text={resumeResponseCompleted.error} />
 				</MainHome>
 			);
 		}
 
-		let resumeFetched: Resume;
-
-		if (resumeId) {
-			const resumeByIdResponse = await resumeService.describeById(resumeId);
-			if (isError(resumeByIdResponse)) {
-				return (
-					<MainHome>
-						<ErrorMessage text={resumeByIdResponse.error} />
-					</MainHome>
-				);
-			}
-
-			resumeFetched = resumeByIdResponse.success;
-		} else {
-			resumeFetched = allResumesResponse.success[0];
-		}
-
-		let sections = [];
-
-		if (resumeFetched.summary) {
-			sections.push(SectionSelected.summary);
-		}
-
-		if (resumeFetched.experience) {
-			sections.push(SectionSelected.experience);
-		}
-
-		if (resumeFetched.education) {
-			sections.push(SectionSelected.education);
-		}
-
-		if (resumeFetched.skills) {
-			sections.push(SectionSelected.skills);
-		}
-
-		if (resumeFetched.languages) {
-			sections.push(SectionSelected.languages);
-		}
+		const { header, summary, experience, education, languages, skills } = resumeResponseCompleted.success;
+		let sections = filterSections(summary, experience, education, skills, languages);
 
 		return (
 			<MainHome>
-				<ResumeHeader userLogged={user} resumeId={resumeFetched.id} />
-				{resumeFetched.summary && <ResumeSummary userLogged={user} resumeId={resumeFetched.id} />}
-				{resumeFetched.experience && <ResumeExperience userLogged={user} resumeId={resumeFetched.id} />}
-				{resumeFetched.education && <ResumeEducation userLogged={user} resumeId={resumeFetched.id} />}
-				{resumeFetched.skills && <ResumeSkills userLogged={user} resumeId={resumeFetched.id} />}
-				{resumeFetched.languages && <ResumeLanguage userLogged={user} resumeId={resumeFetched.id} />}
-				{sections.length < 5 && (
-					<AddResumeSectionModal userLogged={user} resumeId={resumeFetched.id} sectionsDisplayed={sections} />
+				{header && <ResumeHeader userLogged={user} resumeId={id} resumeHeader={header} />}
+				{summary && <ResumeSummary userLogged={user} resumeId={id} resumeSummary={summary} />}
+				{experience && <ResumeExperience userLogged={user} resumeId={id} resumeExperience={experience} />}
+				{education && <ResumeEducation userLogged={user} resumeId={id} resumeEducation={education} />}
+				{skills && <ResumeSkills userLogged={user} resumeId={id} resumeSkills={skills} />}
+				{languages && <ResumeLanguage userLogged={user} resumeId={id} resumeLanguages={languages} />}
+				{sections.filter(Boolean).length < 5 && (
+					<AddResumeSectionModal userLogged={user} resumeId={id} sectionsDisplayed={sections} />
 				)}
 			</MainHome>
 		);
@@ -130,3 +73,48 @@ export default async function HomeScreen({ resumeId }: HomeScreenProps) {
 
 	return <HomeScreenClient userLogged={user} />;
 }
+
+const NewResumeScreen = async ({ user, resumeService }: { user: User; resumeService: ResumeService }) => {
+	const id = crypto.randomUUID().toString();
+	const createResumeResponse = await createResumeAction(id);
+	if (isError(createResumeResponse)) {
+		return (
+			<MainHome>
+				<ErrorMessage text={createResumeResponse.error} />
+			</MainHome>
+		);
+	}
+
+	const createDefaultHeaderResponse = await updateHeaderAction(
+		{ ...defaultResume.header, id: crypto.randomUUID().toString() },
+		id
+	);
+	if (isError(createDefaultHeaderResponse)) {
+		return (
+			<MainHome>
+				<ErrorMessage text={createDefaultHeaderResponse.error} />
+			</MainHome>
+		);
+	}
+
+	const resumeResponseCompleted = await resumeService.describeById(id);
+	if (isError(resumeResponseCompleted)) {
+		return (
+			<MainHome>
+				<ErrorMessage text={resumeResponseCompleted.error} />
+			</MainHome>
+		);
+	}
+	return (
+		<MainHome>
+			{resumeResponseCompleted.success.header && (
+				<ResumeHeader
+					userLogged={user}
+					resumeId={createResumeResponse.success}
+					resumeHeader={resumeResponseCompleted.success.header}
+				/>
+			)}
+			<AddResumeSectionModal userLogged={user} resumeId={createResumeResponse.success} sectionsDisplayed={[]} />
+		</MainHome>
+	);
+};

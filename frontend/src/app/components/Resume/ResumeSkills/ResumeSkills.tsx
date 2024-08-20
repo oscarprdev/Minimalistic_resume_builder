@@ -2,12 +2,10 @@
 
 import ResumeSkillsForm, { ResumeSkillsFormValues } from '../../Forms/ResumeSkillsForm';
 import { toast } from '../../ui/use-toast';
-import ResumeSkillsSkeleton from './ResumeSkillsSkeleton';
 import { deleteSkillsAction } from '@/app/actions/resume/delete-skills';
-import { describeSkillsAction } from '@/app/actions/resume/describe-skills';
 import { updateSkillsAction } from '@/app/actions/resume/update-skills';
-import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
+import { DefaultResumeSkills } from '@/data/default-resume.types';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeSkillsStore } from '@/store/useResumeSkillsStore';
 import { useMutation } from '@tanstack/react-query';
@@ -17,22 +15,12 @@ import { useRouter } from 'next/navigation';
 type ResumeSkillsProps = {
 	resumeId: string;
 	userLogged?: User;
+	resumeSkills: DefaultResumeSkills;
 };
 
-const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
+const ResumeSkills = ({ resumeId, userLogged, resumeSkills }: ResumeSkillsProps) => {
 	const router = useRouter();
-	const { resumeSkills, updateSkills } = useResumeSkillsStore();
-
-	const response = useDescribeSection({
-		resumeId,
-		queryFn: async () => {
-			if (!userLogged) {
-				return successResponse(resumeSkills);
-			}
-
-			return await describeSkillsAction(resumeId);
-		},
-	});
+	const { updateSkills } = useResumeSkillsStore();
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeSkillsFormValues) => {
@@ -66,19 +54,13 @@ const ResumeSkills = ({ resumeId, userLogged }: ResumeSkillsProps) => {
 
 	return (
 		<section data-testid="skills">
-			{response.isPending || (!response.error && !response.data) ? (
-				<ResumeSkillsSkeleton />
-			) : response.data ? (
-				<ResumeSkillsForm
-					handleSubmit={handleSubmit}
-					afterResumeSkillsFormSubmit={afterResumeSkillsFormSubmit}
-					submitResponse={data}
-					defaultValues={response.data}
-					handleDeleteSection={handleDeleteSection}
-				/>
-			) : (
-				<p>error</p>
-			)}
+			<ResumeSkillsForm
+				handleSubmit={handleSubmit}
+				afterResumeSkillsFormSubmit={afterResumeSkillsFormSubmit}
+				submitResponse={data}
+				defaultValues={resumeSkills}
+				handleDeleteSection={handleDeleteSection}
+			/>
 		</section>
 	);
 };

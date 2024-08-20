@@ -2,37 +2,25 @@
 
 import ResumeEducationForm, { ResumeEducationFormValues } from '../../Forms/ResumeEducationForm';
 import { toast } from '../../ui/use-toast';
-import ResumeEducationSkeleton from './ResumeEducationSkeleton';
 import { deleteEducationAction } from '@/app/actions/resume/delete-education';
-import { describeEducationAction } from '@/app/actions/resume/describe-education';
 import { updateEducationAction } from '@/app/actions/resume/update-education';
-import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
+import { DefaultResumeEducation } from '@/data/default-resume.types';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeEducationStore } from '@/store/useResumeEducationStore';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
 
 type ResumeEducationProps = {
 	resumeId: string;
 	userLogged?: User;
+	resumeEducation: DefaultResumeEducation;
 };
 
-const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
+const ResumeEducation = ({ resumeId, userLogged, resumeEducation }: ResumeEducationProps) => {
 	const router = useRouter();
-	const { resumeEducation, updateEducation } = useResumeEducationStore();
-
-	const response = useDescribeSection({
-		resumeId,
-		queryFn: async () => {
-			if (!userLogged) {
-				return successResponse(resumeEducation);
-			}
-
-			return await describeEducationAction(resumeId);
-		},
-	});
+	const { updateEducation } = useResumeEducationStore();
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeEducationFormValues) => {
@@ -69,19 +57,13 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 
 	return (
 		<section data-testid="education">
-			{response.isPending || (!response.error && !response.data) ? (
-				<ResumeEducationSkeleton />
-			) : response.data ? (
-				<ResumeEducationForm
-					handleSubmit={handleSubmit}
-					afterResumeEducationFormSubmit={afterResumeEducationFormSubmit}
-					submitResponse={data}
-					defaultValues={response.data}
-					handleDeleteSection={handleDeleteSection}
-				/>
-			) : (
-				<p>error</p>
-			)}
+			<ResumeEducationForm
+				handleSubmit={handleSubmit}
+				afterResumeEducationFormSubmit={afterResumeEducationFormSubmit}
+				submitResponse={data}
+				defaultValues={resumeEducation}
+				handleDeleteSection={handleDeleteSection}
+			/>
 		</section>
 	);
 };
