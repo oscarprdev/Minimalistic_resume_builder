@@ -1,0 +1,56 @@
+type: object
+required:
+    - id
+    - title
+    - theme
+    - header
+    - summary
+    - experience
+    - education
+    - languages
+    - skills
+    - image
+properties:
+    id:
+        type: string
+        description: Resource Id.
+        example: f4dfc6e7-804a-47c9-bb9b-fa95bc9fa31c
+    title:
+        type: string
+        description: The title of the resume.
+        example: 'Resume Title'
+    theme:
+        type: string
+        enum:
+            - default
+            - vertical
+        description: The theme of the resume.
+        example: 'default'
+    header:
+        oneOf:
+            - type: 'null'
+            - $ref: 'components/_index.yaml#/schemas/Header'
+    summary:
+        oneOf:
+            - type: 'null'
+            - $ref: 'components/_index.yaml#/schemas/Summary'
+    experience:
+        oneOf:
+            - type: 'null'
+            - $ref: 'components/_index.yaml#/schemas/Experience'
+    education:
+        oneOf:
+            - type: 'null'
+            - $ref: 'components/_index.yaml#/schemas/Education'
+    languages:
+        oneOf:
+            - type: 'null'
+            - $ref: 'components/_index.yaml#/schemas/Languages'
+    skills:
+        oneOf:
+            - type: 'null'
+            - $ref: 'components/_index.yaml#/schemas/Skills'
+    image:
+        type: string
+        description: The resume image url.
+        example: https://www.bucket.com/theme-image
