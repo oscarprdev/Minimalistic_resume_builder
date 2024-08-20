@@ -24,7 +24,7 @@ import {
 	IconX,
 } from '@tabler/icons-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { useDebouncedCallback } from 'use-debounce';
 import { z } from 'zod';
@@ -103,7 +103,7 @@ const ResumeHeaderForm = ({
 
 	useEffect(() => {
 		form.reset({ ...defaultValues, error: null });
-	}, [defaultValues, form]);
+	}, [resumeId]);
 
 	useEffect(() => {
 		if (firstRendered && imageValue) {

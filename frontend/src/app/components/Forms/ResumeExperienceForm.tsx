@@ -24,6 +24,7 @@ type ResumeExperienceFormProps = {
 	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeExperience;
+	resumeId: string;
 };
 
 const resumeExperienceFormSchema = z.object({
@@ -48,6 +49,7 @@ const ResumeExperienceForm = ({
 	handleDeleteSection,
 	submitResponse,
 	defaultValues,
+	resumeId,
 }: ResumeExperienceFormProps) => {
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -69,7 +71,7 @@ const ResumeExperienceForm = ({
 
 	useEffect(() => {
 		form.reset({ ...defaultValues, error: null });
-	}, [defaultValues, form]);
+	}, [resumeId]);
 
 	useEffect(() => {
 		if (submitResponse) {

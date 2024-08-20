@@ -63,6 +63,7 @@ const ResumeLanguage = ({ resumeId, userLogged, resumeLanguages }: ResumeLanguag
 				submitResponse={data}
 				defaultValues={resumeLanguages}
 				handleDeleteSection={handleDeleteSection}
+				resumeId={resumeId}
 			/>
 		</section>
 	);

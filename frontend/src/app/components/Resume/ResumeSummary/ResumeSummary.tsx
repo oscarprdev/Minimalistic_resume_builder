@@ -60,6 +60,7 @@ const ResumeSummary = ({ resumeId, userLogged, resumeSummary }: ResumeSummaryPro
 				submitResponse={data}
 				defaultValues={resumeSummary}
 				handleDeleteSection={handleDeleteSection}
+				resumeId={resumeId}
 			/>
 		</section>
 	);

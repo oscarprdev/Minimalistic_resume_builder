@@ -20,6 +20,7 @@ type ResumeSummaryFormProps = {
 	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeSummary;
+	resumeId: string;
 };
 
 const resumeSummaryFormSchema = z.object({
@@ -36,6 +37,7 @@ const ResumeSummaryForm = ({
 	handleDeleteSection,
 	submitResponse,
 	defaultValues,
+	resumeId,
 }: ResumeSummaryFormProps) => {
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -52,7 +54,7 @@ const ResumeSummaryForm = ({
 
 	useEffect(() => {
 		form.reset({ ...defaultValues, error: null });
-	}, [defaultValues, form]);
+	}, [resumeId]);
 
 	useEffect(() => {
 		if (submitResponse) {

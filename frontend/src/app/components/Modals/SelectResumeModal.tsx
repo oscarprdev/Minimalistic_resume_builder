@@ -62,12 +62,14 @@ const SelectResumeModal = ({ userLogged }: SelectResumeModalProps) => {
 					</Button>
 				</DialogTrigger>
 
-				<DialogContent className={cn(isPending && 'w-56')}>
+				<DialogContent aria-describedby="" className={cn(isPending && 'w-56')}>
 					<>
 						{isPending ? (
 							<div className="w-full grid place-items-center text-zinc-600 gap-1">
-								<IconLoader2 className="animate-spin" size={32} />
-								<p className="text-sm">Fetching resumes...</p>
+								<DialogHeader>
+									<IconLoader2 className="animate-spin" size={32} />
+									<DialogTitle className="text-sm">Fetching resumes...</DialogTitle>
+								</DialogHeader>
 							</div>
 						) : error ? (
 							<p>{error.message}</p>

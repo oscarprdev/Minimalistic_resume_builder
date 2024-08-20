@@ -60,6 +60,7 @@ const ResumeSkills = ({ resumeId, userLogged, resumeSkills }: ResumeSkillsProps)
 				submitResponse={data}
 				defaultValues={resumeSkills}
 				handleDeleteSection={handleDeleteSection}
+				resumeId={resumeId}
 			/>
 		</section>
 	);

@@ -2,9 +2,8 @@ import ViewerSkillIcon from '../Icons/SkillsIcons';
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/app/components/ui/tooltip';
 import ButtonTooltip from '@/app/containers/ButtonTooltip';
-import { defaultLanguage, defaultSkill } from '@/data/default-resume';
+import { defaultSkill } from '@/data/default-resume';
 import { DefaultResumeSkills } from '@/data/default-resume.types';
 import { Either, isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -24,6 +23,7 @@ type ResumeSkillsFormProps = {
 	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeSkills;
+	resumeId: string;
 };
 
 const resumeSkillsFormSchema = z.object({
@@ -45,6 +45,7 @@ const ResumeSkillsForm = ({
 	handleDeleteSection,
 	submitResponse,
 	defaultValues,
+	resumeId,
 }: ResumeSkillsFormProps) => {
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -66,7 +67,7 @@ const ResumeSkillsForm = ({
 
 	useEffect(() => {
 		form.reset({ ...defaultValues, error: null });
-	}, [defaultValues, form]);
+	}, [resumeId]);
 
 	useEffect(() => {
 		if (submitResponse) {

@@ -23,6 +23,7 @@ type ResumeLanguagesFormProps = {
 	handleDeleteSection(): Promise<void>;
 	submitResponse: Either<string, string> | undefined;
 	defaultValues: DefaultResumeLanguages;
+	resumeId: string;
 };
 
 const resumeLanguagesFormSchema = z.object({
@@ -46,6 +47,7 @@ const ResumeLanguagesForm = ({
 	handleDeleteSection,
 	submitResponse,
 	defaultValues,
+	resumeId,
 }: ResumeLanguagesFormProps) => {
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -67,7 +69,7 @@ const ResumeLanguagesForm = ({
 
 	useEffect(() => {
 		form.reset({ ...defaultValues, error: null });
-	}, [defaultValues, form]);
+	}, [resumeId]);
 
 	useEffect(() => {
 		if (submitResponse) {

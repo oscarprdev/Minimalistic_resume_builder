@@ -63,6 +63,7 @@ const ResumeExperience = ({ resumeId, userLogged, resumeExperience }: ResumeExpe
 				submitResponse={data}
 				defaultValues={resumeExperience}
 				handleDeleteSection={handleDeleteSection}
+				resumeId={resumeId}
 			/>
 		</section>
 	);
