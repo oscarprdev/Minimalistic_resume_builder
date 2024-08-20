@@ -2,6 +2,7 @@
 
 import ResumeExperienceForm, { ResumeExperienceFormValues } from '../../Forms/ResumeExperienceForm';
 import { toast } from '../../ui/use-toast';
+import ResumeExperienceSkeleton from './ResumeExperienceSkeleton';
 import { deleteExperienceAction } from '@/app/actions/resume/delete-experience';
 import { describeExperienceAction } from '@/app/actions/resume/describe-experience';
 import { updateExperienceAction } from '@/app/actions/resume/update-experience';
@@ -68,7 +69,9 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 
 	return (
 		<section data-testid="experience">
-			{!response.isPending && response.data && (
+			{response.isPending || (!response.error && !response.data) ? (
+				<ResumeExperienceSkeleton />
+			) : response.data ? (
 				<ResumeExperienceForm
 					handleSubmit={handleSubmit}
 					afterResumeExperienceFormSubmit={afterResumeExperienceFormSubmit}
@@ -76,6 +79,8 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 					defaultValues={response.data}
 					handleDeleteSection={handleDeleteSection}
 				/>
+			) : (
+				<p>error</p>
 			)}
 		</section>
 	);

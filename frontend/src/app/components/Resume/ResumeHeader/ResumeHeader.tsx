@@ -2,6 +2,7 @@
 
 import ResumeHeaderForm, { ResumeHeaderFormValues } from '../../Forms/ResumeHeaderForm';
 import { toast } from '../../ui/use-toast';
+import ResumeHeaderSkeleton from './ResumeHeaderSkeleton';
 import { describeHeaderAction } from '@/app/actions/resume/describe-header';
 import { updateHeaderAction } from '@/app/actions/resume/update-header';
 import { useDescribeSection } from '@/app/hooks/useDescribeSection';
@@ -52,14 +53,18 @@ const ResumeHeader = ({ resumeId, userLogged }: ResumeHeaderProps) => {
 
 	return (
 		<section data-testid="header">
-			{!response.isPending && (
+			{response.isPending || (!response.error && !response.data) ? (
+				<ResumeHeaderSkeleton />
+			) : response.data ? (
 				<ResumeHeaderForm
 					resumeId={resumeId}
 					handleSubmit={handleSubmit}
 					afterResumeHeaderFormSubmit={afterResumeHeaderFormSubmit}
 					submitResponse={data}
-					defaultValues={response.data ?? defaultResume.header}
+					defaultValues={response.data}
 				/>
+			) : (
+				<p>error</p>
 			)}
 		</section>
 	);

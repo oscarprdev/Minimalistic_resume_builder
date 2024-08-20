@@ -8,6 +8,7 @@ type useDescribeSectionInput<T> = {
 };
 
 export const useDescribeSection = <T>({ resumeId, queryFn }: useDescribeSectionInput<T>) => {
+	const [error, setError] = useState<string | null>(null);
 	const [isPending, setIsPending] = useState(false);
 	const [data, setData] = useState<T | null>(null);
 
@@ -17,10 +18,11 @@ export const useDescribeSection = <T>({ resumeId, queryFn }: useDescribeSectionI
 			const response = await queryFn();
 			if (isError(response)) {
 				setIsPending(false);
-				return toast({
+				toast({
 					variant: 'destructive',
 					description: response.error,
 				});
+				return setError(response.error);
 			}
 
 			setData(response.success);
@@ -34,5 +36,6 @@ export const useDescribeSection = <T>({ resumeId, queryFn }: useDescribeSectionI
 	return {
 		isPending,
 		data,
+		error,
 	};
 };

@@ -1,6 +1,5 @@
 import { API_URL } from '@/constants';
-import { Either, successResponse } from '@/lib/types';
-import { handleErrorResponse } from '@/lib/utils';
+import { Either, errorResponse, successResponse } from '@/lib/types';
 import { Languages } from '@/types';
 
 interface IResumeLanguagesService {
@@ -21,7 +20,7 @@ export class ResumeLanguagesService implements IResumeLanguagesService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error getting resume languages');
+			return errorResponse('Error getting resume languages');
 		}
 	}
 
@@ -35,7 +34,7 @@ export class ResumeLanguagesService implements IResumeLanguagesService {
 
 			return successResponse('Languages successfully updatted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updatting languages resume');
+			return errorResponse('Error on updatting languages resume');
 		}
 	}
 
@@ -48,7 +47,7 @@ export class ResumeLanguagesService implements IResumeLanguagesService {
 
 			return successResponse('Languages successfully deletted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on deletting languages resume');
+			return errorResponse('Error on deletting languages resume');
 		}
 	}
 }

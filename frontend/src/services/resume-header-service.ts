@@ -1,6 +1,5 @@
 import { API_URL } from '@/constants';
 import { Either, errorResponse, successResponse } from '@/lib/types';
-import { handleErrorResponse } from '@/lib/utils';
 import { Header } from '@/types';
 
 interface IResumeHeaderService {
@@ -19,7 +18,7 @@ export class ResumeHeaderService implements IResumeHeaderService {
 			const jsonResponse: Header = await response.json();
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error getting resume header');
+			return errorResponse('Error getting resume header');
 		}
 	}
 

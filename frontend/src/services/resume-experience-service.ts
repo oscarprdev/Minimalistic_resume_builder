@@ -1,6 +1,5 @@
 import { API_URL } from '@/constants';
-import { Either, successResponse } from '@/lib/types';
-import { handleErrorResponse } from '@/lib/utils';
+import { Either, errorResponse, successResponse } from '@/lib/types';
 import { Experience } from '@/types';
 
 interface IResumeExperienceService {
@@ -21,7 +20,7 @@ export class ResumeExperienceService implements IResumeExperienceService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error getting resume experience');
+			return errorResponse('Error getting resume experience');
 		}
 	}
 
@@ -35,7 +34,7 @@ export class ResumeExperienceService implements IResumeExperienceService {
 
 			return successResponse('Experience successfully updatted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updatting experience resume');
+			return errorResponse('Error on updatting experience resume');
 		}
 	}
 
@@ -48,7 +47,7 @@ export class ResumeExperienceService implements IResumeExperienceService {
 
 			return successResponse('Experience successfully deletted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on deletting experience resume');
+			return errorResponse('Error on deletting experience resume');
 		}
 	}
 }

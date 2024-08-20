@@ -1,6 +1,5 @@
 import { API_URL } from '@/constants';
-import { Either, successResponse } from '@/lib/types';
-import { handleErrorResponse } from '@/lib/utils';
+import { Either, errorResponse, successResponse } from '@/lib/types';
 import { Skills } from '@/types';
 
 interface IResumeSkillsService {
@@ -21,7 +20,7 @@ export class ResumeSkillsService implements IResumeSkillsService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error getting resume skills');
+			return errorResponse('Error getting resume skills');
 		}
 	}
 
@@ -35,7 +34,7 @@ export class ResumeSkillsService implements IResumeSkillsService {
 
 			return successResponse('Skills successfully updatted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updatting skills resume');
+			return errorResponse('Error on updatting skills resume');
 		}
 	}
 
@@ -48,7 +47,7 @@ export class ResumeSkillsService implements IResumeSkillsService {
 
 			return successResponse('Skills successfully deletted');
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on deletting skills resume');
+			return errorResponse('Error on deletting skills resume');
 		}
 	}
 }

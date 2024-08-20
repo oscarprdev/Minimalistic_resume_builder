@@ -1,6 +1,5 @@
 import { API_URL } from '@/constants';
 import { Either, errorResponse, successResponse } from '@/lib/types';
-import { handleErrorResponse } from '@/lib/utils';
 import { Resume } from '@/types';
 
 interface IResumeService {
@@ -17,12 +16,14 @@ export class ResumeService implements IResumeService {
 
 	async describe() {
 		try {
-			const response = await fetch(`${this.path}/${this.userConfig.id}/list`);
+			const response = await fetch(`${this.path}/${this.userConfig.id}/list`, {
+				cache: 'no-store',
+			});
 			const jsonResponse: Resume[] = await response.json();
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on describing resume');
+			return errorResponse('Error on describing resume');
 		}
 	}
 
@@ -49,7 +50,7 @@ export class ResumeService implements IResumeService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on creating resume');
+			return errorResponse('Error on creating resume');
 		}
 	}
 
@@ -63,7 +64,7 @@ export class ResumeService implements IResumeService {
 
 			return successResponse(jsonResponse);
 		} catch (error) {
-			return handleErrorResponse(error, 'Error on updating resume image');
+			return errorResponse('Error on updating resume image');
 		}
 	}
 }
