@@ -1,104 +1,107 @@
 parameters:
-  UserId:
-    $ref: 'components/parameters/UserId.yaml'
+    UserId:
+        $ref: 'components/parameters/UserId.yaml'
 
-  ResumeId:
-    $ref: 'components/parameters/ResumeId.yaml'
+    ResumeId:
+        $ref: 'components/parameters/ResumeId.yaml'
 
 responses:
-  # Common
-  BadRequest:
-    $ref: 'components/responses/BadRequest.yaml'
+    # Common
+    BadRequest:
+        $ref: 'components/responses/BadRequest.yaml'
 
-  InternalError:
-    $ref: 'components/responses/InternalError.yaml'
+    InternalError:
+        $ref: 'components/responses/InternalError.yaml'
 
-  NotFound:
-    $ref: 'components/responses/NotFound.yaml'
+    NotFound:
+        $ref: 'components/responses/NotFound.yaml'
 
-  # User
-  UserLogged:
-    $ref: 'components/responses/user/UserLogged.yaml'
+    # User
+    UserLogged:
+        $ref: 'components/responses/user/UserLogged.yaml'
 
-  UserRegistered:
-    $ref: 'components/responses/user/UserRegistered.yaml'
+    UserRegistered:
+        $ref: 'components/responses/user/UserRegistered.yaml'
 
-  # Resume
-  ResumeSectionCreated:
-    $ref: 'components/responses/resume/ResumeSectionCreated.yaml'
+    # Resume
+    ResumeSectionCreated:
+        $ref: 'components/responses/resume/ResumeSectionCreated.yaml'
 
-  ResumeSectionDeleted:
-    $ref: 'components/responses/resume/ResumeSectionDeleted.yaml'
+    ResumeSectionDeleted:
+        $ref: 'components/responses/resume/ResumeSectionDeleted.yaml'
 
-  ResumeListDescribe:
-    $ref: 'components/responses/resume/ResumeListDescribe.yaml'
+    ResumeListDescribe:
+        $ref: 'components/responses/resume/ResumeListDescribe.yaml'
 
-  ResumeDescribe:
-    $ref: 'components/responses/resume/ResumeDescribe.yaml'
+    ResumeDescribe:
+        $ref: 'components/responses/resume/ResumeDescribe.yaml'
 
-  ResumeHeaderDescribe:
-    $ref: 'components/responses/resume/ResumeHeaderDescribe.yaml'
+    ResumeHeaderDescribe:
+        $ref: 'components/responses/resume/ResumeHeaderDescribe.yaml'
 
-  ResumeSummaryDescribe:
-    $ref: 'components/responses/resume/ResumeSummaryDescribe.yaml'
+    ResumeSummaryDescribe:
+        $ref: 'components/responses/resume/ResumeSummaryDescribe.yaml'
 
-  ResumeExperienceDescribe:
-    $ref: 'components/responses/resume/ResumeExperienceDescribe.yaml'
+    ResumeExperienceDescribe:
+        $ref: 'components/responses/resume/ResumeExperienceDescribe.yaml'
 
-  ResumeEducationDescribe:
-    $ref: 'components/responses/resume/ResumeEducationDescribe.yaml'
+    ResumeEducationDescribe:
+        $ref: 'components/responses/resume/ResumeEducationDescribe.yaml'
 
-  ResumeSkillsDescribe:
-    $ref: 'components/responses/resume/ResumeSkillsDescribe.yaml'
+    ResumeSkillsDescribe:
+        $ref: 'components/responses/resume/ResumeSkillsDescribe.yaml'
 
-  ResumeLanguagesDescribe:
-    $ref: 'components/responses/resume/ResumeLanguagesDescribe.yaml'
+    ResumeLanguagesDescribe:
+        $ref: 'components/responses/resume/ResumeLanguagesDescribe.yaml'
 
 schemas:
-  Error:
-    $ref: 'components/schemas/Error.yaml'
+    Error:
+        $ref: 'components/schemas/Error.yaml'
 
-  UserCredentials:
-    $ref: 'components/schemas/UserCredentials.yaml'
+    UserCredentials:
+        $ref: 'components/schemas/UserCredentials.yaml'
 
-  UserAuthResponse:
-    $ref: 'components/schemas/UserAuthResponse.yaml'
+    UserAuthResponse:
+        $ref: 'components/schemas/UserAuthResponse.yaml'
 
-  CommonPostResponse:
-    $ref: 'components/schemas/CommonPostResponse.yaml'
+    CommonPostResponse:
+        $ref: 'components/schemas/CommonPostResponse.yaml'
 
-  CommonDeleteResponse:
-    $ref: 'components/schemas/CommonDeleteResponse.yaml'
+    CommonDeleteResponse:
+        $ref: 'components/schemas/CommonDeleteResponse.yaml'
 
-  Resume:
-    $ref: 'components/schemas/Resume.yaml'
+    Resume:
+        $ref: 'components/schemas/Resume.yaml'
 
-  Header:
-    $ref: 'components/schemas/Header.yaml'
+    ResumeCompleted:
+        $ref: 'components/schemas/ResumeCompleted.yaml'
 
-  Summary:
-    $ref: 'components/schemas/Summary.yaml'
+    Header:
+        $ref: 'components/schemas/Header.yaml'
 
-  Experience:
-    $ref: 'components/schemas/Experience.yaml'
+    Summary:
+        $ref: 'components/schemas/Summary.yaml'
 
-  Job:
-    $ref: 'components/schemas/Job.yaml'
+    Experience:
+        $ref: 'components/schemas/Experience.yaml'
 
-  Education:
-    $ref: 'components/schemas/Education.yaml'
+    Job:
+        $ref: 'components/schemas/Job.yaml'
 
-  School:
-    $ref: 'components/schemas/School.yaml'
+    Education:
+        $ref: 'components/schemas/Education.yaml'
 
-  Skills:
-    $ref: 'components/schemas/Skills.yaml'
+    School:
+        $ref: 'components/schemas/School.yaml'
 
-  Skill:
-    $ref: 'components/schemas/Skill.yaml'
+    Skills:
+        $ref: 'components/schemas/Skills.yaml'
 
-  Languages:
-    $ref: 'components/schemas/Languages.yaml'
+    Skill:
+        $ref: 'components/schemas/Skill.yaml'
 
-  Language:
-    $ref: 'components/schemas/Language.yaml'
+    Languages:
+        $ref: 'components/schemas/Languages.yaml'
+
+    Language:
+        $ref: 'components/schemas/Language.yaml'

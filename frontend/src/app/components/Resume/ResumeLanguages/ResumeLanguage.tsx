@@ -2,37 +2,25 @@
 
 import ResumeLanguagesForm, { ResumeLanguagesFormValues } from '../../Forms/ResumeLanguagesForm';
 import { toast } from '../../ui/use-toast';
-import ResumeLanguagesSkeleton from './ResumeLanguagesSkeleton';
 import { deleteLanguagesAction } from '@/app/actions/resume/delete-languages';
-import { describeLanguagesAction } from '@/app/actions/resume/describe-languages';
 import { updateLanguagesAction } from '@/app/actions/resume/update-languages';
-import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
+import { DefaultResumeLanguages } from '@/data/default-resume.types';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeLanguageStore } from '@/store/useResumeLanguageStore';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
 
 type ResumeLanguageProps = {
 	resumeId: string;
 	userLogged?: User;
+	resumeLanguages: DefaultResumeLanguages;
 };
 
-const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
+const ResumeLanguage = ({ resumeId, userLogged, resumeLanguages }: ResumeLanguageProps) => {
 	const router = useRouter();
-	const { resumeLanguage, updateLanguage } = useResumeLanguageStore();
-
-	const response = useDescribeSection({
-		resumeId,
-		queryFn: async () => {
-			if (!userLogged) {
-				return successResponse(resumeLanguage);
-			}
-
-			return await describeLanguagesAction(resumeId);
-		},
-	});
+	const { updateLanguage } = useResumeLanguageStore();
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeLanguagesFormValues) => {
@@ -69,19 +57,13 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 
 	return (
 		<section data-testid="languages">
-			{response.isPending || (!response.error && !response.data) ? (
-				<ResumeLanguagesSkeleton />
-			) : response.data ? (
-				<ResumeLanguagesForm
-					handleSubmit={handleSubmit}
-					afterResumeLanguagesFormSubmit={afterResumeLanguageFormSubmit}
-					submitResponse={data}
-					defaultValues={response.data}
-					handleDeleteSection={handleDeleteSection}
-				/>
-			) : (
-				<p>error</p>
-			)}
+			<ResumeLanguagesForm
+				handleSubmit={handleSubmit}
+				afterResumeLanguagesFormSubmit={afterResumeLanguageFormSubmit}
+				submitResponse={data}
+				defaultValues={resumeLanguages}
+				handleDeleteSection={handleDeleteSection}
+			/>
 		</section>
 	);
 };

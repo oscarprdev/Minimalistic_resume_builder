@@ -33,7 +33,23 @@ export class DefaultResumeApplication {
 		const globalResumeDatabase = new DefaultGlobalResumeDatabase(this.database);
 		const commonResumeDatabase = new DefaultCommonResumeDatabase(this.database);
 
-		return new DefaultGlobalUsecase(globalResumeDatabase, commonResumeDatabase);
+		const headerResumeDatabase = new DefaultHeaderResumeDatabase(this.database);
+		const summaryResumeDatabase = new DefaultSummaryResumeDatabase(this.database);
+		const experienceResumeDatabase = new DefaultExperienceResumeDatabase(this.database);
+		const educationResumeDatabase = new DefaultEducationResumeDatabase(this.database);
+		const skillsResumeDatabase = new DefaultSkillsResumeDatabase(this.database);
+		const languagesResumeDatabase = new DefaultLanguagesResumeDatabase(this.database);
+
+		return new DefaultGlobalUsecase(
+			globalResumeDatabase,
+			commonResumeDatabase,
+			headerResumeDatabase,
+			summaryResumeDatabase,
+			experienceResumeDatabase,
+			educationResumeDatabase,
+			skillsResumeDatabase,
+			languagesResumeDatabase
+		);
 	}
 
 	headerUsecase() {

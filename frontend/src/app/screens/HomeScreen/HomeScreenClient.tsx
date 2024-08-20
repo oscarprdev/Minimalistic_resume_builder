@@ -1,5 +1,6 @@
 'use client';
 
+import { filterSections } from './utils/utils';
 import AddResumeSectionModal from '@/app/components/Modals/AddResumeSectionModal';
 import ResumeEducation from '@/app/components/Resume/ResumeEducation/ResumeEducation';
 import ResumeExperience from '@/app/components/Resume/ResumeExperience/ResumeExperience';
@@ -12,6 +13,7 @@ import MainHome from '@/app/containers/MainHome';
 import { defaultResume } from '@/data/default-resume';
 import { useResumeEducationStore } from '@/store/useResumeEducationStore';
 import { useResumeExperienceStore } from '@/store/useResumeExperienceStore';
+import { useResumeHeaderStore } from '@/store/useResumeHeaderStore';
 import { useResumeLanguageStore } from '@/store/useResumeLanguageStore';
 import { useResumeSkillsStore } from '@/store/useResumeSkillsStore';
 import { useResumeSummaryStore } from '@/store/useResumeSummaryStore';
@@ -22,48 +24,37 @@ type HomeScreenClientProps = {
 };
 
 const HomeScreenClient = ({ userLogged }: HomeScreenClientProps) => {
+	const { resumeHeader } = useResumeHeaderStore();
 	const { resumeSummary } = useResumeSummaryStore();
 	const { resumeExperience } = useResumeExperienceStore();
 	const { resumeEducation } = useResumeEducationStore();
 	const { resumeSkills } = useResumeSkillsStore();
 	const { resumeLanguage } = useResumeLanguageStore();
 
-	let sections = [];
+	let sections = filterSections(resumeSummary, resumeExperience, resumeEducation, resumeSkills, resumeLanguage);
 
-	if (!resumeSummary.isHidden) {
-		sections.push(SectionSelected.summary);
-	}
-
-	if (!resumeExperience.isHidden) {
-		sections.push(SectionSelected.experience);
-	}
-
-	if (!resumeEducation.isHidden) {
-		sections.push(SectionSelected.education);
-	}
-
-	if (!resumeSkills.isHidden) {
-		sections.push(SectionSelected.skills);
-	}
-
-	if (!resumeLanguage.isHidden) {
-		sections.push(SectionSelected.languages);
-	}
+	const id = defaultResume.id;
 
 	return (
 		<MainHome>
-			<ResumeHeader userLogged={userLogged} resumeId={defaultResume.id} />
-			{!resumeSummary.isHidden && <ResumeSummary userLogged={userLogged} resumeId={defaultResume.id} />}
-			{!resumeExperience.isHidden && <ResumeExperience userLogged={userLogged} resumeId={defaultResume.id} />}
-			{!resumeEducation.isHidden && <ResumeEducation userLogged={userLogged} resumeId={defaultResume.id} />}
-			{!resumeSkills.isHidden && <ResumeSkills userLogged={userLogged} resumeId={defaultResume.id} />}
-			{!resumeLanguage.isHidden && <ResumeLanguage userLogged={userLogged} resumeId={defaultResume.id} />}
+			<ResumeHeader userLogged={userLogged} resumeId={id} resumeHeader={resumeHeader} />
+			{!resumeSummary.isHidden && (
+				<ResumeSummary userLogged={userLogged} resumeId={id} resumeSummary={resumeSummary} />
+			)}
+			{!resumeExperience.isHidden && (
+				<ResumeExperience userLogged={userLogged} resumeId={id} resumeExperience={resumeExperience} />
+			)}
+			{!resumeEducation.isHidden && (
+				<ResumeEducation userLogged={userLogged} resumeId={id} resumeEducation={resumeEducation} />
+			)}
+			{!resumeSkills.isHidden && (
+				<ResumeSkills userLogged={userLogged} resumeId={id} resumeSkills={resumeSkills} />
+			)}
+			{!resumeLanguage.isHidden && (
+				<ResumeLanguage userLogged={userLogged} resumeId={id} resumeLanguages={resumeLanguage} />
+			)}
 			{sections.length < 5 && (
-				<AddResumeSectionModal
-					userLogged={userLogged}
-					resumeId={defaultResume.id}
-					sectionsDisplayed={sections}
-				/>
+				<AddResumeSectionModal userLogged={userLogged} resumeId={id} sectionsDisplayed={sections} />
 			)}
 		</MainHome>
 	);

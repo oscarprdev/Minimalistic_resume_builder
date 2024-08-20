@@ -2,12 +2,10 @@
 
 import ResumeSummaryForm, { ResumeSummaryFormValues } from '../../Forms/ResumeSummaryForm';
 import { toast } from '../../ui/use-toast';
-import ResumeSummarySkeleton from './ResumeSummarySkeleton';
 import { deleteSummaryAction } from '@/app/actions/resume/delete-summary';
-import { describeSummaryAction } from '@/app/actions/resume/describe-summary';
 import { updateSummaryAction } from '@/app/actions/resume/update-summary';
-import { useDescribeSection } from '@/app/hooks/useDescribeSection';
 import { defaultResume } from '@/data/default-resume';
+import { DefaultResumeSummary } from '@/data/default-resume.types';
 import { isError, successResponse } from '@/lib/types';
 import { useResumeSummaryStore } from '@/store/useResumeSummaryStore';
 import { useMutation } from '@tanstack/react-query';
@@ -17,22 +15,12 @@ import { useRouter } from 'next/navigation';
 type ResumeSummaryProps = {
 	resumeId: string;
 	userLogged?: User;
+	resumeSummary: DefaultResumeSummary;
 };
 
-const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
+const ResumeSummary = ({ resumeId, userLogged, resumeSummary }: ResumeSummaryProps) => {
 	const router = useRouter();
-	const { resumeSummary, updateSummary } = useResumeSummaryStore();
-
-	const response = useDescribeSection({
-		resumeId,
-		queryFn: async () => {
-			if (!userLogged) {
-				return successResponse(resumeSummary);
-			}
-
-			return await describeSummaryAction(resumeId);
-		},
-	});
+	const { updateSummary } = useResumeSummaryStore();
 
 	const { mutate, data } = useMutation({
 		mutationFn: async (values: ResumeSummaryFormValues) => {
@@ -66,19 +54,13 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 
 	return (
 		<section data-testid="summary">
-			{response.isPending || (!response.error && !response.data) ? (
-				<ResumeSummarySkeleton />
-			) : response.data ? (
-				<ResumeSummaryForm
-					handleSubmit={handleSubmit}
-					afterResumeSummaryFormSubmit={afterResumeSummaryFormSubmit}
-					submitResponse={data}
-					defaultValues={response.data}
-					handleDeleteSection={handleDeleteSection}
-				/>
-			) : (
-				<p>error</p>
-			)}
+			<ResumeSummaryForm
+				handleSubmit={handleSubmit}
+				afterResumeSummaryFormSubmit={afterResumeSummaryFormSubmit}
+				submitResponse={data}
+				defaultValues={resumeSummary}
+				handleDeleteSection={handleDeleteSection}
+			/>
 		</section>
 	);
 };

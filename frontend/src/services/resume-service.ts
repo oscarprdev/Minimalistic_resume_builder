@@ -1,10 +1,10 @@
 import { API_URL } from '@/constants';
 import { Either, errorResponse, successResponse } from '@/lib/types';
-import { Resume } from '@/types';
+import { Resume, ResumeCompleted } from '@/types';
 
 interface IResumeService {
 	describe(): Promise<Either<string, Resume[]>>;
-	describeById(resumeId: string): Promise<Either<string, Resume>>;
+	describeById(resumeId: string): Promise<Either<string, ResumeCompleted>>;
 	create(id: string, title: string): Promise<Either<string, string>>;
 	updateImage(imageUrl: string, resumeId: string): Promise<Either<string, string>>;
 }
@@ -32,10 +32,11 @@ export class ResumeService implements IResumeService {
 			const response = await fetch(`${this.path}/${this.userConfig.id}/${resumeId}/describe`, {
 				cache: 'no-store',
 			});
-			const jsonResponse: Resume = await response.json();
+			const jsonResponse: ResumeCompleted = await response.json();
 
 			return successResponse(jsonResponse);
 		} catch (error) {
+			console.log('responseerror', error);
 			return errorResponse('Resume ID not valid');
 		}
 	}

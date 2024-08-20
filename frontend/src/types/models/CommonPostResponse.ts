@@ -3,12 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 export type CommonPostResponse = {
-	/**
-	 * Response code
-	 */
-	status: number;
-	/**
-	 * Post description
-	 */
-	message: string;
+    /**
+     * Response code
+     */
+    status: number;
+    /**
+     * Post description
+     */
+    message: string;
 };
+
