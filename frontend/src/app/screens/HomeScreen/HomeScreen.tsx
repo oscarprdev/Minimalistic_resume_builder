@@ -27,51 +27,49 @@ export default async function HomeScreen({ resumeId }: HomeScreenProps) {
 	const session = await auth();
 	const user = session?.user;
 
-	if (user?.id && user?.name) {
-		const resumeService = new ResumeService({ id: user.id, username: user.name });
+	if (!user?.id || !user?.name) return <HomeScreenClient userLogged={user} />;
 
-		const allResumesResponse = await resumeService.describe();
-		if (isError(allResumesResponse)) {
-			return (
-				<MainHome>
-					<ErrorMessage text={allResumesResponse.error} />
-				</MainHome>
-			);
-		}
-		if (allResumesResponse.success.length === 0) {
-			return <NewResumeScreen user={user} resumeService={resumeService} />;
-		}
+	const resumeService = new ResumeService({ id: user.id, username: user.name });
 
-		const id = resumeId || allResumesResponse.success[0].id;
-
-		const resumeResponseCompleted = await resumeService.describeById(id);
-		if (isError(resumeResponseCompleted)) {
-			return (
-				<MainHome>
-					<ErrorMessage text={resumeResponseCompleted.error} />
-				</MainHome>
-			);
-		}
-
-		const { header, summary, experience, education, languages, skills } = resumeResponseCompleted.success;
-		let sections = filterSections(summary, experience, education, skills, languages);
-
+	const allResumesResponse = await resumeService.describe();
+	if (isError(allResumesResponse)) {
 		return (
 			<MainHome>
-				{header && <ResumeHeader userLogged={user} resumeId={id} resumeHeader={header} />}
-				{summary && <ResumeSummary userLogged={user} resumeId={id} resumeSummary={summary} />}
-				{experience && <ResumeExperience userLogged={user} resumeId={id} resumeExperience={experience} />}
-				{education && <ResumeEducation userLogged={user} resumeId={id} resumeEducation={education} />}
-				{skills && <ResumeSkills userLogged={user} resumeId={id} resumeSkills={skills} />}
-				{languages && <ResumeLanguage userLogged={user} resumeId={id} resumeLanguages={languages} />}
-				{sections.filter(Boolean).length < 5 && (
-					<AddResumeSectionModal userLogged={user} resumeId={id} sectionsDisplayed={sections} />
-				)}
+				<ErrorMessage text={allResumesResponse.error} />
+			</MainHome>
+		);
+	}
+	if (allResumesResponse.success.length === 0) {
+		return <NewResumeScreen user={user} resumeService={resumeService} />;
+	}
+
+	const id = resumeId || allResumesResponse.success[0].id;
+
+	const resumeResponseCompleted = await resumeService.describeById(id);
+	if (isError(resumeResponseCompleted)) {
+		return (
+			<MainHome>
+				<ErrorMessage text={resumeResponseCompleted.error} />
 			</MainHome>
 		);
 	}
 
-	return <HomeScreenClient userLogged={user} />;
+	const { header, summary, experience, education, languages, skills } = resumeResponseCompleted.success;
+	let sections = filterSections(summary, experience, education, skills, languages);
+
+	return (
+		<MainHome>
+			{header && <ResumeHeader userLogged={user} resumeId={id} resumeHeader={header} />}
+			{summary && <ResumeSummary userLogged={user} resumeId={id} resumeSummary={summary} />}
+			{experience && <ResumeExperience userLogged={user} resumeId={id} resumeExperience={experience} />}
+			{education && <ResumeEducation userLogged={user} resumeId={id} resumeEducation={education} />}
+			{skills && <ResumeSkills userLogged={user} resumeId={id} resumeSkills={skills} />}
+			{languages && <ResumeLanguage userLogged={user} resumeId={id} resumeLanguages={languages} />}
+			{sections.filter(Boolean).length < 5 && (
+				<AddResumeSectionModal userLogged={user} resumeId={id} sectionsDisplayed={sections} />
+			)}
+		</MainHome>
+	);
 }
 
 const NewResumeScreen = async ({ user, resumeService }: { user: User; resumeService: ResumeService }) => {

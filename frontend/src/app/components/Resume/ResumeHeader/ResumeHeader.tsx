@@ -8,6 +8,7 @@ import { useResumeHeaderStore } from '@/store/useResumeHeaderStore';
 import { useMutation } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 type ResumeHeaderProps = {
 	resumeId: string;
@@ -17,6 +18,7 @@ type ResumeHeaderProps = {
 
 const ResumeHeader = ({ resumeId, userLogged, resumeHeader }: ResumeHeaderProps) => {
 	const router = useRouter();
+
 	const { updateHeader } = useResumeHeaderStore();
 
 	const { mutate, data } = useMutation({

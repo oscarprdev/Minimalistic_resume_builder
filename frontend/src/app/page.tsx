@@ -6,16 +6,12 @@ import ResumeLanguagesSkeleton from './components/Resume/ResumeLanguages/ResumeL
 import ResumeSkillsSkeleton from './components/Resume/ResumeSkills/ResumeSkillsSkeleton';
 import ResumeSummarySkeleton from './components/Resume/ResumeSummary/ResumeSummarySkeleton';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
+import { cookies } from 'next/headers';
 import { Suspense } from 'react';
 
-type HomeProps = {
-	searchParams: {
-		id: string;
-	};
-};
-
 export const dynamic = 'force-dynamic';
-export default async function Home({ searchParams: { id } }: HomeProps) {
+export default async function Home() {
+	const id = cookies().get('id')?.value;
 	return (
 		<>
 			<Header resumeId={id} />

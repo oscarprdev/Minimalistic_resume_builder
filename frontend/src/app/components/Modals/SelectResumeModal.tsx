@@ -2,12 +2,12 @@ import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { toast } from '../ui/use-toast';
 import { describeResumeListAction } from '@/app/actions/resume/describe-resume-list';
-import { revalidateAction } from '@/app/actions/revalidate';
+import { setResumeId } from '@/app/actions/resume/set-resume-id';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog';
 import { isError } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { IconLayoutGrid, IconLoader2 } from '@tabler/icons-react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -20,7 +20,6 @@ type SelectResumeModalProps = {
 const SelectResumeModal = ({ userLogged }: SelectResumeModalProps) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const router = useRouter();
-	const queryClient = useQueryClient();
 
 	const dialogTrigger = useRef<HTMLButtonElement>(null);
 	const { data, isPending, error } = useQuery({
@@ -45,12 +44,8 @@ const SelectResumeModal = ({ userLogged }: SelectResumeModalProps) => {
 	const toggleDialogOpen = () => setDialogOpen(!dialogOpen);
 
 	const handleSelectResume = (id: string) => {
-		queryClient.invalidateQueries({
-			queryKey: ['resumeHeader', id],
-			refetchType: 'active',
-		});
-		router.push(`/?id=${id}`);
 		setDialogOpen(false);
+		setResumeId(id);
 	};
 
 	return (

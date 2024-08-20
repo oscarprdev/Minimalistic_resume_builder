@@ -51,6 +51,10 @@ const ResumeSummaryForm = ({
 	}, 500);
 
 	useEffect(() => {
+		form.reset({ ...defaultValues, error: null });
+	}, [defaultValues, form]);
+
+	useEffect(() => {
 		if (submitResponse) {
 			if (isError(submitResponse)) {
 				return form.setValue('error', submitResponse.error);
