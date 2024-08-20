@@ -66,8 +66,8 @@ const SelectResumeModal = ({ userLogged }: SelectResumeModalProps) => {
 					<>
 						{isPending ? (
 							<div className="w-full grid place-items-center text-zinc-600 gap-1">
+								<IconLoader2 className="animate-spin" size={32} />
 								<DialogHeader>
-									<IconLoader2 className="animate-spin" size={32} />
 									<DialogTitle className="text-sm">Fetching resumes...</DialogTitle>
 								</DialogHeader>
 							</div>
