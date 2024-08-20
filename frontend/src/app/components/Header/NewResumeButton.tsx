@@ -3,10 +3,10 @@
 import { toast } from '../ui/use-toast';
 import { createResumeAction } from '@/app/actions/resume/create-resume';
 import { setResumeId } from '@/app/actions/resume/set-resume-id';
+import { updateHeaderAction } from '@/app/actions/resume/update-header';
+import { defaultResume } from '@/data/default-resume';
 import { isError } from '@/lib/types';
 import { IconPencilPlus } from '@tabler/icons-react';
-import { cookies } from 'next/headers';
-import { useRouter } from 'next/navigation';
 import React, { Ref, forwardRef, useImperativeHandle } from 'react';
 
 export type NewResumeButtonRef = {
@@ -14,18 +14,31 @@ export type NewResumeButtonRef = {
 };
 
 const NewResumeButton = ({}, ref: Ref<NewResumeButtonRef>) => {
-	const router = useRouter();
-
 	const handleNewResume = async () => {
 		const resumeId = crypto.randomUUID().toString();
 		const response = await createResumeAction(resumeId);
 
-		isError(response)
-			? toast({
-					variant: 'destructive',
-					description: response.error,
-				})
-			: setResumeId(resumeId);
+		if (isError(response)) {
+			toast({
+				variant: 'destructive',
+				description: response.error,
+			});
+			return;
+		}
+
+		const createDefaultHeaderResponse = await updateHeaderAction(
+			{ ...defaultResume.header, id: crypto.randomUUID().toString() },
+			resumeId
+		);
+		if (isError(createDefaultHeaderResponse)) {
+			toast({
+				variant: 'destructive',
+				description: createDefaultHeaderResponse.error,
+			});
+			return;
+		}
+
+		setResumeId(resumeId);
 	};
 
 	useImperativeHandle(ref, () => ({
