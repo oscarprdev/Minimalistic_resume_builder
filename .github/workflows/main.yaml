@@ -142,4 +142,4 @@ jobs:
               run: cd frontend && npx playwright install --with-deps
             - name: Run Tests
               shell: bash
-              run: cd frontend && npx dotenv -e .env -- npm run test:e2e
+              run: cd frontend && npm run test:e2e
