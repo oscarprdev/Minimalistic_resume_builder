@@ -69,7 +69,7 @@ const ResumeEducation = ({ resumeId, userLogged }: ResumeEducationProps) => {
 
 	return (
 		<section data-testid="education">
-			{response.isPending ? (
+			{response.isPending || (!response.error && !response.data) ? (
 				<ResumeEducationSkeleton />
 			) : response.data ? (
 				<ResumeEducationForm

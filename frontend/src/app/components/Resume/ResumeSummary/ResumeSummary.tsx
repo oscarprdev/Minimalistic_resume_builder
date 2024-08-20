@@ -66,7 +66,7 @@ const ResumeSummary = ({ resumeId, userLogged }: ResumeSummaryProps) => {
 
 	return (
 		<section data-testid="summary">
-			{response.isPending ? (
+			{response.isPending || (!response.error && !response.data) ? (
 				<ResumeSummarySkeleton />
 			) : response.data ? (
 				<ResumeSummaryForm

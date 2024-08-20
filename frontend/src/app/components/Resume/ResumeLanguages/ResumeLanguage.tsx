@@ -69,7 +69,7 @@ const ResumeLanguage = ({ resumeId, userLogged }: ResumeLanguageProps) => {
 
 	return (
 		<section data-testid="languages">
-			{response.isPending ? (
+			{response.isPending || (!response.error && !response.data) ? (
 				<ResumeLanguagesSkeleton />
 			) : response.data ? (
 				<ResumeLanguagesForm

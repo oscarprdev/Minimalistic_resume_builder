@@ -69,7 +69,7 @@ const ResumeExperience = ({ resumeId, userLogged }: ResumeExperienceProps) => {
 
 	return (
 		<section data-testid="experience">
-			{response.isPending ? (
+			{response.isPending || (!response.error && !response.data) ? (
 				<ResumeExperienceSkeleton />
 			) : response.data ? (
 				<ResumeExperienceForm
