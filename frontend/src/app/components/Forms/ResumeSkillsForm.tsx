@@ -124,7 +124,7 @@ const ResumeSkillsForm = ({
 						</FormItem>
 					)}
 				/>
-				<div className="flex items-center justify-start flex-wrap gap-2 w-full">
+				<div className="flex items-center justify-start flex-wrap gap-2 w-full pt-3">
 					{isFocused && (
 						<ButtonTooltip
 							id="add-skill"
