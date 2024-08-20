@@ -5,6 +5,8 @@ test.describe('Summary section', () => {
 	test.beforeEach(async ({ navigateToApp, resumePage, summarySectionPage }) => {
 		await navigateToApp();
 
+		await expect(resumePage.addSectionBtn).toBeVisible();
+
 		await resumePage.addSectionBtn.click();
 		await expect(resumePage.addSectionModalContent).toBeVisible();
 		const sectionBtn = resumePage.getSectionButton('summary');
