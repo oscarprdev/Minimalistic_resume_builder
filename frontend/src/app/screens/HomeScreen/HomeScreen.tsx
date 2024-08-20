@@ -115,15 +115,15 @@ export default async function HomeScreen({ resumeId }: HomeScreenProps) {
 
 		return (
 			<MainHome>
-				<ResumeHeader userLogged={user} resumeId={resumeFetched.id} />
-				{resumeFetched.summary && <ResumeSummary userLogged={user} resumeId={resumeFetched.id} />}
+				{/* <ResumeHeader userLogged={user} resumeId={resumeFetched.id} />
+				{resumeFetched.summary && <ResumeSummary userLogged={user} resumeId={resumeFetched.id} />} */}
 				{resumeFetched.experience && <ResumeExperience userLogged={user} resumeId={resumeFetched.id} />}
 				{resumeFetched.education && <ResumeEducation userLogged={user} resumeId={resumeFetched.id} />}
-				{resumeFetched.skills && <ResumeSkills userLogged={user} resumeId={resumeFetched.id} />}
+				{/* {resumeFetched.skills && <ResumeSkills userLogged={user} resumeId={resumeFetched.id} />}
 				{resumeFetched.languages && <ResumeLanguage userLogged={user} resumeId={resumeFetched.id} />}
 				{sections.length < 5 && (
 					<AddResumeSectionModal userLogged={user} resumeId={resumeFetched.id} sectionsDisplayed={sections} />
-				)}
+				)} */}
 			</MainHome>
 		);
 	}
