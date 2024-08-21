@@ -1,8 +1,8 @@
-import Header from './components/Header/Header';
 import { Toaster } from './components/ui/toaster';
 import './globals.css';
 import QueryProvider from './providers/QueryProvider';
-import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
+import type { Metadata, Viewport } from 'next';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
@@ -11,8 +11,15 @@ import { ReactNode } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Resume builder',
-	description: 'Resume builder app',
+	title: 'MRB - Minimalistic resume builder',
+	description: 'Minimalistic resume builder app',
+};
+
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	maximumScale: 1,
+	userScalable: false,
 };
 
 export default function RootLayout({
@@ -31,6 +38,7 @@ export default function RootLayout({
 						<Toaster />
 					</QueryProvider>
 				</SessionProvider>
+				<Analytics />
 			</body>
 		</html>
 	);
